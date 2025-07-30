@@ -1,0 +1,27 @@
+# dependencies
+/node_modules
+
+# testing
+/coverage
+
+# production
+/dist
+/build
+
+# misc
+.DS_Store
+.env.local
+.env.*.local
+.vercel
+.netlify
+.vscode
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+# Other OS and build tool generated files
+*.log
+.pnpm-store/
+*.tgz
+
+# vite-specific
+.vite/
