@@ -10,7 +10,8 @@
 .dark-mode-switch-toggle {
   width: 45px;
   height: 25px;
-  background-color: light-dark(#787878, #555); /* Track color */
+  /* Track color: Lighter gray in light mode, darker gray in dark mode */
+  background-color: light-dark(#555, #333); /* Changed to grayscale */
   border-radius: 15px;
   position: relative;
   transition: background-color 0.3s ease;
@@ -20,13 +21,15 @@
 }
 
 .dark-mode-switch-toggle--dark {
-  background-color: #9b9b9b; /* Green for dark mode (on) */
+  /* When in dark mode, the track should indicate 'on' with a darker color */
+  background-color: #555; /* A darker gray for the 'on' state in dark mode */
 }
 
 .dark-mode-switch-icon {
   width: 19px;
   height: 19px;
-  background-color: light-dark(#fff, #eee);
+  /* Circle color: White in light mode, lighter gray in dark mode */
+  background-color: light-dark(#fff, #bbb); /* Changed to grayscale */
   border-radius: 50%;
   position: absolute;
   transition: transform 0.3s ease;
@@ -43,6 +46,6 @@
 
 .dark-mode-switch-label {
   font-size: 0.95rem;
-  color: var(--text-color-secondary); /* Use theme variable for label */
+  color: var(--text-color-secondary); /* This correctly uses theme-aware text colors */
   font-weight: 400;
 }

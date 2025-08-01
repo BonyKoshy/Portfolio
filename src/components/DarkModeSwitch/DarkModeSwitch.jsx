@@ -10,7 +10,6 @@ function DarkModeSwitch() {
     <div className="dark-mode-switch-container" onClick={toggleTheme}>
       <div className={`dark-mode-switch-toggle ${theme === 'dark' ? 'dark-mode-switch-toggle--dark' : ''}`}>
         <span className="dark-mode-switch-icon">
-          {theme === 'dark' ? '' : ''} {/* Sun and Moon emojis */}
         </span>
       </div>
       <span className="dark-mode-switch-label">
