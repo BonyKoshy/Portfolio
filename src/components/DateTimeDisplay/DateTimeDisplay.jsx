@@ -15,16 +15,18 @@ function DateTimeDisplay() {
     };
   }, []);
 
-  // Format the date and time
-  const options = {
-    weekday: 'short', // e.g., 'Thu'
-    month: 'short',   // e.g., 'Jul'
-    day: 'numeric',   // e.g., '31'
-    hour: 'numeric',  // e.g., '07'
-    minute: 'numeric', // e.g., '26'
-    hour12: true      // 12-hour format with AM/PM
-  };
-  const formattedDateTime = currentDateTime.toLocaleString('en-US', options);
+  // --- START Modifications for Date/Time Format ---
+  // Get year, month, day, and weekday
+  const year = currentDateTime.getFullYear();
+  const month = (currentDateTime.getMonth() + 1).toString().padStart(2, '0'); // Month is 0-indexed
+  const day = currentDateTime.getDate().toString().padStart(2, '0');
+  
+  const weekdayOptions = { weekday: 'short' };
+  const weekday = currentDateTime.toLocaleString('en-US', weekdayOptions).toUpperCase(); // e.g., "FRI"
+
+  // Assemble the desired format "YYYY.MM.DD FRI"
+  const formattedDateTime = `${year}.${month}.${day} ${weekday}`;
+  // --- END Modifications for Date/Time Format ---
 
   return (
     <div className="datetime-display">
@@ -33,4 +35,4 @@ function DateTimeDisplay() {
   );
 }
 
-export default DateTimeDisplay; 
+export default DateTimeDisplay;

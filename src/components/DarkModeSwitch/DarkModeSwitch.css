@@ -10,7 +10,7 @@
 .dark-mode-switch-toggle {
   width: 45px;
   height: 25px;
-  background-color: light-dark(#ccc, #555); /* Track color */
+  background-color: light-dark(#787878, #555); /* Track color */
   border-radius: 15px;
   position: relative;
   transition: background-color 0.3s ease;
@@ -44,5 +44,5 @@
 .dark-mode-switch-label {
   font-size: 0.95rem;
   color: var(--text-color-secondary); /* Use theme variable for label */
-  font-weight: 500;
+  font-weight: 400;
 }

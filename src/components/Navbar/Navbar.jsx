@@ -10,12 +10,11 @@ function Navbar() {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
 
   const toggleMobileMenu = () => {
-    setIsMobileMenuOpen(!isMobileMenuOpen);
-    // When menu closes, hide overflow to prevent scroll issues
-    document.body.style.overflow = isMobileMenuOpen ? '' : 'hidden';
+    const newState = !isMobileMenuOpen;
+    setIsMobileMenuOpen(newState);
+    document.body.style.overflow = newState ? 'hidden' : '';
   };
 
-  // Close menu if window is resized above mobile breakpoint
   React.useEffect(() => {
     const handleResize = () => {
       if (window.innerWidth > 768 && isMobileMenuOpen) {
@@ -26,14 +25,12 @@ function Navbar() {
     window.addEventListener('resize', handleResize);
     return () => {
       window.removeEventListener('resize', handleResize);
-      document.body.style.overflow = ''; // Clean up on unmount
+      document.body.style.overflow = '';
     };
   }, [isMobileMenuOpen]);
 
-
   return (
     <nav className={`navbar-container ${isMobileMenuOpen ? 'mobile-menu-open' : ''}`}>
-      {/* This GlassSurface wraps the core desktop/expanded mobile content */}
       <GlassSurface
         width={isMobileMenuOpen ? "100%" : "calc(100% - 40px)"}
         height={isMobileMenuOpen ? "100%" : 80}
@@ -45,31 +42,27 @@ function Navbar() {
         distortionScale={isMobileMenuOpen ? -150 : -100}
         className="navbar-glass-surface"
       >
-        {/* Content for desktop and expanded mobile menu */}
         <div className={`navbar-content ${isMobileMenuOpen ? 'mobile-content-expanded' : ''}`}>
 
-          {/* This content is for desktop or when mobile menu is expanded */}
           <div className="navbar-left-content">
-            {/* Date and Time is ONLY for desktop, hidden by CSS on mobile */}
             <DateTimeDisplay />
           </div>
 
           <ul className="navbar-links">
-            <li><a href="#home" onClick={toggleMobileMenu}>Home</a></li>
-            <li><a href="#about" onClick={toggleMobileMenu}>About</a></li>
-            <li><a href="#skills" onClick={toggleMobileMenu}>Skills</a></li>
-            <li><a href="#projects" onClick={toggleMobileMenu}>Projects</a></li>
-            <li><a href="#contact" onClick={toggleMobileMenu}>Contact</a></li>
+            <li><a href="#home" onClick={isMobileMenuOpen ? toggleMobileMenu : undefined}>Home</a></li>
+            <li><a href="#about" onClick={isMobileMenuOpen ? toggleMobileMenu : undefined}>About</a></li>
+            <li><a href="#skills" onClick={isMobileMenuOpen ? toggleMobileMenu : undefined}>Skills</a></li>
+            <li><a href="#projects" onClick={isMobileMenuOpen ? toggleMobileMenu : undefined}>Projects</a></li>
+            <li><a href="#contact" onClick={isMobileMenuOpen ? toggleMobileMenu : undefined}>Contact</a></li>
           </ul>
 
           <div className="navbar-right-content">
-            <button className="navbar-resume-button">Download Resume</button> {/* This button also on desktop/expanded mobile */}
-            <DarkModeSwitch /> {/* This is present on desktop and expanded mobile */}
+            <DarkModeSwitch />
           </div>
         </div>
       </GlassSurface>
 
-      {/* Hamburger Menu Toggle (always fixed top-right on mobile viewport) */}
+      {/* Hamburger Menu Toggle (fixed top-left on mobile viewport) */}
       <div className="hamburger-fixed-wrapper">
         <HamburgerMenu isOpen={isMobileMenuOpen} onClick={toggleMobileMenu} />
       </div>
