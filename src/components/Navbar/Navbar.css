@@ -1,0 +1,225 @@
+/* src/components/Navbar/Navbar.css */
+/* --- Desktop Styles (Default) --- */
+.navbar-container {
+  position: fixed; /* Stays fixed at the top */
+  top: 20px;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 1000;
+  width: 80%;
+  display: flex;
+  justify-content: center;
+  align-items: flex-start; /* Align items to top to allow hamburger wrapper to float */
+  transition: all 0.4s ease-in-out;
+}
+
+.navbar-glass-surface {
+  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.2);
+  min-width: 300px;
+  transition: all 0.4s ease-in-out;
+}
+
+.navbar-content {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 25px;
+  height: 100%;
+  width: 100%;
+  transition: opacity 0.3s ease-in-out 0.1s;
+}
+
+.navbar-left-content,
+.navbar-right-content {
+  display: flex;
+  align-items: center;
+}
+
+.navbar-brand h1 {
+  display: none;
+}
+
+.navbar-links {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  gap: 30px;
+}
+
+.navbar-links a {
+  color: var(--text-color-secondary);
+  text-decoration: none;
+  font-weight: 500;
+  transition: color 0.3s ease, transform 0.2s ease;
+  padding: 5px 0;
+  position: relative;
+}
+
+.navbar-links a:hover {
+  color: var(--text-color-primary);
+  transform: translateY(-2px);
+}
+
+.navbar-links a::after {
+    content: '';
+    position: absolute;
+    width: 0;
+    height: 2px;
+    bottom: 0;
+    left: 0;
+    background-color: var(--text-color-primary);
+    transition: width 0.3s ease-in-out;
+}
+
+.navbar-links a:hover::after {
+    width: 100%;
+}
+
+.navbar-resume-button {
+  background: light-dark(rgba(0, 0, 0, 0.1), rgba(255, 255, 255, 0.1));
+  border: 1px solid light-dark(rgba(0, 0, 0, 0.2), rgba(255, 255, 255, 0.2));
+  padding: 8px 15px;
+  border-radius: 8px;
+  color: var(--text-color-primary);
+  font-weight: 600;
+  cursor: pointer;
+  transition: background 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease, transform 0.2s ease;
+  backdrop-filter: blur(5px);
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
+  margin-right: 15px; /* Space between resume button and dark mode switch */
+}
+
+.navbar-resume-button:hover {
+  background: light-dark(rgba(0, 0, 0, 0.15), rgba(255, 255, 255, 0.15));
+  border-color: light-dark(rgba(0, 0, 0, 0.3), rgba(255, 255, 255, 0.3));
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  transform: translateY(-2px);
+}
+
+/* Hamburger wrapper - hidden by default on desktop */
+.hamburger-fixed-wrapper {
+  display: none;
+}
+
+/* --- Mobile-Specific Styles --- */
+@media (max-width: 768px) {
+  /* This container handles the overall fixed positioning of the whole Navbar component */
+  .navbar-container {
+    
+    top: 15px; /* Adjust as desired from top edge */
+    left: auto; /* Remove left positioning */
+    right: 15px; /* Fix to right edge */
+    transform: none; /* Remove horizontal centering transform */
+    width: 60px; /* Base width for the circle */
+    height: 60px; /* Base height for the circle */
+    border-radius: 50%; /* Make it a circle */
+    overflow: hidden; /* Hide overflow when compact */
+    /* Align items to center the glass surface within this container if needed */
+    align-items: center;
+    justify-content: center;
+  }
+
+  /* The GlassSurface itself (the visual circle/overlay) */
+  .navbar-glass-surface {
+    /* These !important are needed to override inline styles set by GlassSurface props */
+    width: 100% !important; /* Take full width of the navbar-container */
+    height: 100% !important; /* Take full height of the navbar-container */
+    border-radius: 50% !important; /* Circle shape */
+    padding: 0 !important; /* No padding inside the circle */
+    min-width: unset !important; /* Remove min-width for mobile */
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3) !important; /* More pronounced shadow for mobile circle */
+    /* No transitions here, as they are handled by navbar-container for the expansion */
+  }
+
+  /* Content inside the glass surface (hidden when compact) */
+  .navbar-content {
+    opacity: 0; /* Hide content by default */
+    pointer-events: none; /* Prevent interaction with hidden content */
+    transition: opacity 0.2s ease-out; /* Smooth fade out */
+    display: flex; /* Keep flex context for alignment in expanded state */
+    flex-direction: column; /* Stack items when visible */
+    justify-content: center;
+    align-items: center;
+    padding: 0;
+    gap: 20px; /* Gap between menu items when expanded */
+  }
+
+  /* Hamburger Menu Wrapper - fixed to viewport's top-right */
+  .hamburger-fixed-wrapper {
+      display: block; /* Show the hamburger wrapper */
+      position: fixed; /* Fixed to viewport */
+      top: 15px; /* Same top as .navbar-container */
+      right: 15px; /* Same right as .navbar-container */
+      width: 60px; /* Match Navbar circle size */
+      height: 60px; /* Match Navbar circle size */
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      z-index: 1001; /* Ensure it's always on top, above the expanding Navbar */
+  }
+
+  /* Hide elements by default on mobile (only show hamburger in compact state) */
+  .navbar-left-content, /* DateTimeDisplay */
+  .navbar-links,
+  .navbar-right-content, /* This holds DarkModeSwitch and Resume button */
+  .navbar-resume-button,
+  .dark-mode-switch-container { /* Specific hide for the switch container too */
+    display: none;
+  }
+
+  /* --- Mobile Menu OPEN State --- */
+  .navbar-container.mobile-menu-open {
+    width: 100vw; /* Expand to full viewport width */
+    height: 100vh; /* Expand to full viewport height */
+    top: 0;
+    right: 0;
+    left: 0; /* Ensure it covers full screen */
+    border-radius: 0; /* No border radius when expanded */
+    background: var(--background-color-primary); /* Base background for the overlay */
+    backdrop-filter: blur(20px) saturate(1.5) brightness(1.1); /* Background blur for the overlay */
+    -webkit-backdrop-filter: blur(20px) saturate(1.5) brightness(1.1);
+  }
+
+  .navbar-container.mobile-menu-open .navbar-glass-surface {
+    border-radius: 0 !important;
+    background: transparent !important; /* Ensure glass background is transparent when overlay takes over */
+    box-shadow: none !important; /* Remove shadow for full screen */
+  }
+
+  .navbar-container.mobile-menu-open .navbar-content {
+    opacity: 1; /* Show content */
+    pointer-events: auto; /* Allow interaction */
+    display: flex; /* Ensure flex layout is active for content */
+    flex-direction: column; /* Stack menu items vertically */
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
+  }
+
+  /* Show specific elements in the expanded mobile menu */
+  .navbar-container.mobile-menu-open .navbar-brand h1, /* Can show brand name again */
+  .navbar-container.mobile-menu-open .navbar-links,
+  .navbar-container.mobile-menu-open .navbar-right-content { /* Show DarkModeSwitch and Resume button */
+    display: flex; /* Use flex to maintain alignment if items have varying widths */
+    width: auto; /* Let content determine width */
+    flex-direction: column; /* Stack these elements vertically */
+    align-items: center;
+  }
+
+  .navbar-container.mobile-menu-open .navbar-links {
+    flex-direction: column;
+    text-align: center;
+    gap: 15px; /* Adjust gap for vertical links */
+  }
+
+  .navbar-container.mobile-menu-open .navbar-links a {
+    font-size: 1.5rem; /* Larger links for mobile menu */
+    padding: 10px 0;
+  }
+
+  .navbar-container.mobile-menu-open .navbar-right-content {
+      margin-top: 20px;
+      gap: 15px; /* Space between resume button and dark mode switch */
+  }
+}

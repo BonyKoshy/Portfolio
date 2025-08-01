@@ -1,0 +1,42 @@
+/* src/components/HamburgerMenu/HamburgerMenu.css */
+.hamburger-menu {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  width: 30px;
+  height: 25px;
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  padding: 0;
+  box-sizing: content-box; /* Ensures padding doesn't affect width/height */
+  z-index: 1001; /* Above Navbar content */
+}
+
+.hamburger-menu:focus {
+  outline: none; /* Remove default outline */
+}
+
+.hamburger-menu div {
+  width: 30px;
+  height: 3px;
+  background-color: var(--text-color-primary); /* Adapts to theme */
+  border-radius: 2px;
+  transition: all 0.3s linear;
+  position: relative;
+  transform-origin: 1px;
+}
+
+/* Animation for when menu is open */
+.hamburger-menu.open .bar1 {
+  transform: rotate(45deg);
+}
+
+.hamburger-menu.open .bar2 {
+  opacity: 0;
+  transform: translateX(20px);
+}
+
+.hamburger-menu.open .bar3 {
+  transform: rotate(-45deg);
+}

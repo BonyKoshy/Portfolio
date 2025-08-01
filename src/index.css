@@ -1,68 +1,134 @@
-:root {
-  font-family: system-ui, Avenir, Helvetica, Arial, sans-serif;
-  line-height: 1.5;
-  font-weight: 400;
+/* src/index.css - Global Styles for Fluent Design & Theme */
 
-  color-scheme: light dark;
-  color: rgba(255, 255, 255, 0.87);
-  background-color: #242424;
+/* Universal Box-Sizing for easier layout */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
 
-  font-synthesis: none;
-  text-rendering: optimizeLegibility;
+/* Basic body reset and font settings */
+body {
+  margin: 0;
+  padding: 0;
+  font-family: 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue', sans-serif;
   -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
+  -moz-osx-smoothing: grayscale;
+  min-height: 100vh;
+  line-height: 1.6;
+  transition: background-color 0.3s ease, color 0.3s ease; /* Smooth theme transition */
+}
+
+/* Define CSS Variables based on data-theme attribute on <body> */
+body[data-theme='light'] {
+  background-color: #f0f0f0;
+  color: #333;
+  --text-color-primary: #333;
+  --text-color-secondary: #555;
+  --background-color-primary: #f0f0f0;
+  --background-color-secondary: #e0e0e0;
+  /* Glass Surface Fallback colors for light mode */
+  --glass-fallback-bg: rgba(255, 255, 255, 0.25);
+  --glass-fallback-border: rgba(255, 255, 255, 0.3);
+  --glass-fallback-shadow-rgb: 31, 38, 135; /* RGB for shadow opacity */
+  --link-color: #0078D4;
+  --link-hover-color: #005A9E;
+}
+
+body[data-theme='dark'] {
+  background-color: #1a1a1a;
+  color: #e0e0e0;
+  --text-color-primary: #e0e0e0;
+  --text-color-secondary: #ccc;
+  --background-color-primary: #1a1a1a;
+  --background-color-secondary: #2c2c2c;
+  /* Glass Surface Fallback colors for dark mode */
+  --glass-fallback-bg: rgba(255, 255, 255, 0.1);
+  --glass-fallback-border: rgba(255, 255, 255, 0.2);
+  --glass-fallback-shadow-rgb: 31, 38, 135; /* Same RGB, adjust opacity in usage */
+  --link-color: #4FC3F7;
+  --link-hover-color: #81D4FA;
+}
+
+/* Apply fallback styles using the variables */
+.glass-surface--fallback {
+  background: var(--glass-fallback-bg);
+  backdrop-filter: blur(12px) saturate(1.8) brightness(1.1);
+  -webkit-backdrop-filter: blur(12px) saturate(1.8) brightness(1.1);
+  border: 1px solid var(--glass-fallback-border);
+  box-shadow:
+    0 8px 32px 0 rgba(var(--glass-fallback-shadow-rgb), 0.2),
+    0 2px 16px 0 rgba(var(--glass-fallback-shadow-rgb), 0.1),
+    inset 0 1px 0 0 rgba(255, 255, 255, 0.4),
+    inset 0 -1px 0 0 rgba(255, 255, 255, 0.2);
+}
+
+/* Adjustments for dark mode fallback specifically */
+body[data-theme='dark'] .glass-surface--fallback {
+  background: var(--glass-fallback-bg); /* Use dark mode specific bg */
+  border: 1px solid var(--glass-fallback-border); /* Use dark mode specific border */
+  box-shadow:
+    0 8px 32px 0 rgba(var(--glass-fallback-shadow-rgb), 0.1), /* Lighter shadow */
+    0 2px 16px 0 rgba(var(--glass-fallback-shadow-rgb), 0.05),
+    inset 0 1px 0 0 rgba(255, 255, 255, 0.2),
+    inset 0 -1px 0 0 rgba(255, 255, 255, 0.1);
+}
+
+/* Fallback for browsers not supporting backdrop-filter */
+@supports not (backdrop-filter: blur(10px)) {
+  .glass-surface--fallback {
+    background: light-dark(rgba(255, 255, 255, 0.4), rgba(0, 0, 0, 0.4));
+    box-shadow:
+      inset 0 1px 0 0 light-dark(rgba(255, 255, 255, 0.5), rgba(255, 255, 255, 0.2)),
+      inset 0 -1px 0 0 light-dark(rgba(255, 255, 255, 0.3), rgba(255, 255, 255, 0.1));
+  }
+  .glass-surface--fallback::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: light-dark(rgba(255, 255, 255, 0.15), rgba(255, 255, 255, 0.05));
+    border-radius: inherit;
+    z-index: -1;
+  }
+}
+
+/* Root element for React app */
+#root {
+  width: 100%;
+  min-height: 100vh;
+  position: relative;
+  overflow-x: hidden;
+}
+
+/* Reset default heading margins etc. */
+h1, h2, h3, h4, h5, h6 {
+  margin-top: 0;
+  margin-bottom: 0.5em;
+  font-weight: 600;
+  color: var(--text-color-primary);
+}
+
+p {
+  margin-top: 0;
+  margin-bottom: 1em;
 }
 
 a {
-  font-weight: 500;
-  color: #646cff;
-  text-decoration: inherit;
+  color: var(--link-color);
+  text-decoration: none;
+  transition: color 0.3s ease;
 }
+
 a:hover {
-  color: #535bf2;
-}
-
-body {
-  margin: 0;
-  display: flex;
-  place-items: center;
-  min-width: 320px;
-  min-height: 100vh;
-}
-
-h1 {
-  font-size: 3.2em;
-  line-height: 1.1;
+  color: var(--link-hover-color);
+  text-decoration: underline;
 }
 
 button {
-  border-radius: 8px;
-  border: 1px solid transparent;
-  padding: 0.6em 1.2em;
-  font-size: 1em;
-  font-weight: 500;
   font-family: inherit;
-  background-color: #1a1a1a;
   cursor: pointer;
-  transition: border-color 0.25s;
-}
-button:hover {
-  border-color: #646cff;
-}
-button:focus,
-button:focus-visible {
-  outline: 4px auto -webkit-focus-ring-color;
-}
-
-@media (prefers-color-scheme: light) {
-  :root {
-    color: #213547;
-    background-color: #ffffff;
-  }
-  a:hover {
-    color: #747bff;
-  }
-  button {
-    background-color: #f9f9f9;
-  }
+  border: none;
+  background: none;
+  padding: 0;
+  color: inherit;
 }
