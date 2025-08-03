@@ -2,43 +2,43 @@
 
 /* Styles for the Squares component as background */
 .app-background-squares {
-  position: fixed; /* Fixed position relative to viewport */
+  position: fixed;
   top: 0;
   left: 0;
-  width: 100vw; /* Take full viewport width */
-  height: 100vh; /* Take full viewport height */
-  z-index: -1; /* Place it behind all other content */
-  pointer-events: none; /* Allows clicks/interactions to pass through to content */
-  /* Optional: Add a subtle overlay to background */
+  width: 100vw;
+  height: 100vh;
+  z-index: -1;
+  pointer-events: none;
   background: linear-gradient(to bottom, rgba(0,0,0,0.1), rgba(0,0,0,0.3));
 }
 
 /* Styles for your actual content wrapper that sits on top of the background */
 .app-content-wrapper {
-  position: relative; /* Ensure content is on top of background */
-  z-index: 1; /* Place it above the background */
-  max-width: 1280px; /* Constrain your content width */
-  margin: 0 auto; /* Center your content wrapper */
+  position: relative;
+  z-index: 1;
+  max-width: 1280px;
+  margin: 0 auto;
   padding: 90px 20px 20px; /* Adjust padding-top to account for fixed Navbar height */
-  min-height: 100vh; /* Ensure content wrapper is tall enough */
+  min-height: 100vh;
   display: flex;
   flex-direction: column;
+  /* Keep align-items: center; if you want sections centered */
   align-items: center;
-  /* Remove justify-content: center; from here as sections will stack */
-  text-align: center; /* General text alignment for content */
+  /* Remove text-align: center; if you want section content to have their own alignment */
+  /* text-align: center; */ /* Moved text-align to specific sections as needed */
 }
 
 /* Basic responsiveness for overall layout */
 @media (max-width: 768px) {
   .app-content-wrapper {
-    padding-top: 100px; /* Adjust padding for smaller Navbar */
+    padding-top: 100px;
     padding-left: 15px;
     padding-right: 15px;
   }
 }
 
-/* --- Existing starter template styles (clean up or keep as needed for initial view) --- */
-/* You can remove these as you build your actual sections */
+/* --- CLEANUP: Remove these old starter template styles --- */
+/* You can now delete these from App.css */
 .logo {
   height: 6em;
   padding: 1.5em;
@@ -49,7 +49,7 @@
   filter: drop-shadow(0 0 2em #646cffaa);
 }
 .logo.react:hover {
-  animation: logo-spin infinite 20s linear; /* Keep animation */
+  animation: logo-spin infinite 20s linear;
   filter: drop-shadow(0 0 2em #61dafbaa);
 }
 
@@ -57,14 +57,6 @@
   from { transform: rotate(0deg); }
   to { transform: rotate(360deg); }
 }
-
-/*
-@media (prefers-reduced-motion: no-preference) {
-  a:nth-of-type(2) .logo {
-    animation: logo-spin infinite 20s linear;
-  }
-}
-*/ /* Animation is already applied above */
 
 .card {
   padding: 2em;

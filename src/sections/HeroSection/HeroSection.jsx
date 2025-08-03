@@ -1,55 +1,63 @@
 // src/sections/HeroSection/HeroSection.jsx
-import React, { useState } from 'react';
-import StatusIndicator from '../../components/StatusIndicator/StatusIndicator';
-import BlurText from '../../components/BlurText/BlurText'; // Import BlurText
+import React from 'react';
+import BlurText from '../../components/BlurText/BlurText';
+import Button from '../../components/Button/Button';
 import './HeroSection.css';
 
 function HeroSection() {
-  const [status, setStatus] = useState('available');
+  const scrollToSection = (id) => {
+    const element = document.getElementById(id);
+    if (element) {
+      element.scrollIntoView({ behavior: 'smooth' });
+    }
+  };
 
   return (
     <section id="home" className="hero-section">
-      {/* Status Indicator */}
-      <div className="hero-status-bar">
-        <StatusIndicator status={status} />
-        <span className="hero-status-text">
-          {status === 'available' ? 'Available for projects' : 'Currently busy'}
-        </span>
-      </div>
-
-      {/* Blur Text for "Hi, I'm Bony Koshy. A BCA Graduate." */}
-      <div className="hero-intro-text-container"> {/* Wrapper for alignment */}
-        <p className="hero-intro-hi-im">Hi, I'm</p> {/* Smaller "Hi, I'm" */}
+      {/* Main Blur Text Introduction Block */}
+      <div className="hero-intro-text-block">
         <BlurText
-          text="Bony Koshy."
-          delay={80} // Adjust delay for animation speed
-          animateBy="words"
-          direction="top"
-          className="hero-name-blur-text" // Custom class for styling
-          minFontSize={80} // Base font size, BlurText will scale dynamically
-          textColor="var(--text-color-primary)" // Theme-aware color
+          text="Hi, I'm Bony Koshy." // <-- ENSURE THIS STRING HAS SPACES
+          delay={50}
+          animateBy="letters"
+          direction="bottom"
+          className="hero-main-blur-text"
         />
         <BlurText
-          text="A BCA Graduate."
-          delay={80} // Adjust delay
-          animateBy="words"
-          direction="top"
-          className="hero-bca-blur-text" // Custom class for styling
-          minFontSize={40} // Smaller font size for the second line
-          textColor="var(--text-color-secondary)" // Theme-aware color
+          text="A BCA Graduate." // <-- ENSURE THIS STRING HAS SPACES
+          delay={50}
+          animateBy="letters"
+          direction="bottom"
+          className="hero-main-blur-text hero-second-line"
         />
       </div>
 
+      {/* Description below the main blur text */}
+      <div className="hero-description-container">
+        <p className="hero-description-line">“Freshly graduated, fully motivated.”</p>
+        <p className="hero-description-line hero-description-single-line">
+          Crafting smart solutions with a passion for digital excellence.
+        </p>
+      </div>
 
-      {/* Tagline (if still desired, or removed if the above is enough) */}
-      {/* <p className="hero-tagline">
-        A passionate developer building the future one line of code at a time
-      </p> */}
-
-      {/* Call to Action Buttons (Placeholder for now) */}
+      {/* Call to Action Buttons */}
       <div className="hero-cta-buttons">
-        <button className="hero-cta-button">Download Resume</button>
-        <button className="hero-cta-button hero-cta-button--secondary">View Projects</button>
+        <Button
+          variant="primary"
+          iconSrc="/icons/resume_icon.png"
+          iconAlt="Resume Icon"
+          onClick={() => window.open('/your_resume.pdf', '_blank', 'noopener noreferrer')}
+        >
+          Resume
+        </Button>
+        <Button
+          variant="secondary"
+          iconSrc="/icons/view_more_icon.png"
+          iconAlt="View More Icon"
+          onClick={() => scrollToSection('about')}
+        >
+          View More
+        </Button>
       </div>
     </section>
   );

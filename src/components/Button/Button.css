@@ -1,0 +1,100 @@
+/* src/components/Button/Button.css */
+
+/* Define theme-aware color variables for buttons */
+:root {
+  /* Default/light theme button colors */
+  --button-primary-bg: rgba(0, 0, 0, 0.3); /* Semi-transparent green */
+  --button-primary-border:rgba(0, 0, 0, 0.01);
+  --button-primary-hover-bg: rgba(0, 0, 0, 0.01); /* Darker green on hover */
+  --button-primary-hover-border:rgba(0, 0, 0, 0.01);
+
+  --button-secondary-bg: rgba(0, 0, 0, 0.01); /* Very light, transparent gray */
+  --button-secondary-border: rgba(0, 0, 0, 0.01);
+  --button-secondary-hover-bg: rgba(0, 0, 0, 0.01); /* Slightly more opaque hover */
+  --button-secondary-hover-border: var(--link-color); /* Link color border on hover */
+}
+
+/* Dark mode specific button colors */
+body[data-theme='dark'] {
+  --button-primary-bg: rgba(0, 0, 0, 0.3); /* Slightly more transparent green for dark theme */
+  --button-primary-border: rgba(0, 0, 0, 0.3);
+  --button-primary-hover-bg: rgba(0, 0, 0, 0.3);
+  --button-primary-hover-border: rgba(0, 0, 0, 0.3);
+
+  --button-secondary-bg: rgba(0, 0, 0, 0.3); /* Very dark, transparent gray */
+  --button-secondary-border: rgba(0, 0, 0, 0.3);
+  --button-secondary-hover-bg: rgba(0, 0, 0, 0.3);
+}
+
+
+.button-glass-surface {
+  display: inline-flex;
+  flex-shrink: 0;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.08); /* Fluent-inspired soft shadow */
+  transition: all 0.3s ease; /* Smooth transition for hover effects */
+  
+  /* Apply custom background and border via CSS variables (passed as style prop to GlassSurface) */
+  background: var(--button-glass-bg); /* Uses the custom variable passed from Button.jsx */
+  border: 1px solid var(--button-glass-border); /* Uses the custom variable */
+}
+
+.button-glass-surface:hover {
+  transform: translateY(-3px); /* Subtle lift on hover */
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.15); /* Enhanced shadow on hover */
+}
+/* Hover effect for the glass surface background */
+.button-glass-surface.button-variant-primary:hover { /* Target primary variant specifically */
+  background: var(--button-primary-hover-bg);
+  border-color: var(--button-primary-hover-border);
+}
+.button-glass-surface.button-variant-secondary:hover { /* Target secondary variant specifically */
+  background: var(--button-secondary-hover-bg);
+  border-color: var(--button-secondary-hover-border);
+}
+
+
+.button-content {
+  background: transparent; /* CRITICAL: Keep this transparent so GlassSurface shows through */
+  border: none;
+  padding: 12px 25px;
+  font-size: 1.1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  border-radius: inherit;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  color: var(--text-color-primary); /* Text color from theme */
+  /* --- CRITICAL CHANGE: Add subtle text shadow for visibility --- */
+  text-shadow: 0 0 5px rgba(0, 0, 0, 0.2); /* Soft black shadow */
+}
+/* Override text color for primary button to ensure white text */
+.button-variant-primary .button-content {
+    color: white;
+}
+
+
+/* --- Button Variants (No direct background-color here) --- */
+
+
+.button-icon {
+  width: 20px;
+  height: 20px;
+  flex-shrink: 0;
+  object-fit: contain;
+  line-height: 1;
+  display: block;
+}
+
+/* Mobile adjustments for buttons */
+@media (max-width: 768px) {
+    .button-glass-surface {
+        width: 100%;
+    }
+    .button-content {
+        font-size: 1rem;
+        padding: 10px 20px;
+    }
+}

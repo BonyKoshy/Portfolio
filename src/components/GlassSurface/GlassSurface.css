@@ -1,3 +1,22 @@
+/* Define custom properties that can be set by children components (like Button) */
+:root {
+  --button-glass-bg: transparent; /* Default to transparent */
+  --button-glass-border: transparent; /* Default to transparent */
+}
+
+/* Fallback styles: Use the custom properties if they are set */
+.glass-surface--fallback {
+  background: var(--button-glass-bg, rgba(255, 255, 255, 0.25)); /* Use custom background if available, else default */
+  backdrop-filter: blur(12px) saturate(1.8) brightness(1.1);
+  -webkit-backdrop-filter: blur(12px) saturate(1.8) brightness(1.1);
+  border: 1px solid var(--button-glass-border, rgba(255, 255, 255, 0.3)); /* Use custom border if available, else default */
+  box-shadow:
+    0 8px 32px 0 rgba(31, 38, 135, 0.2),
+    0 2px 16px 0 rgba(31, 38, 135, 0.1),
+    inset 0 1px 0 0 rgba(255, 255, 255, 0.4),
+    inset 0 -1px 0 0 rgba(255, 255, 255, 0.2);
+}
+
 .glass-surface {
   position: relative;
   display: flex;
