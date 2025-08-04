@@ -3,12 +3,12 @@
   min-height: 100vh;
   display: flex;
   flex-direction: column;
-  justify-content: flex-start; /* <--- CRITICAL CHANGE: Align content to the TOP */
-  align-items: flex-start; /* <--- CRITICAL CHANGE: Align the *entire section's content* to the LEFT */
-  padding: 120px 20px 50px; /* <--- Adjusted padding-top to give space from Navbar */
-  max-width: 1280px; /* Constrain the section width */
-  margin: 0 auto; /* Center the section within the app-content-wrapper */
-  text-align: left; /* Ensure text inside the section aligns left */
+  justify-content: flex-start;
+  align-items: flex-start;
+  padding: 120px 20px 50px;
+  max-width: 1280px;
+  margin: 0 auto;
+  text-align: left;
   position: relative;
   z-index: 1;
 }
@@ -17,32 +17,32 @@
 .hero-intro-text-block {
     display: flex;
     flex-direction: column;
-    align-items: flex-start; /* Align lines within this block to the left */
+    align-items: flex-start;
     width: 100%;
     margin-bottom: 30px;
-    padding-left: 0; /* No extra padding here */
+    padding-left: 0;
 }
 
 /* Common styling for both BlurText lines */
 .hero-main-blur-text {
-    font-size: 4.5em; /* <--- Ensure this large size for desktop */
+    font-size: 4.5em;
     font-weight: 700;
     color: var(--text-color-primary);
     line-height: 1.1;
-    /* BlurText component already handles inline-block and transitions */
 }
 
 /* Specific styling for the second line, creating vertical spacing */
 .hero-second-line {
-    margin-top: -10px; /* Adjust this value to bring lines closer/further */
-    font-weight: 500; /* Slightly less bold for the second line */
+    margin-top: -50px; /* Adjusted to bring lines closer */
+    font-weight: 500;
 }
 
 /* Description Styling */
 .hero-description-container {
     width: 100%;
+    margin-top: -80px; /* Adjusted space from the blur text */
     margin-bottom: 40px;
-    padding-left: 0; /* No extra padding here */
+    padding-left: 0;
     text-align: left;
     color: var(--text-color-secondary);
     font-size: 1.1rem;
@@ -59,9 +59,9 @@
 }
 
 .hero-description-single-line {
-    white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis;
+    white-space: normal; /* CRITICAL CHANGE: Allow text to wrap on multiple lines */
+    overflow: visible; /* Ensure content is visible */
+    text-overflow: clip; /* No ellipsis */
     max-width: 100%;
 }
 
@@ -70,10 +70,10 @@
   display: flex;
   gap: 20px;
   flex-wrap: wrap;
-  justify-content: flex-start; /* Align CTA buttons to the left */
+  justify-content: flex-start;
   width: 100%;
-  padding-left: 0; /* No extra padding here */
-  margin-top: 20px;
+  padding-left: 0;
+  margin-top: -10px;
 }
 
 /* Responsive adjustments */
@@ -86,15 +86,16 @@
     }
 
     .hero-main-blur-text {
-        font-size: 2.5em; /* <--- Smaller on mobile */
+        font-size: 2.5em;
         line-height: 1.1;
     }
     .hero-second-line {
-        margin-top: -5px; /* Adjust spacing for mobile */
+        margin-top: -10px; /* Adjusted spacing for mobile */
     }
 
     .hero-description-container {
         font-size: 0.95rem;
+        margin-top: -50px; /* Adjusted space for mobile */
     }
 
     .hero-cta-buttons {

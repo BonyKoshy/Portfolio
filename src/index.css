@@ -13,7 +13,7 @@ body {
   padding: 0;
   font-family: 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue', sans-serif;
   -webkit-font-smoothing: antialiased;
-  -moz-osx-smoothing: grayscale;
+  -moz-osx-font-smoothing: grayscale;
   min-height: 100vh;
   line-height: 1.6;
   transition: background-color 0.3s ease, color 0.3s ease; /* Smooth theme transition */
@@ -28,8 +28,8 @@ body[data-theme='light'] {
   --background-color-primary: #f0f0f0;
   --background-color-secondary: #e0e0e0;
   /* Glass Surface Fallback colors for light mode */
-  --glass-fallback-bg: rgba(255, 255, 255, 0.25);
-  --glass-fallback-border: rgba(255, 255, 255, 0.3);
+  --glass-fallback-bg: rgba(255, 255, 255, 0.4); /* Slightly less opaque for light theme */
+  --glass-fallback-border: rgba(255, 255, 255, 0.5); /* Slightly less opaque border */
   --glass-fallback-shadow-rgb: 31, 38, 135; /* RGB for shadow opacity */
   --link-color: #0078D4;
   --link-hover-color: #005A9E;
@@ -43,7 +43,7 @@ body[data-theme='dark'] {
   --background-color-primary: #1a1a1a;
   --background-color-secondary: #2c2c2c;
   /* Glass Surface Fallback colors for dark mode */
-  --glass-fallback-bg: rgba(255, 255, 255, 0.1);
+  --glass-fallback-bg: rgba(0, 0, 0, 0.4); /* More opaque for dark theme to show blur better */
   --glass-fallback-border: rgba(255, 255, 255, 0.2);
   --glass-fallback-shadow-rgb: 31, 38, 135; /* Same RGB, adjust opacity in usage */
   --link-color: #4FC3F7;
@@ -77,7 +77,7 @@ body[data-theme='dark'] .glass-surface--fallback {
 /* Fallback for browsers not supporting backdrop-filter */
 @supports not (backdrop-filter: blur(10px)) {
   .glass-surface--fallback {
-    background: light-dark(rgba(255, 255, 255, 0.4), rgba(0, 0, 0, 0.4));
+    background: light-dark(rgba(255, 255, 255, 0.6), rgba(0, 0, 0, 0.6)); /* Increased opacity for non-backdrop-filter browsers */
     box-shadow:
       inset 0 1px 0 0 light-dark(rgba(255, 255, 255, 0.5), rgba(255, 255, 255, 0.2)),
       inset 0 -1px 0 0 light-dark(rgba(255, 255, 255, 0.3), rgba(255, 255, 255, 0.1));
@@ -86,7 +86,7 @@ body[data-theme='dark'] .glass-surface--fallback {
     content: '';
     position: absolute;
     inset: 0;
-    background: light-dark(rgba(255, 255, 255, 0.15), rgba(255, 255, 255, 0.05));
+    background: light-dark(rgba(255, 255, 255, 0.3), rgba(255, 255, 255, 0.1)); /* Increased opacity for non-backdrop-filter browsers */
     border-radius: inherit;
     z-index: -1;
   }
