@@ -1,0 +1,46 @@
+/* src/sections/AboutSection/AboutSection.css */
+.about-section {
+  min-height: 80vh; /* Adjust as needed, might not need full viewport height */
+  display: flex;
+  flex-direction: column;
+  justify-content: center; /* Center content vertically */
+  align-items: flex-start; /* Align content to the left */
+  padding: 50px 20px; /* Padding for the section */
+  max-width: 1280px; /* Match app-content-wrapper's max-width */
+  margin: 0 auto; /* Center the section within the app-content-wrapper */
+  text-align: left; /* Ensure text aligns left within the section */
+  color: var(--text-color-secondary);
+}
+
+.about-title {
+  font-size: 2.8em;
+  font-weight: 700;
+  color: var(--text-color-primary);
+  margin-bottom: 20px;
+}
+
+.about-description {
+  font-size: 1.1rem;
+  line-height: 1.7;
+  margin-bottom: 15px;
+  max-width: 800px; /* Constrain description width for readability */
+}
+
+.about-description:last-child {
+  margin-bottom: 0;
+}
+
+/* Responsive adjustments for mobile */
+@media (max-width: 768px) {
+  .about-section {
+    padding: 40px 15px;
+  }
+
+  .about-title {
+    font-size: 2em;
+  }
+
+  .about-description {
+    font-size: 1rem;
+  }
+}

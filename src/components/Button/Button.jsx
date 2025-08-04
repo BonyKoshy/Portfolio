@@ -12,10 +12,9 @@ function Button({ children, onClick, className = '', variant = 'primary', iconSr
     width: 'fit-content',
     height: 'fit-content',
     borderRadius: 999, // Pill-shaped
-    blur: 3, // <--- CRITICAL CHANGE: Very little blur for text visibility
-    opacity: 0.5, // <--- Adjust overall transparency of the glass
-    brightness: 100, // <--- Keep bright
-    // backgroundOpacity: 0, // No specific backgroundOpacity here; let CSS variables in GlassSurface.css handle it
+    blur: 10, // Increased blur for consistency with Navbar
+    opacity: 0.8, // Increased overall transparency of the glass
+    brightness: 100,
     ...glassProps, // Allow overrides
   };
 
@@ -24,18 +23,17 @@ function Button({ children, onClick, className = '', variant = 'primary', iconSr
 
   if (variant === 'primary') {
     // For primary, make it slightly less transparent and maybe a bit more pronounced
-    finalGlassProps.opacity = 0.6;
-    finalGlassProps.blur = 5; // A bit more blur for primary
-    // We'll give it a background tint via CSS variables passed as style
+    finalGlassProps.opacity = 0.9; // Slightly less transparent for primary
+    finalGlassProps.blur = 12; // A bit more blur for primary
     finalGlassProps.style = {
       ...finalGlassProps.style,
-      '--button-glass-bg': 'var(--button-primary-bg)', // Custom var for primary color tint
-      '--button-glass-border': 'var(--button-primary-border)', // Custom var for primary border
+      '--button-glass-bg': 'var(--button-primary-bg)',
+      '--button-glass-border': 'var(--button-primary-border)',
     };
   } else if (variant === 'secondary') {
     // For secondary, keep it very transparent/subtle
-    finalGlassProps.opacity = 0.4;
-    finalGlassProps.blur = 3;
+    finalGlassProps.opacity = 0.7; // Slightly more transparent for secondary
+    finalGlassProps.blur = 10;
     finalGlassProps.style = {
       ...finalGlassProps.style,
       '--button-glass-bg': 'var(--button-secondary-bg)',

@@ -5,6 +5,7 @@ import Squares from './components/Squares/Squares';
 import Navbar from './components/Navbar/Navbar';
 import { ThemeProvider } from './context/ThemeContext';
 import HeroSection from './Sections/HeroSection/HeroSection'; // Ensure this import is here
+import AboutSection from './sections/AboutSection/AboutSection'; // Ensure this import is here
 
 function App() {
   return (
@@ -24,12 +25,7 @@ function App() {
         {/* This is your main content wrapper where all sections will go */}
         <div className="app-content-wrapper">
           <HeroSection /> {/* Render the Hero Section here */}
-
-          {/* You can remove any remaining placeholder paragraphs here */}
-          <p style={{ color: 'var(--text-color-secondary)', marginBottom: '50vh', fontSize: '1.2em' }}>
-            {/* Temporary content to allow scrolling, adjust/remove as needed */}
-            Scroll down to see more content once sections are added.
-          </p>
+          <AboutSection />
         </div>
       </>
     </ThemeProvider>

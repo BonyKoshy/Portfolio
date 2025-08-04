@@ -46,7 +46,7 @@ function HeroSection() {
           variant="primary"
           iconSrc="/icons/resume_icon.png"
           iconAlt="Resume Icon"
-          onClick={() => window.open('/your_resume.pdf', '_blank', 'noopener noreferrer')}
+          onClick={() => window.open('/resume.pdf', '_blank', 'noopener noreferrer')}
         >
           Resume
         </Button>
