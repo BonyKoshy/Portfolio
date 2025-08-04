@@ -25,7 +25,7 @@
 
 /* Common styling for both BlurText lines */
 .hero-main-blur-text {
-    font-size: 4.5em;
+    font-size: 5em;
     font-weight: 700;
     color: var(--text-color-primary);
     line-height: 1.1;
@@ -33,6 +33,7 @@
 
 /* Specific styling for the second line, creating vertical spacing */
 .hero-second-line {
+    font-size: 4em;
     margin-top: -50px; /* Adjusted to bring lines closer */
     font-weight: 500;
 }

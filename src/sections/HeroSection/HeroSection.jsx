@@ -17,7 +17,7 @@ function HeroSection() {
       {/* Main Blur Text Introduction Block */}
       <div className="hero-intro-text-block">
         <BlurText
-          text="Hi, I'm Bony Koshy." // <-- ENSURE THIS STRING HAS SPACES
+          text="Hi, I'm Bony." // <-- ENSURE THIS STRING HAS SPACES
           delay={50}
           animateBy="letters"
           direction="bottom"
