@@ -1,46 +1,23 @@
 /* src/sections/AboutSection/AboutSection.css */
 .about-section {
-  min-height: 80vh; /* Adjust as needed, might not need full viewport height */
-  display: flex;
+  min-height: 100vh; /* Ensure section takes full height if needed */
+  display: flexbox;
   flex-direction: column;
-  justify-content: center; /* Center content vertically */
-  align-items: flex-start; /* Align content to the left */
-  padding: 50px 20px; /* Padding for the section */
-  max-width: 1280px; /* Match app-content-wrapper's max-width */
-  margin: 0 auto; /* Center the section within the app-content-wrapper */
-  text-align: left; /* Ensure text aligns left within the section */
-  color: var(--text-color-secondary);
+  justify-content: center; /* Vertically center the bento grid within the section */
+  align-items: center; /* Horizontally center the bento grid */
+  padding: 50px 20px; /* Padding for the section itself */
+  max-width: 100%; /* Allow section to take full width of app-content-wrapper */
+  margin: 0 auto; /* Center the section */
+  position: relative;
+  z-index: 1; /* Ensure it's above the squares background */
 }
 
-.about-title {
-  font-size: 2.8em;
-  font-weight: 700;
-  color: var(--text-color-primary);
-  margin-bottom: 20px;
-}
-
-.about-description {
-  font-size: 1.1rem;
-  line-height: 1.7;
-  margin-bottom: 15px;
-  max-width: 800px; /* Constrain description width for readability */
-}
-
-.about-description:last-child {
-  margin-bottom: 0;
-}
+/* No direct styles for .about-title, .about-description here, as they are now inside cards */
 
 /* Responsive adjustments for mobile */
 @media (max-width: 768px) {
   .about-section {
-    padding: 40px 15px;
-  }
-
-  .about-title {
-    font-size: 2em;
-  }
-
-  .about-description {
-    font-size: 1rem;
+    padding: 40px 15px; /* Adjust padding for mobile */
+    min-height: auto; /* Allow height to collapse on mobile if content is shorter */
   }
 }

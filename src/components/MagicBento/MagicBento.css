@@ -1,0 +1,254 @@
+/* src/components/MagicBento/MagicBento.css */
+:root {
+  --bento-purple-primary: rgba(132, 0, 255, 1);
+  --bento-purple-glow: rgba(132, 0, 255, 0.2);
+  --bento-purple-border: rgba(132, 0, 255, 0.8);
+  --bento-border-color-dark: #392e4e; /* For dark mode bento */
+  --bento-background-dark: #060010; /* For dark mode bento */
+}
+
+/* Adjustments for light-dark theme integration */
+body[data-theme='light'] {
+  --bento-card-bg: rgba(255, 255, 255, 0.4); /* Light mode glass background */
+  --bento-card-border: rgba(255, 255, 255, 0.5); /* Light mode glass border */
+  --bento-card-shadow-rgb: 31, 38, 135; /* RGB for shadow opacity */
+  --bento-text-color: var(--text-color-primary); /* Primary text color from global theme */
+  --bento-label-color: var(--text-color-secondary);
+}
+
+body[data-theme='dark'] {
+  --bento-card-bg: rgba(0, 0, 0, 0.4); /* Dark mode glass background */
+  --bento-card-border: rgba(255, 255, 255, 0.2); /* Dark mode glass border */
+  --bento-card-shadow-rgb: 31, 38, 135; /* Same RGB, adjust opacity in usage */
+  --bento-text-color: var(--text-color-primary); /* Primary text color from global theme */
+  --bento-label-color: var(--text-color-secondary);
+}
+
+/* Base grid container for Bento layout */
+.card-grid {
+  display: grid;
+  gap: 8px; /* Consistent with your provided gap */
+  padding: 15px; /* Add some padding around the grid */
+  max-width: 1280px; /* Match your app-content-wrapper max-width */
+  width: 100%;
+  margin: 0 auto; /* Center the grid */
+
+  /* Your custom grid layout */
+  grid-template-columns: repeat(6, 1fr);
+  grid-template-rows: repeat(9, auto);
+
+  min-height: 100vh; /* Ensure grid takes full height if needed */
+}
+
+.card {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  position: relative;
+  aspect-ratio: auto; /* Allow content to define height */
+  min-height: 100px; /* Minimum height for cards */
+  width: 100%;
+  max-width: 100%;
+  padding: 1.25em;
+  border-radius: 20px;
+  overflow: hidden;
+  transition: all 0.3s ease;
+
+  /* Glass surface styles */
+  background: var(--bento-card-bg);
+  backdrop-filter: blur(12px) saturate(1.8) brightness(1.1);
+  -webkit-backdrop-filter: blur(12px) saturate(1.8) brightness(1.1);
+  border: 1px solid var(--bento-card-border);
+  box-shadow: 0 8px 32px 0 rgba(var(--bento-card-shadow-rgb), 0.2);
+
+  /* Spotlight & Glow variables managed by JS */
+  --glow-x: 50%;
+  --glow-y: 50%;
+  --glow-intensity: 0;
+  --glow-radius: 200px;
+}
+
+/* Adjustments for dark mode fallback specifically for cards */
+body[data-theme='dark'] .card {
+  box-shadow:
+    0 8px 32px 0 rgba(var(--bento-card-shadow-rgb), 0.1), /* Lighter shadow */
+    0 2px 16px 0 rgba(var(--bento-card-shadow-rgb), 0.05),
+    inset 0 1px 0 0 rgba(255, 255, 255, 0.2),
+    inset 0 -1px 0 0 rgba(255, 255, 255, 0.1);
+}
+
+/* Fallback for browsers not supporting backdrop-filter for cards */
+@supports not (backdrop-filter: blur(10px)) {
+  .card {
+    background: light-dark(rgba(255, 255, 255, 0.6), rgba(0, 0, 0, 0.6)); /* Increased opacity */
+    box-shadow:
+      inset 0 1px 0 0 light-dark(rgba(255, 255, 255, 0.5), rgba(255, 255, 255, 0.2)),
+      inset 0 -1px 0 0 light-dark(rgba(255, 255, 255, 0.3), rgba(255, 255, 255, 0.1));
+  }
+}
+
+.card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.15); /* Keep original hover shadow or adjust */
+}
+
+.card__header,
+.card__content {
+  display: flex;
+  position: relative;
+  color: var(--bento-text-color); /* Use theme-aware text color */
+  text-align: left; /* Ensure content aligns left within cards */
+}
+
+.card__header {
+  gap: 0.75em;
+  justify-content: space-between;
+  flex-wrap: wrap; /* Allow header items to wrap */
+}
+
+.card__content {
+  flex-direction: column;
+  flex-grow: 1; /* Allow content to take available space */
+}
+
+.card__label {
+  font-size: 16px;
+  color: var(--bento-label-color); /* Use secondary text color for labels */
+}
+
+.card__title {
+  font-weight: 700; /* Made bolder for emphasis */
+  font-size: 1.5em; /* Larger title */
+  margin: 0 0 0.5em;
+  line-height: 1.2;
+}
+
+.card__description {
+  font-size: 1em; /* Adjusted size */
+  line-height: 1.5;
+  opacity: 0.9;
+}
+
+/* Ensure images within cards are responsive */
+.card img {
+  max-width: 100%;
+  height: auto;
+  display: block; /* Remove extra space below image */
+}
+
+/* Specific grid area assignments */
+.div1 { grid-column: span 4 / span 4; grid-row: span 3 / span 3; }
+.div2 { grid-column: span 2 / span 2; grid-row: span 2 / span 2; grid-column-start: 5; }
+.div3 { grid-column: span 2 / span 2; grid-row: span 2 / span 2; grid-column-start: 5; grid-row-start: 3; }
+.div4 { grid-column: span 1 / span 1; grid-row-start: 4; } /* Adjusted span for smaller cards */
+.div5 { grid-column: span 1 / span 1; grid-row-start: 4; grid-column-start: 2; } /* Adjusted span and start */
+.div6 { grid-column: span 2 / span 2; grid-row-start: 4; grid-column-start: 3; } /* Adjusted span and start */
+.div7 { grid-column: span 3 / span 3; grid-row: span 2 / span 2; grid-row-start: 5; }
+.div8 { grid-column: span 3 / span 3; grid-row: span 2 / span 2; grid-column-start: 4; grid-row-start: 5; }
+.div9 { grid-column: span 6 / span 6; grid-row-start: 7; }
+
+
+/* Border glow effect */
+.card--border-glow::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  padding: 6px;
+  background: radial-gradient(var(--glow-radius) circle at var(--glow-x) var(--glow-y),
+      rgba(var(--bento-purple-glow), calc(var(--glow-intensity) * 0.8)) 0%,
+      rgba(var(--bento-purple-glow), calc(var(--glow-intensity) * 0.4)) 30%,
+      transparent 60%);
+  border-radius: inherit;
+  mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+  mask-composite: subtract;
+  -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+  -webkit-mask-composite: xor;
+  pointer-events: none;
+  transition: opacity 0.3s ease;
+  z-index: 1;
+}
+
+.card--border-glow:hover::after {
+  opacity: 1;
+}
+
+.card--border-glow:hover {
+  box-shadow: 0 4px 20px rgba(46, 24, 78, 0.4), 0 0 30px var(--bento-purple-glow);
+}
+
+/* Particle effect container */
+.particle-container {
+  position: relative;
+  overflow: hidden;
+}
+
+.particle {
+  pointer-events: none; /* Ensure particles don't block interaction */
+}
+.particle::before {
+  content: '';
+  position: absolute;
+  top: -2px;
+  left: -2px;
+  right: -2px;
+  bottom: -2px;
+  background: rgba(132, 0, 255, 0.2);
+  border-radius: 50%;
+  z-index: -1;
+}
+
+.particle-container:hover {
+  box-shadow: 0 4px 20px rgba(46, 24, 78, 0.2), 0 0 30px var(--bento-purple-glow);
+}
+
+/* Global spotlight styles */
+.global-spotlight {
+  mix-blend-mode: screen;
+  will-change: transform, opacity;
+  z-index: 200 !important;
+  pointer-events: none;
+}
+
+.bento-section {
+  position: relative;
+  user-select: none;
+  /* Additional styles for the bento section container if needed */
+  padding: 20px; /* Add some padding around the whole bento grid */
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  .card-grid {
+    grid-template-columns: 1fr; /* Stack all cards on mobile */
+    grid-template-rows: auto; /* Auto rows for stacked content */
+    gap: 10px;
+    padding: 15px;
+  }
+  .card {
+    grid-column: auto !important;
+    grid-row: auto !important;
+    min-height: 150px;
+    padding: 1em;
+  }
+  .card__title {
+    font-size: 1.2em;
+  }
+  .card__description {
+    font-size: 0.9em;
+  }
+}
+
+/* General card content styling for flex */
+.card-content-flex {
+  display: flexbox;
+  flex-direction: column;
+  height: 100%;
+}
+.card-content-flex-center {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  height: 100%;
+}
