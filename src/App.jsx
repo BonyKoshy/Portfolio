@@ -4,7 +4,7 @@ import './App.css';
 import Squares from './components/Squares/Squares';
 import Navbar from './components/Navbar/Navbar';
 import { ThemeProvider } from './context/ThemeContext';
-import HeroSection from './Sections/HeroSection/HeroSection'; // Ensure this import is here
+import HeroSection from './sections/HeroSection/HeroSection'; // Ensure this import is here
 import AboutSection from './sections/AboutSection/AboutSection'; // Ensure this import is here
 
 function App() {
@@ -15,7 +15,7 @@ function App() {
           speed={0.3}
           squareSize={70}
           direction='diagonal'
-          borderColor='#444'
+          borderColor='#777'
           hoverFillColor='#fff'
           className="app-background-squares"
         />

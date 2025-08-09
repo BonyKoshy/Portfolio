@@ -1,7 +1,67 @@
 /* src/components/ScrollStack/ScrollStack.css */
 
-.education-content {
-  flex-grow: 1;
+/* Make the scroller ITSELF the card */
+.scroll-stack-scroller {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  overflow-y: auto;
+  overflow-x: hidden;
+  overscroll-behavior: contain;
+
+  /* Card styles */
+  border-radius: 20px;
+  background: var(--bento-card-bg);
+  backdrop-filter: blur(12px) saturate(1.8);
+  -webkit-backdrop-filter: blur(12px) saturate(1.8);
+  border: 1px solid var(--bento-card-border);
+  box-shadow: 0 8px 32px 0 rgba(var(--bento-card-shadow-rgb), 0.1);
+}
+
+/* Hide scrollbar */
+.scroll-stack-scroller::-webkit-scrollbar {
+  display: none;
+}
+.scroll-stack-scroller {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
+.scroll-stack-inner {
+  /* Padding top makes space for the fixed header, padding bottom allows the last card to scroll up */
+  padding: 80px 1rem 50vh;
+}
+
+.scroll-stack-card {
+  transform-origin: top center;
+  will-change: transform, filter;
+  width: calc(100% - 32px);
+  margin: 0 auto;
+  padding: 1.5rem;
+  border-radius: 16px;
+  box-sizing: border-box;
+  position: relative;
+
+  /* Different background for contrast */
+  background: rgba(var(--bento-card-shadow-rgb), 0.1);
+  border: 1px solid rgba(var(--bento-card-shadow-rgb), 0.2);
+
+  color: var(--bento-text-color);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.education-content h4 {
+    font-size: 1.1em;
+    font-weight: 600;
+    margin: 0 0 4px;
+}
+
+.education-content p {
+    font-size: 0.9em;
+    margin: 0;
+    color: var(--text-color-secondary);
 }
 
 .education-icon {
@@ -9,91 +69,12 @@
   height: 32px;
   margin-left: 15px;
   flex-shrink: 0;
+}
+
+body[data-theme='dark'] .education-icon {
   filter: invert(1);
 }
 
-.scroll-stack-scroller {
-  position: relative;
-  width: 100%;
-  height: 100%; /* Make sure it takes full height of its container */
-  overflow-y: auto;
-  overflow-x: visible;
-  overscroll-behavior: contain;
-  -webkit-overflow-scrolling: touch;
-  scroll-behavior: smooth;
-  -webkit-transform: translateZ(0);
-  transform: translateZ(0);
-  will-change: scroll-position;
-}
-
-.scroll-stack-inner {
-  padding: 10vh 0 30vh; /* Adjusted padding for better fit within the bento card */
-  min-height: 100%; /* Ensures content stretches to enable scrolling */
-}
-
-.scroll-stack-card-wrapper {
-  position: relative;
-}
-
-.scroll-stack-card {
-  transform-origin: top center;
-  will-change: transform, filter;
-  backface-visibility: hidden;
-  transform-style: preserve-3d;
-  box-shadow: 0 0 15px rgba(0, 0, 0, 0.1); /* Lighter shadow for nested cards */
-  min-height: 10rem; /* Fixed height for each education item card */
-  width: calc(100% - 20px); /* Slightly smaller width to show stacking */
-  margin: 10px auto; /* Center cards and provide vertical spacing */
-  padding: 1.5rem;
-  border-radius: 20px; /* Consistent border-radius with bento cards */
-  box-sizing: border-box;
-  /* Improve mobile performance */
-  -webkit-transform: translateZ(0);
-  transform: translateZ(0);
-  position: relative;
-
-  /* Glass surface styles for inner cards, adapt from main GlassSurface */
-  background: var(--bento-card-bg); /* Inherit from bento card theme */
-  backdrop-filter: blur(8px) saturate(1.5) brightness(1.1); /* Slightly less blur for inner cards */
-  -webkit-backdrop-filter: blur(8px) saturate(1.5) brightness(1.1);
-  border: 1px solid var(--bento-card-border);
-  box-shadow: 0 4px 15px 0 rgba(var(--bento-card-shadow-rgb), 0.1); /* Lighter shadow */
-
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-  align-items: center; /* Center content horizontally */
-  text-align: left;
-  color: var(--bento-text-color);
-}
-
-body[data-theme='dark'] .scroll-stack-card {
-  box-shadow: 0 4px 15px 0 rgba(var(--bento-card-shadow-rgb), 0.05); /* Even lighter shadow in dark mode */
-}
-
-@supports not (backdrop-filter: blur(10px)) {
-  .scroll-stack-card {
-    background: light-dark(rgba(255, 255, 255, 0.5), rgba(0, 0, 0, 0.5)); /* Fallback opacity */
-    box-shadow:
-      inset 0 1px 0 0 light-dark(rgba(255, 255, 255, 0.4), rgba(255, 255, 255, 0.15)),
-      inset 0 -1px 0 0 light-dark(rgba(255, 255, 255, 0.2), rgba(255, 255, 255, 0.05));
-  }
-}
-
-
-.scroll-stack-card h2 {
-  font-size: 1.2em;
-  margin-bottom: 0.5em;
-  color: inherit;
-}
-
-.scroll-stack-card p {
-  font-size: 0.9em;
-  line-height: 1.4;
-  color: inherit;
-}
-
 .scroll-stack-end {
-  width: 100%;
   height: 1px;
 }

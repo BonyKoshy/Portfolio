@@ -4,7 +4,7 @@ import './Squares.css';
 const Squares = ({
   direction = 'right',
   speed = 1,
-  borderColor = '#999',
+  borderColor = '#444',
   squareSize = 40,
   hoverFillColor = '#222',
   className = ''

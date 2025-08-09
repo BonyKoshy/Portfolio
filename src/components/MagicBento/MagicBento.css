@@ -35,7 +35,7 @@ body[data-theme='dark'] {
 
   /* Your custom grid layout */
   grid-template-columns: repeat(6, 1fr);
-  grid-template-rows: repeat(9, auto);
+  grid-template-rows: repeat(8, auto) 1fr;
 
   min-height: 100vh; /* Ensure grid takes full height if needed */
 }
@@ -145,7 +145,11 @@ body[data-theme='dark'] .card {
 .div6 { grid-column: span 2 / span 2; grid-row-start: 4; grid-column-start: 3; } /* Adjusted span and start */
 .div7 { grid-column: span 3 / span 3; grid-row: span 2 / span 2; grid-row-start: 5; }
 .div8 { grid-column: span 3 / span 3; grid-row: span 2 / span 2; grid-column-start: 4; grid-row-start: 5; }
-.div9 { grid-column: span 6 / span 6; grid-row: span 1 / span 1; grid-row-start: 7; }
+.div9 {
+  grid-column: span 6 / span 6;
+  grid-row-start: 7; /* Adjust as needed for your layout */
+  min-height: 280px; /* Crucial: Set a fixed height for the container */
+}
 
 
 /* Border glow effect */
