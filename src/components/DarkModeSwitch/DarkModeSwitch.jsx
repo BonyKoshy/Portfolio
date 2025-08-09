@@ -1,20 +1,23 @@
 // src/components/DarkModeSwitch/DarkModeSwitch.jsx
 import React, { useContext } from 'react';
-import { ThemeContext } from '../../context/ThemeContext'; // We'll create this next
+import { ThemeContext } from '../../context/ThemeContext';
 import './DarkModeSwitch.css';
 
 function DarkModeSwitch() {
   const { theme, toggleTheme } = useContext(ThemeContext);
+  const isDark = theme === 'dark';
 
   return (
-    <div className="dark-mode-switch-container" onClick={toggleTheme}>
-      <div className={`dark-mode-switch-toggle ${theme === 'dark' ? 'dark-mode-switch-toggle--dark' : ''}`}>
-        <span className="dark-mode-switch-icon">
-        </span>
-      </div>
-      <span className="dark-mode-switch-label">
-        {theme === 'dark' ? 'Light' : 'Dark'}
-      </span>
+    <div className="toggle-switch">
+      <label className="switch-label">
+        <input
+          type="checkbox"
+          className="checkbox"
+          checked={!isDark}
+          onChange={toggleTheme}
+        />
+        <span className="slider"></span>
+      </label>
     </div>
   );
 }

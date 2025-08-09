@@ -1,4 +1,6 @@
 /* src/sections/AboutSection/AboutSection.css */
+
+
 .about-section {
   min-height: 100vh; /* Ensure section takes full height if needed */
   display: flexbox;
@@ -12,6 +14,112 @@
   z-index: 1; /* Ensure it's above the squares background */
 }
 
+.card-full-link {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  height: 100%;
+  text-decoration: none;
+}
+
+.social-icon {
+  width: 48px;
+  height: 48px;
+  transition: all 0.3s ease;
+}
+
+.card-hover-effect:hover .social-icon {
+  filter: grayscale(0%) invert(0); /* Reveal color on hover */
+  transform: scale(1.1);
+}
+
+.card-hover-effect:hover .github-icon {
+    filter: grayscale(0%) invert(0);
+}
+
+.location-map {
+  width: 100%;
+  height: 100%;
+  border-radius: 10px;
+  filter: grayscale(100%);
+  transition: filter 0.4s ease-in-out;
+}
+
+.location-map:hover {
+  filter: grayscale(0%);
+}
+
+.typing-speed-card {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+}
+
+.typing-speed-card::before {
+  content: '30';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  font-size: 10em; /* Huge font size */
+  font-weight: 700;
+  color: var(--text-color-primary);
+  opacity: 0.05; /* Very low opacity */
+  z-index: 0;
+}
+
+.typing-speed-card .card__content {
+  position: relative;
+  z-index: 1;
+}
+
+.typing-display {
+  display: flex;
+  align-items: baseline;
+  line-height: 1;
+}
+
+.wpm-value {
+  font-size: 4em;
+  font-weight: bold;
+}
+
+.wpm-label {
+  font-size: 1.5em;
+  font-weight: 500;
+  margin-left: 0.25em;
+  color: var(--text-color-secondary);
+}
+
+.typing-stats {
+  display: flex;
+  gap: 20px;
+  margin-top: 1em;
+  color: var(--text-color-secondary);
+}
+.scroll-stack-card {
+  /* ... existing styles */
+  display: flex; /* Use flexbox */
+  justify-content: space-between; /* Pushes items to ends */
+  align-items: center; /* Vertically aligns them */
+  /* ... existing styles */
+}
+
+.education-content {
+  flex-grow: 1; /* Allows text content to take up available space */
+}
+
+.education-icon {
+  width: 32px;
+  height: 32px;
+  margin-left: 15px; /* Space between text and icon */
+  flex-shrink: 0; /* Prevents icon from shrinking */
+  filter: invert(1);
+}
 /* No direct styles for .about-title, .about-description here, as they are now inside cards */
 
 /* Responsive adjustments for mobile */

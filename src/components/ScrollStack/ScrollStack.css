@@ -1,4 +1,17 @@
 /* src/components/ScrollStack/ScrollStack.css */
+
+.education-content {
+  flex-grow: 1;
+}
+
+.education-icon {
+  width: 32px;
+  height: 32px;
+  margin-left: 15px;
+  flex-shrink: 0;
+  filter: invert(1);
+}
+
 .scroll-stack-scroller {
   position: relative;
   width: 100%;
@@ -48,8 +61,8 @@
 
   display: flex;
   flex-direction: column;
-  justify-content: center;
-  align-items: flex-start;
+  justify-content: space-between;
+  align-items: center; /* Center content horizontally */
   text-align: left;
   color: var(--bento-text-color);
 }
