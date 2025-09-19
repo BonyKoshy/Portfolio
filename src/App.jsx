@@ -1,34 +1,29 @@
 // src/App.jsx
 import React from 'react';
-import './App.css';
-import Squares from './components/Squares/Squares';
-import Navbar from './components/Navbar/Navbar';
-import { ThemeProvider } from './context/ThemeContext';
-import HeroSection from './Sections/HeroSection/HeroSection'; // Ensure this import is here
-import AboutSection from './sections/AboutSection/AboutSection'; // Ensure this import is here
+import './App.css'; // Import your main app styles
+import DotGrid from './components/DotGrid/DotGrid';
 
 function App() {
   return (
-    <ThemeProvider>
-      <>
-        <Squares
-          speed={0.3}
-          squareSize={70}
-          direction='diagonal'
-          borderColor='#444'
-          hoverFillColor='#fff'
-          className="app-background-squares"
+    <>
+      {/* This is your new animated background */}
+      <div className="app-background">
+        <DotGrid
+          dotSize={4}
+          gap={25}
+          baseColor="#c01515ff"   /* Darker color for the dots */
+          activeColor="#ffffffff" /* Lighter color on interaction */
+          proximity={100}
+          shockRadius={200}
+          shockStrength={10}
+          resistance={1000}
+          returnDuration={5}
         />
+      </div>
 
-        <Navbar />
-
-        {/* This is your main content wrapper where all sections will go */}
-        <div className="app-content-wrapper">
-          <HeroSection /> {/* Render the Hero Section here */}
-          <AboutSection />
-        </div>
-      </>
-    </ThemeProvider>
+      <main className="app-content">
+      </main>
+    </>
   );
 }
 
