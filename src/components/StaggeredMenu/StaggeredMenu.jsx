@@ -29,7 +29,8 @@ const StaggeredMenu = forwardRef(({
 
   useLayoutEffect(() => {
     const ctx = gsap.context(() => {
-      gsap.set([panelRef.current, preLayersRef.current.children], { xPercent: -100 });
+      // Set initial position to be off-screen to the right
+      gsap.set([panelRef.current, ...preLayersRef.current.children], { xPercent: 100 });
     });
     return () => ctx.revert();
   }, []);
@@ -40,15 +41,16 @@ const StaggeredMenu = forwardRef(({
     const tl = gsap.timeline({
       onComplete: () => { busyRef.current = false; }
     });
-    tl.set(panelRef.current.querySelectorAll('.sm-panel-itemLabel'), { yPercent: 120 });
+    tl.set(panelRef.current.querySelectorAll('.sm-panel-item'), { yPercent: 100, autoAlpha: 0 });
     tl.to([preLayersRef.current.children, panelRef.current], {
       xPercent: 0,
       duration: 0.6,
       ease: 'power3.out',
       stagger: 0.05
     });
-    tl.to(panelRef.current.querySelectorAll('.sm-panel-itemLabel'), {
+    tl.to(panelRef.current.querySelectorAll('.sm-panel-item'), {
       yPercent: 0,
+      autoAlpha: 1,
       duration: 0.5,
       ease: 'power3.out',
       stagger: 0.08
@@ -59,7 +61,8 @@ const StaggeredMenu = forwardRef(({
     if (busyRef.current) return;
     busyRef.current = true;
     gsap.to([panelRef.current, ...Array.from(preLayersRef.current.children).reverse()], {
-      xPercent: -100,
+      // Animate back off-screen to the right
+      xPercent: 100,
       duration: 0.4,
       ease: 'power3.in',
       stagger: 0.04,
@@ -75,7 +78,7 @@ const StaggeredMenu = forwardRef(({
       </div>
       <aside ref={panelRef} className="staggered-menu-panel" aria-hidden={!open}>
         <div className="sm-panel-inner">
-          <ul className="sm-panel-list" role="list">
+          <ul className="sm-panel-list" data-numbering role="list">
             {items.map((it) => (
               <li className="sm-panel-itemWrap" key={it.label}>
                 <a className="sm-panel-item" href={it.link}>{it.label}</a>
@@ -99,4 +102,3 @@ const StaggeredMenu = forwardRef(({
 });
 
 export default StaggeredMenu;
-

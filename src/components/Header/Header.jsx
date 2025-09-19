@@ -1,4 +1,4 @@
-import React, { useRef } from 'react';
+import React, { useRef, useState } from 'react';
 import StaggeredMenu from '../StaggeredMenu/StaggeredMenu';
 import Clock from '../Clock/Clock';
 import ThemeToggle from '../ThemeToggle/ThemeToggle';
@@ -6,6 +6,7 @@ import './Header.css';
 
 function Header() {
   const menuRef = useRef(null);
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
 
   const menuItems = [
     { label: 'Home', link: '#home' },
@@ -20,7 +21,6 @@ function Header() {
   ];
 
   const handleMenuToggle = () => {
-    // This calls the toggleMenu function inside the StaggeredMenu component
     menuRef.current?.toggleMenu();
   };
 
@@ -33,24 +33,27 @@ function Header() {
         <div className="header-right">
           <ThemeToggle />
           <button
-            className="menu-toggle-button"
+            className={`menu-toggle-button ${isMenuOpen ? 'is-open' : ''}`}
             onClick={handleMenuToggle}
             aria-label="Toggle Menu"
+            aria-expanded={isMenuOpen}
           >
-            Menu
+            <span className="line line-1"></span>
+            <span className="line line-2"></span>
+            <span className="line line-3"></span>
           </button>
         </div>
       </header>
 
-      {/* The menu panel is now controlled via the ref */}
       <StaggeredMenu
         ref={menuRef}
         items={menuItems}
         socialItems={socialItems}
+        onMenuOpen={() => setIsMenuOpen(true)}
+        onMenuClose={() => setIsMenuOpen(false)}
       />
     </>
   );
 }
 
 export default Header;
-
