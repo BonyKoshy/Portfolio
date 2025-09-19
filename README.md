@@ -6,7 +6,7 @@ This site is currently being crafted with love, caffeine, and a lot of `console.
 
 Stay tuned for the full experience — packed with projects, certifications, and some fun easter eggs.
 
-> Expected Launch: August 31, 2025  
+> Expected Launch: September 30, 2025  
 > Built with: React + Vite | CSS | AOS | GitHub Pages
 
 🔗 Live Preview: _Coming Soon_
