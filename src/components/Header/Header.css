@@ -1,0 +1,22 @@
+.main-header {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1.5rem 2rem;
+  z-index: 1000;
+  pointer-events: none; /* Let clicks pass through */
+}
+
+.main-header > * {
+  pointer-events: auto; /* Re-enable clicks for children */
+}
+
+.header-left, .header-right {
+  display: flex;
+  align-items: center;
+  gap: 1.5rem;
+}

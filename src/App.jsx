@@ -1,57 +1,45 @@
 // src/App.jsx
 import React from 'react';
+import { ThemeProvider } from './ThemeContext';
 import './App.css';
 import DotGrid from './components/DotGrid/DotGrid';
-import StaggeredMenu from './components/StaggeredMenu/StaggeredMenu'; // Import the menu
-
-// Define your menu and social items
-const menuItems = [
-  { label: 'Home', ariaLabel: 'Go to home page', link: '#home' },
-  { label: 'About', ariaLabel: 'Learn about me', link: '#about' },
-  { label: 'Projects', ariaLabel: 'View my projects', link: '#projects' },
-  { label: 'Contact', ariaLabel: 'Get in touch', link: '#contact' }
-];
-
-const socialItems = [
-  { label: 'LinkedIn', link: 'https://linkedin.com/in/bonykoshy' },
-  { label: 'GitHub', link: 'https://github.com/BonyKoshy' }
-];
+import Header from './components/Header/Header'; // Import the new Header
 
 function App() {
   return (
-    <>
+    <ThemeProvider>
       <div className="app-background">
         <DotGrid
           dotSize={2}
-          gap={25}
-          baseColor="#000000ff"
-          activeColor="#ffffffff"
-          proximity={100}
+          gap={30}
+          baseColor="var(--text-secondary)" /* Use theme variable */
+          activeColor="var(--accent)"       /* Use theme variable */
+          proximity={120}
           shockRadius={200}
-          shockStrength={0.2}
-          resistance={1000}
-          returnDuration={0.5}
+          shockStrength={0.3}
+          resistance={800}
+          returnDuration={0.7}
         />
       </div>
 
-      <div style={{ height: '100vh', background: '#1a1a1a' }}>
-        <StaggeredMenu
-          position="right"
-          items={menuItems}
-          socialItems={socialItems}
-          displaySocials={true}
-          displayItemNumbering={true}
-          menuButtonColor="#fff"
-          openMenuButtonColor="#000000ff"
-          changeMenuColorOnOpen={true}
-          colors={['#B19EEF', '#5227FF']}
-          logoUrl="/path-to-your-logo.svg"
-          accentColor="#ff6b6b"
-          onMenuOpen={() => console.log('Menu opened')}
-          onMenuClose={() => console.log('Menu closed')}
-        />
-      </div>
-    </>
+      <Header />
+
+      <main className="app-content">
+        {/* Your sections will go here */}
+        <section id="home" style={{ height: '100vh', paddingTop: '100px' }}>
+          <h2>Home</h2>
+        </section>
+        <section id="about" style={{ height: '100vh' }}>
+          <h2>About</h2>
+        </section>
+        <section id="projects" style={{ height: '100vh' }}>
+          <h2>Projects</h2>
+        </section>
+        <section id="contact" style={{ height: '100vh' }}>
+          <h2>Contact</h2>
+        </section>
+      </main>
+    </ThemeProvider>
   );
 }
 

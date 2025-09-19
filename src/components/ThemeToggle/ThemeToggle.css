@@ -1,0 +1,24 @@
+.theme-toggle {
+  background: none;
+  border: none;
+  cursor: pointer;
+  font-size: 1.5rem;
+  padding: 0;
+  position: relative;
+  width: 2rem;
+  height: 2rem;
+}
+
+.sun, .moon {
+  position: absolute;
+  top: 0;
+  left: 0;
+  opacity: 0;
+  transform: scale(0.5);
+  transition: opacity 0.3s ease, transform 0.3s ease;
+}
+
+.sun.visible, .moon.visible {
+  opacity: 1;
+  transform: scale(1);
+}
