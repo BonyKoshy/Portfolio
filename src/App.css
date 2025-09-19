@@ -1,38 +1,16 @@
-/* src/App.css - Styles for main layout and background */
-
-/* Styles for the Squares component as background */
-.app-background-squares {
+/* src/App.css */
+.app-background {
   position: fixed;
-  top: 0;
-  left: 0;
+  inset: 0; /* Same as top: 0, right: 0, bottom: 0, left: 0 */
   width: 100vw;
   height: 100vh;
-  z-index: -1;
-  pointer-events: none;
-  background: linear-gradient(to bottom, rgba(0,0,0,0.1), rgba(0,0,0,0.3));
+  z-index: -1; /* This is key to keep it in the background */
 }
 
-/* Styles for your actual content wrapper that sits on top of the background */
-.app-content-wrapper {
+.app-content {
   position: relative;
-  z-index: 1;
+  z-index: 1; /* Ensures content stays on top of the background */
+  padding: 2rem;
   max-width: 1280px;
   margin: 0 auto;
-  padding: 150px 50px 50px; /* Adjust padding-top to account for fixed Navbar height */
-  min-height: 100vh;
-  display: flex-start;
-  flex-direction: column;
-  /* Keep align-items: center; if you want sections centered */
-  align-items: flex-start;
-  /* Remove text-align: center; if you want section content to have their own alignment */
-  /* text-align: center; */ /* Moved text-align to specific sections as needed */
-}
-
-/* Basic responsiveness for overall layout */
-@media (max-width: 768px) {
-  .app-content-wrapper {
-    padding-top: 100px;
-    padding-left: 15px;
-    padding-right: 15px;
-  }
 }
