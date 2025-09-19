@@ -2,7 +2,7 @@
   position: fixed;
   top: 0;
   left: 0;
-  width: 100%;
+  width: 60%;
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -20,3 +20,13 @@
   align-items: center;
   gap: 1.5rem;
 }
+
+@media (max-width: 768px) {
+  .main-header {
+    padding: 1rem;
+  }
+  .header-left {
+    /* Optionally hide the clock on very small screens */
+    display: none;
+  }
+}   

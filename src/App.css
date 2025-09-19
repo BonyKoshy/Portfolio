@@ -1,16 +1,31 @@
-/* src/App.css */
 .app-background {
   position: fixed;
-  inset: 0; /* Same as top: 0, right: 0, bottom: 0, left: 0 */
+  inset: 0;
   width: 100vw;
   height: 100vh;
-  z-index: -1; /* This is key to keep it in the background */
+  z-index: -1;
 }
 
 .app-content {
   position: relative;
-  z-index: 1; /* Ensures content stays on top of the background */
+  z-index: 1;
   padding: 2rem;
   max-width: 1280px;
   margin: 0 auto;
+}
+
+.content-section {
+  min-height: 100vh;
+  padding-top: 120px; /* To offset the fixed header */
+  display: flex;
+  flex-direction: column;
+}
+
+@media (max-width: 768px) {
+  .app-content {
+    padding: 1.5rem;
+  }
+  .content-section {
+    padding-top: 100px;
+  }
 }
