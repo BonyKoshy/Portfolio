@@ -14,7 +14,7 @@
   /* Dark Theme - with better contrast for dots */
   --background-dark: #121212;
   --text-primary-dark: #e4e6eb;
-  --text-secondary-dark: #4a4a4a; /* Lighter grey for visible dots */
+  --text-secondary-dark: #c1c1c1; /* Lighter grey for visible dots */
   --accent-dark: #4597ff;
   --panel-bg-dark: rgba(30, 30, 30, 0.85);
   --prelayer-1-dark: #242526;
