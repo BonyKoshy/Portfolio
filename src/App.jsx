@@ -1,10 +1,13 @@
+// src/App.jsx
 import React, { useEffect, useState, useContext } from 'react';
 import { ThemeProvider, ThemeContext } from './ThemeContext';
 import './App.css';
 import DotGrid from './components/DotGrid/DotGrid';
 import Header from './components/Header/Header';
 import GradualBlur from './components/GradualBlur/GradualBlur';
-import Hero from './components/Hero/Hero'; // Import the new Hero component
+import Hero from './components/Hero/Hero';
+import About from './components/About/About'; // Import the new About component
+import SectionTitle from './components/SectionTitle/SectionTitle'; // 1. Import the new component
 
 function AppContent() {
   const { theme } = useContext(ThemeContext);
@@ -48,17 +51,23 @@ function AppContent() {
       />
 
       <main className="app-content">
-        {/* Replace the old section with the new Hero component */}
         <Hero />
 
+        <About />
+
+
+        {/* --- CHANGE: Use the new SectionTitle component --- */}
         <section id="about" className="content-section">
-          <h2>About</h2>
+          <SectionTitle title="About" />
+          {/* You can add the rest of your "About" content here */}
         </section>
         <section id="projects" className="content-section">
-          <h2>Projects</h2>
+          <SectionTitle title="Projects" />
+          {/* You can add the rest of your "Projects" content here */}
         </section>
         <section id="contact" className="content-section">
-          <h2>Contact</h2>
+          <SectionTitle title="Contact" />
+          {/* You can add the rest of your "Contact" content here */}
         </section>
       </main>
     </>
