@@ -7,7 +7,7 @@
   justify-content: space-between;
   align-items: center;
   padding: 1.5rem 2rem;
-  z-index: 2000;
+  z-index: 3000;
   pointer-events: none; /* Let clicks pass through */
 }
 
