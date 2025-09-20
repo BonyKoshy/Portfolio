@@ -13,48 +13,62 @@ const StaggeredMenu = forwardRef(({
   const preLayersRef = useRef(null);
   const busyRef = useRef(false);
 
-  // This is the new logic for keyboard shortcuts
+  const handleClose = useCallback(() => {
+    if (busyRef.current || !open) return; // Prevent multiple close triggers
+    setOpen(false);
+    onMenuClose?.();
+    playClose();
+  }, [open, onMenuClose]); // Added `open` dependency
+
+  // --- NEW LOGIC #1: Close on click outside ---
+  useEffect(() => {
+    const handleClickOutside = (event) => {
+      // If the click is outside the panelRef, close the menu
+      if (panelRef.current && !panelRef.current.contains(event.target)) {
+        handleClose();
+      }
+    };
+
+    // Add listener only when the menu is open
+    if (open) {
+      document.addEventListener('mousedown', handleClickOutside);
+    }
+
+    // Cleanup: remove the event listener
+    return () => {
+      document.removeEventListener('mousedown', handleClickOutside);
+    };
+  }, [open, handleClose]); // Rerun when `open` or `handleClose` changes
+
+  // Logic for keyboard shortcuts (from previous step)
   useEffect(() => {
     const handleKeyPress = (event) => {
-      // Convert the pressed key to a number
       const keyNumber = parseInt(event.key, 10);
-      
-      // Check if it's a valid number for our menu items (e.g., 1, 2, 3, 4)
       if (!isNaN(keyNumber) && keyNumber > 0 && keyNumber <= items.length) {
-        
-        // Find the corresponding menu item (arrays are 0-indexed)
         const targetItem = items[keyNumber - 1];
         if (targetItem) {
           const linkElement = panelRef.current?.querySelector(`a[href="${targetItem.link}"]`);
           if (linkElement) {
-            linkElement.click(); // Simulate a click on the link
-            handleClose(); // Close the menu
+            linkElement.click();
+            handleClose();
           }
         }
       }
     };
 
-    // Only listen for key presses if the menu is open
     if (open) {
       document.addEventListener('keydown', handleKeyPress);
     }
 
-    // Cleanup: remove the event listener when the menu closes or component unmounts
     return () => {
       document.removeEventListener('keydown', handleKeyPress);
     };
-  }, [open, items]); // Rerun this effect if `open` or `items` change
+  }, [open, items, handleClose]);
 
 
-  const handleClose = useCallback(() => {
-    if (busyRef.current) return;
-    setOpen(false);
-    onMenuClose?.();
-    playClose();
-  }, [onMenuClose]);
-  
   useImperativeHandle(ref, () => ({
     toggleMenu: () => {
+      if (busyRef.current) return;
       const target = !open;
       if (target) {
         setOpen(true);
@@ -118,7 +132,8 @@ const StaggeredMenu = forwardRef(({
           <ul className="sm-panel-list" data-numbering role="list">
             {items.map((it) => (
               <li className="sm-panel-itemWrap" key={it.label}>
-                <a className="sm-panel-item" href={it.link}>{it.label}</a>
+                {/* --- NEW LOGIC #2: Added onClick handler here --- */}
+                <a className="sm-panel-item" href={it.link} onClick={handleClose}>{it.label}</a>
               </li>
             ))}
           </ul>

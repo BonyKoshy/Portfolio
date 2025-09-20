@@ -5,21 +5,22 @@
   width: 100%;
   height: 100%;
   pointer-events: none;
-  z-index: 1000;
+  z-index: 2000;
 }
 
+/* --- FIX: Use identical clamp() for panel and prelayers --- */
 .staggered-menu-panel {
   position: absolute;
   top: 0;
   right: 0;
   width: clamp(300px, 30vw, 420px);
-  height: 100vh; /* Changed from 90vh */
+  height: 100vh;
   background: var(--panel-bg);
   backdrop-filter: blur(12px);
   -webkit-backdrop-filter: blur(12px);
   display: flex;
   flex-direction: column;
-  padding: 8em 2em 2em 2em;
+  padding: 8em 2.5em 2em 2em; /* Adjusted padding */
   overflow-y: auto;
   z-index: 10;
   pointer-events: auto;
@@ -30,7 +31,7 @@
   top: 0;
   right: 0;
   bottom: 0;
-  width: clamp(260px, 38vw, 420px);
+  width: clamp(300px, 30vw, 420px); /* Changed to match panel */
   pointer-events: none;
   z-index: 5;
 }
@@ -44,14 +45,12 @@
   transform: translateX(0);
 }
 
-/* Use theme variables for layer colors */
 .sm-prelayers .sm-prelayer:nth-of-type(1) {
   background-color: var(--prelayer-1);
 }
 .sm-prelayers .sm-prelayer:nth-of-type(2) {
   background-color: var(--prelayer-2);
 }
-
 
 .sm-panel-inner {
   flex: 1;
@@ -61,7 +60,7 @@
 }
 
 .sm-panel-itemWrap {
-  overflow: hidden; /* Hide text before animation */
+  overflow: hidden;
 }
 
 .sm-panel-list {
@@ -76,7 +75,7 @@
 .sm-panel-item {
   position: relative;
   color: var(--text-primary);
-  font-weight: 600;
+  font-weight: 700;
   font-size: 3.5rem;
   cursor: pointer;
   line-height: 1;
@@ -85,8 +84,8 @@
   transition: color 0.25s;
   display: inline-block;
   text-decoration: none;
-  padding-right: 1.4em;
-  opacity: 0; /* Let GSAP handle visibility */
+  padding-right: 0.5em; /* Increased padding to make space for number */
+  /* --- FIX: Removed `opacity: 0`. GSAP handles this now. --- */
 }
 
 .sm-panel-item:hover {
@@ -97,18 +96,26 @@
   counter-reset: smItem;
 }
 
+/* --- FIX: New styles to make numbers always visible and responsive --- */
 .sm-panel-list[data-numbering] .sm-panel-item::after {
   counter-increment: smItem;
   content: counter(smItem, decimal-leading-zero);
   position: absolute;
-  top: 0.1em;
-  right: 2.8em;
-  font-size: 18px;
+  top: 20%;
+  right: 0;
+  transform: translateY(-50%);
+  font-size: 1rem;
   font-weight: 400;
   color: var(--accent);
-  letter-spacing: 0;
+  letter-spacing: 0px;
   pointer-events: none;
   user-select: none;
+  opacity: 0.5; /* Always visible but subtle */
+  transition: opacity 0.3s ease;
+}
+
+.sm-panel-item:hover::after {
+  opacity: 1;
 }
 
 .sm-socials {
@@ -152,19 +159,29 @@
   color: var(--accent);
 }
 
-/* Hover effects for social links */
-.sm-socials-list:hover .sm-socials-link {
+.sm-socials-list:hover .sm-socials-link:not(:hover) {
   opacity: 0.35;
 }
 
-.sm-socials-list:hover .sm-socials-link:hover {
-  opacity: 1;
+/* --- FIX: Media queries for better responsiveness --- */
+@media (max-width: 1200px) {
+  .sm-panel-item {
+    font-size: 3rem; /* Slightly smaller font for mid-size screens */
+  }
 }
 
-/* Media Queries for responsiveness */
+@media (max-width: 768px) {
+  .staggered-menu-panel, .sm-prelayers {
+    width: clamp(280px, 60vw, 420px); /* Adjust width for tablets */
+  }
+  .sm-panel-item {
+    font-size: 2.5rem; /* Smaller font for tablets */
+  }
+}
+
 @media (max-width: 640px) {
-  .staggered-menu-panel {
-    width: 100%;
-    right: 0; /* Ensure it stays on the right */
+  .staggered-menu-panel, .sm-prelayers {
+    width: 100%; /* Full width on mobile */
+    right: 0;
   }
 }

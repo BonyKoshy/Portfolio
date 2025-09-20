@@ -1,0 +1,130 @@
+/* src/components/Hero/Hero.css */
+.hero-section {
+  min-height: 100vh;
+  width: 100%;
+  display: flex;
+  padding: 2rem;
+}
+
+.hero-content-wrapper {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: flex-start; 
+}
+
+.hero-text-content {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start; /* Left-align text within the container */
+  gap: 0.5rem;
+  max-width: 50%; /* Take up half the screen on desktop */
+  text-align: left;
+}
+
+.hero-tagline {
+  font-size: clamp(1.2rem, 3vw, 1.5rem);
+  color: var(--accent);
+  margin: 0;
+  font-weight: 300;
+  text-transform: uppercase;
+  letter-spacing: 1.5px;
+}
+
+.hero-title-container {
+  width: 100%;
+  max-width: 600px;
+  height: 110px; /* Adjusted height for larger font */
+}
+
+.hero-description {
+  font-family: Poppins, sans-serif;
+  font-size: clamp(1rem, 2vw, 1.1rem);
+  color: var(--text-secondary);
+  margin: 0;
+  max-width: 600px;
+  line-height: 1.7;
+  font-weight: 400;
+  text-align: justify;
+}
+
+.hero-buttons {
+  display: flex;
+  gap: 1rem;
+  margin-top: 1.5rem;
+}
+
+.btn {
+  display: inline-flex; /* Use flex to align icon and text */
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.75rem 1.5rem;
+  border-radius: 8px;
+  text-decoration: none;
+  font-weight: 600;
+  font-size: 1rem;
+  transition: all 0.3s ease;
+  border: 2px solid transparent;
+}
+
+.btn-icon {
+  transition: transform 0.3s ease;
+}
+
+.btn:hover .btn-icon {
+  transform: translateY(2px); /* Simple hover effect for icon */
+}
+
+.btn-primary {
+  background-color: var(--accent);
+  color: var(--background);
+}
+
+.btn-primary:hover {
+  background-color: transparent;
+  color: var(--accent);
+  border-color: var(--accent);
+}
+
+.btn-secondary {
+  background-color: transparent;
+  color: var(--text-secondary);
+  border-color: var(--text-secondary);
+}
+
+.btn-secondary:hover {
+  color: var(--accent);
+  border-color: var(--accent);
+}
+
+/* --- Responsive Layout for Mobile --- */
+@media (max-width: 900px) {
+  .hero-content-wrapper {
+    justify-content: center; /* Center the content block */
+  }
+
+  .hero-text-content {
+    max-width: 80%; /* Allow content to take more space */
+    align-items: center; /* Center-align all items */
+    text-align: center;
+  }
+}
+
+@media (max-width: 640px) {
+  .hero-text-content {
+    max-width: 100%; /* Full width on small screens */
+  }
+  
+  .hero-title-container {
+    height: 80px; /* Adjust height for smaller name */
+  }
+
+  .hero-description{
+    text-align: center; /* Center text on mobile */
+  }
+
+  /* --- Hide icons on mobile --- */
+  .btn-icon {
+    display: none;
+  }
+}
