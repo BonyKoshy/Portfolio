@@ -1,4 +1,4 @@
-import React, { useCallback, useLayoutEffect, useRef, useState, useImperativeHandle, forwardRef } from 'react';
+import React, { useCallback, useLayoutEffect, useRef, useState, useImperativeHandle, forwardRef, useEffect } from 'react';
 import { gsap } from 'gsap';
 import './StaggeredMenu.css';
 
@@ -13,23 +13,61 @@ const StaggeredMenu = forwardRef(({
   const preLayersRef = useRef(null);
   const busyRef = useRef(false);
 
+  // This is the new logic for keyboard shortcuts
+  useEffect(() => {
+    const handleKeyPress = (event) => {
+      // Convert the pressed key to a number
+      const keyNumber = parseInt(event.key, 10);
+      
+      // Check if it's a valid number for our menu items (e.g., 1, 2, 3, 4)
+      if (!isNaN(keyNumber) && keyNumber > 0 && keyNumber <= items.length) {
+        
+        // Find the corresponding menu item (arrays are 0-indexed)
+        const targetItem = items[keyNumber - 1];
+        if (targetItem) {
+          const linkElement = panelRef.current?.querySelector(`a[href="${targetItem.link}"]`);
+          if (linkElement) {
+            linkElement.click(); // Simulate a click on the link
+            handleClose(); // Close the menu
+          }
+        }
+      }
+    };
+
+    // Only listen for key presses if the menu is open
+    if (open) {
+      document.addEventListener('keydown', handleKeyPress);
+    }
+
+    // Cleanup: remove the event listener when the menu closes or component unmounts
+    return () => {
+      document.removeEventListener('keydown', handleKeyPress);
+    };
+  }, [open, items]); // Rerun this effect if `open` or `items` change
+
+
+  const handleClose = useCallback(() => {
+    if (busyRef.current) return;
+    setOpen(false);
+    onMenuClose?.();
+    playClose();
+  }, [onMenuClose]);
+  
   useImperativeHandle(ref, () => ({
     toggleMenu: () => {
       const target = !open;
-      setOpen(target);
       if (target) {
+        setOpen(true);
         onMenuOpen?.();
         playOpen();
       } else {
-        onMenuClose?.();
-        playClose();
+        handleClose();
       }
     }
   }));
 
   useLayoutEffect(() => {
     const ctx = gsap.context(() => {
-      // Set initial position to be off-screen to the right
       gsap.set([panelRef.current, ...preLayersRef.current.children], { xPercent: 100 });
     });
     return () => ctx.revert();
@@ -61,7 +99,6 @@ const StaggeredMenu = forwardRef(({
     if (busyRef.current) return;
     busyRef.current = true;
     gsap.to([panelRef.current, ...Array.from(preLayersRef.current.children).reverse()], {
-      // Animate back off-screen to the right
       xPercent: 100,
       duration: 0.4,
       ease: 'power3.in',
