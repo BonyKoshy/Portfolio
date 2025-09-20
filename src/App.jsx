@@ -1,9 +1,9 @@
-import React, { useEffect, useState, useContext, StrictMode } from 'react';
-import { createRoot } from 'react-dom/client';
+import React, { useEffect, useState, useContext } from 'react';
 import { ThemeProvider, ThemeContext } from './ThemeContext';
 import './App.css';
 import DotGrid from './components/DotGrid/DotGrid';
 import Header from './components/Header/Header';
+import GradualBlur from './components/GradualBlur/GradualBlur'; // 1. Import the new component
 
 // This is the main content component that can access the theme context
 function AppContent() {
@@ -11,22 +11,17 @@ function AppContent() {
   const [dotColors, setDotColors] = useState({ base: '', active: '' });
 
   useEffect(() => {
-    // This function reads the actual color values from the CSS variables
-    // after they have been applied to the document. This makes the canvas dots theme-aware.
     const updateDotColors = () => {
       const base = getComputedStyle(document.documentElement).getPropertyValue('--text-secondary').trim();
       const active = getComputedStyle(document.documentElement).getPropertyValue('--accent').trim();
       setDotColors({ base, active });
     };
-
-    // We call it once on mount and then anytime the theme changes.
     updateDotColors();
   }, [theme]);
 
   return (
     <>
       <div className="app-background">
-        {/* We wait until the colors are loaded from CSS to prevent an initial flicker */}
         {dotColors.base && dotColors.active && (
           <DotGrid
             dotSize={2}
@@ -43,6 +38,29 @@ function AppContent() {
       </div>
 
       <Header />
+
+      {/* 2. Add the GradualBlur component here */}
+      <div
+        style={{
+          position: 'fixed',
+          top: 0, // Align with the top of the viewport
+          left: 0,
+          right: 0,
+          zIndex: 999, // Lower than header (1000), higher than content (1)
+          pointerEvents: 'none', // Allow clicks to pass through
+        }}
+      >
+        <GradualBlur
+          target="page"
+          position="top"
+          height="6rem"
+          strength={4}
+          divCount={5}
+          curve="bezier"
+          exponential={true}
+          opacity={1}
+        />
+      </div>
 
       <main className="app-content">
         <section id="home" className="content-section">
@@ -72,4 +90,3 @@ function App() {
 }
 
 export default App;
-
