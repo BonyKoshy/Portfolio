@@ -47,10 +47,9 @@ const TextPressure = ({
       }
     };
     window.addEventListener('mousemove', handleMouseMove);
-    // ------------------- THIS IS THE FIX -------------------
-    // The `{ passive: true }` option has been removed from this line.
+    // ------------------- FIX: REMOVED { passive: true } -------------------
     window.addEventListener('touchmove', handleTouchMove); 
-    // -----------------------------------------------------
+    // ---------------------------------------------------------------------
     if (containerRef.current) {
       const { left, top, width, height } = containerRef.current.getBoundingClientRect();
       mouseRef.current.x = left + width / 2;

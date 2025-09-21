@@ -34,7 +34,9 @@ function useMousePositionRef(containerRef) {
       }
     };
     window.addEventListener('mousemove', handleMouseMove);
+    // ------------------- FIX: REMOVED { passive: true } -------------------
     window.addEventListener('touchmove', handleTouchMove);
+    // ---------------------------------------------------------------------
     return () => {
       window.removeEventListener('mousemove', handleMouseMove);
       window.removeEventListener('touchmove', handleTouchMove);

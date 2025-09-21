@@ -8,12 +8,20 @@
 
 .github-header {
   display: flex;
-  align-items: center;
+  /* FIX: Align header content to the center */
+  align-items: center; 
   width: 100%;
-  gap: 0.75rem;
+  background: none;
+  border: none;
   padding-bottom: 1rem;
   color: var(--text-primary);
   flex-shrink: 0;
+}
+
+.github-title {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
 }
 
 .github-logo {
@@ -27,37 +35,22 @@
 }
 
 .calendar-container {
+  color: var(--text-secondary);
   flex-grow: 1;
-  overflow-x: auto;
-  overflow-y: hidden;
-  /* FIX 1: Add padding to create space for the scrollbar */
-  padding-bottom: 12px;
+  /* FIX: Use flexbox to center the calendar */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  overflow: hidden; /* Hide any overflow from the calendar itself */
 }
 
-/* Make the calendar's inner SVG take up the full space */
+/* This targets the direct child of the calendar component to control its size */
 .calendar-container > div {
   width: 100%;
+  display: flex;
+  justify-content: center;
 }
 
 .react-activity-calendar {
   font-family: 'Poppins', sans-serif !important;
-  color: var(--text-secondary);
-}
-
-/* --- FINAL SCROLLBAR FIX --- */
-.calendar-container::-webkit-scrollbar {
-  height: 4px; /* Makes the scrollbar track very thin */
-}
-
-.calendar-container::-webkit-scrollbar-track {
-  background: transparent; /* Makes the track invisible */
-}
-
-.calendar-container::-webkit-scrollbar-thumb {
-  background: var(--text-secondary); /* Color of the handle */
-  border-radius: 4px;
-}
-
-.calendar-container::-webkit-scrollbar-thumb:hover {
-  background: var(--accent);
 }

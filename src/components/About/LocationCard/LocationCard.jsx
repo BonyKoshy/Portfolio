@@ -16,7 +16,6 @@ function LocationCard() {
 
       <HoverCard.Root open={isOpen} onOpenChange={setIsOpen}>
         <HoverCard.Trigger asChild>
-          {/* Use a simple div with onClick for a reliable tap/click */}
           <div
             className="location-link"
             onClick={() => setIsOpen(true)}
@@ -28,7 +27,6 @@ function LocationCard() {
           <HoverCard.Content
             className="hover-card-content"
             sideOffset={5}
-            // This makes it so clicking outside the card closes it
             onPointerDownOutside={(e) => {
               e.preventDefault();
               setIsOpen(false);
