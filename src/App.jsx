@@ -6,8 +6,8 @@ import DotGrid from './components/DotGrid/DotGrid';
 import Header from './components/Header/Header';
 import GradualBlur from './components/GradualBlur/GradualBlur';
 import Hero from './components/Hero/Hero';
-import About from './components/About/About'; // Import the new About component
-import SectionTitle from './components/SectionTitle/SectionTitle'; // 1. Import the new component
+import About from './components/About/About';
+import SectionTitle from './components/SectionTitle/SectionTitle';
 
 function AppContent() {
   const { theme } = useContext(ThemeContext);
@@ -15,18 +15,23 @@ function AppContent() {
 
   useEffect(() => {
     const updateDotColors = () => {
-      const base = getComputedStyle(document.documentElement).getPropertyValue('--text-secondary').trim();
-      const active = getComputedStyle(document.documentElement).getPropertyValue('--accent').trim();
-      setDotColors({ base, active });
+      // Small delay to ensure CSS variables have been updated by the browser
+      setTimeout(() => {
+        const base = getComputedStyle(document.documentElement).getPropertyValue('--text-secondary').trim();
+        const active = getComputedStyle(document.documentElement).getPropertyValue('--accent').trim();
+        setDotColors({ base, active });
+      }, 100);
     };
     updateDotColors();
-  }, [theme]);
+  }, [theme]); // This effect now correctly re-runs on theme change
 
   return (
     <>
       <div className="app-background">
+        {/* FIX: Add the `key={theme}` prop to force remount on theme change */}
         {dotColors.base && dotColors.active && (
           <DotGrid
+            key={theme} // This is the fix!
             dotSize={2}
             gap={30}
             baseColor={dotColors.base}
@@ -52,22 +57,15 @@ function AppContent() {
 
       <main className="app-content">
         <Hero />
+        
+        {/* FIX: Remove the old, duplicate #about section */}
+        <About /> 
 
-        <About />
-
-
-        {/* --- CHANGE: Use the new SectionTitle component --- */}
-        <section id="about" className="content-section">
-          <SectionTitle title="About" />
-          {/* You can add the rest of your "About" content here */}
-        </section>
         <section id="projects" className="content-section">
           <SectionTitle title="Projects" />
-          {/* You can add the rest of your "Projects" content here */}
         </section>
         <section id="contact" className="content-section">
           <SectionTitle title="Contact" />
-          {/* You can add the rest of your "Contact" content here */}
         </section>
       </main>
     </>

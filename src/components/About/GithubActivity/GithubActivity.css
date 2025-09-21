@@ -8,59 +8,56 @@
 
 .github-header {
   display: flex;
-  justify-content: space-between;
   align-items: center;
   width: 100%;
-  background: none;
-  border: none;
-  padding: 0 0 1rem 0; /* Add some padding at the bottom */
+  gap: 0.75rem;
+  padding-bottom: 1rem;
   color: var(--text-primary);
   flex-shrink: 0;
-}
-
-.github-title {
-  display: flex;
-  align-items: center;
-  gap: 0.75rem;
 }
 
 .github-logo {
   color: var(--text-primary);
 }
 
-.github-title h3 {
+.github-header h3 {
   font-size: 1rem;
   font-weight: 600;
   margin: 0;
 }
 
 .calendar-container {
-  color: var(--text-secondary);
+  flex-grow: 1;
   overflow-x: auto;
-  flex-grow: 1; /* Make the calendar fill the remaining space */
+  overflow-y: hidden;
+  /* FIX 1: Add padding to create space for the scrollbar */
+  padding-bottom: 12px;
+}
+
+/* Make the calendar's inner SVG take up the full space */
+.calendar-container > div {
+  width: 100%;
 }
 
 .react-activity-calendar {
   font-family: 'Poppins', sans-serif !important;
+  color: var(--text-secondary);
 }
 
-/* --- FINAL FIX: Custom Scrollbar Styles --- */
-/* Targetting the inner div with high specificity */
-.calendar-container > div[style*="overflow-x: auto"]::-webkit-scrollbar {
-  height: 8px;
+/* --- FINAL SCROLLBAR FIX --- */
+.calendar-container::-webkit-scrollbar {
+  height: 4px; /* Makes the scrollbar track very thin */
 }
 
-.calendar-container > div[style*="overflow-x: auto"]::-webkit-scrollbar-track {
-  background: var(--prelayer-1);
-  border-radius: 10px;
+.calendar-container::-webkit-scrollbar-track {
+  background: transparent; /* Makes the track invisible */
 }
 
-.calendar-container > div[style*="overflow-x: auto"]::-webkit-scrollbar-thumb {
-  background-color: var(--text-secondary);
-  border-radius: 10px;
-  border: 2px solid var(--panel-bg);
+.calendar-container::-webkit-scrollbar-thumb {
+  background: var(--text-secondary); /* Color of the handle */
+  border-radius: 4px;
 }
 
-.calendar-container > div[style*="overflow-x: auto"]::-webkit-scrollbar-thumb:hover {
-  background-color: var(--accent);
+.calendar-container::-webkit-scrollbar-thumb:hover {
+  background: var(--accent);
 }
