@@ -29,6 +29,10 @@
   --prelayer-2-dark: #3a3b3c;
 }
 
+html {
+  scroll-behavior: smooth;
+}
+
 html[data-theme='light'] {
   --background: var(--background-light);
   --text-primary: var(--text-primary-light);

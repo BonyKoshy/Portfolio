@@ -3,23 +3,23 @@
   width: 100%;
   display: grid;
   gap: 1rem;
-  /* Mobile-first: Default to the smaller grid layout */
   grid-template-columns: repeat(4, 1fr);
-  grid-template-rows: repeat(8, auto); /* Use 'auto' for flexible row height */
+  grid-auto-rows: auto;
 }
 
 .grid-item {
   background-color: var(--panel-bg);
   border-radius: 12px;
   padding: 1.5rem;
-  min-height: 150px; /* Give cards a minimum height */
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
   transition: all 0.3s ease;
+  display: flex; /* Helps with internal alignment */
+  flex-direction: column;
 }
 
 .grid-item:hover {
   transform: translateY(-5px);
-  box-shadow: 0 10px 15px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 10px 15px rgba(0, 0, 0, 0.05);
 }
 
 .card-placeholder {
@@ -32,10 +32,12 @@
   color: var(--text-secondary);
 }
 
+/* ... card-placeholder styles ... */
+
 /* --- Mobile Grid Layout --- */
-.div1 { grid-column: span 4; }
-.div2 { grid-column: span 4; }
-.div3 { grid-column: span 4; }
+.div1 { grid-column: span 4; min-height: 450px; }
+.div2 { grid-column: span 4; min-height: 120px; }
+.div3 { grid-column: span 4; min-height: 200px; }
 .div4 { grid-column: span 4; }
 .div5 { grid-column: span 4; }
 .div6 { grid-column: span 4; }
@@ -44,23 +46,22 @@
 
 
 /* --- Desktop Grid Layout --- */
-/* Using a breakpoint, e.g., 1024px */
 @media (min-width: 1024px) {
   .about-grid {
     grid-template-columns: repeat(6, 1fr);
-    grid-auto-rows: minmax(150px, auto); /* Better row control */
+    /* Define row heights. 3fr total height for rows 1 and 2 */
+    grid-template-rows: 1fr 2fr auto auto 1fr 1fr auto;
   }
 
-  .div1 { grid-area: 1 / 1 / 3 / 5; } /* row-start / col-start / row-end / col-end */
-  .div2 { grid-area: 1 / 5 / 2 / 7; }
-  .div3 { grid-area: 2 / 5 / 3 / 7; }
+  .div1 { grid-area: 1 / 1 / 3 / 5; }
+  .div2 { grid-area: 1 / 5 / 2 / 7; } /* Takes 1fr of the height */
+  .div3 { grid-area: 2 / 5 / 3 / 7; } /* Takes 2fr of the height */
   .div4 { grid-area: 3 / 1 / 4 / 7; }
   .div5 { grid-area: 4 / 1 / 6 / 7; }
   .div6 { grid-area: 6 / 1 / 8 / 7; }
   .div7 { grid-area: 8 / 1 / 9 / 3; }
-  .div8 { grid-area: 8 / 3 / 9 / 7; } /* Combined social icons into one area */
+  .div8 { grid-area: 8 / 3 / 9 / 7; }
 }
-
 /* Placeholder for social icons layout */
 .social-icons {
   display: flex;

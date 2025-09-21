@@ -66,8 +66,10 @@ const AccordionItem = ({ item, expanded, setExpanded }) => {
 
 // Main Card Component
 function AccordionCard() {
+  // Check window width once on initial render
+  const isDesktop = window.innerWidth > 768;
   // This state ensures only one item is open at a time
-  const [expanded, setExpanded] = useState('item-1'); // Default open item
+  const [expanded, setExpanded] = useState(isDesktop ? 'item-1' : false);
 
   return (
     <div className="accordion-card">

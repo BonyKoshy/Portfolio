@@ -1,30 +1,34 @@
 // src/components/About/TypingSpeed/TypingSpeed.jsx
 import React from 'react';
+import { Gauge } from 'lucide-react';
 import TextPressure from '../../TextPressure/TextPressure';
 import './TypingSpeed.css';
 
-function TypingSpeed({ isExpanded }) {
-  // We receive the `isExpanded` state from the parent
+function TypingSpeed() {
   return (
-    <div className={`typing-speed-card ${isExpanded ? 'expanded' : 'collapsed'}`}>
-      <div className="typing-speed-content">
+    <div className="typing-speed-card">
+      {/* Left side of the card */}
+      <div className="typing-speed-label">
+        <Gauge className="typing-speed-icon" size={28} />
         <h3 className="typing-speed-title">Typing Speed</h3>
-        <div className="typing-speed-display">
-          <div className="typing-speed-value">
-            <TextPressure
-                text="80" // Your typing speed
-                textColor="var(--accent)"
-                minFontSize={24}
-                flex={false}
-                alpha={false}
-                stroke={false}
-                width={false}
-                weight={true}
-                italic={true}
-            />
-          </div>
-          <span className="typing-speed-wpm">WPM</span>
+      </div>
+
+      {/* Right side of the card */}
+      <div className="typing-speed-display">
+        <div className="typing-speed-value">
+          <TextPressure
+            text="60"
+            textColor="var(--accent)"
+            minFontSize={14}
+            flex={true}
+            alpha={false}
+            stroke={false}
+            width={false}
+            weight={false}
+            italic={true}
+          />
         </div>
+        <span className="typing-speed-wpm">WPM</span>
       </div>
     </div>
   );
