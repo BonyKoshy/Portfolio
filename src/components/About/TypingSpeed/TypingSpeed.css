@@ -3,16 +3,17 @@
   height: 100%;
   width: 100%;
   display: flex;
-  justify-content: space-between; /* Pushes left and right sides apart */
-  align-items: center;
-  gap: 1.5rem;
+  flex-direction: column; /* Stack the two groups vertically */
+  justify-content: space-between; /* Push them to opposite ends */
+  align-items: stretch; /* Make them fill the width */
 }
 
-/* Left side container */
+/* Group for icon and title */
 .typing-speed-label {
   display: flex;
   align-items: center;
   gap: 0.75rem;
+  /* This stays at the top-left */
 }
 
 .typing-speed-icon {
@@ -28,15 +29,16 @@
   white-space: nowrap;
 }
 
-/* Right side container */
+/* Group for value and WPM */
 .typing-speed-display {
   display: flex;
   align-items: baseline;
+  justify-content: flex-end; /* Align this group to the right */
   gap: 0.5rem;
 }
 
 .typing-speed-value {
-  width: 100px;
+  width: 120px;
   height: 80px;
 }
 

@@ -7,20 +7,19 @@ import './TypingSpeed.css';
 function TypingSpeed() {
   return (
     <div className="typing-speed-card">
-      {/* Left side of the card */}
+      {/* FIX: Add a wrapper div here */}
       <div className="typing-speed-label">
         <Gauge className="typing-speed-icon" size={28} />
         <h3 className="typing-speed-title">Typing Speed</h3>
       </div>
 
-      {/* Right side of the card */}
       <div className="typing-speed-display">
         <div className="typing-speed-value">
           <TextPressure
             text="60"
             textColor="var(--accent)"
             minFontSize={14}
-            flex={true}
+            flex={false}
             alpha={false}
             stroke={false}
             width={false}

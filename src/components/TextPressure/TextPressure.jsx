@@ -47,7 +47,10 @@ const TextPressure = ({
       }
     };
     window.addEventListener('mousemove', handleMouseMove);
-    window.addEventListener('touchmove', handleTouchMove, { passive: true }); // Use passive for better scroll performance
+    // ------------------- THIS IS THE FIX -------------------
+    // The `{ passive: true }` option has been removed from this line.
+    window.addEventListener('touchmove', handleTouchMove); 
+    // -----------------------------------------------------
     if (containerRef.current) {
       const { left, top, width, height } = containerRef.current.getBoundingClientRect();
       mouseRef.current.x = left + width / 2;
@@ -87,7 +90,6 @@ const TextPressure = ({
     // eslint-disable-next-line
   }, [scale, text]);
 
-  // --- OPTIMIZATION START ---
   useEffect(() => {
     let rafId;
     const animate = () => {
@@ -95,7 +97,6 @@ const TextPressure = ({
       mouseRef.current.y += (cursorRef.current.y - mouseRef.current.y) / 15;
       
       if (titleRef.current) {
-        // --- Step 1: READ all DOM positions first ---
         const titleRect = titleRef.current.getBoundingClientRect();
         const maxDist = titleRect.width / 2;
         const charPositions = spansRef.current.map(span => {
@@ -107,7 +108,6 @@ const TextPressure = ({
           };
         });
 
-        // --- Step 2: WRITE all style changes second ---
         spansRef.current.forEach((span, i) => {
           if (!span || !charPositions[i]) return;
           const charCenter = charPositions[i];
@@ -132,7 +132,6 @@ const TextPressure = ({
     animate();
     return () => cancelAnimationFrame(rafId);
   }, [width, weight, italic, alpha, chars.length]);
-  // --- OPTIMIZATION END ---
 
   const dynamicClassName = [className, flex ? 'flex' : '', stroke ? 'stroke' : ''].filter(Boolean).join(' ');
 

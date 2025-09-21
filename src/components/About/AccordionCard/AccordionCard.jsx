@@ -7,18 +7,18 @@ import './AccordionCard.css';
 const accordionData = [
   {
     id: 'item-1',
-    title: 'Who I Am',
-    content: "I'm a final-year Computer Applications student from Kerala, India. My passion lies in turning complex ideas into beautiful, functional, and user-centric digital experiences. I'm a lifelong learner, always excited by new technologies and the creative challenges they present."
+    title: 'Background',
+    content: "BCA graduate from Kerala with a placement at Accenture."
   },
   {
     id: 'item-2',
-    title: 'What I Do',
-    content: "I specialize in full-stack development, comfortable with both front-end and back-end technologies. From designing intuitive user interfaces with React to building robust server-side logic and APIs, I enjoy every stage of the development lifecycle."
+    title: 'Strengths',
+    content: "Problem-solving, clean code, and delivering user-first applications."
   },
   {
     id: 'item-3',
-    title: 'What I Love',
-    content: "Beyond coding, I'm passionate about creative problem-solving, exploring new tech trends, and collaborating with others. I also enjoy photography and graphic design, which often inspire my approach to building visually appealing web applications."
+    title: 'Beyond Work',
+    content: "Design, photography, and experimenting with new technologies."
   }
 ];
 
