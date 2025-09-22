@@ -3,7 +3,25 @@
   height: 100%;
   width: 100%;
   display: flex;
-  align-items: center;
+  flex-direction: column;
   justify-content: center;
-  color: var(--text-secondary); /* Sets the icon color */
-}   
+  align-items: center;
+  padding: 0 1rem; /* Add some padding to the sides */
+  transition: height 0.4s ease; /* Smooth height transition */
+}
+
+.logo-loop-container {
+  width: 100%;
+}
+
+
+
+.selected-tech-title {
+  margin-top: 1.5rem;
+  padding: 0.5rem 1rem;
+  background-color: var(--prelayer-1);
+  color: var(--accent);
+  font-weight: 600;
+  border-radius: 8px;
+  font-size: 1rem;
+}

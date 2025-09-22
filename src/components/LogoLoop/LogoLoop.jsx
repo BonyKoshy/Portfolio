@@ -1,9 +1,8 @@
 // src/components/LogoLoop/LogoLoop.jsx
-import { useCallback, useEffect, useMemo, useRef, useState, memo } from 'react';
-import { Tooltip, TooltipContent, TooltipTrigger, TooltipProvider } from '../ui/Tooltip';
+import React, { useCallback, useEffect, useMemo, useRef, useState, memo } from 'react';
 import './LogoLoop.css';
 
-// ... (The hooks like useAnimationFrame, useResizeObserver, etc., remain unchanged)
+// ... (The hooks like useAnimationFrame, etc., remain unchanged)
 const ANIMATION_CONFIG = { SMOOTH_TAU: 0.25, MIN_COPIES: 2, COPY_HEADROOM: 2 };
 const toCssLength = value => (typeof value === 'number' ? `${value}px` : (value ?? undefined));
 const useResizeObserver = (callback, elements, dependencies) => { useEffect(() => { if (!window.ResizeObserver) { const handleResize = () => callback(); window.addEventListener('resize', handleResize); callback(); return () => window.removeEventListener('resize', handleResize); } const observers = elements.map(ref => { if (!ref.current) return null; const observer = new ResizeObserver(callback); observer.observe(ref.current); return observer; }); callback(); return () => { observers.forEach(observer => observer?.disconnect()); }; }, dependencies); };
@@ -16,14 +15,13 @@ export const LogoLoop = memo(
     logos,
     speed = 120,
     direction = 'left',
-    width = '100%',
     logoHeight = 28,
     gap = 32,
     pauseOnHover = true,
     fadeOut = false,
     fadeOutColor,
     scaleOnHover = false,
-    ariaLabel = 'Partner logos',
+    onLogoClick, // New prop to handle clicks
     className,
     style
   }) => {
@@ -63,33 +61,23 @@ export const LogoLoop = memo(
 
     const handleMouseEnter = useCallback(() => setIsHovered(true), []);
     const handleMouseLeave = useCallback(() => setIsHovered(false), []);
-
+    
     const renderLogoItem = useCallback((item, key) => {
-      const content = 'node' in item
-        ? <span className="logoloop__node">{item.node}</span>
-        : <img src={item.src} alt={item.alt ?? ''} title={item.title} loading="lazy" draggable={false} />;
-
-      const itemContent = (
-        <TooltipProvider>
-          <Tooltip>
-            <TooltipTrigger asChild>
-              {item.href ? (
-                <a className="logoloop__link" href={item.href} target="_blank" rel="noopener noreferrer">
-                  {content}
-                </a>
-              ) : (
-                content
-              )}
-            </TooltipTrigger>
-            <TooltipContent>
-              <p>{item.title}</p>
-            </TooltipContent>
-          </Tooltip>
-        </TooltipProvider>
-      );
-
-      return <li className="logoloop__item" key={key}>{itemContent}</li>;
-    }, []);
+        const content = <span className="logoloop__node">{item.node}</span>;
+        
+        // Use a button for accessibility and click handling
+        return (
+            <li className="logoloop__item" key={key}>
+                <button 
+                    className="logoloop__link" 
+                    onClick={() => onLogoClick(item.title)}
+                    aria-label={item.title}
+                >
+                    {content}
+                </button>
+            </li>
+        );
+    }, [onLogoClick]);
 
     const logoLists = useMemo(() =>
       Array.from({ length: copyCount }, (_, copyIndex) => (
@@ -108,8 +96,7 @@ export const LogoLoop = memo(
       <div
         ref={containerRef}
         className={rootClassName}
-        style={{ width: toCssLength(width), ...cssVariables, ...style }}
-        aria-label={ariaLabel}
+        style={{ ...cssVariables, ...style }}
         onMouseEnter={handleMouseEnter}
         onMouseLeave={handleMouseLeave}
       >

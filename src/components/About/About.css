@@ -32,7 +32,11 @@
 .div2 { grid-column: span 4; min-height: 120px; }
 .div7 { grid-column: span 4; min-height: 120px; } /* Location card */
 .div3 { grid-column: span 4; min-height: 200px; }
-.div4 { grid-column: span 4; }
+.div4 { 
+    grid-column: span 4;
+    /* FIX: Allow a little extra space on mobile */
+    min-height: 150px;
+}
 .div5 { grid-column: span 4; }
 .div6 { grid-column: span 4; }
 

@@ -1,71 +1,90 @@
 // src/components/About/TechCarousel/TechCarousel.jsx
-import React from 'react';
+import React, { useState } from 'react';
+import { motion, AnimatePresence } from 'framer-motion';
 import LogoLoop from '../../LogoLoop/LogoLoop';
 import {
-  SiPython, SiC, SiCplusplus, SiJavascript, SiTypescript,
-  SiHtml5, SiCss3, SiTailwindcss, SiBootstrap, SiReact, SiNodedotjs,
-  SiDotnet, SiFlask, SiSpring, SiMysql, SiSqlite, 
-  SiOracle, SiDocker, SiNetlify, SiVercel,
-  SiGit, SiGithub, SiAndroidstudio,
-  SiBlender, SiFigma
+  SiReact, SiJavascript, SiHtml5, SiCss3, SiNodedotjs, SiPython,
+  SiGit, SiGithub, SiFigma, SiTailwindcss, SiSpring, SiDotnet, SiCplusplus,
+  SiTypescript, SiBootstrap, SiFlask, SiMysql, SiSqlite, 
+  SiOracle, SiDocker, SiNetlify, SiVercel, SiAndroidstudio, SiBlender
 } from 'react-icons/si';
-import { FaJava } from 'react-icons/fa'; // 1. Import the correct Java icon
+import { FaJava, FaAws } from "react-icons/fa";
 import './TechCarousel.css';
 
+// Your final list of technologies
 const techLogos = [
-  // Programming Languages
-  { node: <SiPython />, title: "Python", href: "https://www.python.org" },
-  { node: <FaJava />, title: "Java", href: "https://www.java.com" }, // 2. Use the correct component
-  { node: <SiC />, title: "C", href: "https://en.wikipedia.org/wiki/C_(programming_language)" },
-  { node: <SiCplusplus />, title: "C++", href: "https://isocpp.org/" },
-  { node: <SiJavascript />, title: "JavaScript", href: "https://developer.mozilla.org/en-US/docs/Web/JavaScript" },
-  { node: <SiTypescript />, title: "TypeScript", href: "https://www.typescriptlang.org/" },
-
-  // Web Development
-  { node: <SiHtml5 />, title: "HTML5", href: "https://developer.mozilla.org/en-US/docs/Web/Guide/HTML/HTML5" },
-  { node: <SiCss3 />, title: "CSS3", href: "https://developer.mozilla.org/en-US/docs/Web/CSS" },
-  { node: <SiTailwindcss />, title: "Tailwind CSS", href: "https://tailwindcss.com" },
-  { node: <SiBootstrap />, title: "Bootstrap", href: "https://getbootstrap.com/" },
-  { node: <SiReact />, title: "React.js", href: "https://react.dev" },
-  { node: <SiNodedotjs />, title: "Node.js", href: "https://nodejs.org" },
-  { node: <SiDotnet />, title: ".NET (ASP.NET & MAUI)", href: "https://dotnet.microsoft.com" },
-  { node: <SiFlask />, title: "Flask", href: "https://flask.palletsprojects.com/" },
-  { node: <SiSpring />, title: "Spring Boot", href: "https://spring.io/projects/spring-boot" },
-
-  // Databases
-  { node: <SiMysql />, title: "MySQL", href: "https://www.mysql.com/" },
-  { node: <SiSqlite />, title: "SQLite", href: "https://www.sqlite.org/" },
-  { node: <SiOracle />, title: "Oracle Database", href: "https://www.oracle.com/database/" },
-
-  // Cloud & DevOps
-  { node: <SiDocker />, title: "Docker", href: "https://www.docker.com/" },
-  { node: <SiNetlify />, title: "Netlify", href: "https://www.netlify.com/" },
-  { node: <SiVercel />, title: "Vercel", href: "https://vercel.com/" },
-
-  // Tools & Platforms
-  { node: <SiGit />, title: "Git", href: "https://git-scm.com/" },
-  { node: <SiGithub />, title: "GitHub", href: "https://github.com" },
-  { node: <SiAndroidstudio />, title: "Android Studio", href: "https://developer.android.com/studio" },
-  { node: <SiBlender />, title: "Blender", href: "https://www.blender.org/" },
-  { node: <SiFigma />, title: "Figma", href: "https://www.figma.com" },
+    { node: <SiHtml5 />, title: "HTML5" },
+    { node: <SiCss3 />, title: "CSS3" },
+    { node: <SiJavascript />, title: "JavaScript" },
+    { node: <SiTypescript />, title: "TypeScript" },
+    { node: <SiReact />, title: "React.js" },
+    { node: <SiNodedotjs />, title: "Node.js" },
+    { node: <SiTailwindcss />, title: "Tailwind CSS" },
+    { node: <SiBootstrap />, title: "Bootstrap" },
+    { node: <SiPython />, title: "Python" },
+    { node: <FaJava />, title: "Java" },
+    { node: <SiCplusplus />, title: "C++" },
+    { node: <SiDotnet />, title: "C#" },
+    { node: <SiSpring />, title: "Spring Boot" },
+    { node: <SiFlask />, title: "Flask" },
+    { node: <SiMysql />, title: "MySQL" },
+    { node: <SiSqlite />, title: "SQLite" },
+    { node: <SiOracle />, title: "Oracle" },
+    { node: <FaAws />, title: "AWS" },
+    { node: <SiDocker />, title: "Docker" },
+    { node: <SiNetlify />, title: "Netlify" },
+    { node: <SiVercel />, title: "Vercel" },
+    { node: <SiGit />, title: "Git" },
+    { node: <SiGithub />, title: "GitHub" },
+    { node: <SiAndroidstudio />, title: "Android Studio" },
+    { node: <SiBlender />, title: "Blender" },
+    { node: <SiFigma />, title: "Figma" },
 ];
 
-
 function TechCarousel() {
+  const [expanded, setExpanded] = useState(false);
+  const [selectedTitle, setSelectedTitle] = useState('');
+
+  const handleLogoClick = (title) => {
+    if (expanded && selectedTitle === title) {
+      // If the same logo is clicked again, collapse the card
+      setExpanded(false);
+      setSelectedTitle('');
+    } else {
+      // Otherwise, expand and show the new title
+      setSelectedTitle(title);
+      setExpanded(true);
+    }
+  };
+
   return (
-    <div className="tech-carousel-card">
-      <LogoLoop
-        logos={techLogos}
-        speed={80}
-        direction="left"
-        logoHeight={48}
-        gap={50}
-        pauseOnHover
-        scaleOnHover
-        fadeOut
-        ariaLabel="Technology partners"
-        fadeOutColor="var(--panel-bg)"
-      />
+    <div className={`tech-carousel-card ${expanded ? 'expanded' : ''}`}>
+      <div className="logo-loop-container">
+        <LogoLoop
+          logos={techLogos}
+          speed={50}
+          logoHeight={0}
+          gap={30}
+          fadeOut
+          pauseOnHover={!expanded} // Disable hover pause when expanded
+          scaleOnHover={!expanded} // Disable hover scale when expanded
+          fadeOutColor="var(--panel-bg)"
+          onLogoClick={handleLogoClick}
+        />
+      </div>
+      <AnimatePresence>
+        {expanded && (
+          <motion.div
+            className="selected-tech-title"
+            initial={{ opacity: 0, y: -10 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0, y: -10 }}
+            transition={{ duration: 0.3 }}
+          >
+            {selectedTitle}
+          </motion.div>
+        )}
+      </AnimatePresence>
     </div>
   );
 }
