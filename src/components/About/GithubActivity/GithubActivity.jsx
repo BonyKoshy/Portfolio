@@ -1,11 +1,13 @@
 // src/components/About/GithubActivity/GithubActivity.jsx
-import React, { useEffect, useRef } from 'react';
+import React, { useEffect, useRef, useContext } from 'react';
 import GitHubCalendar from 'react-github-calendar';
-import { Github, ArrowUpRight } from 'lucide-react'; // Import the ArrowUpRight icon
+import { Github, ArrowUpRight } from 'lucide-react';
+import { ThemeContext } from '../../../ThemeContext';
 import './GithubActivity.css';
 
 function GithubActivity() {
   const calendarWrapperRef = useRef(null);
+  const { theme } = useContext(ThemeContext);
 
   useEffect(() => {
     if (calendarWrapperRef.current) {
@@ -14,9 +16,9 @@ function GithubActivity() {
     }
   }, []);
 
-  const theme = {
-    light: ['#ebedf0', '#9be9a8', '#40c463', '#30a14e', '#216e39'],
-    dark: ['#161b22', '#0e4429', '#006d32', '#26a641', '#39d353'],
+  const customTheme = {
+    light: ['#f0f2f5', '#dbece2', '#a7d5b4', '#6ec085', '#3a9d56'],
+    dark: ['#242526', '#0e4429', '#006d32', '#26a641', '#39d353'],
   };
 
   return (
@@ -35,15 +37,16 @@ function GithubActivity() {
             blockSize={12}
             blockMargin={4}
             fontSize={14}
-            theme={theme}
+            // 1. Pass the full theme object
+            theme={customTheme}
+            // 2. Explicitly tell the component which theme to use
+            colorScheme={theme}
           />
         </div>
-
-        {/* --- NEW: Visit Profile Button --- */}
-        <a 
-          href="https://github.com/BonyKoshy" 
-          target="_blank" 
-          rel="noopener noreferrer" 
+        <a
+          href="https://github.com/BonyKoshy"
+          target="_blank"
+          rel="noopener noreferrer"
           className="github-profile-link"
         >
           <ArrowUpRight className="profile-link-icon" size={24} />

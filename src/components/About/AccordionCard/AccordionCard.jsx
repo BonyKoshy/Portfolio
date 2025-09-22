@@ -8,17 +8,17 @@ const accordionData = [
   {
     id: 'item-1',
     title: 'Background',
-    content: "BCA graduate from Kerala with a placement at Accenture."
+    content: "am a Bachelor of Computer Applications (BCA) graduate from Kerala, India, with a strong foundation in software development and a confirmed placement at Accenture. My academic journey and project experience have equipped me with the ability to approach challenges with both technical expertise and creative thinking."
   },
   {
     id: 'item-2',
     title: 'Strengths',
-    content: "Problem-solving, clean code, and delivering user-first applications."
+    content: "I excel in problem-solving, writing clean and maintainable code, and building user-focused applications. My skill set spans across front-end and back-end technologies, enabling me to create solutions that are both functional and intuitive. I am also committed to continuous learning, ensuring that I stay updated with emerging tools and frameworks."
   },
   {
     id: 'item-3',
     title: 'Beyond Work',
-    content: "Design, photography, and experimenting with new technologies."
+    content: "Outside of professional development, I am deeply interested in design, photography, and creative experimentation with new technologies. These passions often influence my approach to building digital experiences, helping me combine technical precision with visual creativity."
   }
 ];
 
