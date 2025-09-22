@@ -10,13 +10,15 @@
 .grid-item {
   background-color: var(--panel-bg);
   border-radius: 12px;
+  /* Padding is now handled by inner components or this base */
   padding: 1.5rem;
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
   transition: all 0.3s ease;
   display: flex;
   flex-direction: column;
-  position: relative; /* Required for z-index to work */
+  position: relative;
   z-index: 1;
+  min-height: 120px;
 }
 
 .grid-item:hover {
@@ -54,7 +56,7 @@
   .div2 { grid-area: 1 / 5 / 2 / 7; } 
   .div7 { grid-area: 2 / 5 / 3 / 7; } 
   .div3 { grid-area: 3 / 1 / 4 / 7; }
-  .div4 { grid-area: 4 / 1 / 5 / 7; }
+  .div4 { grid-area: 4 / 1 / 5 / 7; transition: all 0.4s ease, transform 0.3s ease;}
   .div5 { grid-area: 5 / 1 / 7 / 7; }
   .div6 { grid-area: 7 / 1 / 9 / 7; }
 }

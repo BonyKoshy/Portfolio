@@ -8,20 +8,11 @@
 
 .github-header {
   display: flex;
-  /* FIX: Align header content to the center */
-  align-items: center; 
-  width: 100%;
-  background: none;
-  border: none;
-  padding-bottom: 1rem;
-  color: var(--text-primary);
-  flex-shrink: 0;
-}
-
-.github-title {
-  display: flex;
   align-items: center;
   gap: 0.75rem;
+  color: var(--text-primary);
+  width: 100%;
+  justify-content: flex-start;
 }
 
 .github-logo {
@@ -34,23 +25,85 @@
   margin: 0;
 }
 
-.calendar-container {
-  color: var(--text-secondary);
-  flex-grow: 1;
-  /* FIX: Use flexbox to center the calendar */
+/* --- NEW: Wrapper for Calendar and Button --- */
+.github-content-wrapper {
   display: flex;
-  justify-content: center;
-  align-items: center;
-  overflow: hidden; /* Hide any overflow from the calendar itself */
+  flex-grow: 1;
+  gap: 1.5rem;
+  overflow: hidden; /* Hide overflow from the main card */
 }
 
-/* This targets the direct child of the calendar component to control its size */
-.calendar-container > div {
-  width: 100%;
-  display: flex;
+.calendar-container {
+  color: var(--text-secondary);
+  overflow-x: auto;
+  flex-grow: 1;
+  padding-bottom: 12px;
+}
+
+/* --- NEW: "Visit Profile" Button Styles --- */
+.github-profile-link {
+  display: inline-flex; /* Use inline-flex to size to content */
+  flex-direction: row; /* Icon and text side-by-side */
   justify-content: center;
+  align-items: center;
+  min-width: 290px;
+  gap: 0.5rem;
+  flex-shrink: 0;
+  padding: 0.75rem 1.25rem; /* Give it some padding */
+  background-color: var(--prelayer-1);
+  color: var(--text-secondary);
+  border-radius: 12px;
+  text-decoration: none;
+  font-weight: 600;
+  transition: all 0.3s ease;
+  margin-bottom: 12px;
+}
+
+.github-profile-link:hover {
+  background-color: var(--accent);
+  color: var(--background);
+}
+
+.profile-link-icon {
+  margin-bottom: 0.5rem;
+}
+
+/* --- Responsive Styles for the Button --- */
+@media (max-width: 1270px) {
+  .github-content-wrapper {
+    flex-direction: column; /* Stack items vertically */
+    gap: 1rem;
+  }
+
+  .github-profile-link {
+    width: 100%; /* Full width */
+    height: auto; /* Auto height */
+    flex-direction: row; /* Icon and text side-by-side */
+    padding: 0.75rem 1rem; /* Pill shape padding */
+    border-radius: 9999px; /* Pill shape */
+    gap: 0.5rem;
+  }
+
+  .profile-link-icon {
+    margin-bottom: 0;
+  }
 }
 
 .react-activity-calendar {
   font-family: 'Poppins', sans-serif !important;
+}
+
+/* --- Custom Scrollbar Styles --- */
+.calendar-container::-webkit-scrollbar {
+  height: 4px;
+}
+.calendar-container::-webkit-scrollbar-track {
+  background: transparent;
+}
+.calendar-container::-webkit-scrollbar-thumb {
+  background: var(--text-secondary);
+  border-radius: 4px;
+}
+.calendar-container::-webkit-scrollbar-thumb:hover {
+  background: var(--accent);
 }

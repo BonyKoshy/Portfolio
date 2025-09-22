@@ -2,13 +2,12 @@
 .logoloop {
   position: relative;
   overflow-x: hidden;
-  --logoloop-gap: 32px;
-  --logoloop-logoHeight: 28px;
-  /* Use theme variable for the fade color */
+  --logoloop-gap: 48px;
+  --logoloop-logoHeight: 48px;
   --logoloop-fadeColorAuto: var(--panel-bg);
+  /* FIX: Add vertical padding to give icons room to scale */
+  padding: 0.5rem 0;
 }
-
-/* ... (rest of the file is mostly the same) ... */
 
 .logoloop__track {
   display: flex;
@@ -20,6 +19,9 @@
 .logoloop__list {
   display: flex;
   align-items: center;
+  list-style: none;
+  margin: 0;
+  padding: 0;
 }
 
 .logoloop__item {
@@ -27,32 +29,59 @@
   margin-right: var(--logoloop-gap);
   font-size: var(--logoloop-logoHeight);
   line-height: 1;
-  /* FIX: Add a background to hide background grid dots */
   background-color: var(--panel-bg);
+  transition: opacity 0.3s ease, transform 0.3s ease;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: var(--logoloop-logoHeight);
+  height: var(--logoloop-logoHeight);
+  /* FIX: Allow the scaled item to be fully visible */
+  overflow: visible;
+}
+
+/* ... (rest of the file is unchanged) ... */
+
+/* New: Styles for the react-icons SVG */
+.logoloop__node svg {
+    width: 100%; /* Make SVG take full width of its parent (.logoloop__node) */
+    height: 100%; /* Make SVG take full height of its parent (.logoloop__node) */
+    object-fit: contain; /* Ensure the icon scales nicely */
+}
+
+/* FIX: New hover and active styles */
+.logoloop.is-hovered .logoloop__item:not(:hover) {
+  opacity: 0.5;
+}
+.logoloop__item:hover {
+  transform: scale(1.15);
+}
+.logoloop__item.active {
+  transform: scale(1.15);
+}
+.logoloop.is-hovered .logoloop__item.active:not(:hover) {
+  opacity: 1;
 }
 
 .logoloop__node {
   display: inline-flex;
   align-items: center;
-  /* FIX: Use theme variable for icon color */
-  color: var(--text-secondary);
-  transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  color: var(--text-secondary); /* This sets the icon color */
+  width: 100%; /* Ensure node takes full item width */
+  height: 100%; /* Ensure node takes full item height */
 }
 
-/* FIX: Changed from <a> to <button> styles */
 .logoloop__link {
   display: inline-flex;
   align-items: center;
+  justify-content: center; /* Center button content */
   background: none;
   border: none;
-  padding: 0;
+  padding: 0; /* Remove padding from button, item takes care of spacing */
   cursor: pointer;
   border-radius: 4px;
-}
-
-.logoloop__link:hover .logoloop__node {
-  transform: scale(1.2);
-  transform-origin: center center;
+  width: 100%; /* Make button take full item width */
+  height: 100%; /* Make button take full item height */
 }
 
 .logoloop__link:focus-visible {
@@ -60,7 +89,6 @@
   outline-offset: 2px;
 }
 
-/* ... (fade effect and other styles remain the same) ... */
 .logoloop--fade::before,
 .logoloop--fade::after {
   content: '';
@@ -74,18 +102,10 @@
 
 .logoloop--fade::before {
   left: 0;
-  background: linear-gradient(
-    to right,
-    var(--logoloop-fadeColor, var(--logoloop-fadeColorAuto)) 0%,
-    transparent 100%
-  );
+  background: linear-gradient( to right, var(--logoloop-fadeColor, var(--logoloop-fadeColorAuto)) 0%, transparent 100% );
 }
 
 .logoloop--fade::after {
   right: 0;
-  background: linear-gradient(
-    to left,
-    var(--logoloop-fadeColor, var(--logoloop-fadeColorAuto)) 0%,
-    transparent 100%
-  );
+  background: linear-gradient( to left, var(--logoloop-fadeColor, var(--logoloop-fadeColorAuto)) 0%, transparent 100% );
 }
