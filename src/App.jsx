@@ -2,12 +2,16 @@
 import React, { useEffect, useState, useContext } from 'react';
 import { ThemeProvider, ThemeContext } from './ThemeContext';
 import './App.css';
+
+// Component Imports
 import DotGrid from './components/DotGrid/DotGrid';
 import Header from './components/Header/Header';
 import GradualBlur from './components/GradualBlur/GradualBlur';
 import Hero from './components/Hero/Hero';
 import About from './components/About/About';
 import SectionTitle from './components/SectionTitle/SectionTitle';
+import CertificatesList from './components/CertificatesList/CertificatesList';
+
 
 function AppContent() {
   const { theme } = useContext(ThemeContext);
@@ -15,7 +19,6 @@ function AppContent() {
 
   useEffect(() => {
     const updateDotColors = () => {
-      // Small delay to ensure CSS variables have been updated by the browser
       setTimeout(() => {
         const base = getComputedStyle(document.documentElement).getPropertyValue('--text-secondary').trim();
         const active = getComputedStyle(document.documentElement).getPropertyValue('--accent').trim();
@@ -23,15 +26,14 @@ function AppContent() {
       }, 100);
     };
     updateDotColors();
-  }, [theme]); // This effect now correctly re-runs on theme change
+  }, [theme]);
 
   return (
     <>
       <div className="app-background">
-        {/* FIX: Add the `key={theme}` prop to force remount on theme change */}
         {dotColors.base && dotColors.active && (
           <DotGrid
-            key={theme} // This is the fix!
+            key={theme}
             dotSize={2}
             gap={30}
             baseColor={dotColors.base}
@@ -57,13 +59,17 @@ function AppContent() {
 
       <main className="app-content">
         <Hero />
-        
-        {/* FIX: Remove the old, duplicate #about section */}
-        <About /> 
+        <About />
+
+      <section id="certificates" className="content-section">
+        <SectionTitle title="Certificates" />
+        <CertificatesList />
+      </section>
 
         <section id="projects" className="content-section">
           <SectionTitle title="Projects" />
         </section>
+        
         <section id="contact" className="content-section">
           <SectionTitle title="Contact" />
         </section>

@@ -32,7 +32,11 @@
   text-decoration: none;
   border-bottom: 2px solid transparent;
   transition: border-color 0.3s ease;
-  cursor: pointer;
+  cursor: pointer;    
+  background: none; /* Add these to make the button look like text */
+  border: none;
+  padding: 0;
+  font: inherit;
 }
 
 .location-link:hover {

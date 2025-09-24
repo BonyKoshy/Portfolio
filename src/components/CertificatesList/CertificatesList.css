@@ -1,9 +1,8 @@
-.certificates-card-container {
+/* This file is renamed from CertificatesCard.css */
+/* Styles for the list itself */
+.certificates-list-container {
     width: 100%;
-    height: 100%;
-    display: flex;
-    flex-direction: column;
-    gap: 1.5rem;
+    margin: 0 auto;
 }
 
 .certificates-list {
@@ -13,29 +12,31 @@
     display: flex;
     flex-direction: column;
     gap: 1rem;
-    overflow-y: auto;
-    max-height: 400px; /* Or any height you prefer */
 }
 
 .certificate-item {
     display: flex;
+    flex-wrap: wrap; /* Allow wrapping on small screens */
     justify-content: space-between;
     align-items: center;
     padding: 1rem;
     border-radius: 12px;
-    background-color: var(--prelayer-1);
+    background-color: var(--panel-bg);
     cursor: pointer;
-    transition: background-color 0.2s;
+    transition: background-color 0.2s, transform 0.2s;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
 }
 
 .certificate-item:hover {
+    transform: translateY(-2px);
     background-color: var(--prelayer-2);
 }
 
 .item-content {
     display: flex;
     align-items: center;
-    gap: 1rem;
+    gap: 1.5rem;
+    margin-bottom: 0.5rem; /* Add space for the button on mobile */
 }
 
 .item-image {
@@ -72,20 +73,31 @@
     gap: 0.5rem;
     width: 100%;
     padding: 0.75rem 1rem;
-    background-color: var(--prelayer-1);
+    background-color: var(--panel-bg);
     color: var(--text-secondary);
-    border-radius: 9999px;
+    border-radius: 9999px; /* Pill shape */
     text-decoration: none;
     font-weight: 600;
     transition: all 0.3s ease;
-    margin-top: auto; /* Pushes the button to the bottom */
+    margin-top: 2rem; /* Add space above the button */
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
 }
 
 .view-all-certs-link:hover {
     background-color: var(--accent);
     color: var(--background);
+    transform: translateY(-2px);
+    box-shadow: 0 10px 15px rgba(0, 0, 0, 0.05);
 }
 
+.profile-link-icon {
+    transition: transform 0.3s ease;
+}
+
+.view-all-certs-link:hover .profile-link-icon {
+    transform: rotate(45deg);
+    padding-top: 1px;
+}
 /* Styles for the expanded card */
 .card-overlay {
     position: fixed;
@@ -169,4 +181,16 @@
     line-height: 1.6;
     max-height: 200px;
     overflow-y: auto;
+}
+
+@media (max-width: 640px) {
+    .item-content {
+        width: 100%; /* Take full width on mobile */
+        margin-bottom: 1rem;
+    }
+    
+    .item-button {
+        width: 100%; /* Make button full width */
+        text-align: center;
+    }
 }

@@ -11,6 +11,7 @@ function Header() {
   const menuItems = [
     { label: 'Home', link: '#home' },
     { label: 'About', link: '#about' },
+    { label: 'Certificates', link: '#certificates' },
     { label: 'Projects', link: '#projects' },
     { label: 'Contact', link: '#contact' },
   ];

@@ -16,12 +16,13 @@ function LocationCard() {
 
       <HoverCard.Root open={isOpen} onOpenChange={setIsOpen}>
         <HoverCard.Trigger asChild>
-          <div
+          <button
+            type="button"
             className="location-link"
             onClick={() => setIsOpen(true)}
           >
             Pathanamthitta, Kerala, India
-          </div>
+          </button>
         </HoverCard.Trigger>
         <HoverCard.Portal>
           <HoverCard.Content

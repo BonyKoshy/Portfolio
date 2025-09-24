@@ -1,97 +1,70 @@
 import React, { useEffect, useId, useRef, useState } from "react";
 import { AnimatePresence, motion } from "framer-motion";
 import { ArrowUpRight } from 'lucide-react';
-import './CertificatesCard.css';
-
+import './CertificatesList.css';
 
 const cards = [
     {
-        description: "IBM",
-        title: "Spring Framework for Java Development",
-        src: "/certs/ibm-logo.png",
+        description: "Google",
+        title: "Google IT Support Professional Certificate",
+        src: "/certs/google.png", // Recommended: Add an image for this cert
         ctaText: "View",
-        ctaLink: "#",
+        ctaLink: "https://www.coursera.org/professional-certificates/google-it-support",
         content: () => (
             <p>
-                Gained expertise in building enterprise-grade Java applications using Spring Boot, RESTful APIs, and security practices. Focused on scalable, production-ready development with modern frameworks.
+                Currently pursuing this 6-course professional certificate on Coursera. It covers the fundamentals of IT support, including troubleshooting, networking, operating systems, system administration, and security.
             </p>
         ),
     },
     {
         description: "IBM",
-        title: "Java Development with Databases",
-        src: "/certs/ibm-logo-1.jpeg",
+        title: "IBM Java Developer Professional Certificate",
+        src: "/certs/ibm.png", // Recommended: Add an image for this cert
         ctaText: "View",
-        ctaLink: "#",
+        ctaLink: "https://www.coursera.org/professional-certificates/ibm-java-developer",
         content: () => (
             <p>
-                Hands-on experience integrating Java applications with MySQL databases. Learned advanced querying, transactions, and data persistence techniques for robust backend development.
-            </p>
-        ),
-    },
-    {
-        description: "IBM",
-        title: "Cloud Native, Microservices, Containers, DevOps & Agile",
-        src: "/certs/ibm-logo-2.jpeg",
-        ctaText: "View",
-        ctaLink: "#",
-        content: () => (
-            <p>
-                Built cloud-native applications using microservices architecture, Docker containers, and DevOps practices. Applied Agile methodologies to deliver modern, scalable software solutions.
+                In progress (currently on course 10 of 14) of this comprehensive program on Coursera. This series focuses on building job-ready skills in Java, Spring Framework, database integration, and cloud-native development.
             </p>
         ),
     },
     {
         description: "Microsoft",
-        title: "Azure Data Fundamentals",
-        src: "/certs/microsoft-certified-fundamentals-logo.jpeg",
+        title: "Microsoft Azure Data Fundamentals",
+        src: "/certs/microsoft.png",
         ctaText: "View",
         ctaLink: "#",
         content: () => (
             <p>
-                Validated foundational knowledge of cloud data concepts with Microsoft Azure. Covered relational and non-relational data, analytics, and cloud storage solutions with enterprise credibility.
-            </p>
-        ),
-    },
-    {
-        description: "Microsoft",
-        title: "Power Platform Fundamentals",
-        src: "/certs/microsoft-certified-fundamentals-logo-1.jpeg",
-        ctaText: "View",
-        ctaLink: "#",
-        content: () => (
-            <p>
-                Learned to leverage Power BI, Power Apps, and Power Automate for creating data-driven solutions, automating workflows, and building low-code enterprise apps.
+                [cite_start]Completed a series of modules covering foundational knowledge of core data concepts [cite: 31, 32][cite_start], relational data [cite: 24, 25][cite_start], non-relational data [cite: 4][cite_start], and data analytics on Microsoft Azure[cite: 11].
             </p>
         ),
     },
     {
         description: "Be10x",
-        title: "Generative AI & ChatGPT Workshop",
-        src: "/certs/be10x-logo.png",
+        title: "AI Tools and ChatGPT Workshop",
+        src: "/certs/Be10x.png",
         ctaText: "View",
         ctaLink: "#",
         content: () => (
             <p>
-                Participated in an industry workshop on Generative AI and ChatGPT. Gained insights into prompt engineering, real-world AI applications, and the future of workplace automation.
+                A workshop focused on leveraging AI for practical tasks. Gained skills in creating presentations, analyzing data, and debugging code efficiently using modern AI tools.
             </p>
         ),
     },
     {
-        description: "TrendUp / College",
+        description: "TrendUp & CMS College",
         title: "Full-Stack Development with Python",
-        src: "/certs/fullstack-logo.jpeg",
+        src: "/certs/VAP.jpeg",
         ctaText: "View",
         ctaLink: "#",
         content: () => (
             <p>
-                Acquired full-stack skills beyond Java, focusing on Python, web frameworks, and frontend-backend integration. Strengthened versatility in building complete applications.
+                Completed a value-added program in association with TrendUp at CMS College of Science & Commerce, covering the principles and practices of full-stack web development using Python.
             </p>
         ),
     },
 ];
-
-
 
 
 const CloseIcon = () => (
@@ -116,10 +89,10 @@ const CloseIcon = () => (
     </motion.svg>
 );
 
-function CertificatesCard() {
+function CertificatesList() {
     const [active, setActive] = useState(null);
     const ref = useRef(null);
-    const id = useId();
+    const id = useId(); // <-- FIX: Define the id using the useId hook
 
     useEffect(() => {
         function onKeyDown(event) {
@@ -127,18 +100,15 @@ function CertificatesCard() {
                 setActive(null);
             }
         }
-
         if (active) {
             document.body.style.overflow = "hidden";
         } else {
             document.body.style.overflow = "auto";
         }
-
         window.addEventListener("keydown", onKeyDown);
         return () => window.removeEventListener("keydown", onKeyDown);
     }, [active]);
-    
-    // Custom hook to handle clicks outside the active card
+
     useEffect(() => {
         function handleClickOutside(event) {
             if (ref.current && !ref.current.contains(event.target)) {
@@ -151,9 +121,8 @@ function CertificatesCard() {
         };
     }, [ref]);
 
-
     return (
-        <div className="certificates-card-container">
+        <div className="certificates-list-container">
             <AnimatePresence>
                 {active && (
                     <motion.div
@@ -259,17 +228,17 @@ function CertificatesCard() {
                     </motion.li>
                 ))}
             </ul>
-             <a
+            <a
                 href="https://www.linkedin.com/in/bonykoshy/details/certifications/"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="view-all-certs-link"
             >
                 <ArrowUpRight className="profile-link-icon" size={20} />
-                <span>View All Certificates</span>
+                <span>View More on LinkedIn</span>
             </a>
         </div>
     );
 }
 
-export default CertificatesCard;
+export default CertificatesList;
