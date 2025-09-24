@@ -40,9 +40,9 @@
 }
 
 .item-image {
-    width: 40px;
-    height: 40px;
-    border-radius: 8px;
+    width: 60px;
+    height: 60px;
+    border-radius: 10px;
     object-fit: contain;
 }
 
@@ -58,10 +58,11 @@
 
 .item-button {
     padding: 0.5rem 1rem;
-    border-radius: 99px;
+    border-radius: 10px;
     background-color: var(--accent);
     color: white;
-    font-weight: 500;
+    font-weight: 600;
+    font-size: 1.1rem;
     border: none;
     cursor: pointer;
 }
@@ -98,11 +99,14 @@
     transform: rotate(45deg);
     padding-top: 1px;
 }
+
 /* Styles for the expanded card */
 .card-overlay {
     position: fixed;
     inset: 0;
-    background-color: rgba(0, 0, 0, 0.5);
+    background-color: rgba(0, 0, 0, 0.6);
+    backdrop-filter: blur(4px);
+    -webkit-backdrop-filter: blur(4px);
     z-index: 50;
 }
 
@@ -112,75 +116,77 @@
     display: grid;
     place-items: center;
     z-index: 100;
-}
-
-.close-button {
-    position: absolute;
-    top: 1rem;
-    right: 1rem;
-    background-color: var(--panel-bg);
-    border-radius: 50%;
-    width: 2rem;
-    height: 2rem;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    border: none;
-    cursor: pointer;
-    z-index: 101; /* Above the card content */
-}
-
-.active-card-content {
-    width: 90%;
-    max-width: 500px;
-    max-height: 90%;
-    background-color: var(--panel-bg);
-    border-radius: 12px;
-    overflow: hidden;
-    display: flex;
-    flex-direction: column;
-}
-
-.active-card-image {
-    width: 100%;
-    height: 200px;
-    object-fit: cover;
-}
-
-.active-card-details {
     padding: 1rem;
 }
 
-.details-header {
+.active-card-content {
+    width: 80%; /* The container now controls the width */
+    max-height: 90vh;
+    background-color: var(--panel-bg);
+    border-radius: 16px;
+    overflow: hidden;
     display: flex;
-    justify-content: space-between;
+    flex-direction: column;
+    padding: 1.5rem;
+    gap: 1.5rem;
+}
+
+/* New Header Styles */
+.active-card-header {
+    display: flex;
     align-items: flex-start;
-    margin-bottom: 1rem;
+    gap: 1rem;
+}
+
+.active-card-image {
+    width: 80px;
+    height: 80px;
+    border-radius: 12px;
+    object-fit: contain; /* Ensures logo is not cropped */
+    flex-shrink: 0;
+    background-color: var(--prelayer-1);
+}
+
+.header-text-content {
+    flex-grow: 1;
 }
 
 .card-title {
     font-size: 1.25rem;
     font-weight: 700;
+    margin: 0;
+    color: var(--text-primary);
 }
 
 .card-description {
     font-size: 0.9rem;
     color: var(--text-secondary);
+    margin-top: 0.25rem;
 }
 
+/* Updated Button Styles */
 .cta-button {
-    padding: 0.5rem 1rem;
-    border-radius: 99px;
+    padding: 0.75rem 1rem;
+    border-radius: 10px;
     background-color: var(--accent);
     color: white;
+    font-weight: 600;
     text-decoration: none;
+    flex-shrink: 0;
+    transition: transform 0.2s ease;
+}
+
+.cta-button:hover {
+    transform: scale(1.05);
 }
 
 .card-main-content {
     font-size: 1rem;
-    line-height: 1.6;
-    max-height: 200px;
+    line-height: 1.7;
+    color: var(--text-secondary);
+    max-height: 300px;
     overflow-y: auto;
+    padding-right: 0.5rem; /* Space for scrollbar */
 }
 
 @media (max-width: 640px) {
@@ -191,6 +197,35 @@
     
     .item-button {
         width: 100%; /* Make button full width */
+        text-align: center;
+    }
+}
+
+@media (max-width: 768px) {
+    .close-button {
+        display: none;
+    }
+
+    .active-card-header {
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+    }
+
+    .cta-button {
+        width: 100%;
+        margin-top: 1rem;
+    }
+}
+
+@media (max-width: 640px) {
+    .item-content {
+        width: 100%;
+        margin-bottom: 1rem;
+    }
+    
+    .item-button {
+        width: 100%;
         text-align: center;
     }
 }
