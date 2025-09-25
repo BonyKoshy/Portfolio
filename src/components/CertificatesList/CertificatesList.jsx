@@ -11,7 +11,7 @@ const cards = [
         title: "Google IT Support Professional Certificate",
         src: "/certs/google.png",
         ctaText: "View",
-        ctaLink: "https://www.coursera.org/professional-certificates/google-it-support",
+        ctaLink: "https://coursera.org/verify/0RDHEIUBYOV3",
         content: () => ( <p>Currently pursuing this 6-course professional certificate on Coursera. It covers the fundamentals of IT support, including troubleshooting, networking, operating systems, system administration, and security.</p> ),
     },
     {
@@ -19,7 +19,7 @@ const cards = [
         title: "IBM Java Developer Professional Certificate",
         src: "/certs/ibm.png",
         ctaText: "View",
-        ctaLink: "https://www.coursera.org/professional-certificates/ibm-java-developer",
+        ctaLink: "https://coursera.org/verify/G6AK17EELULT",
         content: () => ( <p>In progress (currently on course 10 of 14) of this comprehensive program on Coursera. This series focuses on building job-ready skills in Java, Spring Framework, database integration, and cloud-native development.</p> ),
     },
     {
@@ -27,7 +27,7 @@ const cards = [
         title: "Microsoft Azure Data Fundamentals",
         src: "/certs/microsoft.png",
         ctaText: "View",
-        ctaLink: "#",
+        ctaLink: "https://learn.microsoft.com/en-us/users/bonykoshy-6243/",
         content: () => ( <p>Completed a series of modules covering foundational knowledge of core data concepts, relational data, non-relational data, and data analytics on Microsoft Azure.</p> ),
     },
     {
@@ -35,7 +35,7 @@ const cards = [
         title: "AI Tools and ChatGPT Workshop",
         src: "/certs/Be10x.png",
         ctaText: "View",
-        ctaLink: "#",
+        ctaLink: "https://certx.in/certificate/0270772f-3809-4400-b29b-1e1c61cd0997380787",
         content: () => ( <p>A workshop focused on leveraging AI for practical tasks. Gained skills in creating presentations, analyzing data, and debugging code efficiently using modern AI tools.</p> ),
     },
     {
@@ -43,7 +43,7 @@ const cards = [
         title: "Full-Stack Development with Python",
         src: "/certs/VAP.jpeg",
         ctaText: "View",
-        ctaLink: "#",
+        ctaLink: "https://www.linkedin.com/in/bonykoshy/details/certifications/",
         content: () => ( <p>Completed a value-added program in association with TrendUp at CMS College of Science & Commerce, covering the principles and practices of full-stack web development using Python.</p> ),
     },
 ];

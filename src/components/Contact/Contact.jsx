@@ -11,7 +11,7 @@ import './Contact.css';
 const socialLinks = [
     { icon: <SiGithub />, href: 'https://github.com/BonyKoshy', label: "GitHub" },
     { icon: <SiLinkedin />, href: 'https://www.linkedin.com/in/bonykoshy/', label: "LinkedIn" },
-    { icon: <SiInstagram />, href: 'https://www.instagram.com/bonykoshy/', label: "Instagram" },
+    { icon: <SiInstagram />, href: 'https://www.instagram.com/bonn_i.e/', label: "Instagram" },
     { icon: <SiX />, href: 'https://twitter.com/bonykoshy', label: "X (Twitter)" },
 ];
 
@@ -45,7 +45,7 @@ const Contact = () => {
                             <ArrowUpRight className="contact-email-icon" size={20} />
                         </a>
                         <p className="contact-description">
-                            A creative developer passionate about building beautiful and functional digital experiences. Let's connect!
+                            I'm always open to discussing new projects, creative ideas, or opportunities to be part of an ambitious team. Feel free to reach out.
                         </p>
                         <ul className="social-links">
                             {socialLinks.map((social) => (
