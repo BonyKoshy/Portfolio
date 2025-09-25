@@ -59,17 +59,19 @@
     left: 0;
     right: 0;
     padding: 2rem;
-    color: white;
-    background: linear-gradient(to top, var(--background) 10%, transparent);
+    color: var(--text-primary);
+    background: linear-gradient(to top, var(--background) 30%, transparent);
 }
 .card-category {
     font-size: 0.9rem;
     font-weight: 500;
+    color: var(--text-secondary); /* And also this one for the category */
 }
 .card-title {
     font-size: 1.5rem;
     font-weight: 700;
     margin-top: 0.25rem;
+    color: var(--text-primary); /* And this one for the title */
 }
 
 .carousel-controls {

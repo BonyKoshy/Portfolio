@@ -1,7 +1,7 @@
 // src/components/CertificatesList/CertificatesList.jsx
 import React, { useEffect, useId, useRef, useState } from "react";
 import { AnimatePresence, motion } from "framer-motion";
-import { ArrowUpRight } from 'lucide-react';
+import { ArrowUpRight, Linkedin } from 'lucide-react';
 import SectionTitle from "../SectionTitle/SectionTitle";
 import './CertificatesList.css';
 
@@ -129,7 +129,7 @@ function CertificatesList() {
                 </ul>
 
                 <a href="https://www.linkedin.com/in/bonykoshy/details/certifications/" target="_blank" rel="noopener noreferrer" className="view-all-certs-link" >
-                    <ArrowUpRight className="profile-link-icon" size={20} />
+                    <Linkedin className="profile-link-icon" size={20} /> {/* Replace icon */}
                     <span>View More on LinkedIn</span>
                 </a>
             </div>

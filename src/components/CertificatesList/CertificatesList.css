@@ -3,6 +3,9 @@
 .certificates-list-container {
     width: 100%;
     margin: 0 auto;
+    /* position: relative; */ /* No longer needed */
+    display: flex; /* Add this */
+    flex-direction: column; /* Add this */
 }
 
 .certificates-list {
@@ -84,21 +87,11 @@
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
 }
 
-.view-all-certs-link:hover {
-    background-color: var(--accent);
-    color: var(--background);
-    transform: translateY(-2px);
-    box-shadow: 0 10px 15px rgba(0, 0, 0, 0.05);
-}
 
 .profile-link-icon {
     transition: transform 0.3s ease;
 }
 
-.view-all-certs-link:hover .profile-link-icon {
-    transform: rotate(45deg);
-    padding-top: 1px;
-}
 
 /* Styles for the expanded card */
 .card-overlay {
@@ -227,5 +220,14 @@
     .item-button {
         width: 100%;
         text-align: center;
+    }
+}
+
+@media (min-width: 1024px) {
+    .view-all-certs-link {
+        width: auto;
+        padding: 0.5rem 1rem;
+        margin-top: 2rem; /* Add margin to create space from the cards */
+        align-self: flex-end; /* Align the button to the right */
     }
 }
