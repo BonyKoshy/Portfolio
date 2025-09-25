@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from 'react';
-import { SiGithub, SiLinkedin, SiInstagram, SiTwitter as SiX } from 'react-icons/si'; // Changed SiTwitter to SiX
-import { AnimatePresence } from 'framer-motion';
-import { motion } from 'framer-motion';
+import { SiGithub, SiLinkedin, SiInstagram, SiX } from 'react-icons/si';
+import { AnimatePresence, motion } from 'framer-motion';
 import { ChevronDown, ChevronUp } from 'lucide-react';
 import Chatbot from './Chatbot';
 import GeminiLogo from './GeminiLogo';
@@ -11,7 +10,7 @@ const socialLinks = [
     { icon: <SiGithub />, href: 'https://github.com/BonyKoshy', label: "GitHub" },
     { icon: <SiLinkedin />, href: 'https://www.linkedin.com/in/bonykoshy/', label: "LinkedIn" },
     { icon: <SiInstagram />, href: 'https://www.instagram.com/bonykoshy/', label: "Instagram" },
-    { icon: <SiX />, href: 'https://twitter.com/bonykoshy', label: "X (Twitter)" }, // Changed icon and label
+    { icon: <SiX />, href: 'https://twitter.com/bonykoshy', label: "X (Twitter)" },
 ];
 
 const navLinks = [
@@ -20,8 +19,9 @@ const navLinks = [
     { name: "Certificates", href: "#certificates" },
     { name: "Projects", href: "#projects" },
 ];
-const AiAssistant = () => {
-    const [isOpen, setIsOpen] = useState(false);
+
+const Contact = () => {
+    const [isChatOpen, setIsChatOpen] = useState(false);
     const [isMobile, setIsMobile] = useState(window.innerWidth < 768);
 
     useEffect(() => {
@@ -30,30 +30,6 @@ const AiAssistant = () => {
         return () => window.removeEventListener('resize', handleResize);
     }, []);
 
-    return (
-        <div className={`ai-assistant-card ${isOpen ? 'open' : ''}`}>
-            <div className="ai-assistant-header" onClick={() => setIsOpen(!isOpen)}>
-                <h3>AI Assistance</h3>
-                {isOpen ? <ChevronDown /> : <ChevronUp />}
-            </div>
-            <AnimatePresence>
-                {isOpen && (
-                    <motion.div
-                        key="chatbot"
-                        initial={{ opacity: 0, height: 0 }}
-                        animate={{ opacity: 1, height: 'auto' }}
-                        exit={{ opacity: 0, height: 0 }}
-                        transition={{ duration: 0.3 }}
-                    >
-                        <Chatbot isMobile={isMobile} onClose={() => setIsOpen(false)} />
-                    </motion.div>
-                )}
-            </AnimatePresence>
-        </div>
-    );
-}
-
-const Contact = () => {
     return (
         <section id="contact" className="contact-section">
             <div className="contact-gradient-overlay" />
@@ -79,13 +55,42 @@ const Contact = () => {
                             {navLinks.map((link) => <a key={link.name} href={link.href}>{link.name}</a>)}
                         </div>
                         <div className="contact-form-container">
-                            <form name="contact" method="POST" data-netlify="true" className="contact-form">
-                                <input type="hidden" name="form-name" value="contact" />
-                                <input type="text" name="name" placeholder="Enter your name" required />
-                                <input type="email" name="email" placeholder="Enter your email" required />
-                                <textarea name="message" placeholder="Write a message" required></textarea>
-                                <button type="submit" className="send-button">Send</button>
-                            </form>
+                            <AnimatePresence mode="wait">
+                                {isChatOpen ? (
+                                    <motion.div 
+                                        key="chatbot" 
+                                        className="chatbot-view"
+                                        initial={{ opacity: 0, y: 20 }}
+                                        animate={{ opacity: 1, y: 0 }}
+                                        exit={{ opacity: 0, y: -20 }}
+                                    >
+                                        <div className="chatbot-header" onClick={() => setIsChatOpen(false)}>
+                                            <h3>AI Assistance</h3>
+                                            <ChevronDown />
+                                        </div>
+                                        <Chatbot isMobile={isMobile} onClose={() => setIsChatOpen(false)} />
+                                    </motion.div>
+                                ) : (
+                                    <motion.div 
+                                        key="form"
+                                        initial={{ opacity: 0, y: 20 }}
+                                        animate={{ opacity: 1, y: 0 }}
+                                        exit={{ opacity: 0, y: -20 }}
+                                    >
+                                        <form name="contact" method="POST" data-netlify="true" className="contact-form">
+                                            <input type="hidden" name="form-name" value="contact" />
+                                            <input type="text" name="name" placeholder="Enter your name" required />
+                                            <input type="email" name="email" placeholder="Enter your email" required />
+                                            <textarea name="message" placeholder="Write a message" required></textarea>
+                                            <button type="submit" className="send-button">Send</button>
+                                        </form>
+                                        <button className="chatbot-toggle" onClick={() => setIsChatOpen(true)}>
+                                            AI Assistance
+                                            <ChevronUp />
+                                        </button>
+                                    </motion.div>
+                                )}
+                            </AnimatePresence>
                         </div>
                     </div>
                 </div>
@@ -95,14 +100,13 @@ const Contact = () => {
                         <span>© 2024 Bony Koshy. All rights reserved.</span>
                     </div>
                     <div className="gemini-credit">
-                        vibecoded using <GeminiLogo /> Gemini
+                        Vibecoded using <GeminiLogo /> Gemini
                     </div>
                     <div className="footer-legal">
                         <a href="#">Privacy Policy</a>
                     </div>
                 </footer>
             </div>
-            <AiAssistant />
         </section>
     );
 };
