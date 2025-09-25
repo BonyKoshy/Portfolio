@@ -11,6 +11,7 @@ import Hero from './components/Hero/Hero';
 import About from './components/About/About';
 import SectionTitle from './components/SectionTitle/SectionTitle';
 import CertificatesList from './components/CertificatesList/CertificatesList';
+import Projects from './components/Projects/Projects';
 
 
 function AppContent() {
@@ -66,9 +67,8 @@ function AppContent() {
         <CertificatesList />
       </section>
 
-        <section id="projects" className="content-section">
-          <SectionTitle title="Projects" />
-        </section>
+        <Projects />
+
         
         <section id="contact" className="content-section">
           <SectionTitle title="Contact" />
