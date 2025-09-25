@@ -1,5 +1,6 @@
+// src/components/Contact/Chatbot.jsx
 import React, { useState, useRef, useEffect } from 'react';
-import { Send, X as CloseIcon } from 'lucide-react';
+import { Send } from 'lucide-react';
 
 const Chatbot = ({ isMobile, onClose }) => {
     const [messages, setMessages] = useState([
@@ -44,7 +45,6 @@ const Chatbot = ({ isMobile, onClose }) => {
 
     return (
         <div className={`chatbot-container ${isMobile ? 'fullscreen' : ''}`}>
-            {isMobile && <button onClick={onClose} className="chatbot-close-btn"><CloseIcon /></button>}
             <div className="chatbot-messages">
                 {messages.map((msg, index) => (
                     <div key={index} className={`message ${msg.from}`}>

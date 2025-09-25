@@ -1,9 +1,11 @@
+// src/components/Contact/Contact.jsx
 import React, { useState, useEffect } from 'react';
 import { SiGithub, SiLinkedin, SiInstagram, SiX } from 'react-icons/si';
 import { AnimatePresence, motion } from 'framer-motion';
-import { ChevronDown, ChevronUp } from 'lucide-react';
+import { ChevronDown, ChevronUp, ArrowUpRight } from 'lucide-react';
 import Chatbot from './Chatbot';
 import GeminiLogo from './GeminiLogo';
+import SectionTitle from '../SectionTitle/SectionTitle';
 import './Contact.css';
 
 const socialLinks = [
@@ -34,9 +36,14 @@ const Contact = () => {
         <section id="contact" className="contact-section">
             <div className="contact-gradient-overlay" />
             <div className="contact-container">
+                <SectionTitle title="Get In Touch" />
                 <div className="contact-grid">
                     <div className="contact-left">
                         <h2 className="contact-name">BONY KOSHY</h2>
+                        <a href="mailto:bonykoshy@gmail.com" className="contact-email-link">
+                            bonykoshy@gmail.com
+                            <ArrowUpRight className="contact-email-icon" size={20} />
+                        </a>
                         <p className="contact-description">
                             A creative developer passionate about building beautiful and functional digital experiences. Let's connect!
                         </p>

@@ -1,11 +1,25 @@
+/* src/components/Contact/Contact.css */
 /* Main Section Styles */
 .contact-section {
     position: relative;
-    padding: 4rem 2rem 2rem;
+    padding: 120px 2rem 2rem;
     color: var(--text-primary);
-    min-height: 90vh; /* Adjusted height */
-    display: flex; /* Added for alignment */
-    flex-direction: column; /* Added for alignment */
+    min-height: 90vh;
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+}
+
+/* Gradient Overlay */
+.contact-gradient-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(to top, var(--background) 70%, transparent 100%);
+    z-index: 0;
+    pointer-events: none;
 }
 
 .contact-container {
@@ -14,39 +28,81 @@
     max-width: 1280px;
     margin: 0 auto;
     width: 100%;
-    flex-grow: 1; /* Added for alignment */
-    display: flex; /* Added for alignment */
-    flex-direction: column; /* Added for alignment */
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
 }
 
 .contact-grid {
     display: grid;
     grid-template-columns: 1fr;
     gap: 4rem;
-    flex-grow: 1; /* Allow grid to take available space */
+    flex-grow: 1;
+    align-items: end;
 }
 
 /* Left Side */
 .contact-left {
     text-align: left;
-    display: flex; /* Added for alignment */
-    flex-direction: column; /* Added for alignment */
-    justify-content: flex-end; /* CHANGED: Bottom-align content */
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
 }
 
 .contact-name {
     font-size: 2rem;
     font-weight: 700;
 }
+
+/* Email Link Styles */
+.contact-email-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.25rem;
+    color: var(--text-secondary);
+    text-decoration: none;
+    font-weight: 500;
+    margin-top: 0.5rem;
+    position: relative; /* ADDED: For pseudo-element positioning */
+    width: fit-content; /* ADDED: To match text width */
+}
+
+.contact-email-link::after {
+    content: '';
+    position: absolute;
+    bottom: -2px;
+    left: 0;
+    width: 100%;
+    height: 1px;
+    background-color: var(--text-secondary);
+    transform: scaleX(0);
+    transform-origin: right;
+    transition: transform 0.3s ease-out;
+}
+
+.contact-email-link:hover::after {
+    transform: scaleX(1);
+    transform-origin: left;
+}
+
+.contact-email-icon {
+    opacity: 1; /* CHANGED: Always visible */
+    transition: transform 0.3s ease;
+}
+
+.contact-email-link:hover .contact-email-icon {
+    transform: translateX(2px) translateY(-2px);
+}
+
 .contact-description {
     font-size: 1rem;
     color: var(--text-secondary);
     max-width: 400px;
-    margin: 0.5rem 0 1.5rem; /* CHANGED: Removed auto margin */
+    margin: 1.5rem 0;
 }
 .social-links {
     display: flex;
-    justify-content: flex-start; /* CHANGED: Align left */
+    justify-content: flex-start;
     gap: 1.5rem;
     list-style: none;
     padding: 0;
@@ -62,6 +118,12 @@
 }
 
 /* Right Side */
+.contact-right {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+}
+
 .contact-nav {
     display: none;
     justify-content: flex-end;
@@ -82,15 +144,17 @@
     background-color: var(--panel-bg);
     padding: 2rem;
     border-radius: 16px;
-    height: 480px; /* FIXED height */
     display: flex;
     flex-direction: column;
+    max-height: 80vh;
+    height: auto;
 }
 
 .contact-form {
     display: flex;
     flex-direction: column;
     gap: 1rem;
+    flex-grow: 1;
 }
 .contact-form input,
 .contact-form textarea {
@@ -104,6 +168,7 @@
 .contact-form textarea {
     min-height: 1px;
     resize: vertical;
+    flex-grow: 1;
 }
 .send-button {
     background-color: var(--accent);
@@ -119,7 +184,7 @@
     opacity: 0.8;
 }
 
-/* NEW: Chatbot toggle button and view */
+/* Chatbot toggle button and view */
 .chatbot-toggle {
     display: flex;
     justify-content: space-between;
@@ -144,6 +209,8 @@
     display: flex;
     flex-direction: column;
     height: 100%;
+    flex-grow: 1;
+    min-height: 0;
 }
 .chatbot-header {
     display: flex;
@@ -170,6 +237,10 @@
     display: flex;
     flex-direction: column;
     gap: 0.75rem;
+    scrollbar-width: none;
+}
+.chatbot-messages::-webkit-scrollbar {
+    display: none;
 }
 .message {
     padding: 0.5rem 1rem;
@@ -191,6 +262,7 @@
     margin-top: 1rem;
     padding-top: 1rem;
     border-top: 1px solid var(--prelayer-2);
+    flex-shrink: 0;
 }
 .chatbot-input-area input {
     flex-grow: 1;
@@ -222,7 +294,7 @@
     border-top: 1px solid var(--prelayer-2);
     color: var(--text-secondary);
     font-size: 0.9rem;
-    position: relative; /* For gemini logo positioning */
+    position: relative;
 }
 
 .gemini-credit {
@@ -262,8 +334,8 @@
     text-decoration: underline;
 }
 
-.app-content { 
-    overflow-x: hidden; 
+.app-content {
+    overflow-x: hidden;
 }
 
 /* Desktop Layout */
@@ -286,6 +358,6 @@
     .gemini-credit {
         position: static;
         transform: none;
-        order: -1; /* Move to top */
+        order: -1;
     }
 }

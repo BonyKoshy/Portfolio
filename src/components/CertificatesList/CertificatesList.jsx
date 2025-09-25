@@ -1,6 +1,8 @@
+// src/components/CertificatesList/CertificatesList.jsx
 import React, { useEffect, useId, useRef, useState } from "react";
 import { AnimatePresence, motion } from "framer-motion";
 import { ArrowUpRight } from 'lucide-react';
+import SectionTitle from "../SectionTitle/SectionTitle";
 import './CertificatesList.css';
 
 const cards = [
@@ -46,15 +48,6 @@ const cards = [
     },
 ];
 
-// This component is no longer used but can be kept for future reference or removed.
-const CloseIcon = () => (
-    <motion.svg initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0, transition: { duration: 0.05 } }} xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="h-4 w-4" >
-        <path stroke="none" d="M0 0h24v24H0z" fill="none" />
-        <path d="M18 6l-12 12" />
-        <path d="M6 6l12 12" />
-    </motion.svg>
-);
-
 function CertificatesList() {
     const [active, setActive] = useState(null);
     const ref = useRef(null);
@@ -80,65 +73,67 @@ function CertificatesList() {
     }, [ref]);
 
     return (
-        <div className="certificates-list-container">
-            <AnimatePresence>
-                {active && (
-                    <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} className="card-overlay" onClick={() => setActive(null)} />
-                )}
-            </AnimatePresence>
-            <AnimatePresence>
-                {active && (
-                    <div className="active-card-wrapper">
-                        <motion.div layoutId={`card-${active.title}-${id}`} ref={ref} className="active-card-content" onClick={(e) => e.stopPropagation()} >
-                            <div className="active-card-header">
-                                <motion.div layoutId={`image-${active.title}-${id}`}>
-                                    <img src={active.src} alt={active.title} className="active-card-image" />
-                                </motion.div>
-                                <div className="header-text-content">
-                                    <motion.h3 layoutId={`title-${active.title}-${id}`} className="card-title"> {active.title} </motion.h3>
-                                    <motion.p layoutId={`description-${active.description}-${id}`} className="card-description"> {active.description} </motion.p>
+        <section id="certificates" className="content-section">
+            <SectionTitle title="Certificates" />
+            <div className="certificates-list-container">
+                <AnimatePresence>
+                    {active && (
+                        <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} className="card-overlay" onClick={() => setActive(null)} />
+                    )}
+                </AnimatePresence>
+                <AnimatePresence>
+                    {active && (
+                        <div className="active-card-wrapper">
+                            <motion.div layoutId={`card-${active.title}-${id}`} ref={ref} className="active-card-content" onClick={(e) => e.stopPropagation()} >
+                                <div className="active-card-header">
+                                    <motion.div layoutId={`image-${active.title}-${id}`}>
+                                        <img src={active.src} alt={active.title} className="active-card-image" />
+                                    </motion.div>
+                                    <div className="header-text-content">
+                                        <motion.h3 layoutId={`title-${active.title}-${id}`} className="card-title"> {active.title} </motion.h3>
+                                        <motion.p layoutId={`description-${active.description}-${id}`} className="card-description"> {active.description} </motion.p>
+                                    </div>
+                                    <motion.a layoutId={`button-${active.title}-${id}`} href={active.ctaLink} target="_blank" rel="noopener noreferrer" className="cta-button" >
+                                        {active.ctaText}
+                                    </motion.a>
                                 </div>
-                                <motion.a layoutId={`button-${active.title}-${id}`} href={active.ctaLink} target="_blank" rel="noopener noreferrer" className="cta-button" >
-                                    {active.ctaText}
-                                </motion.a>
-                            </div>
-                            <motion.div className="card-main-content" initial={{ opacity: 0 }} animate={{ opacity: 1, transition: { duration: 0.3, delay: 0.15 } }} exit={{ opacity: 0, transition: { duration: 0.15 } }} >
-                                {active.content()}
+                                <motion.div className="card-main-content" initial={{ opacity: 0 }} animate={{ opacity: 1, transition: { duration: 0.3, delay: 0.15 } }} exit={{ opacity: 0, transition: { duration: 0.15 } }} >
+                                    {active.content()}
+                                </motion.div>
                             </motion.div>
-                            {/* The close button has been removed from here */}
-                        </motion.div>
-                    </div>
-                )}
-            </AnimatePresence>
-
-            <ul className="certificates-list">
-                {cards.map((card) => (
-                    <motion.li layoutId={`card-${card.title}-${id}`} key={`card-${card.title}-${id}`} onClick={() => setActive(card)} className="certificate-item" >
-                        <div className="item-content">
-                            <motion.div layoutId={`image-${card.title}-${id}`}>
-                                <img src={card.src} alt={card.title} className="item-image" />
-                            </motion.div>
-                            <div>
-                                <motion.h3 layoutId={`title-${card.title}-${id}`} className="item-title">
-                                    {card.title}
-                                </motion.h3>
-                                <motion.p layoutId={`description-${card.description}-${id}`} className="item-description">
-                                    {card.description}
-                                </motion.p>
-                            </div>
                         </div>
-                        <motion.a layoutId={`button-${card.title}-${id}`} className="item-button">
-                            {card.ctaText}
-                        </motion.a>
-                    </motion.li>
-                ))}
-            </ul>
+                    )}
+                </AnimatePresence>
 
-            <a href="https://www.linkedin.com/in/bonykoshy/details/certifications/" target="_blank" rel="noopener noreferrer" className="view-all-certs-link" >
-                <ArrowUpRight className="profile-link-icon" size={20} />
-                <span>View More on LinkedIn</span>
-            </a>
-        </div>
+                <ul className="certificates-list">
+                    {cards.map((card) => (
+                        <motion.li layoutId={`card-${card.title}-${id}`} key={`card-${card.title}-${id}`} onClick={() => setActive(card)} className="certificate-item" >
+                            <div className="item-content">
+                                <motion.div layoutId={`image-${card.title}-${id}`}>
+                                    <img src={card.src} alt={card.title} className="item-image" />
+                                </motion.div>
+                                <div>
+                                    <motion.h3 layoutId={`title-${card.title}-${id}`} className="item-title">
+                                        {card.title}
+                                    </motion.h3>
+                                    <motion.p layoutId={`description-${card.description}-${id}`} className="item-description">
+                                        {card.description}
+                                    </motion.p>
+                                </div>
+                            </div>
+                            <motion.a layoutId={`button-${card.title}-${id}`} className="item-button">
+                                {card.ctaText}
+                            </motion.a>
+                        </motion.li>
+                    ))}
+                </ul>
+
+                <a href="https://www.linkedin.com/in/bonykoshy/details/certifications/" target="_blank" rel="noopener noreferrer" className="view-all-certs-link" >
+                    <ArrowUpRight className="profile-link-icon" size={20} />
+                    <span>View More on LinkedIn</span>
+                </a>
+            </div>
+        </section>
     );
 }
 

@@ -9,7 +9,6 @@ import Header from './components/Header/Header';
 import GradualBlur from './components/GradualBlur/GradualBlur';
 import Hero from './components/Hero/Hero';
 import About from './components/About/About';
-import SectionTitle from './components/SectionTitle/SectionTitle';
 import CertificatesList from './components/CertificatesList/CertificatesList';
 import Projects from './components/Projects/Projects';
 import Contact from './components/Contact/Contact.jsx';
@@ -63,12 +62,7 @@ function AppContent() {
         <div className="content-wrapper">
             <Hero />
             <About />
-
-            <section id="certificates" className="content-section">
-                <SectionTitle title="Certificates" />
-                <CertificatesList />
-            </section>
-
+            <CertificatesList />
             <Projects />
         </div>
 
