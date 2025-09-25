@@ -25,6 +25,7 @@ function AppContent() {
 
   const { theme } = useContext(ThemeContext);
   const [dotColors, setDotColors] = useState({ base: '', active: '' });
+  
 
   useEffect(() => {
     
@@ -40,6 +41,9 @@ function AppContent() {
 
   return (
     <>
+
+    <Header />
+
       <div className="app-background">
         {dotColors.base && dotColors.active && (
           <DotGrid
@@ -57,17 +61,17 @@ function AppContent() {
         )}
       </div>
 
-      <Header />
 
-      <GradualBlur
-        preset="header"
-        target="page"
-        strength={3}
-        height="120px"
-        zIndex={999}
-      />
+      
 
       <main>
+        <GradualBlur
+          preset="header"
+          target="page"
+          strength={3}
+          height="120px"
+          zIndex={1}
+        />
         <div className="content-wrapper">
             <Hero />
             <About />
