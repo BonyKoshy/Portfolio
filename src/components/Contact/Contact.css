@@ -1,5 +1,18 @@
 /* src/components/Contact/Contact.css */
 /* Main Section Styles */
+body.flash-effect {
+    animation: flash 0.5s 2;
+}
+
+@keyframes flash {
+    0%, 100% {
+        opacity: 1;
+    }
+    50% {
+        opacity: 0.5;
+    }
+}
+
 .contact-section {
     position: relative;
     padding: 120px 2rem 2rem;
@@ -195,11 +208,59 @@
     background: none;
     border: 1px solid var(--prelayer-2);
     color: var(--text-secondary);
-    font-weight: 500;
+    font-weight: 500;   
     border-radius: 8px;
     cursor: pointer;
     transition: all 0.2s;
+    position: relative;
+    overflow: hidden;
+    z-index: 1;
 }
+
+.chatbot-toggle .hoverEffect {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: -1;
+}
+
+.chatbot-toggle .hoverEffect div {
+    background: linear-gradient(
+        90deg,#958ffc, #217df9,#a0a8b0
+    );
+    border-radius: 50%;
+    width: 40rem;
+    height:40rem;
+    transition: 0.4s;
+    filter: blur(20px);
+    animation: rotate 3s linear infinite;
+    opacity: 0.5;
+}
+
+.chatbot-toggle:hover .hoverEffect div {
+    width: 35rem;
+    height: 35rem;
+}
+
+@keyframes rotate {
+    0% {
+        transform: rotate(0deg);
+    }
+    100% {
+        transform: rotate(360deg);
+    }
+}
+
+.chatbot-toggle:hover::before {
+    transform: translate(-50%, -50%) scale(1);
+}
+
+
 .chatbot-toggle:hover {
     background-color: var(--prelayer-2);
     color: var(--text-primary);

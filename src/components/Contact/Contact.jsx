@@ -94,6 +94,7 @@ const Contact = () => {
                                         <button className="chatbot-toggle" onClick={() => setIsChatOpen(true)}>
                                             AI Assistance
                                             <ChevronUp />
+                                            <div className="hoverEffect"><div /></div>
                                         </button>
                                     </motion.div>
                                 )}
@@ -104,13 +105,13 @@ const Contact = () => {
 
                 <footer className="contact-footer">
                     <div className="footer-copyright">
-                        <span>© 2024 Bony Koshy. All rights reserved.</span>
+                        <span>© 2025 Bony Koshy. All rights reserved.</span>
                     </div>
                     <div className="gemini-credit">
                         Vibecoded using <GeminiLogo /> Gemini
                     </div>
                     <div className="footer-legal">
-                        <a href="#">Privacy Policy</a>
+                        <a href="/privacy">Privacy Policy</a>
                     </div>
                 </footer>
             </div>

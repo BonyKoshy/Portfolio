@@ -1,6 +1,7 @@
 // src/App.jsx
 import React, { useEffect, useState, useContext } from 'react';
 import { ThemeProvider, ThemeContext } from './ThemeContext';
+import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import './App.css';
 
 // Component Imports
@@ -12,13 +13,21 @@ import About from './components/About/About';
 import CertificatesList from './components/CertificatesList/CertificatesList';
 import Projects from './components/Projects/Projects';
 import Contact from './components/Contact/Contact.jsx';
+import PrivacyPolicy from './pages/PrivacyPolicy';
 
 
 function AppContent() {
+
+  useEffect(() => {
+    console.log("%cHello, curious developer!", "color: #4597ff; font-size: 20px; font-weight: bold;");
+    console.log("%cThanks for checking out my portfolio's code. Feel free to connect with me on LinkedIn!", "color: #4597ff; font-size: 18px; font-weight: italics;");
+  }, []);
+
   const { theme } = useContext(ThemeContext);
   const [dotColors, setDotColors] = useState({ base: '', active: '' });
 
   useEffect(() => {
+    
     const updateDotColors = () => {
       setTimeout(() => {
         const base = getComputedStyle(document.documentElement).getPropertyValue('--text-secondary').trim();
@@ -75,7 +84,12 @@ function AppContent() {
 function App() {
   return (
     <ThemeProvider>
-      <AppContent />
+      <Router>
+        <Routes>
+          <Route path="/" element={<AppContent />} />
+          <Route path="/privacy" element={<PrivacyPolicy />} />
+        </Routes>
+      </Router>
     </ThemeProvider>
   );
 }

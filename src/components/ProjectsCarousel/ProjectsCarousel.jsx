@@ -1,6 +1,6 @@
 import React, { useEffect, useState, useRef, useMemo } from "react";
 import { motion, useScroll } from "framer-motion";
-import { Github } from "lucide-react";
+import { Github, ArrowLeft, ArrowRight } from "lucide-react";
 import './ProjectsCarousel.css';
 
 export const Carousel = ({ items, onCardClick }) => {
@@ -55,8 +55,8 @@ export const Carousel = ({ items, onCardClick }) => {
                     <span>More Projects</span>
                 </a>
                 <div className="nav-buttons">
-                    <button onClick={() => scroll(-1)} disabled={isAtStart}>&larr;</button>
-                    <button onClick={() => scroll(1)} disabled={isAtEnd}>&rarr;</button>
+                    <button onClick={() => scroll(-1)} disabled={isAtStart}><ArrowLeft size={24} /></button>
+                    <button onClick={() => scroll(1)} disabled={isAtEnd}><ArrowRight size={24} /></button>
                 </div>
             </div>
         </>

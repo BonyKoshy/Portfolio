@@ -60,7 +60,7 @@
     right: 0;
     padding: 2rem;
     color: white;
-    background: linear-gradient(to top, rgba(0, 0, 0, 0.7), transparent);
+    background: linear-gradient(to top, var(--background) 10%, transparent);
 }
 .card-category {
     font-size: 0.9rem;
@@ -106,10 +106,10 @@
     background: var(--prelayer-1);
     color: var(--text-primary);
     border: none;
-    width: 44px; /* Bigger */
-    height: 44px; /* Bigger */
-    border-radius: 12px; /* More rounded square */
-    font-size: 1.5rem; /* Bigger arrow */
+    width: 40px; /* Bigger */
+    height: 40px; /* Bigger */
+    border-radius: 30px; /* More rounded square */
+    font-size: 1rem; /* Bigger arrow */
     cursor: pointer;
     transition: all 0.2s;
 }

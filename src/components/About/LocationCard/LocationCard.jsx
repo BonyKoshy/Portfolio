@@ -34,14 +34,14 @@ function LocationCard() {
             }}
           >
             <img
-              src="/pathanamthitta.jpg"
+              src="/pathanamthitta.png"
               alt="Pathanamthitta"
               className="tooltip-image"
             />
             <div className="tooltip-text">
               <h4>Pathanamthitta, Kerala</h4>
               <p>
-                Known as the "Pilgrim Capital of Kerala," Pathanamthitta is a town nestled in the Western Ghats, famous for its scenic beauty, rivers, and religious shrines.
+                Based in the vibrant state of Kerala, India, I am open to collaborating with teams and clients globally. I am available for remote work and willing to relocate for the right opportunities.
               </p>
             </div>
           </HoverCard.Content>
