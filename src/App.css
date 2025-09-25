@@ -6,7 +6,7 @@
   z-index: -1;
 }
 
-.app-content {
+.content-wrapper {
   position: relative;
   z-index: 1;
   padding: 2rem;
@@ -22,7 +22,7 @@
 }
 
 @media (max-width: 768px) {
-  .app-content {
+  .content-wrapper {
     padding: 1.5rem;
   }
   .content-section {

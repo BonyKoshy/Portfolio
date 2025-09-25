@@ -1,8 +1,13 @@
 /* Main Section Styles */
 .contact-section {
     position: relative;
-    padding: 6rem 2rem 2rem;
+    padding: 4rem 2rem 2rem;
     color: var(--text-primary);
+    width: 100vw;
+    margin-left: 50%;
+    transform: translateX(-50%);
+    box-sizing: border-box;
+    min-height: 80vh;
 }
 
 .contact-gradient-overlay {
@@ -112,29 +117,36 @@
     opacity: 0.8;
 }
 
-.chatbot-toggle {
-    width: 100%;
-    margin-top: 1rem;
-    padding: 0.5rem;
-    background: none;
-    border: 1px solid var(--prelayer-2);
-    color: var(--text-secondary);
-    font-weight: 500;
-    border-radius: 99px;
-    cursor: pointer;
-    transition: all 0.2s;
-}
-.chatbot-toggle:hover {
-    background-color: var(--prelayer-2);
-    color: var(--text-primary);
-}
-
-/* Chatbot Styles */
-.chatbot-container {
+/* AI Assistant Card */
+.ai-assistant-card {
+    position: fixed;
+    bottom: 0;
+    right: 2rem;
+    width: 350px;
+    background-color: var(--panel-bg);
+    border-radius: 16px 16px 0 0;
+    z-index: 1001;
+    overflow: hidden;
+    max-height: 80vh;
     display: flex;
     flex-direction: column;
-    height: 440px;
 }
+
+.ai-assistant-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1rem;
+    cursor: pointer;
+    border-bottom: 1px solid var(--prelayer-2);
+}
+
+.chatbot-container {
+    padding: 1rem;
+    flex-grow: 1;
+    overflow-y: auto;
+}
+
 .chatbot-messages {
     flex-grow: 1;
     overflow-y: auto;
@@ -184,19 +196,20 @@
 
 /* Footer Styles */
 .contact-footer {
-    border-top: 1px solid var(--prelayer-2);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
     margin-top: 4rem;
     padding-top: 2rem;
-    text-align: center;
+    border-top: 1px solid var(--prelayer-2);
     color: var(--text-secondary);
     font-size: 0.9rem;
 }
+
 .gemini-credit {
     display: flex;
-    justify-content: center;
     align-items: center;
     gap: 0.5rem;
-    margin-bottom: 1rem;
 }
 .gemini-logo {
     filter: grayscale(1);
@@ -205,11 +218,17 @@
 .gemini-credit:hover .gemini-logo {
     filter: grayscale(0);
 }
-.footer-legal {
-    display: flex;
-    justify-content: center;
-    gap: 1.5rem;
+
+.footer-legal a {
+    text-decoration: none;
+    color: var(--text-secondary);
+    transition: text-decoration 0.2s;
 }
+
+.footer-legal a:hover {
+    text-decoration: underline;
+}
+
 
 /* Desktop Layout */
 @media (min-width: 1024px) {
@@ -217,7 +236,7 @@
         grid-template-columns: 1fr 1.5fr;
         gap: 6rem;
     }
-    .contact-left, .contact-footer {
+    .contact-left {
         text-align: left;
     }
     .social-links, .gemini-credit, .footer-legal {
@@ -226,51 +245,23 @@
     .contact-nav {
         display: flex;
     }
+    .contact-footer {
+        text-align: left;
+    }
 }
 
-/* Chatbot Fullscreen on Mobile */
-.chatbot-container.fullscreen {
-    position: fixed;
-    inset: 0;
-    background-color: var(--background);
-    z-index: 1000;
-    height: 100%;
-    padding: 1rem;
-    border-radius: 0;
-}
-.chatbot-close-btn {
-    position: absolute;
-    top: 1rem;
-    right: 1rem;
-    background: var(--prelayer-1);
-    border: none;
-    border-radius: 50%;
-    width: 40px;
-    height: 40px;
-    color: var(--text-primary);
-    cursor: pointer;
-}
-
-/* Typing Indicator */
-.typing-indicator span {
-  height: 8px;
-  width: 8px;
-  background-color: var(--text-secondary);
-  border-radius: 50%;
-  display: inline-block;
-  animation: wave 1.2s infinite ease-in-out;
-}
-.typing-indicator span:nth-of-type(2) {
-  animation-delay: -1.0s;
-}
-.typing-indicator span:nth-of-type(3) {
-  animation-delay: -0.8s;
-}
-@keyframes wave {
-  0%, 60%, 100% {
-    transform: initial;
-  }
-  30% {
-    transform: translateY(-8px);
-  }
+/* Mobile Layout for AI Assistant */
+@media (max-width: 768px) {
+    .ai-assistant-card {
+        top: 0;
+        left: 0;
+        right: 0;
+        width: 100%;
+        border-radius: 0 0 16px 16px;
+        bottom: auto;
+    }
+    .contact-footer {
+        flex-direction: column;
+        gap: 1rem;
+    }
 }

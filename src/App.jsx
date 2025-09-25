@@ -12,7 +12,7 @@ import About from './components/About/About';
 import SectionTitle from './components/SectionTitle/SectionTitle';
 import CertificatesList from './components/CertificatesList/CertificatesList';
 import Projects from './components/Projects/Projects';
-import Contact from './components/Contact/Contact.jsx'; 
+import Contact from './components/Contact/Contact.jsx';
 
 
 function AppContent() {
@@ -59,22 +59,20 @@ function AppContent() {
         zIndex={999}
       />
 
-      <main className="app-content">
-        <Hero />
-        <About />
+      <main>
+        <div className="content-wrapper">
+            <Hero />
+            <About />
 
-      <section id="certificates" className="content-section">
-        <SectionTitle title="Certificates" />
-        <CertificatesList />
-      </section>
+            <section id="certificates" className="content-section">
+                <SectionTitle title="Certificates" />
+                <CertificatesList />
+            </section>
 
-        <Projects />
+            <Projects />
+        </div>
 
-        
-        <section id="contact" className="content-section">
-          <SectionTitle title="Contact" />
-          <Contact />
-        </section>
+        <Contact />
       </main>
     </>
   );
