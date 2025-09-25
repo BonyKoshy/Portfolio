@@ -12,6 +12,7 @@ import About from './components/About/About';
 import SectionTitle from './components/SectionTitle/SectionTitle';
 import CertificatesList from './components/CertificatesList/CertificatesList';
 import Projects from './components/Projects/Projects';
+import Contact from './components/Contact/Contact.jsx'; 
 
 
 function AppContent() {
@@ -72,6 +73,7 @@ function AppContent() {
         
         <section id="contact" className="content-section">
           <SectionTitle title="Contact" />
+          <Contact />
         </section>
       </main>
     </>
