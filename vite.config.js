@@ -12,7 +12,7 @@ export default defineConfig({
       // Caches all assets and the offline page
       workbox: {
         globPatterns: ['**/*.{js,css,html,ico,png,svg,jpg,jpeg,pdf}'],
-        navigateFallback: '/offline.html',
+        navigateFallback: '/index.html',
       },
       // Defines the web app manifest
       manifest: {
