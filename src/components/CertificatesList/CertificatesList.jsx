@@ -3,7 +3,7 @@ import React, { useEffect, useId, useRef, useState } from "react";
 import { AnimatePresence, motion } from "framer-motion";
 import { Linkedin } from 'lucide-react';
 import SectionTitle from "../SectionTitle/SectionTitle";
-import { useOutsideClick } from "../../hooks/use-outside-click"; // Make sure this hook is imported
+import { useOutsideClick } from "../../hooks/use-outside-click";
 import './CertificatesList.css';
 
 const cards = [
@@ -54,16 +54,13 @@ function CertificatesList() {
     const ref = useRef(null);
     const id = useId();
 
-    // This custom hook will handle closing the modal when clicking outside of it.
     useOutsideClick(ref, () => setActive(null));
 
     useEffect(() => {
         function onKeyDown(event) {
             if (event.key === "Escape") setActive(null);
         }
-        // When a modal is active, prevent the body from scrolling.
         document.body.style.overflow = active ? "hidden" : "auto";
-
         window.addEventListener("keydown", onKeyDown);
         return () => window.removeEventListener("keydown", onKeyDown);
     }, [active]);
@@ -74,24 +71,13 @@ function CertificatesList() {
             <div className="certificates-list-container">
                 <AnimatePresence>
                     {active && (
-                        // We wrap the overlay and button in a Fragment to ensure AnimatePresence works correctly
-                        <React.Fragment key="certificate-modal">
-                            <motion.div
-                                initial={{ opacity: 0 }}
-                                animate={{ opacity: 1 }}
-                                exit={{ opacity: 0 }}
-                                className="card-overlay"
-                                onClick={() => setActive(null)}
-                            />
-                            <button
-                                className="popup-close-button"
-                                onClick={() => setActive(null)}
-                                aria-label="Close certificate details"
-                            >
-                                <span className="line line-1"></span>
-                                <span className="line line-2"></span>
-                            </button>
-                        </React.Fragment>
+                        <motion.div
+                            initial={{ opacity: 0 }}
+                            animate={{ opacity: 1 }}
+                            exit={{ opacity: 0 }}
+                            className="card-overlay"
+                            onClick={() => setActive(null)}
+                        />
                     )}
                 </AnimatePresence>
 
@@ -99,6 +85,15 @@ function CertificatesList() {
                     {active && (
                         <div className="active-card-wrapper">
                             <motion.div layoutId={`card-${active.title}-${id}`} ref={ref} className="active-card-content">
+                                <button
+                                    className="popup-close-button"
+                                    onClick={() => setActive(null)}
+                                    aria-label="Close certificate details"
+                                >
+                                    <span className="line line-1"></span>
+                                    <span className="line line-2"></span>
+                                </button>
+                                
                                 <div className="active-card-header">
                                     <motion.div layoutId={`image-${active.title}-${id}`}>
                                         <img src={active.src} alt={active.title} className="active-card-image" />
@@ -107,12 +102,20 @@ function CertificatesList() {
                                         <motion.h3 layoutId={`title-${active.title}-${id}`} className="card-title"> {active.title} </motion.h3>
                                         <motion.p layoutId={`description-${active.description}-${id}`} className="card-description"> {active.description} </motion.p>
                                     </div>
+                                </div>
+
+                                <motion.div 
+                                    className="card-body-wrapper"
+                                    initial={{ opacity: 0 }} 
+                                    animate={{ opacity: 1, transition: { duration: 0.3, delay: 0.15 } }} 
+                                    exit={{ opacity: 0, transition: { duration: 0.15 } }}
+                                >
+                                    <div className="card-main-content">
+                                        {active.content()}
+                                    </div>
                                     <motion.a layoutId={`button-${active.title}-${id}`} href={active.ctaLink} target="_blank" rel="noopener noreferrer" className="cta-button" >
                                         {active.ctaText}
                                     </motion.a>
-                                </div>
-                                <motion.div className="card-main-content" initial={{ opacity: 0 }} animate={{ opacity: 1, transition: { duration: 0.3, delay: 0.15 } }} exit={{ opacity: 0, transition: { duration: 0.15 } }} >
-                                    {active.content()}
                                 </motion.div>
                             </motion.div>
                         </div>

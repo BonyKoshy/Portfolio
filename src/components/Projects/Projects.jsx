@@ -144,14 +144,6 @@ export default function Projects() {
                             className="project-overlay"
                             onClick={() => setActiveCard(null)}
                         />
-                         <button
-                            className="popup-close-button"
-                            onClick={() => setActiveCard(null)}
-                            aria-label="Close project details"
-                        >
-                            <span className="line line-1"></span>
-                            <span className="line line-2"></span>
-                        </button>
                         <div className="expanded-card-wrapper" onClick={() => setActiveCard(null)}>
                             <motion.div
                                 layoutId={`card-${activeCard.title}`}
@@ -159,6 +151,14 @@ export default function Projects() {
                                 className="expanded-card-content"
                                 onClick={(e) => e.stopPropagation()}
                             >
+                                 <button
+                                    className="popup-close-button"
+                                    onClick={() => setActiveCard(null)}
+                                    aria-label="Close project details"
+                                >
+                                    <span className="line line-1"></span>
+                                    <span className="line line-2"></span>
+                                </button>
                                 <ProjectContent project={activeCard} />
                             </motion.div>
                         </div>

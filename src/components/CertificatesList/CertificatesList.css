@@ -3,9 +3,8 @@
 .certificates-list-container {
     width: 100%;
     margin: 0 auto;
-    /* position: relative; */ /* No longer needed */
-    display: flex; /* Add this */
-    flex-direction: column; /* Add this */
+    display: flex;
+    flex-direction: column;
 }
 
 .certificates-list {
@@ -113,7 +112,7 @@
 }
 
 .active-card-content {
-    width: 80%; /* The container now controls the width */
+    width: 80%;
     max-height: 90vh;
     background-color: var(--panel-bg);
     border-radius: 16px;
@@ -122,6 +121,7 @@
     flex-direction: column;
     padding: 1.5rem;
     gap: 1.5rem;
+    position: relative;
 }
 
 /* New Header Styles */
@@ -159,27 +159,35 @@
 
 /* Updated Button Styles */
 .cta-button {
-    padding: 0.75rem 1rem;
+    padding: 0.75rem 1.5rem;
     border-radius: 10px;
     background-color: var(--accent);
     color: white;
     font-weight: 600;
     text-decoration: none;
-    flex-shrink: 0;
     transition: transform 0.2s ease;
+    margin-top: 1.5rem;
+    align-self: flex-end;
 }
 
 .cta-button:hover {
     transform: scale(1.05);
 }
 
+.card-body-wrapper {
+    display: flex;
+    flex-direction: column;
+    flex-grow: 1;
+    min-height: 0;
+}
+
 .card-main-content {
     font-size: 1rem;
     line-height: 1.7;
     color: var(--text-secondary);
-    max-height: 300px;
     overflow-y: auto;
     padding-right: 0.5rem; /* Space for scrollbar */
+    flex-grow: 1;
 }
 
 @media (max-width: 640px) {
@@ -208,18 +216,6 @@
     .cta-button {
         width: 100%;
         margin-top: 1rem;
-    }
-}
-
-@media (max-width: 640px) {
-    .item-content {
-        width: 100%;
-        margin-bottom: 1rem;
-    }
-    
-    .item-button {
-        width: 100%;
-        text-align: center;
     }
 }
 

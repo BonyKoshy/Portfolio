@@ -64,7 +64,7 @@ body {
 }
 
 .popup-close-button {
-  position: fixed; /* Changed to fixed to align with header */
+  position: absolute; 
   top: 1.5rem;
   right: 2rem;
   width: 48px;
