@@ -14,15 +14,11 @@ const ContextMenuRadioGroup = ContextMenuPrimitive.RadioGroup
 const ContextMenuSubTrigger = React.forwardRef(({ className, inset, children, ...props }, ref) => (
   <ContextMenuPrimitive.SubTrigger
     ref={ref}
-    className={cn(
-      "context-menu-item context-menu-sub-trigger",
-      inset && "pl-8",
-      className
-    )}
+    className={cn("context-menu-item context-menu-sub-trigger", inset && "pl-8", className)}
     {...props}
   >
     {children}
-    <ChevronRight className="ml-auto h-4 w-4" />
+    <ChevronRight className="context-menu-sub-trigger-icon" />
   </ContextMenuPrimitive.SubTrigger>
 ))
 ContextMenuSubTrigger.displayName = ContextMenuPrimitive.SubTrigger.displayName
@@ -30,10 +26,7 @@ ContextMenuSubTrigger.displayName = ContextMenuPrimitive.SubTrigger.displayName
 const ContextMenuSubContent = React.forwardRef(({ className, ...props }, ref) => (
   <ContextMenuPrimitive.SubContent
     ref={ref}
-    className={cn(
-      "context-menu-sub-content",
-      className
-    )}
+    className={cn("context-menu-sub-content", className)}
     {...props}
   />
 ))
@@ -53,11 +46,7 @@ ContextMenuContent.displayName = ContextMenuPrimitive.Content.displayName
 const ContextMenuItem = React.forwardRef(({ className, inset, ...props }, ref) => (
   <ContextMenuPrimitive.Item
     ref={ref}
-    className={cn(
-      "context-menu-item",
-      inset && "pl-8",
-      className
-    )}
+    className={cn("context-menu-item", inset && "pl-8", className)}
     {...props}
   />
 ))
@@ -66,14 +55,11 @@ ContextMenuItem.displayName = ContextMenuPrimitive.Item.displayName
 const ContextMenuCheckboxItem = React.forwardRef(({ className, children, checked, ...props }, ref) => (
   <ContextMenuPrimitive.CheckboxItem
     ref={ref}
-    className={cn(
-      "context-menu-checkbox-item",
-      className
-    )}
+    className={cn("context-menu-checkbox-item", className)}
     checked={checked}
     {...props}
   >
-    <span className="absolute left-2 flex h-3.5 w-3.5 items-center justify-center">
+    <span className="context-menu-item-indicator-wrapper">
       <ContextMenuPrimitive.ItemIndicator>
         <Check className="h-4 w-4" />
       </ContextMenuPrimitive.ItemIndicator>
@@ -86,13 +72,10 @@ ContextMenuCheckboxItem.displayName = ContextMenuPrimitive.CheckboxItem.displayN
 const ContextMenuRadioItem = React.forwardRef(({ className, children, ...props }, ref) => (
   <ContextMenuPrimitive.RadioItem
     ref={ref}
-    className={cn(
-      "context-menu-radio-item",
-      className
-    )}
+    className={cn("context-menu-radio-item", className)}
     {...props}
   >
-    <span className="absolute left-2 flex h-3.5 w-3.5 items-center justify-center">
+    <span className="context-menu-item-indicator-wrapper">
       <ContextMenuPrimitive.ItemIndicator>
         <Circle className="h-2 w-2 fill-current" />
       </ContextMenuPrimitive.ItemIndicator>
@@ -105,11 +88,7 @@ ContextMenuRadioItem.displayName = ContextMenuPrimitive.RadioItem.displayName
 const ContextMenuLabel = React.forwardRef(({ className, inset, ...props }, ref) => (
   <ContextMenuPrimitive.Label
     ref={ref}
-    className={cn(
-      "context-menu-label",
-      inset && "pl-8",
-      className
-    )}
+    className={cn("context-menu-label", inset && "pl-8", className)}
     {...props}
   />
 ))
@@ -124,10 +103,7 @@ const ContextMenuSeparator = React.forwardRef(({ className, ...props }, ref) => 
 ))
 ContextMenuSeparator.displayName = ContextMenuPrimitive.Separator.displayName
 
-const ContextMenuShortcut = ({
-  className,
-  ...props
-}) => {
+const ContextMenuShortcut = ({ className, ...props }) => {
   return (
     <span
       className={cn("context-menu-shortcut", className)}

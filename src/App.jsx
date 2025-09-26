@@ -122,19 +122,18 @@ function AppContent() {
 
         <ContextMenuSub>
           <ContextMenuSubTrigger>
-            <Sun className="h-4 w-4 rotate-0 scale-100 transition-all dark:-rotate-90 dark:scale-0" />
-            <Moon className="absolute h-4 w-4 rotate-90 scale-0 transition-all dark:rotate-0 dark:scale-100" />
-            <span className='ml-2'>Theme</span>
+            {theme === 'dark' ? <Moon className="h-4 w-4" /> : <Sun className="h-4 w-4" />}
+            <span>Theme</span>
           </ContextMenuSubTrigger>
           <ContextMenuSubContent className="w-48">
              <ContextMenuRadioGroup value={theme} onValueChange={toggleTheme}>
                 <ContextMenuRadioItem value="light">
-                    <Sun className="h-4 w-4 mr-2" />
-                    Light
+                    <Sun className="h-4 w-4" />
+                    <span>Light</span>
                 </ContextMenuRadioItem>
                 <ContextMenuRadioItem value="dark">
-                    <Moon className="h-4 w-4 mr-2" />
-                    Dark
+                    <Moon className="h-4 w-4" />
+                    <span>Dark</span>
                 </ContextMenuRadioItem>
             </ContextMenuRadioGroup>
           </ContextMenuSubContent>
