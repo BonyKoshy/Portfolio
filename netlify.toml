@@ -4,3 +4,55 @@
 [build]
   command = "npm run build"
   publish = "dist"
+
+# Add these redirect rules for your custom error pages
+[[redirects]]
+  from = "/*"
+  to = "/404"
+  status = 404
+
+[[redirects]]
+  from = "/*"
+  to = "/401"
+  status = 401
+
+[[redirects]]
+  from = "/*"
+  to = "/403"
+  status = 403
+
+[[redirects]]
+  from = "/*"
+  to = "/408"
+  status = 408
+
+[[redirects]]
+  from = "/*"
+  to = "/429"
+  status = 429
+
+[[redirects]]
+  from = "/*"
+  to = "/500"
+  status = 500
+
+[[redirects]]
+  from = "/*"
+  to = "/502"
+  status = 502
+  
+[[redirects]]
+  from = "/*"
+  to = "/503"
+  status = 503
+
+[[redirects]]
+  from = "/*"
+  to = "/504"
+  status = 504
+
+# This is a catch-all for single-page applications and should be last
+[[redirects]]
+  from = "/*"
+  to = "/index.html"
+  status = 200

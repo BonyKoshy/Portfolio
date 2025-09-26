@@ -1,0 +1,84 @@
+/* src/pages/ErrorPage.css */
+.error-page-container {
+  padding: 2rem;
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+}
+
+.error-card {
+  background-color: var(--panel-bg);
+  border-radius: 12px;
+  padding: 2rem;
+  max-width: 500px;
+  width: 100%;
+  margin: 0 auto;
+}
+
+.error-image-container {
+  margin-bottom: 2rem;
+}
+
+.error-image {
+  max-width: 200px;
+  height: auto;
+}
+
+.error-content .error-code {
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: var(--accent);
+  margin: 0;
+}
+
+.error-content .error-title {
+  font-size: 2rem;
+  font-weight: 700;
+  color: var(--text-primary);
+  margin: 0.5rem 0;
+}
+
+.error-content .error-message {
+  font-size: 1rem;
+  color: var(--text-secondary);
+  line-height: 1.6;
+}
+
+/* New styles for the attribution link */
+.error-attribution {
+  margin-top: 2rem;
+  font-size: 0.8rem;
+}
+
+.error-attribution a {
+  color: var(--text-secondary);
+  text-decoration: none;
+  transition: color 0.2s ease;
+}
+
+.error-attribution a:hover {
+  color: var(--accent);
+  text-decoration: underline;
+}
+
+
+.back-button {
+    position: absolute;
+    top: 2rem;
+    left: 2rem;
+    font-size: 1.1rem;
+    font-weight: 500;
+    text-decoration: none;
+    color: var(--text-secondary);
+    z-index: 10;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    transition: color 0.2s ease;
+}
+
+.back-button:hover {
+    color: var(--accent);
+}
