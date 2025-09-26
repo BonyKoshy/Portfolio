@@ -26,11 +26,46 @@ const Contact = () => {
     const [isChatOpen, setIsChatOpen] = useState(false);
     const [isMobile, setIsMobile] = useState(window.innerWidth < 768);
 
+    // --- NEW: State for the form ---
+    const [formState, setFormState] = useState({ name: '', email: '', message: '' });
+    const [submissionStatus, setSubmissionStatus] = useState(null); // 'success', 'error', or null
+
     useEffect(() => {
         const handleResize = () => setIsMobile(window.innerWidth < 768);
         window.addEventListener('resize', handleResize);
         return () => window.removeEventListener('resize', handleResize);
     }, []);
+
+    // --- NEW: Handler for input changes ---
+    const handleChange = (e) => {
+        setFormState({ ...formState, [e.target.name]: e.target.value });
+    };
+
+    // --- NEW: Handler for form submission ---
+    const handleSubmit = (e) => {
+        e.preventDefault();
+        
+        const formData = new FormData();
+        formData.append('form-name', 'contact');
+        Object.keys(formState).forEach(key => formData.append(key, formState[key]));
+
+        fetch('/', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+            body: new URLSearchParams(formData).toString(),
+        })
+        .then(() => {
+            setSubmissionStatus('success');
+            setFormState({ name: '', email: '', message: '' }); // Clear form
+            setTimeout(() => setSubmissionStatus(null), 5000); // Hide message after 5 seconds
+        })
+        .catch((error) => {
+            setSubmissionStatus('error');
+            console.error(error);
+            setTimeout(() => setSubmissionStatus(null), 5000); // Hide message after 5 seconds
+        });
+    };
+
 
     return (
         <section id="contact" className="contact-section">
@@ -84,12 +119,45 @@ const Contact = () => {
                                         animate={{ opacity: 1, y: 0 }}
                                         exit={{ opacity: 0, y: -20 }}
                                     >
-                                        <form name="contact" method="POST" data-netlify="true" className="contact-form">
+                                        {/* --- UPDATED FORM --- */}
+                                        <form 
+                                            name="contact" 
+                                            method="POST" 
+                                            data-netlify="true"
+                                            data-netlify-honeypot="bot-field"
+                                            onSubmit={handleSubmit}
+                                            className="contact-form"
+                                        >
                                             <input type="hidden" name="form-name" value="contact" />
-                                            <input type="text" name="name" placeholder="Enter your name" required />
-                                            <input type="email" name="email" placeholder="Enter your email" required />
-                                            <textarea name="message" placeholder="Write a message" required></textarea>
+                                            <p hidden><input name="bot-field" onChange={handleChange} /></p>
+                                            
+                                            <input 
+                                                type="text" 
+                                                name="name" 
+                                                placeholder="Enter your name" 
+                                                value={formState.name}
+                                                onChange={handleChange}
+                                                required 
+                                            />
+                                            <input 
+                                                type="email" 
+                                                name="email" 
+                                                placeholder="Enter your email" 
+                                                value={formState.email}
+                                                onChange={handleChange}
+                                                required 
+                                            />
+                                            <textarea 
+                                                name="message" 
+                                                placeholder="Write a message" 
+                                                value={formState.message}
+                                                onChange={handleChange}
+                                                required
+                                            ></textarea>
                                             <button type="submit" className="send-button">Send</button>
+
+                                            {submissionStatus === 'success' && <p className="form-success-message">Thanks! Your message has been sent.</p>}
+                                            {submissionStatus === 'error' && <p className="form-error-message">Oops! Something went wrong.</p>}
                                         </form>
                                         <button className="chatbot-toggle" onClick={() => setIsChatOpen(true)}>
                                             AI Assistance
