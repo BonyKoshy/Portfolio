@@ -16,7 +16,7 @@ export const handler = async (event) => {
   }
 
   const genAI = new GoogleGenerativeAI(apiKey);
-  const model = genAI.getGenerativeModel({ model: "gemini-pro" });
+  const model = genAI.getGenerativeModel({ model: "gemini-2.5-flash" });
 
   // A more detailed and in-depth system prompt for a versatile and real-feel AI assistant.
   const systemPrompt = `
