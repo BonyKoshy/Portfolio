@@ -87,8 +87,8 @@ function AppContent() {
           {dotColors.base && dotColors.active && (
             <DotGrid
               key={theme}
-              dotSize={2}
-              gap={30}
+              dotSize={3}
+              gap={90}
               baseColor={dotColors.base}
               activeColor={dotColors.active}
               proximity={120}
