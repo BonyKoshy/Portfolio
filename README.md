@@ -28,12 +28,12 @@ The application is built with a focus on performance, security, and maintainabil
 
 ### ✨ Key Features
 
-* **🤖 Gemini AI Assistant:** An interactive chatbot, powered by a Netlify serverless function, that's been custom-trained to answer questions about my skills, projects, and professional journey.
-* **🌗 Light & Dark Mode:** A sleek, user-toggleable theme switcher that persists across sessions using `localStorage`.
-* **📱 Fully Responsive Design:** A mobile-first approach ensures a pixel-perfect experience on all devices, from phones to desktops.
-* **🚀 Progressive Web App (PWA):** The site is fully installable and features a service worker for asset caching and offline access.
-* **Motion & Animation:** Smooth page transitions and micro-interactions are implemented with **Framer Motion** to create a dynamic and engaging UI.
-* **📝 Serverless Form Handling:** The contact form uses Netlify's built-in form handling, submitted via a secure AJAX request.
+- **🤖 Gemini AI Assistant:** An interactive chatbot, powered by a Netlify serverless function, that's been custom-trained to answer questions about my skills, projects, and professional journey.
+- **🌗 Light & Dark Mode:** A sleek, user-toggleable theme switcher that persists across sessions using `localStorage`.
+- **📱 Fully Responsive Design:** A mobile-first approach ensures a pixel-perfect experience on all devices, from phones to desktops.
+- **🚀 Progressive Web App (PWA):** The site is fully installable and features a service worker for asset caching and offline access.
+- **Motion & Animation:** Smooth page transitions and micro-interactions are implemented with **Framer Motion** to create a dynamic and engaging UI.
+- **📝 Serverless Form Handling:** The contact form uses Netlify's built-in form handling, submitted via a secure AJAX request.
 
 ---
 
@@ -41,15 +41,15 @@ The application is built with a focus on performance, security, and maintainabil
 
 This project is built with a modern and robust technology stack:
 
-| Category      | Technology                                                                                                                              |
-| :------------ | :-------------------------------------------------------------------------------------------------------------------------------------- |
-| **Frontend** | **React.js**, **Vite**, **JavaScript (ES6+)**, **HTML5**, **CSS3** |
-| **Styling** | **Tailwind CSS** (via Shadcn/UI), **Modular CSS** |
-| **Animation** | **Framer Motion** |
-| **Backend** | **Netlify Serverless Functions** (Node.js runtime)                                                                                      |
-| **AI** | **Google Gemini API** (`@google/generative-ai`)                                                                                         |
-| **Deployment**| **Netlify**, **GitHub** (for CI/CD)                                                                                                       |
-| **Tooling** | **ESLint**, **npm** |
+| Category       | Technology                                                         |
+| :------------- | :----------------------------------------------------------------- |
+| **Frontend**   | **React.js**, **Vite**, **JavaScript (ES6+)**, **HTML5**, **CSS3** |
+| **Styling**    | **Tailwind CSS** (via Shadcn/UI), **Modular CSS**                  |
+| **Animation**  | **Framer Motion**                                                  |
+| **Backend**    | **Netlify Serverless Functions** (Node.js runtime)                 |
+| **AI**         | **Google Gemini API** (`@google/generative-ai`)                    |
+| **Deployment** | **Netlify**, **GitHub** (for CI/CD)                                |
+| **Tooling**    | **ESLint**, **npm**                                                |
 
 ---
 
@@ -76,11 +76,11 @@ You'll need to have [Node.js](https://nodejs.org/) (version 18.x or higher) and 
     npm install
     ```
 4.  **Set up environment variables:**
-    * Create a `.env` file in the root of the project.
-    * Add your Google Generative AI API key to this file:
-        ```env
-        VITE_GEMINI_API_KEY="YOUR_API_KEY_HERE"
-        ```
+    - Create a `.env` file in the root of the project.
+    - Add your Google Generative AI API key to this file:
+      ```env
+      VITE_GEMINI_API_KEY="YOUR_API_KEY_HERE"
+      ```
 5.  **Run the development server:**
     ```sh
     npm run dev
@@ -93,17 +93,17 @@ You'll need to have [Node.js](https://nodejs.org/) (version 18.x or higher) and 
 
 This project is actively maintained. Here are some of the planned features and enhancements:
 
-* **✅ Comprehensive Testing Suite:**
-    * [ ] Implement Unit Tests with Vitest.
-    * [ ] Add Integration Tests with React Testing Library.
-    * [ ] Introduce End-to-End tests with Playwright or Cypress.
-* **🔒 Security Hardening:**
-    * [ ] Implement a strict Content Security Policy (CSP).
-* **🔧 Codebase Migration:**
-    * [ ] Incrementally migrate the codebase from JavaScript to TypeScript for enhanced type safety.
-* **🚀 Performance & Monitoring:**
-    * [ ] Integrate Sentry for real-time error tracking.
-    * [ ] Implement an automated image optimization pipeline.
+- **✅ Comprehensive Testing Suite:**
+  - [ ] Implement Unit Tests with Vitest.
+  - [ ] Add Integration Tests with React Testing Library.
+  - [ ] Introduce End-to-End tests with Playwright or Cypress.
+- **🔒 Security Hardening:**
+  - [ ] Implement a strict Content Security Policy (CSP).
+- **🔧 Codebase Migration:**
+  - [ ] Incrementally migrate the codebase from JavaScript to TypeScript for enhanced type safety.
+- **🚀 Performance & Monitoring:**
+  - [ ] Integrate Sentry for real-time error tracking.
+  - [ ] Implement an automated image optimization pipeline.
 
 See the [open issues](https://github.com/BonyKoshy/Portfolio/issues) for a full list of proposed features (and known issues).
 

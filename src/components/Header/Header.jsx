@@ -1,24 +1,24 @@
-import React, { useRef, useState } from 'react';
-import StaggeredMenu from '../StaggeredMenu/StaggeredMenu';
-import Clock from '../Clock/Clock';
-import ThemeToggle from '../ThemeToggle/ThemeToggle';
-import './Header.css';
+import React, { useRef, useState } from "react";
+import StaggeredMenu from "../StaggeredMenu/StaggeredMenu";
+import Clock from "../Clock/Clock";
+import ThemeToggle from "../ThemeToggle/ThemeToggle";
+import "./Header.css";
 
 function Header() {
   const menuRef = useRef(null);
   const [isMenuOpen, setIsMenuOpen] = useState(false);
 
   const menuItems = [
-    { label: 'Home', link: '#home' },
-    { label: 'About', link: '#about' },
-    { label: 'Certificates', link: '#certificates' },
-    { label: 'Projects', link: '#projects' },
-    { label: 'Contact', link: '#contact' },
+    { label: "Home", link: "#home" },
+    { label: "About", link: "#about" },
+    { label: "Certificates", link: "#certificates" },
+    { label: "Projects", link: "#projects" },
+    { label: "Contact", link: "#contact" },
   ];
 
   const socialItems = [
-    { label: 'LinkedIn', link: 'https://linkedin.com/in/bonykoshy' },
-    { label: 'GitHub', link: 'https://github.com/BonyKoshy' },
+    { label: "LinkedIn", link: "https://linkedin.com/in/bonykoshy" },
+    { label: "GitHub", link: "https://github.com/BonyKoshy" },
   ];
 
   const handleMenuToggle = () => {
@@ -34,7 +34,7 @@ function Header() {
         <div className="header-right">
           <ThemeToggle />
           <button
-            className={`menu-toggle-button ${isMenuOpen ? 'is-open' : ''}`}
+            className={`menu-toggle-button ${isMenuOpen ? "is-open" : ""}`}
             onClick={handleMenuToggle}
             aria-label="Toggle Menu"
             aria-expanded={isMenuOpen}

@@ -1,6 +1,6 @@
 // src/pages/Forbidden.jsx
-import React from 'react';
-import ErrorPage from './ErrorPage';
+import React from "react";
+import ErrorPage from "./ErrorPage";
 
 function Forbidden() {
   return (

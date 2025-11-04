@@ -1,9 +1,9 @@
 // src/components/About/GithubActivity/GithubActivity.jsx
-import React, { useEffect, useRef, useContext } from 'react';
-import GitHubCalendar from 'react-github-calendar';
-import { Github, ArrowUpRight } from 'lucide-react';
-import { ThemeContext } from '../../../ThemeContext';
-import './GithubActivity.css';
+import React, { useEffect, useRef, useContext } from "react";
+import GitHubCalendar from "react-github-calendar";
+import { Github, ArrowUpRight } from "lucide-react";
+import { ThemeContext } from "../../../ThemeContext";
+import "./GithubActivity.css";
 
 function GithubActivity() {
   const calendarWrapperRef = useRef(null);
@@ -17,8 +17,8 @@ function GithubActivity() {
   }, []);
 
   const customTheme = {
-    light: ['#f0f2f5', '#dbece2', '#a7d5b4', '#6ec085', '#3a9d56'],
-    dark: ['#242526', '#0e4429', '#006d32', '#26a641', '#39d353'],
+    light: ["#f0f2f5", "#dbece2", "#a7d5b4", "#6ec085", "#3a9d56"],
+    dark: ["#242526", "#0e4429", "#006d32", "#26a641", "#39d353"],
   };
 
   return (

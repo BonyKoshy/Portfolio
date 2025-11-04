@@ -1,18 +1,18 @@
 import { GoogleGenerativeAI } from "@google/generative-ai";
 
 export const handler = async (event) => {
-  if (event.httpMethod !== 'POST') {
-    return { statusCode: 405, body: 'Method Not Allowed' };
+  if (event.httpMethod !== "POST") {
+    return { statusCode: 405, body: "Method Not Allowed" };
   }
 
   const { prompt } = JSON.parse(event.body);
   const apiKey = process.env.VITE_GEMINI_API_KEY;
 
   if (!prompt) {
-    return { statusCode: 400, body: 'Prompt is required' };
+    return { statusCode: 400, body: "Prompt is required" };
   }
   if (!apiKey) {
-    return { statusCode: 500, body: 'API key is not configured' };
+    return { statusCode: 500, body: "API key is not configured" };
   }
 
   const genAI = new GoogleGenerativeAI(apiKey);
@@ -93,4 +93,3 @@ export const handler = async (event) => {
     };
   }
 };
-

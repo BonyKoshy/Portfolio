@@ -1,9 +1,9 @@
 // src/components/Hero/Hero.jsx
-import React, { useRef } from 'react';
-import { FileUser, ArrowDown } from 'lucide-react';
-import TextPressure from '../TextPressure/TextPressure';
-import VariableProximity from '../VariableProximity/VariableProximity';
-import './Hero.css';
+import React, { useRef } from "react";
+import { FileUser, ArrowDown } from "lucide-react";
+import TextPressure from "../TextPressure/TextPressure";
+import VariableProximity from "../VariableProximity/VariableProximity";
+import "./Hero.css";
 
 function Hero() {
   const heroRef = useRef(null);
@@ -24,30 +24,37 @@ function Hero() {
 
           <div className="hero-title-container">
             <TextPressure
-                text="Bony Koshy"
-                textColor="var(--text-primary)"
-                flex={true}
-                alpha={false}
-                stroke={false}
-                width={true}
-                weight={false}
-                italic={true}
-                minFontSize={48}
+              text="Bony Koshy"
+              textColor="var(--text-primary)"
+              flex={true}
+              alpha={false}
+              stroke={false}
+              width={true}
+              weight={false}
+              italic={true}
+              minFontSize={48}
             />
           </div>
 
-           <p className="hero-description">
-            A passionate and creative developer focused on building beautiful, functional, and user-friendly digital experiences. I turn complex problems into elegant solutions.
+          <p className="hero-description">
+            A passionate and creative developer focused on building beautiful,
+            functional, and user-friendly digital experiences. I turn complex
+            problems into elegant solutions.
           </p>
 
           <div className="hero-buttons">
-            <a href="/resume.pdf" target="_blank" rel="noopener noreferrer" className="btn btn-primary">
-                <FileUser className="btn-icon" size={20} /> {/* Replaced icon */}
-                <span>My Resume</span>
+            <a
+              href="/resume.pdf"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="btn btn-primary"
+            >
+              <FileUser className="btn-icon" size={20} /> {/* Replaced icon */}
+              <span>My Resume</span>
             </a>
             <a href="#about" className="btn btn-secondary">
-                <ArrowDown className="btn-icon" size={20} /> {/* Replaced icon */}
-                <span>View More</span>
+              <ArrowDown className="btn-icon" size={20} /> {/* Replaced icon */}
+              <span>View More</span>
             </a>
           </div>
         </div>

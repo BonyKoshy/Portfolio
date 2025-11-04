@@ -1,8 +1,8 @@
 // src/components/About/LocationCard/LocationCard.jsx
-import React, { useState } from 'react';
-import * as HoverCard from '@radix-ui/react-hover-card';
-import { MapPin } from 'lucide-react';
-import './LocationCard.css';
+import React, { useState } from "react";
+import * as HoverCard from "@radix-ui/react-hover-card";
+import { MapPin } from "lucide-react";
+import "./LocationCard.css";
 
 function LocationCard() {
   const [isOpen, setIsOpen] = useState(false);
@@ -41,7 +41,10 @@ function LocationCard() {
             <div className="tooltip-text">
               <h4>Pathanamthitta, Kerala</h4>
               <p>
-                Based in the vibrant state of Kerala, India, I am open to collaborating with teams and clients globally. I am available for remote work and willing to relocate for the right opportunities.
+                Based in the vibrant state of Kerala, India, I am open to
+                collaborating with teams and clients globally. I am available
+                for remote work and willing to relocate for the right
+                opportunities.
               </p>
             </div>
           </HoverCard.Content>

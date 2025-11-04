@@ -44,9 +44,9 @@
 
 /* New: Styles for the react-icons SVG */
 .logoloop__node svg {
-    width: 100%; /* Make SVG take full width of its parent (.logoloop__node) */
-    height: 100%; /* Make SVG take full height of its parent (.logoloop__node) */
-    object-fit: contain; /* Ensure the icon scales nicely */
+  width: 100%; /* Make SVG take full width of its parent (.logoloop__node) */
+  height: 100%; /* Make SVG take full height of its parent (.logoloop__node) */
+  object-fit: contain; /* Ensure the icon scales nicely */
 }
 
 /* FIX: New hover and active styles */
@@ -91,7 +91,7 @@
 
 .logoloop--fade::before,
 .logoloop--fade::after {
-  content: '';
+  content: "";
   position: absolute;
   top: 0;
   bottom: 0;
@@ -102,10 +102,18 @@
 
 .logoloop--fade::before {
   left: 0;
-  background: linear-gradient( to right, var(--logoloop-fadeColor, var(--logoloop-fadeColorAuto)) 0%, transparent 100% );
+  background: linear-gradient(
+    to right,
+    var(--logoloop-fadeColor, var(--logoloop-fadeColorAuto)) 0%,
+    transparent 100%
+  );
 }
 
 .logoloop--fade::after {
   right: 0;
-  background: linear-gradient( to left, var(--logoloop-fadeColor, var(--logoloop-fadeColorAuto)) 0%, transparent 100% );
+  background: linear-gradient(
+    to left,
+    var(--logoloop-fadeColor, var(--logoloop-fadeColorAuto)) 0%,
+    transparent 100%
+  );
 }

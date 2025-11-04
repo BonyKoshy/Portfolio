@@ -1,7 +1,7 @@
 // src/components/VariableProximity/VariableProximity.jsx
-import { forwardRef, useMemo, useRef, useEffect } from 'react';
-import { motion } from 'framer-motion';
-import './VariableProximity.css';
+import { forwardRef, useMemo, useRef, useEffect } from "react";
+import { motion } from "framer-motion";
+import "./VariableProximity.css";
 
 function useAnimationFrame(callback) {
   useEffect(() => {
@@ -26,20 +26,20 @@ function useMousePositionRef(containerRef) {
         positionRef.current = { x, y };
       }
     };
-    const handleMouseMove = ev => updatePosition(ev.clientX, ev.clientY);
-    const handleTouchMove = ev => {
+    const handleMouseMove = (ev) => updatePosition(ev.clientX, ev.clientY);
+    const handleTouchMove = (ev) => {
       const touch = ev.touches[0];
       if (touch) {
         updatePosition(touch.clientX, touch.clientY);
       }
     };
-    window.addEventListener('mousemove', handleMouseMove);
+    window.addEventListener("mousemove", handleMouseMove);
     // ------------------- FIX: REMOVED { passive: true } -------------------
-    window.addEventListener('touchmove', handleTouchMove);
+    window.addEventListener("touchmove", handleTouchMove);
     // ---------------------------------------------------------------------
     return () => {
-      window.removeEventListener('mousemove', handleMouseMove);
-      window.removeEventListener('touchmove', handleTouchMove);
+      window.removeEventListener("mousemove", handleMouseMove);
+      window.removeEventListener("touchmove", handleTouchMove);
     };
   }, [containerRef]);
   return positionRef;
@@ -52,8 +52,8 @@ const VariableProximity = forwardRef((props, ref) => {
     toFontVariationSettings,
     containerRef,
     radius = 50,
-    falloff = 'linear',
-    className = '',
+    falloff = "linear",
+    className = "",
     onClick,
     style,
     ...restProps
@@ -63,14 +63,14 @@ const VariableProximity = forwardRef((props, ref) => {
   const mousePositionRef = useMousePositionRef(containerRef);
 
   const parsedSettings = useMemo(() => {
-    const parseSettings = settingsStr =>
+    const parseSettings = (settingsStr) =>
       new Map(
         settingsStr
-          .split(',')
-          .map(s => s.trim())
-          .map(s => {
-            const [name, value] = s.split(' ');
-            return [name.replace(/['"]/g, ''), parseFloat(value)];
+          .split(",")
+          .map((s) => s.trim())
+          .map((s) => {
+            const [name, value] = s.split(" ");
+            return [name.replace(/['"]/g, ""), parseFloat(value)];
           })
       );
     const fromSettings = parseSettings(fromFontVariationSettings);
@@ -78,20 +78,21 @@ const VariableProximity = forwardRef((props, ref) => {
     return Array.from(fromSettings.entries()).map(([axis, fromValue]) => ({
       axis,
       fromValue,
-      toValue: toSettings.get(axis) ?? fromValue
+      toValue: toSettings.get(axis) ?? fromValue,
     }));
   }, [fromFontVariationSettings, toFontVariationSettings]);
 
-  const calculateDistance = (x1, y1, x2, y2) => Math.sqrt((x2 - x1) ** 2 + (y2 - y1) ** 2);
-  
-  const calculateFalloff = distance => {
+  const calculateDistance = (x1, y1, x2, y2) =>
+    Math.sqrt((x2 - x1) ** 2 + (y2 - y1) ** 2);
+
+  const calculateFalloff = (distance) => {
     const norm = Math.min(Math.max(1 - distance / radius, 0), 1);
     switch (falloff) {
-      case 'exponential':
+      case "exponential":
         return norm ** 2;
-      case 'gaussian':
+      case "gaussian":
         return Math.exp(-((distance / (radius / 2)) ** 2) / 2);
-      case 'linear':
+      case "linear":
       default:
         return norm;
     }
@@ -105,8 +106,8 @@ const VariableProximity = forwardRef((props, ref) => {
     const containerRect = containerRef.current.getBoundingClientRect();
     const mouseX = mousePositionRef.current.x;
     const mouseY = mousePositionRef.current.y;
-    
-    const letterPositions = letterRefs.current.map(letterRef => {
+
+    const letterPositions = letterRefs.current.map((letterRef) => {
       if (!letterRef) return null;
       const rect = letterRef.getBoundingClientRect();
       return {
@@ -120,19 +121,25 @@ const VariableProximity = forwardRef((props, ref) => {
       if (!letterRef || !letterPositions[index]) return;
 
       const { x: letterCenterX, y: letterCenterY } = letterPositions[index];
-      const distance = calculateDistance(mouseX, mouseY, letterCenterX, letterCenterY);
+      const distance = calculateDistance(
+        mouseX,
+        mouseY,
+        letterCenterX,
+        letterCenterY
+      );
 
       let newSettings = fromFontVariationSettings;
       if (distance < radius) {
         const falloffValue = calculateFalloff(distance);
         newSettings = parsedSettings
           .map(({ axis, fromValue, toValue }) => {
-            const interpolatedValue = fromValue + (toValue - fromValue) * falloffValue;
+            const interpolatedValue =
+              fromValue + (toValue - fromValue) * falloffValue;
             return `'${axis}' ${interpolatedValue}`;
           })
-          .join(', ');
+          .join(", ");
       }
-      
+
       // Only write to the DOM if the setting has changed
       if (letterRef.style.fontVariationSettings !== newSettings) {
         letterRef.style.fontVariationSettings = newSettings;
@@ -141,8 +148,7 @@ const VariableProximity = forwardRef((props, ref) => {
   });
   // --- OPTIMIZATION END ---
 
-
-  const words = label.split(' ');
+  const words = label.split(" ");
   let letterIndex = 0;
 
   return (
@@ -150,22 +156,25 @@ const VariableProximity = forwardRef((props, ref) => {
       ref={ref}
       className={`${className} variable-proximity`}
       onClick={onClick}
-      style={{ display: 'inline', ...style }}
+      style={{ display: "inline", ...style }}
       {...restProps}
     >
       {words.map((word, wordIndex) => (
-        <span key={wordIndex} style={{ display: 'inline-block', whiteSpace: 'nowrap' }}>
-          {word.split('').map(letter => {
+        <span
+          key={wordIndex}
+          style={{ display: "inline-block", whiteSpace: "nowrap" }}
+        >
+          {word.split("").map((letter) => {
             const currentLetterIndex = letterIndex++;
             return (
               <motion.span
                 key={currentLetterIndex}
-                ref={el => {
+                ref={(el) => {
                   letterRefs.current[currentLetterIndex] = el;
                 }}
                 style={{
-                  display: 'inline-block',
-                  fontVariationSettings: fromFontVariationSettings // Start with initial settings
+                  display: "inline-block",
+                  fontVariationSettings: fromFontVariationSettings, // Start with initial settings
                 }}
                 aria-hidden="true"
               >
@@ -173,7 +182,9 @@ const VariableProximity = forwardRef((props, ref) => {
               </motion.span>
             );
           })}
-          {wordIndex < words.length - 1 && <span style={{ display: 'inline-block' }}>&nbsp;</span>}
+          {wordIndex < words.length - 1 && (
+            <span style={{ display: "inline-block" }}>&nbsp;</span>
+          )}
         </span>
       ))}
       <span className="sr-only">{label}</span>
@@ -181,5 +192,5 @@ const VariableProximity = forwardRef((props, ref) => {
   );
 });
 
-VariableProximity.displayName = 'VariableProximity';
+VariableProximity.displayName = "VariableProximity";
 export default VariableProximity;

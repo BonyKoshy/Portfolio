@@ -1,5 +1,5 @@
-import React, { useState, useEffect } from 'react';
-import './Clock.css';
+import React, { useState, useEffect } from "react";
+import "./Clock.css";
 
 // A custom hook to get the current window width
 const useWindowWidth = () => {
@@ -7,8 +7,8 @@ const useWindowWidth = () => {
 
   useEffect(() => {
     const handleResize = () => setWidth(window.innerWidth);
-    window.addEventListener('resize', handleResize);
-    return () => window.removeEventListener('resize', handleResize);
+    window.addEventListener("resize", handleResize);
+    return () => window.removeEventListener("resize", handleResize);
   }, []);
 
   return width;
@@ -24,10 +24,12 @@ function Clock() {
   }, []);
 
   const formatTime = (date) => {
-    const options = { weekday: 'short' };
-    const day = new Intl.DateTimeFormat('en-US', options).format(date).toUpperCase();
-    const hours = date.getHours().toString().padStart(2, '0');
-    const minutes = date.getMinutes().toString().padStart(2, '0');
+    const options = { weekday: "short" };
+    const day = new Intl.DateTimeFormat("en-US", options)
+      .format(date)
+      .toUpperCase();
+    const hours = date.getHours().toString().padStart(2, "0");
+    const minutes = date.getMinutes().toString().padStart(2, "0");
 
     // Use a shorter format on mobile screens
     if (width <= 768) {

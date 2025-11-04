@@ -1,7 +1,7 @@
 // src/components/SectionTitle/SectionTitle.jsx
-import React, { useRef } from 'react';
-import VariableProximity from '../VariableProximity/VariableProximity';
-import './SectionTitle.css';
+import React, { useRef } from "react";
+import VariableProximity from "../VariableProximity/VariableProximity";
+import "./SectionTitle.css";
 
 function SectionTitle({ title }) {
   const containerRef = useRef(null);

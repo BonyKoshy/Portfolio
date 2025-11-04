@@ -1,8 +1,8 @@
 // src/ReloadPrompt.jsx
-import React from 'react';
-import './ReloadPrompt.css';
-import { useRegisterSW } from 'virtual:pwa-register/react';
-import { X, RefreshCw } from 'lucide-react';
+import React from "react";
+import "./ReloadPrompt.css";
+import { useRegisterSW } from "virtual:pwa-register/react";
+import { X, RefreshCw } from "lucide-react";
 
 function ReloadPrompt() {
   const {
@@ -11,10 +11,10 @@ function ReloadPrompt() {
     updateServiceWorker,
   } = useRegisterSW({
     onRegistered(r) {
-      console.log('Service Worker registered:', r);
+      console.log("Service Worker registered:", r);
     },
     onRegisterError(error) {
-      console.log('Service Worker registration error:', error);
+      console.log("Service Worker registration error:", error);
     },
   });
 
@@ -38,7 +38,10 @@ function ReloadPrompt() {
       </div>
       <div className="pwa-toast-buttons">
         {needRefresh && (
-          <button className="pwa-toast-button" onClick={() => updateServiceWorker(true)}>
+          <button
+            className="pwa-toast-button"
+            onClick={() => updateServiceWorker(true)}
+          >
             <RefreshCw size={16} />
             Reload
           </button>

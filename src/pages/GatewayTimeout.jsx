@@ -1,6 +1,6 @@
 // src/pages/GatewayTimeout.jsx
-import React from 'react';
-import ErrorPage from './ErrorPage';
+import React from "react";
+import ErrorPage from "./ErrorPage";
 
 function GatewayTimeout() {
   return (

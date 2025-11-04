@@ -1,8 +1,8 @@
 // src/components/About/TypingSpeed/TypingSpeed.jsx
-import React from 'react';
-import { Gauge } from 'lucide-react';
-import TextPressure from '../../TextPressure/TextPressure';
-import './TypingSpeed.css';
+import React from "react";
+import { Gauge } from "lucide-react";
+import TextPressure from "../../TextPressure/TextPressure";
+import "./TypingSpeed.css";
 
 function TypingSpeed() {
   return (

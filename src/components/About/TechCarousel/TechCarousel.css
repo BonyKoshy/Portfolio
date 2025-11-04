@@ -1,6 +1,6 @@
 /* src/components/About/TechCarousel/TechCarousel.css */
 .tech-carousel-card {
-  padding: 0 !important; 
+  padding: 0 !important;
   display: flex;
   flex-direction: column;
   justify-content: flex-start;
@@ -12,7 +12,7 @@
 }
 
 .tech-carousel-card.expanded {
-  height: auto; 
+  height: auto;
 }
 
 .tech-carousel-header {
@@ -37,7 +37,7 @@
   align-items: center;
   padding: 0 1.5rem 1rem 1.5rem;
   /* Prevent clicks on the logo loop from being registered by the parent card */
-  cursor: default; 
+  cursor: default;
 }
 
 .selected-tech-title {

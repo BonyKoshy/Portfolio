@@ -1,139 +1,139 @@
 /* Overlay and positioning for the expanded card */
 .project-overlay {
-    position: fixed;
-    inset: 0;
-    background-color: rgba(0, 0, 0, 0.7);
-    backdrop-filter: blur(8px);
-    -webkit-backdrop-filter: blur(8px);
-    z-index: 40;
+  position: fixed;
+  inset: 0;
+  background-color: rgba(0, 0, 0, 0.7);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  z-index: 40;
 }
 
 .expanded-card-wrapper {
-    position: fixed;
-    inset: 0;
-    display: grid;
-    place-items: center;
-    z-index: 50;
-    padding: 1rem;
+  position: fixed;
+  inset: 0;
+  display: grid;
+  place-items: center;
+  z-index: 50;
+  padding: 1rem;
 }
 
 .expanded-card-content {
-    background-color: var(--background);
-    color: var(--text-primary);
-    width: 100%;
-    max-width: 60rem; /* 960px */
-    max-height: 90vh;
-    overflow-y: auto;
-    border-radius: 1.5rem;
-    display: flex;
-    gap: 2rem;
-    padding: 2rem;
-    position: relative; /* Add this for positioning the close button */
+  background-color: var(--background);
+  color: var(--text-primary);
+  width: 100%;
+  max-width: 60rem; /* 960px */
+  max-height: 90vh;
+  overflow-y: auto;
+  border-radius: 1.5rem;
+  display: flex;
+  gap: 2rem;
+  padding: 2rem;
+  position: relative; /* Add this for positioning the close button */
 }
 
 /* Expanded card content layout */
 .project-content-image {
-    width: 55%;
-    height: auto;
-    object-fit: cover;
-    border-radius: 1rem;
-    flex-shrink: 0;
-    aspect-ratio: 16 / 10;
+  width: 55%;
+  height: auto;
+  object-fit: cover;
+  border-radius: 1rem;
+  flex-shrink: 0;
+  aspect-ratio: 16 / 10;
 }
 
 .project-content-details {
-    display: flex;
-    flex-direction: column;
+  display: flex;
+  flex-direction: column;
 }
 
 .project-content-header {
-    margin-bottom: 1rem;
+  margin-bottom: 1rem;
 }
 .project-content-header h3 {
-    font-size: 2rem;
-    font-weight: 700;
-    margin: 0;
+  font-size: 2rem;
+  font-weight: 700;
+  margin: 0;
 }
 .project-content-header .project-year {
-    font-size: 1rem;
-    font-weight: 500;
-    color: var(--text-secondary);
-    margin-top: 0.25rem;
+  font-size: 1rem;
+  font-weight: 500;
+  color: var(--text-secondary);
+  margin-top: 0.25rem;
 }
 
 .project-content-description {
-    font-size: 1rem;
-    color: var(--text-secondary);
-    line-height: 1.7;
-    margin-bottom: 1.5rem;
-    flex-grow: 1;
+  font-size: 1rem;
+  color: var(--text-secondary);
+  line-height: 1.7;
+  margin-bottom: 1.5rem;
+  flex-grow: 1;
 }
 
 .project-content-tech {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 0.5rem;
-    margin-bottom: 2rem;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  margin-bottom: 2rem;
 }
 
 .tech-tag {
-    background-color: var(--prelayer-2);
-    padding: 0.25rem 0.75rem;
-    border-radius: 99px;
-    font-size: 0.8rem;
-    font-weight: 500;
+  background-color: var(--prelayer-2);
+  padding: 0.25rem 0.75rem;
+  border-radius: 99px;
+  font-size: 0.8rem;
+  font-weight: 500;
 }
 
 /* Buttons inside the expanded card */
 .project-buttons {
-    display: flex;
-    gap: 1rem;
-    margin-top: auto;
+  display: flex;
+  gap: 1rem;
+  margin-top: auto;
 }
 .project-btn {
-    display: inline-flex;
-    align-items: center;
-    gap: 0.5rem;
-    padding: 0.75rem 1.5rem;
-    border-radius: 8px;
-    text-decoration: none;
-    font-weight: 600;
-    font-size: 1rem;
-    transition: all 0.3s ease;
-    border: 2px solid transparent;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.75rem 1.5rem;
+  border-radius: 8px;
+  text-decoration: none;
+  font-weight: 600;
+  font-size: 1rem;
+  transition: all 0.3s ease;
+  border: 2px solid transparent;
 }
 .project-btn.github {
-    background-color: transparent;
-    color: var(--text-secondary);
-    border-color: var(--text-secondary);
+  background-color: transparent;
+  color: var(--text-secondary);
+  border-color: var(--text-secondary);
 }
 .project-btn.github:hover {
-    color: var(--accent);
-    border-color: var(--accent);
+  color: var(--accent);
+  border-color: var(--accent);
 }
 .project-btn.live {
-    background-color: var(--accent);
-    color: var(--background);
+  background-color: var(--accent);
+  color: var(--background);
 }
 .project-btn.live:hover {
-    background-color: transparent;
-    color: var(--accent);
-    border-color: var(--accent);
+  background-color: transparent;
+  color: var(--accent);
+  border-color: var(--accent);
 }
 
 /* Responsive adjustments for the expanded card */
 @media (max-width: 768px) {
-    .expanded-card-content {
-        flex-direction: column;
-        padding: 1.5rem;
-    }
-    .project-content-image {
-        width: 100%;
-    }
-    .project-content-details {
-        padding: 0;
-    }
-    .project-content-header h3 {
-        font-size: 1.5rem;
-    }
+  .expanded-card-content {
+    flex-direction: column;
+    padding: 1.5rem;
+  }
+  .project-content-image {
+    width: 100%;
+  }
+  .project-content-details {
+    padding: 0;
+  }
+  .project-content-header h3 {
+    font-size: 1.5rem;
+  }
 }

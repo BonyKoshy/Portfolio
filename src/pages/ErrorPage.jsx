@@ -1,8 +1,8 @@
 // src/pages/ErrorPage.jsx
-import React from 'react';
-import { Link } from 'react-router-dom';
-import { ArrowLeft } from 'lucide-react';
-import './ErrorPage.css';
+import React from "react";
+import { Link } from "react-router-dom";
+import { ArrowLeft } from "lucide-react";
+import "./ErrorPage.css";
 
 function ErrorPage({ errorCode, title, message, imageSrc }) {
   return (
@@ -14,7 +14,11 @@ function ErrorPage({ errorCode, title, message, imageSrc }) {
       <div className="error-card">
         <div className="error-image-container">
           {/* You can replace this with your actual image later */}
-          <img src={imageSrc || '/error-placeholder.png'} alt={title} className="error-image" />
+          <img
+            src={imageSrc || "/error-placeholder.png"}
+            alt={title}
+            className="error-image"
+          />
         </div>
         <div className="error-content">
           <p className="error-code">{errorCode}</p>

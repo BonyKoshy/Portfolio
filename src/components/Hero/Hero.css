@@ -10,7 +10,7 @@
   width: 100%;
   display: flex;
   align-items: center;
-  justify-content: flex-start; 
+  justify-content: flex-start;
 }
 
 .hero-text-content {
@@ -114,12 +114,12 @@
   .hero-text-content {
     max-width: 100%; /* Full width on small screens */
   }
-  
+
   .hero-title-container {
     height: 80px; /* Adjust height for smaller name */
   }
 
-  .hero-description{
+  .hero-description {
     text-align: center; /* Center text on mobile */
   }
 

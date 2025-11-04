@@ -171,7 +171,8 @@
 }
 
 @media (max-width: 768px) {
-  .staggered-menu-panel, .sm-prelayers {
+  .staggered-menu-panel,
+  .sm-prelayers {
     width: clamp(280px, 60vw, 420px); /* Adjust width for tablets */
   }
   .sm-panel-item {
@@ -180,7 +181,8 @@
 }
 
 @media (max-width: 640px) {
-  .staggered-menu-panel, .sm-prelayers {
+  .staggered-menu-panel,
+  .sm-prelayers {
     width: 100%; /* Full width on mobile */
     right: 0;
   }
