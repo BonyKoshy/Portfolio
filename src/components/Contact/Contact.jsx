@@ -1,10 +1,8 @@
 // src/components/Contact/Contact.jsx
 import React, { useState, useEffect } from "react";
 import { SiGithub, SiLinkedin, SiInstagram, SiX } from "react-icons/si";
-import { AnimatePresence, motion } from "framer-motion";
-import { ChevronDown, ChevronUp, ArrowUpRight } from "lucide-react";
-import Chatbot from "./Chatbot";
-import GeminiLogo from "./GeminiLogo";
+import { motion } from "framer-motion";
+import { ArrowUpRight } from "lucide-react";
 import SectionTitle from "../SectionTitle/SectionTitle";
 import "./Contact.css";
 
@@ -35,10 +33,9 @@ const navLinks = [
 ];
 
 const Contact = () => {
-  const [isChatOpen, setIsChatOpen] = useState(false);
   const [isMobile, setIsMobile] = useState(window.innerWidth < 768);
 
-  // --- NEW: State for the form ---
+  // --- State for the form ---
   const [formState, setFormState] = useState({
     name: "",
     email: "",
@@ -52,12 +49,12 @@ const Contact = () => {
     return () => window.removeEventListener("resize", handleResize);
   }, []);
 
-  // --- NEW: Handler for input changes ---
+  // --- Handler for input changes ---
   const handleChange = (e) => {
     setFormState({ ...formState, [e.target.name]: e.target.value });
   };
 
-  // --- NEW: Handler for form submission ---
+  // --- Handler for form submission ---
   const handleSubmit = (e) => {
     e.preventDefault();
 
@@ -125,99 +122,62 @@ const Contact = () => {
               ))}
             </div>
             <div className="contact-form-container">
-              <AnimatePresence mode="wait">
-                {isChatOpen ? (
-                  <motion.div
-                    key="chatbot"
-                    className="chatbot-view"
-                    initial={{ opacity: 0, y: 20 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    exit={{ opacity: 0, y: -20 }}
-                  >
-                    <div
-                      className="chatbot-header"
-                      onClick={() => setIsChatOpen(false)}
-                    >
-                      <h3>AI Assistance</h3>
-                      <ChevronDown />
-                    </div>
-                    <Chatbot
-                      isMobile={isMobile}
-                      onClose={() => setIsChatOpen(false)}
-                    />
-                  </motion.div>
-                ) : (
-                  <motion.div
-                    key="form"
-                    initial={{ opacity: 0, y: 20 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    exit={{ opacity: 0, y: -20 }}
-                  >
-                    {/* --- UPDATED FORM --- */}
-                    <form
-                      name="contact"
-                      method="POST"
-                      data-netlify="true"
-                      data-netlify-honeypot="bot-field"
-                      onSubmit={handleSubmit}
-                      className="contact-form"
-                    >
-                      <input type="hidden" name="form-name" value="contact" />
-                      <p hidden>
-                        <input name="bot-field" onChange={handleChange} />
-                      </p>
+              <motion.div
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+              >
+                <form
+                  name="contact"
+                  method="POST"
+                  data-netlify="true"
+                  data-netlify-honeypot="bot-field"
+                  onSubmit={handleSubmit}
+                  className="contact-form"
+                >
+                  <input type="hidden" name="form-name" value="contact" />
+                  <p hidden>
+                    <input name="bot-field" onChange={handleChange} />
+                  </p>
 
-                      <input
-                        type="text"
-                        name="name"
-                        placeholder="Enter your name"
-                        value={formState.name}
-                        onChange={handleChange}
-                        required
-                      />
-                      <input
-                        type="email"
-                        name="email"
-                        placeholder="Enter your email"
-                        value={formState.email}
-                        onChange={handleChange}
-                        required
-                      />
-                      <textarea
-                        name="message"
-                        placeholder="Write a message"
-                        value={formState.message}
-                        onChange={handleChange}
-                        required
-                      ></textarea>
-                      <button type="submit" className="send-button">
-                        Send
-                      </button>
+                  <input
+                    type="text"
+                    name="name"
+                    placeholder="Enter your name"
+                    value={formState.name}
+                    onChange={handleChange}
+                    required
+                  />
+                  <input
+                    type="email"
+                    name="email"
+                    placeholder="Enter your email"
+                    value={formState.email}
+                    onChange={handleChange}
+                    required
+                  />
+                  <textarea
+                    name="message"
+                    placeholder="Write a message"
+                    value={formState.message}
+                    onChange={handleChange}
+                    required
+                  ></textarea>
+                  <button type="submit" className="send-button">
+                    Send
+                  </button>
 
-                      {submissionStatus === "success" && (
-                        <p className="form-success-message">
-                          Thanks! Your message has been sent.
-                        </p>
-                      )}
-                      {submissionStatus === "error" && (
-                        <p className="form-error-message">
-                          Oops! Something went wrong.
-                        </p>
-                      )}
-                    </form>
-                    <button
-                      className="chatbot-toggle"
-                      onClick={() => setIsChatOpen(true)}
-                    >
-                      AI Assistance
-                      <ChevronUp />
-                      <div className="hoverEffect">
-                        <div />
-                      </div>
-                    </button>
-                  </motion.div>
-                )}
-              </AnimatePresence>
+                  {submissionStatus === "success" && (
+                    <p className="form-success-message">
+                      Thanks! Your message has been sent.
+                    </p>
+                  )}
+                  {submissionStatus === "error" && (
+                    <p className="form-error-message">
+                      Oops! Something went wrong.
+                    </p>
+                  )}
+                </form>
+              </motion.div>
             </div>
           </div>
         </div>
@@ -225,9 +185,6 @@ const Contact = () => {
         <footer className="contact-footer">
           <div className="footer-copyright">
             <span>© 2025 Bony Koshy. All rights reserved.</span>
-          </div>
-          <div className="gemini-credit">
-            Vibecoded using <GeminiLogo /> Gemini
           </div>
           <div className="footer-legal">
             <a href="/privacy">Privacy Policy</a>
