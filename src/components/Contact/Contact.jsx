@@ -20,7 +20,7 @@ const socialLinks = [
   },
   {
     icon: <SiX />,
-    href: "https://twitter.com/bonykoshy",
+    href: "https://x.com/Bony_Koshy",
     label: "X (Twitter)",
   },
 ];
@@ -57,6 +57,7 @@ const Contact = () => {
   // --- Handler for form submission ---
   const handleSubmit = (e) => {
     e.preventDefault();
+    if (formState["bot-field"]) return;
 
     const formData = new FormData();
     formData.append("form-name", "contact");
