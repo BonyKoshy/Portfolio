@@ -2,7 +2,7 @@
 import React, { useEffect, useRef, useContext } from "react";
 import GitHubCalendar from "react-github-calendar";
 import { Github, ArrowUpRight } from "lucide-react";
-import { ThemeContext } from "../../../ThemeContext";
+import { ThemeContext } from "@/features/theme/ThemeContext";
 import "./GithubActivity.css";
 
 function GithubActivity() {

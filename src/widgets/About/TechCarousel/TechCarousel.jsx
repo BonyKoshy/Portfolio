@@ -2,8 +2,8 @@
 import React, { useState, useEffect, useRef } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { Zap } from "lucide-react";
-import LogoLoop from "../../LogoLoop/LogoLoop";
-import useResponsiveValue from "../../../hooks/useResponsiveValue";
+import LogoLoop from "@/shared/ui/LogoLoop/LogoLoop";
+import useResponsiveValue from "@/shared/lib/useResponsiveValue";
 import {
   SiReact,
   SiJavascript,
@@ -15,15 +15,12 @@ import {
   SiGithub,
   SiFigma,
   SiTailwindcss,
-  SiSpring,
   SiCplusplus,
   SiTypescript,
   SiBootstrap,
   SiFlask,
   SiMysql,
   SiSqlite,
-  SiOracle,
-  SiDocker,
   SiNetlify,
   SiVercel,
   SiAndroidstudio,
@@ -32,8 +29,7 @@ import {
 } from "react-icons/si";
 import { FaJava, FaAws, FaWindows, FaLinux, FaUbuntu } from "react-icons/fa";
 import { TbBrandCSharp, TbBrandPowershell } from "react-icons/tb";
-import { DiMsqlServer, DiVisualstudio } from "react-icons/di";
-import { VscAzure } from "react-icons/vsc";
+import { DiVisualstudio } from "react-icons/di";
 import { BiLogoVisualStudio } from "react-icons/bi";
 import "./TechCarousel.css";
 
@@ -51,15 +47,10 @@ const techLogos = [
   { node: <SiCplusplus />, title: "C++" },
   { node: <TbBrandCSharp />, title: "C#" },
   { node: <SiDotnet />, title: "ASP.NET" },
-  { node: <SiSpring />, title: "Spring Boot" },
   { node: <SiFlask />, title: "Flask" },
   { node: <SiMysql />, title: "MySQL" },
   { node: <SiSqlite />, title: "SQLite" },
-  { node: <SiOracle />, title: "Oracle" },
-  { node: <DiMsqlServer />, title: "SQL Server" },
-  { node: <SiDocker />, title: "Docker" },
   { node: <FaAws />, title: "AWS" },
-  { node: <VscAzure />, title: "Azure" },
   { node: <SiNetlify />, title: "Netlify" },
   { node: <SiVercel />, title: "Vercel" },
   { node: <TbBrandPowershell />, title: "PowerShell" },

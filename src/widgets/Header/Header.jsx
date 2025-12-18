@@ -1,7 +1,7 @@
 import React, { useRef, useState } from "react";
-import StaggeredMenu from "../StaggeredMenu/StaggeredMenu";
-import Clock from "../Clock/Clock";
-import ThemeToggle from "../ThemeToggle/ThemeToggle";
+import StaggeredMenu from "@/shared/ui/StaggeredMenu/StaggeredMenu";
+import Clock from "@/shared/ui/Clock/Clock";
+import ThemeToggle from "@/features/theme/ui/ThemeToggle";
 import "./Header.css";
 
 function Header() {

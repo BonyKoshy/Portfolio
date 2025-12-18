@@ -1,7 +1,7 @@
 // src/pages/PrivacyPolicy.jsx
 import React from "react";
 import { ArrowLeft } from "lucide-react";
-import SectionTitle from "../components/SectionTitle/SectionTitle";
+import SectionTitle from "@/shared/ui/SectionTitle/SectionTitle";
 import { Link } from "react-router-dom";
 import "./PrivacyPolicy.css";
 

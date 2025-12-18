@@ -1,7 +1,7 @@
 // src/components/About/TypingSpeed/TypingSpeed.jsx
 import React from "react";
 import { Gauge } from "lucide-react";
-import TextPressure from "../../TextPressure/TextPressure";
+import TextPressure from "@/shared/ui/TextPressure/TextPressure";
 import "./TypingSpeed.css";
 
 function TypingSpeed() {

@@ -1,6 +1,6 @@
 // src/App.jsx
 import React, { useEffect, useState, useContext } from "react";
-import { ThemeProvider, ThemeContext } from "./ThemeContext";
+import { ThemeProvider, ThemeContext } from "@/features/theme/ThemeContext";
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 import "./App.css";
 import {
@@ -11,7 +11,7 @@ import {
   ContextMenuRadioItem,
   ContextMenuSeparator,
   ContextMenuTrigger,
-} from "@/components/ui/ContextMenu";
+} from "@/shared/ui/ContextMenu";
 import {
   ArrowLeft,
   ArrowRight,
@@ -31,16 +31,16 @@ import {
 import { motion, AnimatePresence } from "framer-motion";
 
 // Component Imports
-import DotGrid from "@/components/DotGrid/DotGrid";
-import Header from "@/components/Header/Header";
-import GradualBlur from "@/components/GradualBlur/GradualBlur";
-import Hero from "@/components/Hero/Hero";
-import About from "@/components/About/About";
-import CertificatesList from "@/components/CertificatesList/CertificatesList";
-import Projects from "@/components/Projects/Projects";
-import Contact from "@/components/Contact/Contact.jsx";
+import DotGrid from "@/shared/ui/DotGrid/DotGrid";
+import Header from "@/widgets/Header/Header";
+import GradualBlur from "@/shared/ui/GradualBlur/GradualBlur";
+import Hero from "@/widgets/Hero/Hero";
+import About from "@/widgets/About/About";
+import CertificatesList from "@/widgets/CertificatesList/CertificatesList";
+import Projects from "@/widgets/Projects/Projects";
+import Contact from "@/widgets/Contact/Contact.jsx";
 import PrivacyPolicy from "@/pages/PrivacyPolicy";
-import "@/components/ui/ContextMenu.css";
+import "@/shared/ui/ContextMenu.css";
 import ReloadPrompt from "./ReloadPrompt";
 
 // Error Pages

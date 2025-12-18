@@ -1,8 +1,8 @@
 // src/components/Hero/Hero.jsx
 import React, { useRef } from "react";
 import { FileUser, ArrowDown } from "lucide-react";
-import TextPressure from "../TextPressure/TextPressure";
-import VariableProximity from "../VariableProximity/VariableProximity";
+import TextPressure from "@/shared/ui/TextPressure/TextPressure";
+import VariableProximity from "@/shared/ui/VariableProximity/VariableProximity";
 import "./Hero.css";
 
 function Hero() {

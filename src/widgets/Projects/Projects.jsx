@@ -1,8 +1,8 @@
 import React, { useState, useRef } from "react";
 import { AnimatePresence, motion } from "framer-motion";
-import { Carousel } from "../ProjectsCarousel/ProjectsCarousel";
-import SectionTitle from "../SectionTitle/SectionTitle";
-import { useOutsideClick } from "../../hooks/use-outside-click";
+import { Carousel } from "@/widgets/ProjectsCarousel/ProjectsCarousel";
+import SectionTitle from "@/shared/ui/SectionTitle/SectionTitle";
+import { useOutsideClick } from "@/shared/lib/use-outside-click";
 import { Github, ExternalLink, Download } from "lucide-react";
 import "./Projects.css";
 

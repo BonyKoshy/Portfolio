@@ -1,7 +1,7 @@
 // src/components/About/About.jsx
 import React from "react";
 import "./About.css";
-import SectionTitle from "../SectionTitle/SectionTitle";
+import SectionTitle from "@/shared/ui/SectionTitle/SectionTitle";
 
 import AccordionCard from "./AccordionCard/AccordionCard";
 import TypingSpeed from "./TypingSpeed/TypingSpeed";

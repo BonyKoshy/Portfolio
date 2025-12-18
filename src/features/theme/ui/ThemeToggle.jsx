@@ -1,6 +1,6 @@
 import React, { useContext } from "react";
 import styled from "styled-components";
-import { ThemeContext } from "../../ThemeContext";
+import { ThemeContext } from "@/features/theme/ThemeContext";
 
 const Switch = () => {
   const { theme, toggleTheme } = useContext(ThemeContext);

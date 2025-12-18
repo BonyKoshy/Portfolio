@@ -3,7 +3,7 @@ import React, { useState, useEffect } from "react";
 import { SiGithub, SiLinkedin, SiInstagram, SiX } from "react-icons/si";
 import { motion } from "framer-motion";
 import { ArrowUpRight } from "lucide-react";
-import SectionTitle from "../SectionTitle/SectionTitle";
+import SectionTitle from "@/shared/ui/SectionTitle/SectionTitle";
 import "./Contact.css";
 
 const socialLinks = [
