@@ -129,10 +129,6 @@ const Squares: React.FC<SquaresProps> = ({
   };
 
   return (
-    // FIX 1: Updated Vignette to "75%" Requirement
-    // black_15% means the center 15% is totally clear.
-    // transparent_75% means the fade finishes at 75% of the radius.
-    // FIX 2: Used the canonical Tailwind v4 syntax 'mask-[...]' to satisfy the linter.
     <div
       className={`w-full h-full ${className} mask-[radial-gradient(circle_at_center,black_15%,transparent_95%)]`}
     >

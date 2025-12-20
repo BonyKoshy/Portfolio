@@ -78,13 +78,12 @@ function AppContent() {
 
         if (theme === "dark") {
           setGridColors({
-            // SUBTLE UPDATE: Lower opacity for the new #020202 background
-            border: "rgba(255, 255, 255, 0.05)",
+            border: "rgba(255, 255, 255, 0.1)",
             hover: accent ? `${accent}15` : "rgba(69, 151, 255, 0.1)",
           });
         } else {
           setGridColors({
-            border: "rgba(0, 0, 0, 0.06)",
+            border: "rgba(0, 0, 0, 0.1)",
             hover: "rgba(0, 0, 0, 0.04)",
           });
         }
