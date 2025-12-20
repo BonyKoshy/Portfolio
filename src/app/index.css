@@ -1,19 +1,13 @@
-/* src/index.css */
-/* 1. Imports FIRST */
+/* src/app/index.css */
+@import "tailwindcss";
+
+/* 1. Imports (Fonts) */
 @import url("https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap");
 @import url("https://fonts.googleapis.com/css2?family=Roboto+Flex:opsz,wght@8..144,100..1000&display=swap");
 
-/* 2. Tailwind directives SECOND */
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
-
+/* 2. CSS Variables (The Source of Truth) */
 :root {
-  /* --- CHANGE: Updated the default font to Poppins --- */
-  --font-sans: "Poppins", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
-    Oxygen, Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
-
-  /* Light Theme */
+  /* --- LIGHT THEME --- */
   --background-light: #f0f2f5;
   --text-primary-light: #1c1e21;
   --text-secondary-light: #323436;
@@ -22,91 +16,83 @@
   --prelayer-1-light: #e0e2e5;
   --prelayer-2-light: #cdd0d4;
 
-  /* Dark Theme - with better contrast for dots */
-  --background-dark: #121212;
+  /* --- DARK THEME (75% Rich Black) --- */
+  --background-dark: #0a0a0a;
   --text-primary-dark: #e4e6eb;
-  --text-secondary-dark: #c1c1c1; /* Lighter grey for visible dots */
+  --text-secondary-dark: #c1c1c1;
   --accent-dark: #4597ff;
-  --panel-bg-dark: rgba(30, 30, 30, 0.85);
-  --prelayer-1-dark: #242526;
-  --prelayer-2-dark: #3a3b3c;
+  --panel-bg-dark: rgba(28, 28, 28, 0.85);
+  --prelayer-1-dark: #202020;
+  --prelayer-2-dark: #353535;
 }
 
-html {
-  scroll-behavior: smooth;
+/* 3. Tailwind v4 Theme Configuration */
+@theme {
+  --font-sans: "Poppins", system-ui, sans-serif;
+
+  /* Register Colors as Utilities (enables bg-background, text-accent, etc.) */
+  --color-background: var(--background);
+  --color-text-primary: var(--text-primary);
+  --color-text-secondary: var(--text-secondary);
+  --color-accent: var(--accent);
+  --color-panel-bg: var(--panel-bg);
+  --color-prelayer-1: var(--prelayer-1);
+  --color-prelayer-2: var(--prelayer-2);
+
+  /* Animations */
+  --animate-cell-ripple: cell-ripple 0.5s ease-out forwards;
+
+  @keyframes cell-ripple {
+    0% {
+      opacity: 0.4;
+      background-color: var(--accent);
+    }
+    50% {
+      opacity: 0.8;
+      background-color: var(--accent);
+    }
+    100% {
+      opacity: 0.4;
+      background-color: transparent;
+    }
+  }
 }
 
-html[data-theme="light"] {
-  --background: var(--background-light);
-  --text-primary: var(--text-primary-light);
-  --text-secondary: var(--text-secondary-light);
-  --accent: var(--accent-light);
-  --panel-bg: var(--panel-bg-light);
-  --prelayer-1: var(--prelayer-1-light);
-  --prelayer-2: var(--prelayer-2-light);
-}
+/* 4. Base Styles */
+@layer base {
+  html {
+    scroll-behavior: smooth;
+  }
 
-html[data-theme="dark"] {
-  --background: var(--background-dark);
-  --text-primary: var(--text-primary-dark);
-  --text-secondary: var(--text-secondary-dark);
-  --accent: var(--accent-dark);
-  --panel-bg: var(--panel-bg-dark);
-  --prelayer-1: var(--prelayer-1-dark);
-  --prelayer-2: var(--prelayer-2-dark);
-}
+  /* Theme Mapping */
+  html[data-theme="light"] {
+    --background: var(--background-light);
+    --text-primary: var(--text-primary-light);
+    --text-secondary: var(--text-secondary-light);
+    --accent: var(--accent-light);
+    --panel-bg: var(--panel-bg-light);
+    --prelayer-1: var(--prelayer-1-light);
+    --prelayer-2: var(--prelayer-2-light);
+  }
 
-*,
-*::before,
-*::after {
-  box-sizing: border-box;
-}
+  html[data-theme="dark"] {
+    --background: var(--background-dark);
+    --text-primary: var(--text-primary-dark);
+    --text-secondary: var(--text-secondary-dark);
+    --accent: var(--accent-dark);
+    --panel-bg: var(--panel-bg-dark);
+    --prelayer-1: var(--prelayer-1-dark);
+    --prelayer-2: var(--prelayer-2-dark);
+  }
 
-body {
-  margin: 0;
-  font-family: var(--font-sans);
-  background-color: var(--background);
-  color: var(--text-primary);
-  transition: background-color 0.3s ease, color 0.3s ease;
-  overflow-x: hidden;
-}
-
-.popup-close-button {
-  position: absolute;
-  top: 1.5rem;
-  right: 2rem;
-  width: 48px;
-  height: 48px;
-  background-color: var(--panel-bg);
-  border: none;
-  border-radius: 50%;
-  cursor: pointer;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  gap: 5px;
-  z-index: 60; /* Higher than the popup itself */
-  transition: background-color 0.3s ease, transform 0.3s ease;
-  box-shadow: 0 0 20px 2px rgba(0, 0, 0, 0.05);
-}
-
-.popup-close-button:hover {
-  transform: scale(1.05);
-}
-
-.popup-close-button .line {
-  width: 22px;
-  height: 2px;
-  background-color: var(--text-primary);
-  border-radius: 2px;
-  transform-origin: center;
-}
-
-.popup-close-button .line-1 {
-  transform: translateY(3.5px) rotate(45deg);
-}
-
-.popup-close-button .line-2 {
-  transform: translateY(-3.5px) rotate(-45deg);
+  /* Standard CSS for body to avoid @apply order issues */
+  body {
+    background-color: var(--background);
+    color: var(--text-primary);
+    font-family: var(--font-sans);
+    overflow-x: hidden;
+    transition-property: color, background-color, border-color;
+    transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+    transition-duration: 300ms;
+  }
 }

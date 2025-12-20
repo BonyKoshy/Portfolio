@@ -1,4 +1,4 @@
-// src/App.jsx
+// src/app/App.jsx
 import React, { useEffect, useState, useContext } from "react";
 import { ThemeProvider, ThemeContext } from "@/features/theme/ThemeContext";
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
@@ -31,14 +31,14 @@ import {
 import { motion, AnimatePresence } from "framer-motion";
 
 // Component Imports
-import DotGrid from "@/shared/ui/DotGrid/DotGrid";
+import Squares from "@/shared/ui/Squares/Squares";
 import Header from "@/widgets/Header/Header";
 import GradualBlur from "@/shared/ui/GradualBlur/GradualBlur";
 import Hero from "@/widgets/Hero/Hero";
 import About from "@/widgets/About/About";
 import CertificatesList from "@/widgets/CertificatesList/CertificatesList";
 import Projects from "@/widgets/Projects/Projects";
-import Contact from "@/widgets/Contact/Contact.jsx";
+import Contact from "@/widgets/Contact/Contact";
 import PrivacyPolicy from "@/pages/PrivacyPolicy";
 import "@/shared/ui/ContextMenu.css";
 import ReloadPrompt from "./ReloadPrompt";
@@ -55,34 +55,42 @@ import ServiceUnavailable from "@/pages/ServiceUnavailable";
 import GatewayTimeout from "@/pages/GatewayTimeout";
 
 function AppContent() {
-  const { theme, toggleTheme, setTheme } = useContext(ThemeContext);
-  const [dotColors, setDotColors] = useState({ base: "", active: "" });
+  const { theme, setTheme } = useContext(ThemeContext);
   const [openAccordion, setOpenAccordion] = useState(null);
+
+  const [gridColors, setGridColors] = useState({
+    border: "transparent",
+    hover: "transparent",
+  });
 
   useEffect(() => {
     console.log(
       "%cHello, curious developer!",
       "color: #4597ff; font-size: 20px; font-weight: bold;"
     );
-    console.log(
-      "%cThanks for checking out my portfolio's code. Feel free to connect with me on LinkedIn!",
-      "color: #4597ff; font-size: 18px; font-weight: italics;"
-    );
   }, []);
 
   useEffect(() => {
-    const updateDotColors = () => {
+    const updateColors = () => {
       setTimeout(() => {
-        const base = getComputedStyle(document.documentElement)
-          .getPropertyValue("--text-secondary")
-          .trim();
-        const active = getComputedStyle(document.documentElement)
-          .getPropertyValue("--accent")
-          .trim();
-        setDotColors({ base, active });
-      }, 100);
+        const computedStyle = getComputedStyle(document.documentElement);
+        const accent = computedStyle.getPropertyValue("--accent").trim();
+
+        if (theme === "dark") {
+          setGridColors({
+            // SUBTLE UPDATE: Lower opacity for the new #020202 background
+            border: "rgba(255, 255, 255, 0.05)",
+            hover: accent ? `${accent}15` : "rgba(69, 151, 255, 0.1)",
+          });
+        } else {
+          setGridColors({
+            border: "rgba(0, 0, 0, 0.06)",
+            hover: "rgba(0, 0, 0, 0.04)",
+          });
+        }
+      }, 50);
     };
-    updateDotColors();
+    updateColors();
   }, [theme]);
 
   const handleSectionNavigation = (sectionId) => {
@@ -92,37 +100,29 @@ function AppContent() {
     }
   };
 
-  const toggleAccordion = (section) => {
-    setOpenAccordion(openAccordion === section ? null : section);
-  };
-
-  // Handler that prevents the menu from closing
   const handleAccordionToggle = (e, section) => {
     e.preventDefault();
-    toggleAccordion(section);
+    setOpenAccordion(openAccordion === section ? null : section);
   };
 
   return (
     <ContextMenu>
       <ContextMenuTrigger>
         <Header />
-        <div className="app-background">
-          {dotColors.base && dotColors.active && (
-            <DotGrid
-              key={theme}
-              dotSize={3}
-              gap={90}
-              baseColor={dotColors.base}
-              activeColor={dotColors.active}
-              proximity={120}
-              shockRadius={200}
-              shockStrength={0.3}
-              resistance={800}
-              returnDuration={0.7}
-            />
-          )}
+
+        {/* Background Layer: Squares */}
+        <div className="fixed inset-0 w-full h-full -z-10 bg-background transition-colors duration-300">
+          <Squares
+            key={theme}
+            speed={0.2} // Slowed down slightly for elegance
+            squareSize={50}
+            direction="diagonal"
+            borderColor={gridColors.border}
+            hoverFillColor={gridColors.hover}
+          />
         </div>
-        <main>
+
+        <main className="relative z-1">
           <GradualBlur
             preset="header"
             target="page"
@@ -130,45 +130,38 @@ function AppContent() {
             height="120px"
             zIndex={1}
           />
-          <div className="content-wrapper">
-            <Hero />
-            <About />
-            <CertificatesList />
-            <Projects />
+          <div className="content-wrapper p-8 max-w-1280px mx-auto md:p-6 pointer-events-none">
+            <div className="pointer-events-auto">
+              <Hero />
+              <About />
+              <CertificatesList />
+              <Projects />
+            </div>
           </div>
-          <Contact />
+          <div className="pointer-events-auto">
+            <Contact />
+          </div>
         </main>
       </ContextMenuTrigger>
 
       <ContextMenuContent className="w-64">
-        {/* These items will close the menu on click */}
+        {/* Navigation History */}
         <ContextMenuItem onSelect={() => window.history.back()}>
-          <ArrowLeft className="h-4 w-4" />
-          <span>Back</span>
+          <ArrowLeft className="h-4 w-4" /> <span>Back</span>
         </ContextMenuItem>
         <ContextMenuItem
           onSelect={() => window.history.forward()}
-          disabled={!window.history.length > 1}
+          disabled={window.history.length <= 1}
         >
-          <ArrowRight className="h-4 w-4" />
-          <span>Forward</span>
+          <ArrowRight className="h-4 w-4" /> <span>Forward</span>
         </ContextMenuItem>
         <ContextMenuItem onSelect={() => window.location.reload()}>
-          <RefreshCw className="h-4 w-4" />
-          <span>Reload</span>
-        </ContextMenuItem>
-        <ContextMenuItem
-          onSelect={() =>
-            alert("Developer Tools can be opened with F12 or Ctrl+Shift+I")
-          }
-        >
-          <Code className="h-4 w-4" />
-          <span>Developer Tools</span>
+          <RefreshCw className="h-4 w-4" /> <span>Reload</span>
         </ContextMenuItem>
 
         <ContextMenuSeparator />
 
-        {/* This item will NOT close the menu on click */}
+        {/* Theme Accordion */}
         <ContextMenuItem onSelect={(e) => handleAccordionToggle(e, "theme")}>
           {theme === "dark" ? (
             <Moon className="h-4 w-4" />
@@ -177,9 +170,9 @@ function AppContent() {
           )}
           <span>Theme</span>
           {openAccordion === "theme" ? (
-            <ChevronUp className="h-4 w-4 ml-auto" />
+            <ChevronUp className="ml-auto h-4 w-4" />
           ) : (
-            <ChevronDown className="h-4 w-4 ml-auto" />
+            <ChevronDown className="ml-auto h-4 w-4" />
           )}
         </ContextMenuItem>
         <AnimatePresence>
@@ -188,37 +181,33 @@ function AppContent() {
               initial={{ height: 0, opacity: 0 }}
               animate={{ height: "auto", opacity: 1 }}
               exit={{ height: 0, opacity: 0 }}
-              className="accordion-content"
+              className="overflow-hidden"
             >
               <ContextMenuRadioGroup value={theme} className="pl-6">
-                {/* These items WILL close the menu on click */}
                 <ContextMenuRadioItem
                   value="light"
                   onSelect={() => setTheme("light")}
                 >
-                  <Sun className="h-4 w-4" />
-                  <span>Light</span>
+                  <Sun className="h-4 w-4" /> <span>Light</span>
                 </ContextMenuRadioItem>
                 <ContextMenuRadioItem
                   value="dark"
                   onSelect={() => setTheme("dark")}
                 >
-                  <Moon className="h-4 w-4" />
-                  <span>Dark</span>
+                  <Moon className="h-4 w-4" /> <span>Dark</span>
                 </ContextMenuRadioItem>
               </ContextMenuRadioGroup>
             </motion.div>
           )}
         </AnimatePresence>
 
-        {/* This item will NOT close the menu on click */}
+        {/* Sections Accordion */}
         <ContextMenuItem onSelect={(e) => handleAccordionToggle(e, "sections")}>
-          <LinkIcon className="h-4 w-4" />
-          <span>Sections</span>
+          <LinkIcon className="h-4 w-4" /> <span>Sections</span>
           {openAccordion === "sections" ? (
-            <ChevronUp className="h-4 w-4 ml-auto" />
+            <ChevronUp className="ml-auto h-4 w-4" />
           ) : (
-            <ChevronDown className="h-4 w-4 ml-auto" />
+            <ChevronDown className="ml-auto h-4 w-4" />
           )}
         </ContextMenuItem>
         <AnimatePresence>
@@ -227,39 +216,28 @@ function AppContent() {
               initial={{ height: 0, opacity: 0 }}
               animate={{ height: "auto", opacity: 1 }}
               exit={{ height: 0, opacity: 0 }}
-              className="accordion-content"
+              className="overflow-hidden"
             >
               <div className="pl-6">
-                {/* These items WILL close the menu on click */}
                 <ContextMenuItem
                   onSelect={() => handleSectionNavigation("home")}
                 >
-                  <Home className="h-4 w-4" />
-                  <span>Home</span>
+                  <Home className="h-4 w-4" /> <span>Home</span>
                 </ContextMenuItem>
                 <ContextMenuItem
                   onSelect={() => handleSectionNavigation("about")}
                 >
-                  <User className="h-4 w-4" />
-                  <span>About</span>
-                </ContextMenuItem>
-                <ContextMenuItem
-                  onSelect={() => handleSectionNavigation("certificates")}
-                >
-                  <Award className="h-4 w-4" />
-                  <span>Certificates</span>
+                  <User className="h-4 w-4" /> <span>About</span>
                 </ContextMenuItem>
                 <ContextMenuItem
                   onSelect={() => handleSectionNavigation("projects")}
                 >
-                  <Lightbulb className="h-4 w-4" />
-                  <span>Projects</span>
+                  <Lightbulb className="h-4 w-4" /> <span>Projects</span>
                 </ContextMenuItem>
                 <ContextMenuItem
                   onSelect={() => handleSectionNavigation("contact")}
                 >
-                  <Mail className="h-4 w-4" />
-                  <span>Contact</span>
+                  <Mail className="h-4 w-4" /> <span>Contact</span>
                 </ContextMenuItem>
               </div>
             </motion.div>
@@ -275,22 +253,8 @@ function App() {
     <ThemeProvider>
       <Router>
         <Routes>
-          {/* Core routes */}
           <Route path="/" element={<AppContent />} />
           <Route path="/privacy" element={<PrivacyPolicy />} />
-
-          {/* Error routes */}
-          <Route path="/401" element={<Unauthorized />} />
-          <Route path="/403" element={<Forbidden />} />
-          <Route path="/404" element={<NotFound />} />
-          <Route path="/408" element={<RequestTimeout />} />
-          <Route path="/429" element={<TooManyRequests />} />
-          <Route path="/500" element={<InternalServerError />} />
-          <Route path="/502" element={<BadGateway />} />
-          <Route path="/503" element={<ServiceUnavailable />} />
-          <Route path="/504" element={<GatewayTimeout />} />
-
-          {/* Catch-all route (redirect unknown paths to 404) */}
           <Route path="*" element={<NotFound />} />
         </Routes>
       </Router>
