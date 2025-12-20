@@ -6,7 +6,11 @@ import path from "path";
 // https://vite.dev/config/
 export default defineConfig({
   plugins: [
-    react(),
+    react({
+      babel: {
+        plugins: [["babel-plugin-react-compiler", {}]],
+      },
+    }),
     VitePWA({
       registerType: "autoUpdate",
       // Caches all assets and the offline page

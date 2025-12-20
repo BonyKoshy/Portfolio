@@ -1,8 +1,8 @@
-// src/pages/NotFound.jsx
+// src/pages/NotFound.tsx
 import React from "react";
 import ErrorPage from "./ErrorPage";
 
-function NotFound() {
+const NotFound: React.FC = () => {
   return (
     <ErrorPage
       errorCode="404"
@@ -11,6 +11,6 @@ function NotFound() {
       imageSrc="/404.svg"
     />
   );
-}
+};
 
 export default NotFound;

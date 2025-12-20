@@ -1,16 +1,16 @@
-// src/pages/BadGateway.jsx
+// src/pages/BadGateway.tsx
 import React from "react";
 import ErrorPage from "./ErrorPage";
 
-function BadGateway() {
+const BadGateway: React.FC = () => {
   return (
     <ErrorPage
       errorCode="502"
       title="Bad Gateway"
-      message="The server received an invalid response. Please try again later."
-      imageSrc="/502.png"
+      message="The server received an invalid response from the upstream server."
+      imageSrc="/502.svg"
     />
   );
-}
+};
 
 export default BadGateway;

@@ -1,16 +1,16 @@
-// src/pages/Unauthorized.jsx
+// src/pages/Unauthorized.tsx
 import React from "react";
 import ErrorPage from "./ErrorPage";
 
-function Unauthorized() {
+const Unauthorized: React.FC = () => {
   return (
     <ErrorPage
       errorCode="401"
       title="Unauthorized"
-      message="You are not authorized to view this page. Please log in or verify your credentials."
+      message="You do not have permission to access this page. Please log in."
       imageSrc="/401.svg"
     />
   );
-}
+};
 
 export default Unauthorized;

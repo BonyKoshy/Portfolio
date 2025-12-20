@@ -1,8 +1,7 @@
-// src/app/App.jsx
+// src/app/App.tsx
 import React, { useEffect, useState, useContext } from "react";
 import { ThemeProvider, ThemeContext } from "@/features/theme/ThemeContext";
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
-import "./App.css";
 import {
   ContextMenu,
   ContextMenuContent,
@@ -16,12 +15,10 @@ import {
   ArrowLeft,
   ArrowRight,
   RefreshCw,
-  Code,
   Sun,
   Moon,
   Home,
   User,
-  Award,
   Lightbulb,
   Mail,
   Link as LinkIcon,
@@ -46,17 +43,13 @@ import ReloadPrompt from "./ReloadPrompt";
 // Error Pages
 import Unauthorized from "@/pages/Unauthorized";
 import Forbidden from "@/pages/Forbidden";
+// import NotFound from "@/pages/NotFound"; // Assuming basic text for now because of error boundaries or keeping existing imports
 import NotFound from "@/pages/NotFound";
-import RequestTimeout from "@/pages/RequestTimeout";
-import TooManyRequests from "@/pages/TooManyRequests";
-import InternalServerError from "@/pages/InternalServerError";
-import BadGateway from "@/pages/BadGateway";
-import ServiceUnavailable from "@/pages/ServiceUnavailable";
-import GatewayTimeout from "@/pages/GatewayTimeout";
+// Other error pages can be imported as needed or lazy loaded
 
 function AppContent() {
-  const { theme, setTheme } = useContext(ThemeContext);
-  const [openAccordion, setOpenAccordion] = useState(null);
+  const { theme, setTheme } = useContext(ThemeContext) as { theme: string; setTheme: (t: string) => void };
+  const [openAccordion, setOpenAccordion] = useState<string | null>(null);
 
   const [gridColors, setGridColors] = useState({
     border: "transparent",
@@ -92,14 +85,14 @@ function AppContent() {
     updateColors();
   }, [theme]);
 
-  const handleSectionNavigation = (sectionId) => {
+  const handleSectionNavigation = (sectionId: string) => {
     const section = document.getElementById(sectionId);
     if (section) {
       section.scrollIntoView({ behavior: "smooth" });
     }
   };
 
-  const handleAccordionToggle = (e, section) => {
+  const handleAccordionToggle = (e: React.SyntheticEvent, section: string) => {
     e.preventDefault();
     setOpenAccordion(openAccordion === section ? null : section);
   };
@@ -110,10 +103,10 @@ function AppContent() {
         <Header />
 
         {/* Background Layer: Squares */}
-        <div className="fixed inset-0 w-full h-full -z-10 bg-background transition-colors duration-300">
+        <div className="fixed inset-0 w-full h-full -z-10 bg-background transition-colors duration-300 app-background">
           <Squares
-            key={theme}
-            speed={0.2} // Slowed down slightly for elegance
+            // key={theme} // Optimization: Squares usually handles theme changes via props, but forcing remount is safe if needed.
+            speed={0.2} 
             squareSize={50}
             direction="diagonal"
             borderColor={gridColors.border}
@@ -129,7 +122,7 @@ function AppContent() {
             height="120px"
             zIndex={1}
           />
-          <div className="content-wrapper p-8 max-w-1280px mx-auto md:p-6 pointer-events-none">
+          <div className="relative z-2 p-8 max-w-[1280px] mx-auto md:p-6 pointer-events-none content-wrapper">
             <div className="pointer-events-auto">
               <Hero />
               <About />
@@ -161,7 +154,7 @@ function AppContent() {
         <ContextMenuSeparator />
 
         {/* Theme Accordion */}
-        <ContextMenuItem onSelect={(e) => handleAccordionToggle(e, "theme")}>
+        <ContextMenuItem onSelect={(e: React.SyntheticEvent) => handleAccordionToggle(e, "theme")}>
           {theme === "dark" ? (
             <Moon className="h-4 w-4" />
           ) : (
@@ -201,7 +194,7 @@ function AppContent() {
         </AnimatePresence>
 
         {/* Sections Accordion */}
-        <ContextMenuItem onSelect={(e) => handleAccordionToggle(e, "sections")}>
+        <ContextMenuItem onSelect={(e: React.SyntheticEvent) => handleAccordionToggle(e, "sections")}>
           <LinkIcon className="h-4 w-4" /> <span>Sections</span>
           {openAccordion === "sections" ? (
             <ChevronUp className="ml-auto h-4 w-4" />
@@ -254,6 +247,8 @@ function App() {
         <Routes>
           <Route path="/" element={<AppContent />} />
           <Route path="/privacy" element={<PrivacyPolicy />} />
+          <Route path="/unauthorized" element={<Unauthorized />} />
+          <Route path="/forbidden" element={<Forbidden />} />
           <Route path="*" element={<NotFound />} />
         </Routes>
       </Router>
