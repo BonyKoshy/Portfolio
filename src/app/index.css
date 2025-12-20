@@ -1,7 +1,12 @@
 /* src/index.css */
-
+/* 1. Imports FIRST */
 @import url("https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap");
 @import url("https://fonts.googleapis.com/css2?family=Roboto+Flex:opsz,wght@8..144,100..1000&display=swap");
+
+/* 2. Tailwind directives SECOND */
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
 
 :root {
   /* --- CHANGE: Updated the default font to Poppins --- */

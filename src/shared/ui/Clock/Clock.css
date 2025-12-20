@@ -1,6 +1,0 @@
-.clock-display {
-  font-size: 0.9rem;
-  font-weight: 500;
-  color: var(--text-primary); /* This is the key line */
-  letter-spacing: 0.5px;
-}
