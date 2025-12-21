@@ -1,12 +1,12 @@
 import React, { createContext, useState, useEffect, ReactNode } from "react";
 
-interface ThemeContextType {
+export interface ThemeContextValues {
   theme: string;
   toggleTheme: () => void;
   setTheme: React.Dispatch<React.SetStateAction<string>>;
 }
 
-export const ThemeContext = createContext<ThemeContextType | undefined>(undefined);
+export const ThemeContext = createContext<ThemeContextValues | undefined>(undefined);
 
 interface ThemeProviderProps {
   children: ReactNode;

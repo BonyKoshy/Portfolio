@@ -7,30 +7,32 @@
 
 /* 2. CSS Variables (The Source of Truth) */
 :root {
-  /* --- LIGHT THEME --- */
-  --background-light: #f0f2f5;
-  --text-primary-light: #1c1e21;
-  --text-secondary-light: #323436;
-  --accent-light: #0866ff;
-  --panel-bg-light: rgba(255, 255, 255, 0.85);
-  --prelayer-1-light: #e0e2e5;
-  --prelayer-2-light: #cdd0d4;
+  /* --- LIGHT THEME (Titanium White / Zinc) --- */
+  /* Neutral, crisp, and professional. No blue tint in the background. */
+  --background-light: #f8f9fa;      /* Clean off-white (Zinc-50 style) */
+  --text-primary-light: #18181b;    /* Near-black (Zinc-900) */
+  --text-secondary-light: #52525b;  /* Neutral Grey (Zinc-600) */
+  --accent-light: #2563eb;          /* International Klein Blue (High contrast against grey) */
+  --panel-bg-light: rgba(255, 255, 255, 0.95);
+  --prelayer-1-light: #e4e4e7;      /* Light Grey (Zinc-200) */
+  --prelayer-2-light: #d4d4d8;      /* Mid Grey (Zinc-300) */
 
-  /* --- DARK THEME (75% Rich Black) --- */
-  --background-dark: #0a0a0a;
-  --text-primary-dark: #e4e6eb;
-  --text-secondary-dark: #c1c1c1;
-  --accent-dark: #4597ff;
-  --panel-bg-dark: rgba(28, 28, 28, 0.85);
-  --prelayer-1-dark: #202020;
-  --prelayer-2-dark: #353535;
+  /* --- DARK THEME (Deep Carbon / Desaturated AMOLED) --- */
+  /* Base is #09090b: A rich, neutral black. Not blue, not brown. */
+  --background-dark: #09090b;       /* Deep Carbon Black */
+  --text-primary-dark: #f4f4f5;     /* Soft White (Zinc-100) */
+  --text-secondary-dark: #a1a1aa;   /* Neutral Silver (Zinc-400) */
+  --accent-dark: #60a5fa;           /* Soft, luminous Sky Blue (less aggressive than electric blue) */
+  --panel-bg-dark: rgba(24, 24, 27, 0.85); /* Translucent Charcoal (Zinc-900) */
+  --prelayer-1-dark: #18181b;       /* Dark Grey Layer */
+  --prelayer-2-dark: #27272a;       /* Lighter Grey Layer */
 }
 
 /* 3. Tailwind v4 Theme Configuration */
 @theme {
   --font-sans: "Poppins", system-ui, sans-serif;
 
-  /* Register Colors as Utilities (enables bg-background, text-accent, etc.) */
+  /* Register Colors as Utilities */
   --color-background: var(--background);
   --color-text-primary: var(--text-primary);
   --color-text-secondary: var(--text-secondary);
@@ -62,7 +64,7 @@
 @layer base {
   html {
     scroll-behavior: smooth;
-    overflow-y: scroll; /* Force scrollbar to stick essentially locking the width */
+    overflow-y: scroll;
   }
 
   /* Theme Mapping */
@@ -86,23 +88,21 @@
     --prelayer-2: var(--prelayer-2-dark);
   }
 
-  /* Standard CSS for body to avoid @apply order issues */
   body {
     background-color: var(--background);
     color: var(--text-primary);
     font-family: var(--font-sans);
     overflow-x: hidden;
-    overflow-y: scroll !important; /* STRICTLY Force scrollbar to stay visible to prevent ANY layout shift */
+    overflow-y: scroll !important;
     transition-property: color, background-color, border-color;
     transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
     transition-duration: 300ms;
-    padding-right: 0 !important; /* Prevent layout shift from libraries adding padding when scrollbar disappears */
+    padding-right: 0 !important;
   }
 
-  /* Custom Scrollbar */
+  /* Custom Scrollbar - Now strictly neutral grey */
   ::-webkit-scrollbar {
-    width: 0.625rem; /* 10px */
-    height: 0.625rem;
+    width: 0.625rem;
   }
 
   ::-webkit-scrollbar-track {

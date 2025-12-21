@@ -19,6 +19,8 @@ function Header() {
   const socialItems = [
     { label: "LinkedIn", link: "https://linkedin.com/in/bonykoshy" },
     { label: "GitHub", link: "https://github.com/BonyKoshy" },
+    { label: "Instagram", link: "https://instagram.com" },
+    { label: "X", link: "https://x.com" },
   ];
 
   const handleMenuToggle = () => {
@@ -31,7 +33,7 @@ function Header() {
         <div className="header-left">
           <Clock />
         </div>
-        <div className="header-right">
+        <div className="header-right relative z-[60]">
           <ThemeToggle />
           <button
             className={`menu-toggle-button ${isMenuOpen ? "is-open" : ""}`}
