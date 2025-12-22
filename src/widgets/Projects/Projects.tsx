@@ -1,48 +1,47 @@
 import React, { useState, useRef } from "react";
 import { AnimatePresence, motion } from "framer-motion";
-import { Carousel } from "@/widgets/ProjectsCarousel/ProjectsCarousel";
+import { Carousel, ProjectCardData } from "@/widgets/ProjectsCarousel/ProjectsCarousel";
 import SectionTitle from "@/shared/ui/SectionTitle/SectionTitle";
 import { useOutsideClick } from "@/shared/lib/use-outside-click";
 import { Github, ExternalLink, Download } from "lucide-react";
-import "./Projects.css";
 
 // This is the detailed content that appears in the popup
-const ProjectContent = ({ project }) => (
+const ProjectContent: React.FC<{ project: ProjectCardData }> = ({ project }) => (
   <>
     <motion.img
       layoutId={`card-image-${project.title}`}
       src={project.content.imageSrc}
       alt={project.title}
-      className="project-content-image"
+      className="w-[55%] h-auto object-cover rounded-[1rem] shrink-0 aspect-[16/10] max-[768px]:w-full"
     />
-    <div className="project-content-details">
-      <div className="project-content-header">
-        <motion.h3 layoutId={`card-title-${project.title}`}>
+    <div className="flex flex-col">
+      <div className="mb-4">
+        <motion.h3 layoutId={`card-title-${project.title}`} className="text-[2rem] font-bold m-0 max-[768px]:text-[1.5rem]">
           {project.title}
         </motion.h3>
         <motion.p
           layoutId={`card-category-${project.title}`}
-          className="project-year"
+          className="text-[1rem] font-medium text-(--text-secondary) mt-1"
         >
           {project.year}
         </motion.p>
       </div>
-      <motion.p className="project-content-description">
+      <motion.p className="text-[1rem] text-(--text-secondary) leading-[1.7] mb-6 flex-grow">
         {project.content.description}
       </motion.p>
-      <motion.div className="project-content-tech">
+      <motion.div className="flex flex-wrap gap-2 mb-8">
         {project.content.tech.map((t, i) => (
-          <span key={i} className="tech-tag">
+          <span key={i} className="bg-(--prelayer-2) px-3 py-1 rounded-full text-[0.8rem] font-medium">
             {t}
           </span>
         ))}
       </motion.div>
-      <motion.div className="project-buttons">
+      <motion.div className="flex gap-4 mt-auto">
         <a
           href={project.githubLink}
           target="_blank"
           rel="noopener noreferrer"
-          className="project-btn github"
+          className="inline-flex items-center gap-2 px-6 py-3 rounded-lg font-semibold text-[1rem] transition-all duration-300 border-2 border-transparent bg-transparent text-(--text-secondary) border-(--text-secondary) hover:text-(--accent) hover:border-(--accent) no-underline"
         >
           <Github size={18} /> GitHub
         </a>
@@ -51,7 +50,7 @@ const ProjectContent = ({ project }) => (
             href={project.liveLink}
             target="_blank"
             rel="noopener noreferrer"
-            className="project-btn live"
+            className="inline-flex items-center gap-2 px-6 py-3 rounded-lg font-semibold text-[1rem] transition-all duration-300 border-2 border-transparent bg-(--accent) text-(--background) hover:bg-transparent hover:text-(--accent) hover:border-(--accent) no-underline"
           >
             <ExternalLink size={18} /> Live Link
           </a>
@@ -61,7 +60,7 @@ const ProjectContent = ({ project }) => (
             href={project.liveLink}
             target="_blank"
             rel="noopener noreferrer"
-            className="project-btn live"
+            className="inline-flex items-center gap-2 px-6 py-3 rounded-lg font-semibold text-[1rem] transition-all duration-300 border-2 border-transparent bg-(--accent) text-(--background) hover:bg-transparent hover:text-(--accent) hover:border-(--accent) no-underline"
           >
             <Download size={18} /> Install
           </a>
@@ -71,8 +70,8 @@ const ProjectContent = ({ project }) => (
   </>
 );
 
-// Your updated project data
-const data = [
+// Updated project data
+const data: ProjectCardData[] = [
   {
     category: "Web Application",
     title: "Marvel Multiverse Timeline",
@@ -169,8 +168,8 @@ const data = [
 ];
 
 export default function Projects() {
-  const [activeCard, setActiveCard] = useState(null);
-  const ref = useRef(null);
+  const [activeCard, setActiveCard] = useState<ProjectCardData | null>(null);
+  const ref = useRef<HTMLDivElement>(null);
   useOutsideClick(ref, () => setActiveCard(null));
 
   const cards = data.map((card) => ({
@@ -179,7 +178,7 @@ export default function Projects() {
   }));
 
   return (
-    <section id="projects" className="content-section">
+    <section id="projects" className="w-full max-w-7xl mx-auto px-4 py-[60px] text-(--text-primary)">
       <SectionTitle title="My Projects" />
       <Carousel items={cards} onCardClick={setActiveCard} />
 
@@ -190,26 +189,26 @@ export default function Projects() {
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               exit={{ opacity: 0 }}
-              className="project-overlay"
+              className="fixed inset-0 bg-black/70 backdrop-blur-md z-40"
               onClick={() => setActiveCard(null)}
             />
             <div
-              className="expanded-card-wrapper"
+              className="fixed inset-0 grid place-items-center z-50 p-4"
               onClick={() => setActiveCard(null)}
             >
               <motion.div
                 layoutId={`card-${activeCard.title}`}
                 ref={ref}
-                className="expanded-card-content"
+                className="bg-(--background) text-(--text-primary) w-full max-w-[60rem] max-h-[90vh] overflow-y-auto rounded-[1.5rem] flex gap-8 p-8 relative max-[768px]:flex-col max-[768px]:p-6"
                 onClick={(e) => e.stopPropagation()}
               >
                 <button
-                  className="popup-close-button"
+                  className="absolute top-4 right-4 bg-transparent border-none cursor-pointer p-2 flex flex-col justify-center items-center gap-[6px] z-50 group"
                   onClick={() => setActiveCard(null)}
                   aria-label="Close project details"
                 >
-                  <span className="line line-1"></span>
-                  <span className="line line-2"></span>
+                  <span className="w-6 h-[2px] bg-(--text-secondary) rounded-sm transform rotate-45 translate-y-[4px] transition-colors duration-200 group-hover:bg-(--accent)"></span>
+                  <span className="w-6 h-[2px] bg-(--text-secondary) rounded-sm transform -rotate-45 translate-y-[-4px] transition-colors duration-200 group-hover:bg-(--accent)"></span>
                 </button>
                 <ProjectContent project={activeCard} />
               </motion.div>

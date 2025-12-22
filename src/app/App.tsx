@@ -37,7 +37,7 @@ import CertificatesList from "@/widgets/CertificatesList/CertificatesList";
 import Projects from "@/widgets/Projects/Projects";
 import Contact from "@/widgets/Contact/Contact";
 import PrivacyPolicy from "@/pages/PrivacyPolicy";
-import "@/shared/ui/ContextMenu.css";
+// css removed
 import ReloadPrompt from "./ReloadPrompt";
 
 // Error Pages

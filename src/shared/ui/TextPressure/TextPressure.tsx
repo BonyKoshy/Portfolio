@@ -1,8 +1,23 @@
-// src/components/TextPressure/TextPressure.jsx
+import React, { useEffect, useRef, useState } from "react";
 
-import { useEffect, useRef, useState } from "react";
+interface TextPressureProps {
+  text?: string;
+  fontFamily?: string;
+  fontUrl?: string;
+  width?: boolean;
+  weight?: boolean;
+  italic?: boolean;
+  alpha?: boolean;
+  flex?: boolean;
+  stroke?: boolean;
+  scale?: boolean;
+  textColor?: string;
+  strokeColor?: string;
+  className?: string;
+  minFontSize?: number;
+}
 
-const TextPressure = ({
+const TextPressure: React.FC<TextPressureProps> = ({
   text = "Compressa",
   fontFamily = "Compressa VF",
   fontUrl = "https://res.cloudinary.com/dr6lvwubh/raw/upload/v1529908256/CompressaPRO-GX.woff2",
@@ -18,9 +33,9 @@ const TextPressure = ({
   className = "",
   minFontSize = 24,
 }) => {
-  const containerRef = useRef(null);
-  const titleRef = useRef(null);
-  const spansRef = useRef([]);
+  const containerRef = useRef<HTMLDivElement>(null);
+  const titleRef = useRef<HTMLHeadingElement>(null);
+  const spansRef = useRef<(HTMLSpanElement | null)[]>([]);
   const mouseRef = useRef({ x: 0, y: 0 });
   const cursorRef = useRef({ x: 0, y: 0 });
   const [fontSize, setFontSize] = useState(minFontSize);
@@ -28,18 +43,18 @@ const TextPressure = ({
   const [lineHeight, setLineHeight] = useState(1);
   const chars = text.split("");
 
-  const dist = (a, b) => {
+  const dist = (a: { x: number; y: number }, b: { x: number; y: number }) => {
     const dx = b.x - a.x;
     const dy = b.y - a.y;
     return Math.sqrt(dx * dx + dy * dy);
   };
 
   useEffect(() => {
-    const handleMouseMove = (e) => {
+    const handleMouseMove = (e: MouseEvent) => {
       cursorRef.current.x = e.clientX;
       cursorRef.current.y = e.clientY;
     };
-    const handleTouchMove = (e) => {
+    const handleTouchMove = (e: TouchEvent) => {
       const t = e.touches[0];
       if (t) {
         cursorRef.current.x = t.clientX;
@@ -47,9 +62,8 @@ const TextPressure = ({
       }
     };
     window.addEventListener("mousemove", handleMouseMove);
-    // ------------------- FIX: REMOVED { passive: true } -------------------
     window.addEventListener("touchmove", handleTouchMove);
-    // ---------------------------------------------------------------------
+
     if (containerRef.current) {
       const { left, top, width, height } =
         containerRef.current.getBoundingClientRect();
@@ -92,7 +106,7 @@ const TextPressure = ({
   }, [scale, text]);
 
   useEffect(() => {
-    let rafId;
+    let rafId: number;
     const animate = () => {
       mouseRef.current.x += (cursorRef.current.x - mouseRef.current.x) / 15;
       mouseRef.current.y += (cursorRef.current.y - mouseRef.current.y) / 15;
@@ -114,7 +128,7 @@ const TextPressure = ({
           const charCenter = charPositions[i];
           const d = dist(mouseRef.current, charCenter);
 
-          const getAttr = (distance, minVal, maxVal) => {
+          const getAttr = (distance: number, minVal: number, maxVal: number) => {
             const val = maxVal - Math.abs((maxVal * distance) / maxDist);
             return Math.max(minVal, val + minVal);
           };
@@ -124,7 +138,7 @@ const TextPressure = ({
           const italVal = italic ? getAttr(d, 0, 1).toFixed(2) : 0;
           const alphaVal = alpha ? getAttr(d, 0, 1).toFixed(2) : 1;
 
-          span.style.opacity = alphaVal;
+          span.style.opacity = String(alphaVal);
           span.style.fontVariationSettings = `'wght' ${wght}, 'wdth' ${wdth}, 'ital' ${italVal}`;
         });
       }
@@ -201,7 +215,9 @@ const TextPressure = ({
         {chars.map((char, i) => (
           <span
             key={i}
-            ref={(el) => (spansRef.current[i] = el)}
+            ref={(el) => {
+                spansRef.current[i] = el;
+            }}
             data-char={char}
             style={{
               display: "inline-block",

@@ -1,11 +1,13 @@
-// src/components/VariableProximity/VariableProximity.jsx
-import { forwardRef, useMemo, useRef, useEffect } from "react";
+import React, { forwardRef, useMemo, useRef, useEffect } from "react";
 import { motion } from "framer-motion";
-import "./VariableProximity.css";
+// CSS import removed
 
-function useAnimationFrame(callback) {
+// Interface for useAnimationFrame callback
+type FrameCallback = () => void;
+
+function useAnimationFrame(callback: FrameCallback) {
   useEffect(() => {
-    let frameId;
+    let frameId: number;
     const loop = () => {
       callback();
       frameId = requestAnimationFrame(loop);
@@ -15,10 +17,16 @@ function useAnimationFrame(callback) {
   }, [callback]);
 }
 
-function useMousePositionRef(containerRef) {
-  const positionRef = useRef({ x: 0, y: 0 });
+// Interface for mouse position
+interface MousePosition {
+  x: number;
+  y: number;
+}
+
+function useMousePositionRef(containerRef: React.RefObject<HTMLElement | null>) {
+  const positionRef = useRef<MousePosition>({ x: 0, y: 0 });
   useEffect(() => {
-    const updatePosition = (x, y) => {
+    const updatePosition = (x: number, y: number) => {
       if (containerRef?.current) {
         const rect = containerRef.current.getBoundingClientRect();
         positionRef.current = { x: x - rect.left, y: y - rect.top };
@@ -26,17 +34,16 @@ function useMousePositionRef(containerRef) {
         positionRef.current = { x, y };
       }
     };
-    const handleMouseMove = (ev) => updatePosition(ev.clientX, ev.clientY);
-    const handleTouchMove = (ev) => {
+    const handleMouseMove = (ev: MouseEvent) => updatePosition(ev.clientX, ev.clientY);
+    const handleTouchMove = (ev: TouchEvent) => {
       const touch = ev.touches[0];
       if (touch) {
         updatePosition(touch.clientX, touch.clientY);
       }
     };
     window.addEventListener("mousemove", handleMouseMove);
-    // ------------------- FIX: REMOVED { passive: true } -------------------
     window.addEventListener("touchmove", handleTouchMove);
-    // ---------------------------------------------------------------------
+    
     return () => {
       window.removeEventListener("mousemove", handleMouseMove);
       window.removeEventListener("touchmove", handleTouchMove);
@@ -45,7 +52,20 @@ function useMousePositionRef(containerRef) {
   return positionRef;
 }
 
-const VariableProximity = forwardRef((props, ref) => {
+interface VariableProximityProps {
+  label: string;
+  fromFontVariationSettings: string;
+  toFontVariationSettings: string;
+  containerRef: React.RefObject<HTMLElement | null>;
+  radius?: number;
+  falloff?: "linear" | "exponential" | "gaussian";
+  className?: string;
+  onClick?: (event: React.MouseEvent<HTMLSpanElement>) => void;
+  style?: React.CSSProperties;
+  [key: string]: any; // Allow other props
+}
+
+const VariableProximity = forwardRef<HTMLSpanElement, VariableProximityProps>((props, ref) => {
   const {
     label,
     fromFontVariationSettings,
@@ -59,18 +79,20 @@ const VariableProximity = forwardRef((props, ref) => {
     ...restProps
   } = props;
 
-  const letterRefs = useRef([]);
+  const letterRefs = useRef<(HTMLSpanElement | null)[]>([]);
   const mousePositionRef = useMousePositionRef(containerRef);
 
   const parsedSettings = useMemo(() => {
-    const parseSettings = (settingsStr) =>
+    const parseSettings = (settingsStr: string) =>
       new Map(
         settingsStr
           .split(",")
           .map((s) => s.trim())
           .map((s) => {
-            const [name, value] = s.split(" ");
-            return [name.replace(/['"]/g, ""), parseFloat(value)];
+            const parts = s.split(" ");
+            const name = parts[0];
+            const value = parts[1];
+            return [name.replace(/['"]/g, ""), parseFloat(value)] as [string, number];
           })
       );
     const fromSettings = parseSettings(fromFontVariationSettings);
@@ -82,10 +104,10 @@ const VariableProximity = forwardRef((props, ref) => {
     }));
   }, [fromFontVariationSettings, toFontVariationSettings]);
 
-  const calculateDistance = (x1, y1, x2, y2) =>
+  const calculateDistance = (x1: number, y1: number, x2: number, y2: number) =>
     Math.sqrt((x2 - x1) ** 2 + (y2 - y1) ** 2);
 
-  const calculateFalloff = (distance) => {
+  const calculateFalloff = (distance: number) => {
     const norm = Math.min(Math.max(1 - distance / radius, 0), 1);
     switch (falloff) {
       case "exponential":
@@ -98,7 +120,6 @@ const VariableProximity = forwardRef((props, ref) => {
     }
   };
 
-  // --- OPTIMIZATION START ---
   useAnimationFrame(() => {
     if (!containerRef?.current) return;
 
@@ -140,13 +161,11 @@ const VariableProximity = forwardRef((props, ref) => {
           .join(", ");
       }
 
-      // Only write to the DOM if the setting has changed
       if (letterRef.style.fontVariationSettings !== newSettings) {
         letterRef.style.fontVariationSettings = newSettings;
       }
     });
   });
-  // --- OPTIMIZATION END ---
 
   const words = label.split(" ");
   let letterIndex = 0;
@@ -154,17 +173,17 @@ const VariableProximity = forwardRef((props, ref) => {
   return (
     <span
       ref={ref}
-      className={`${className} variable-proximity`}
+      className={`${className} font-['Roboto_Flex']`}
       onClick={onClick}
       style={{ display: "inline", ...style }}
       {...restProps}
     >
-      {words.map((word, wordIndex) => (
+      {words.map((word: string, wordIndex: number) => (
         <span
           key={wordIndex}
           style={{ display: "inline-block", whiteSpace: "nowrap" }}
         >
-          {word.split("").map((letter) => {
+          {word.split("").map((letter: string) => {
             const currentLetterIndex = letterIndex++;
             return (
               <motion.span
@@ -174,7 +193,7 @@ const VariableProximity = forwardRef((props, ref) => {
                 }}
                 style={{
                   display: "inline-block",
-                  fontVariationSettings: fromFontVariationSettings, // Start with initial settings
+                  fontVariationSettings: fromFontVariationSettings,
                 }}
                 aria-hidden="true"
               >

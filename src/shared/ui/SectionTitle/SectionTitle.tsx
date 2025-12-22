@@ -1,14 +1,16 @@
-// src/components/SectionTitle/SectionTitle.jsx
 import React, { useRef } from "react";
 import VariableProximity from "../VariableProximity/VariableProximity";
-import "./SectionTitle.css";
 
-function SectionTitle({ title }) {
-  const containerRef = useRef(null);
+interface SectionTitleProps {
+  title: string;
+}
+
+const SectionTitle: React.FC<SectionTitleProps> = ({ title }) => {
+  const containerRef = useRef<HTMLDivElement>(null);
 
   return (
-    <div className="section-title-container" ref={containerRef}>
-      <h2 className="section-title">
+    <div className="w-full mb-8" ref={containerRef}>
+      <h2 className="font-sans text-[clamp(1.2rem,3vw,1.5rem)] text-(--accent) m-0 font-semibold uppercase tracking-[1.5px]">
         <VariableProximity
           label={title}
           fromFontVariationSettings="'wght' 300, 'opsz' 12"
@@ -19,6 +21,6 @@ function SectionTitle({ title }) {
       </h2>
     </div>
   );
-}
+};
 
 export default SectionTitle;
