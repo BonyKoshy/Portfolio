@@ -1,9 +1,7 @@
-// src/components/About/TechCarousel/TechCarousel.jsx
 import React, { useState, useEffect, useRef } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { Zap } from "lucide-react";
-import LogoLoop from "@/shared/ui/LogoLoop/LogoLoop";
-import useResponsiveValue from "@/shared/lib/useResponsiveValue";
+import LogoLoop from "@/shared/ui/LogoLoop/LogoLoop"; // Ensure import matches export
 import {
   SiReact,
   SiJavascript,
@@ -31,9 +29,14 @@ import { FaJava, FaAws, FaWindows, FaLinux, FaUbuntu } from "react-icons/fa";
 import { TbBrandCSharp, TbBrandPowershell } from "react-icons/tb";
 import { DiVisualstudio } from "react-icons/di";
 import { BiLogoVisualStudio } from "react-icons/bi";
-import "./TechCarousel.css";
 
-const techLogos = [
+// Define logo type for TechCarousel
+type TechLogo = {
+  node: React.ReactNode;
+  title: string;
+};
+
+const techLogos: TechLogo[] = [
   { node: <SiHtml5 />, title: "HTML5" },
   { node: <SiCss3 />, title: "CSS3" },
   { node: <SiJavascript />, title: "JavaScript" },
@@ -66,26 +69,22 @@ const techLogos = [
   { node: <SiFigma />, title: "Figma" },
 ];
 
-function TechCarousel() {
+const TechCarousel: React.FC = () => {
   const [expanded, setExpanded] = useState(false);
   const [selectedTitle, setSelectedTitle] = useState("");
-  const [isHovered, setIsHovered] = useState(false);
-  const cardRef = useRef(null);
+  const cardRef = useRef<HTMLDivElement>(null);
 
-  const handleLogoClick = (title) => {
-    // Only set the new title and expand state
+  const handleLogoClick = (title: string) => {
     setSelectedTitle(title);
     setExpanded(true);
   };
 
-  // This effect now handles closing the card when clicking anywhere
   useEffect(() => {
-    const handleClickOutside = (event) => {
-      // If the card is expanded and the click is outside the card's area
+    const handleClickOutside = (event: MouseEvent) => {
       if (
         expanded &&
         cardRef.current &&
-        !cardRef.current.contains(event.target)
+        !cardRef.current.contains(event.target as Node)
       ) {
         setExpanded(false);
       }
@@ -96,44 +95,55 @@ function TechCarousel() {
     };
   }, [expanded]);
 
-  const isPaused = isHovered || expanded;
+  // If expanded, pause speed (set to 0)
+  const currentSpeed = expanded ? 0 : 100;
 
   return (
     <div
       ref={cardRef}
-      className={`tech-carousel-card ${expanded ? "expanded" : ""}`}
-      // Add a click handler to the entire card to close it
+      className={`relative flex flex-col justify-start gap-6 transition-all duration-400 overflow-hidden h-full cursor-pointer p-0 ${expanded ? "" : ""}`}
       onClick={() => {
         if (expanded) setExpanded(false);
       }}
     >
-      <div className="tech-carousel-header">
+        {/* Force height style from CSS if needed, but flex grow handles it usually */}
+        
+      <div className="flex items-center gap-3 text-(--text-primary) w-full justify-start pl-6 pt-6">
         <Zap size={20} />
-        <h3>Tech Stack</h3>
+        <h3 className="text-base font-semibold m-0">Tech Stack</h3>
       </div>
+      
       <div
-        className="logo-loop-container"
-        // Stop clicks inside the loop from closing the card immediately
+        className="w-full grow flex items-center px-6 pb-4 cursor-default"
         onClick={(e) => e.stopPropagation()}
       >
         <LogoLoop
           logos={techLogos}
-          speed={50}
-          logoHeight={useResponsiveValue(60, 40)}
-          gap={useResponsiveValue(60, 32)}
-          fadeOut
+          speed={currentSpeed}
+          logoHeight={60}
+          gap={60}
+          fadeOut={true}
           fadeOutColor="var(--panel-bg)"
-          onLogoClick={handleLogoClick}
-          activeLogoTitle={selectedTitle}
-          isPaused={isPaused}
-          onMouseEnter={() => setIsHovered(true)}
-          onMouseLeave={() => setIsHovered(false)}
+          renderItem={(item) => {
+             // Cast item to TechLogo to access title since LogoItem is the union type
+             const techItem = item as TechLogo;
+             return (
+                <div 
+                    onClick={() => handleLogoClick(techItem.title || "")}
+                    className="cursor-pointer transition-transform duration-200 hover:scale-110 active:scale-95 text-(--text-secondary) hover:text-(--accent)"
+                >
+                    {techItem.node}
+                </div>
+             );
+          }}
+          ariaLabel="Technology partners"
         />
       </div>
+      
       <AnimatePresence>
         {expanded && (
           <motion.div
-            className="selected-tech-title"
+            className="text-(--text-primary) font-bold text-[1.5rem] md:text-[1.8rem] whitespace-nowrap overflow-hidden text-ellipsis px-6 pb-6 w-full leading-none text-center md:text-left"
             initial={{ opacity: 0, y: 10 }}
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: 10 }}
@@ -145,6 +155,6 @@ function TechCarousel() {
       </AnimatePresence>
     </div>
   );
-}
+};
 
 export default TechCarousel;

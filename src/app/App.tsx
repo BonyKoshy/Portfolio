@@ -56,9 +56,13 @@ function AppContent() {
     hover: "transparent",
   });
 
+  const loggedRef = React.useRef(false);
+
   useEffect(() => {
+    if (loggedRef.current) return;
+    loggedRef.current = true;
     console.log(
-      "%cHello, curious developer!",
+      "%cHello, curious developer! Feel Free to Contact Through LinkedIn",
       "color: #4597ff; font-size: 20px; font-weight: bold;"
     );
   }, []);
@@ -122,7 +126,7 @@ function AppContent() {
             height="120px"
             zIndex={1}
           />
-          <div className="relative z-2 p-8 max-w-[1280px] mx-auto md:p-6 pointer-events-none content-wrapper">
+          <div className="relative z-2 p-8 max-w-7xl mx-auto md:p-6 pointer-events-none content-wrapper">
             <div className="pointer-events-auto">
               <Hero />
               <About />

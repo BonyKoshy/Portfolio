@@ -1,10 +1,15 @@
-// src/components/About/AccordionCard/AccordionCard.jsx
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import "./AccordionCard.css";
+
+// Interface for the data structure
+interface AccordionItemData {
+  id: string;
+  title: string;
+  content: string;
+}
 
 // The content for your accordion sections
-const accordionData = [
+const accordionData: AccordionItemData[] = [
   {
     id: "item-1",
     title: "Background",
@@ -25,18 +30,29 @@ const accordionData = [
   },
 ];
 
+// Props interface for the AccordionItem component
+interface AccordionItemProps {
+  item: AccordionItemData;
+  expanded: string | false;
+  setExpanded: (id: string | false) => void;
+}
+
 // Reusable Accordion Item Component
-const AccordionItem = ({ item, expanded, setExpanded }) => {
+const AccordionItem: React.FC<AccordionItemProps> = ({
+  item,
+  expanded,
+  setExpanded,
+}) => {
   const isOpen = item.id === expanded;
   return (
-    <div className="accordion-item">
+    <div className="border-b border-(--prelayer-2) last:border-b-0">
       <motion.header
-        className="accordion-trigger"
+        className="flex justify-between items-center w-full py-4 text-lg font-semibold text-(--text-primary) cursor-pointer bg-none border-none"
         onClick={() => setExpanded(isOpen ? false : item.id)}
       >
         {item.title}
         <motion.div
-          className="accordion-icon"
+          className="text-(--accent)"
           animate={{ rotate: isOpen ? 180 : 0 }}
           transition={{ duration: 0.3 }}
         >
@@ -69,9 +85,11 @@ const AccordionItem = ({ item, expanded, setExpanded }) => {
               collapsed: { opacity: 0, height: 0 },
             }}
             transition={{ duration: 0.4, ease: [0.04, 0.62, 0.23, 0.98] }}
-            className="accordion-content"
+            className="overflow-hidden"
           >
-            <p>{item.content}</p>
+            <p className="pb-4 text-(--text-secondary) leading-relaxed">
+              {item.content}
+            </p>
           </motion.section>
         )}
       </AnimatePresence>
@@ -80,22 +98,27 @@ const AccordionItem = ({ item, expanded, setExpanded }) => {
 };
 
 // Main Card Component
-function AccordionCard() {
-  // Check window width once on initial render
-  const isDesktop = window.innerWidth > 768;
-  // This state ensures only one item is open at a time
-  const [expanded, setExpanded] = useState(isDesktop ? "item-1" : false);
+const AccordionCard: React.FC = () => {
+  // Initialize state with false safely
+  const [expanded, setExpanded] = useState<string | false>(false);
+
+  // Set initial state based on window width after mount to avoid hydration mismatch
+  useEffect(() => {
+    if (window.innerWidth > 768) {
+      setExpanded("item-1");
+    }
+  }, []);
 
   return (
-    <div className="accordion-card">
-      <div className="accordion-image-container">
+    <div className="flex flex-col gap-6 h-full w-full md:flex-row">
+      <div className="w-full shrink-0 md:w-[35%]">
         <img
           src="/profile-image.jpg"
           alt="Bony Koshy"
-          className="profile-image"
+          className="w-full h-full aspect-square object-cover rounded-xl"
         />
       </div>
-      <div className="accordion-container">
+      <div className="w-full flex flex-col">
         {accordionData.map((item) => (
           <AccordionItem
             key={item.id}
@@ -107,6 +130,6 @@ function AccordionCard() {
       </div>
     </div>
   );
-}
+};
 
 export default AccordionCard;
