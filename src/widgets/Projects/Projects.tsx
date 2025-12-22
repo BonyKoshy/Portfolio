@@ -2,72 +2,70 @@ import React, { useState, useRef } from "react";
 import { AnimatePresence, motion } from "framer-motion";
 import { Carousel, ProjectCardData } from "@/widgets/ProjectsCarousel/ProjectsCarousel";
 import SectionTitle from "@/shared/ui/SectionTitle/SectionTitle";
-import { useOutsideClick } from "@/shared/lib/use-outside-click";
+import { useOutsideClick } from "@/shared/lib";
 import { Github, ExternalLink, Download } from "lucide-react";
+import { Safari } from "@/shared/ui/magicui/safari";
+import { RippleButton } from "@/shared/ui/magicui/ripple-button";
 
 // This is the detailed content that appears in the popup
+// This is the detailed content that appears in the popup
 const ProjectContent: React.FC<{ project: ProjectCardData }> = ({ project }) => (
-  <>
-    <motion.img
-      layoutId={`card-image-${project.title}`}
-      src={project.content.imageSrc}
-      alt={project.title}
-      className="w-[55%] h-auto object-cover rounded-[1rem] shrink-0 aspect-[16/10] max-[768px]:w-full"
-    />
-    <div className="flex flex-col">
-      <div className="mb-4">
-        <motion.h3 layoutId={`card-title-${project.title}`} className="text-[2rem] font-bold m-0 max-[768px]:text-[1.5rem]">
-          {project.title}
-        </motion.h3>
-        <motion.p
-          layoutId={`card-category-${project.title}`}
-          className="text-[1rem] font-medium text-(--text-secondary) mt-1"
-        >
-          {project.year}
-        </motion.p>
-      </div>
-      <motion.p className="text-[1rem] text-(--text-secondary) leading-[1.7] mb-6 flex-grow">
-        {project.content.description}
-      </motion.p>
-      <motion.div className="flex flex-wrap gap-2 mb-8">
-        {project.content.tech.map((t, i) => (
-          <span key={i} className="bg-(--prelayer-2) px-3 py-1 rounded-full text-[0.8rem] font-medium">
-            {t}
-          </span>
-        ))}
-      </motion.div>
-      <motion.div className="flex gap-4 mt-auto">
-        <a
-          href={project.githubLink}
-          target="_blank"
-          rel="noopener noreferrer"
-          className="inline-flex items-center gap-2 px-6 py-3 rounded-lg font-semibold text-[1rem] transition-all duration-300 border-2 border-transparent bg-transparent text-(--text-secondary) border-(--text-secondary) hover:text-(--accent) hover:border-(--accent) no-underline"
-        >
-          <Github size={18} /> GitHub
-        </a>
-        {project.linkType === "link" && (
-          <a
-            href={project.liveLink}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="inline-flex items-center gap-2 px-6 py-3 rounded-lg font-semibold text-[1rem] transition-all duration-300 border-2 border-transparent bg-(--accent) text-(--background) hover:bg-transparent hover:text-(--accent) hover:border-(--accent) no-underline"
-          >
-            <ExternalLink size={18} /> Live Link
-          </a>
-        )}
-        {project.linkType === "install" && (
-          <a
-            href={project.liveLink}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="inline-flex items-center gap-2 px-6 py-3 rounded-lg font-semibold text-[1rem] transition-all duration-300 border-2 border-transparent bg-(--accent) text-(--background) hover:bg-transparent hover:text-(--accent) hover:border-(--accent) no-underline"
-          >
-            <Download size={18} /> Install
-          </a>
-        )}
-      </motion.div>
+  <div className="flex flex-row w-full h-full gap-0 overflow-hidden rounded-[1.5rem] bg-(--panel-bg) max-[768px]:flex-col">
+    {/* Safari Browser Mockup Area - 70% width */}
+    <div className="flex-grow h-full bg-transparent p-8 flex items-center justify-center max-[768px]:h-[40vh] max-[768px]:p-4">
+        <Safari
+            srcs={project.srcs || [project.content.imageSrc]} // Use detail image or fallback
+            url={project.liveLink || project.githubLink}
+            className="w-full h-auto max-h-full object-contain shadow-2xl"
+        />
     </div>
-  </>
+
+    {/* Sidebar Area - 30% width (approx) */}
+    <div className="w-[350px] shrink-0 h-full bg-(--panel-bg) border-l border-(--prelayer-2) p-8 flex flex-col overflow-y-auto max-[768px]:w-full max-[768px]:h-auto max-[768px]:border-l-0 max-[768px]:border-t">
+        <div className="mb-4">
+            <motion.h3 layoutId={`card-title-${project.title}`} className="text-[2rem] font-bold m-0 leading-tight">
+            {project.title}
+            </motion.h3>
+            <motion.p
+            layoutId={`card-category-${project.title}`}
+            className="text-[1rem] font-medium text-(--text-secondary) mt-2"
+            >
+            {project.year} • {project.category}
+            </motion.p>
+        </div>
+
+        <motion.p className="text-[1rem] text-(--text-secondary) leading-[1.7] mb-6 flex-grow">
+            {project.content.description}
+        </motion.p>
+
+        <motion.div className="flex flex-wrap gap-2 mb-8">
+            {project.content.tech.map((t, i) => (
+            <span key={i} className="bg-(--prelayer-2) px-3 py-1 rounded-full text-[0.8rem] font-medium">
+                {t}
+            </span>
+            ))}
+        </motion.div>
+
+        <div className="flex flex-col gap-3 mt-auto">
+            <RippleButton 
+                className="w-full flex items-center justify-center gap-2 bg-transparent border-2 border-(--text-primary) text-(--text-primary) hover:bg-(--text-primary) hover:text-(--background)"
+                onClick={() => window.open(project.githubLink, '_blank')}
+            >
+                <Github size={18} /> Source Code
+            </RippleButton>
+
+            {(project.linkType === "link" || project.linkType === "install") && (
+            <RippleButton 
+                className="w-full flex items-center justify-center gap-2 bg-(--accent) text-white border-2 border-transparent hover:opacity-90"
+                onClick={() => window.open(project.liveLink, '_blank')}
+            >
+                {project.linkType === "install" ? <Download size={18} /> : <ExternalLink size={18} />}
+                {project.linkType === "install" ? "Download App" : "Visit Website"}
+            </RippleButton>
+            )}
+        </div>
+    </div>
+  </div>
 );
 
 // Updated project data
@@ -101,6 +99,10 @@ const data: ProjectCardData[] = [
         "An AI-enhanced, multilingual chat application that offers real-time, one-on-one conversations with live translation, secure user authentication, and a responsive UI, all powered by Python and Flask.",
       tech: ["Python", "Flask", "Socket.IO", "JavaScript", "Bootstrap"],
     },
+    srcs: [
+        "/projects/connectly.png",
+        "/projects/connectly-details.png",
+    ]
   },
   {
     category: "Desktop Application",
@@ -199,7 +201,7 @@ export default function Projects() {
               <motion.div
                 layoutId={`card-${activeCard.title}`}
                 ref={ref}
-                className="bg-(--background) text-(--text-primary) w-full max-w-[60rem] max-h-[90vh] overflow-y-auto rounded-[1.5rem] flex gap-8 p-8 relative max-[768px]:flex-col max-[768px]:p-6"
+                className="bg-transparent w-full max-w-[70rem] h-[80vh] overflow-hidden flex relative"
                 onClick={(e) => e.stopPropagation()}
               >
                 <button

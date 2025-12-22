@@ -1,5 +1,6 @@
 import React, { useContext } from "react";
 import { ThemeContext } from "@/features/theme/ThemeContext";
+import type { ThemeContextValues } from "@/features/theme/ThemeContextDefinition";
 
 const ThemeToggle: React.FC = () => {
   const context = useContext(ThemeContext);
@@ -8,7 +9,7 @@ const ThemeToggle: React.FC = () => {
     throw new Error("ThemeToggle must be used within a ThemeProvider");
   }
 
-  const { theme, toggleTheme } = context as any;
+  const { theme, toggleTheme } = context as ThemeContextValues;
   const isChecked = theme === "light";
 
   return (
@@ -23,7 +24,44 @@ const ThemeToggle: React.FC = () => {
           className="peer appearance-none hidden"
           id="theme-switch"
           checked={isChecked}
-          onChange={toggleTheme}
+          onChange={(e) => {
+            if (!document.startViewTransition) {
+                toggleTheme();
+                return;
+            }
+
+            const label = e.target.parentElement;
+            const rect = label?.getBoundingClientRect();
+            const x = rect ? rect.left + rect.width / 2 : window.innerWidth / 2;
+            const y = rect ? rect.top + rect.height / 2 : window.innerHeight / 2;
+
+            const right = window.innerWidth - x;
+            const bottom = window.innerHeight - y;
+            const maxRadius = Math.hypot(
+                Math.max(x, right),
+                Math.max(y, bottom)
+            );
+
+            const transition = document.startViewTransition(() => {
+                toggleTheme();
+            });
+
+            transition.ready.then(() => {
+                document.documentElement.animate(
+                    {
+                        clipPath: [
+                            `circle(0px at ${x}px ${y}px)`,
+                            `circle(${maxRadius}px at ${x}px ${y}px)`,
+                        ],
+                    },
+                    {
+                        duration: 700, // Faster transition
+                        easing: "ease-in-out",
+                        pseudoElement: "::view-transition-new(root)",
+                    }
+                );
+            });
+          }}
         />
         
         <svg

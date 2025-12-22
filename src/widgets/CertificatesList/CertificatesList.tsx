@@ -2,7 +2,7 @@ import React, { useEffect, useId, useRef, useState } from "react";
 import { AnimatePresence, motion } from "framer-motion";
 import { Linkedin } from "lucide-react";
 import SectionTitle from "@/shared/ui/SectionTitle/SectionTitle";
-import { useOutsideClick } from "@/shared/lib/use-outside-click";
+import { useOutsideClick } from "@/shared/lib";
 
 interface CardData {
   description: string;

@@ -1,9 +1,14 @@
-import React, { useState } from "react";
+import React, { useOptimistic } from "react";
+import { useActionState } from "react"; // React 19
 import { SiGithub, SiLinkedin, SiInstagram, SiX } from "react-icons/si";
 import { motion } from "framer-motion";
 import { ArrowUpRight } from "lucide-react";
 import SectionTitle from "@/shared/ui/SectionTitle/SectionTitle";
+import { RippleButton } from "@/shared/ui/magicui/ripple-button";
+import { useNotification } from "@/features/notifications/NotificationContext";
+import { z } from "zod";
 
+// --- Types ---
 interface SocialLink {
   icon: React.ReactNode;
   href: string;
@@ -15,14 +20,26 @@ interface NavLink {
   href: string;
 }
 
-interface FormState {
-  name: string;
-  email: string;
-  message: string;
-  "bot-field"?: string;
-  [key: string]: string | undefined;
-}
+// --- Validation Schema ---
+const ContactSchema = z.object({
+  name: z.string().min(1, "Name is required"),
+  email: z.string().email("Invalid email address"),
+  message: z.string().min(1, "Message is required"),
+  "bot-field": z.string().optional(),
+});
 
+// --- Action State Type ---
+type ActionState = {
+  success?: boolean;
+  error?: string;
+  validationErrors?: {
+    name?: string[];
+    email?: string[];
+    message?: string[];
+  };
+} | null;
+
+// --- Data ---
 const socialLinks: SocialLink[] = [
   { icon: <SiGithub />, href: "https://github.com/BonyKoshy", label: "GitHub" },
   {
@@ -50,49 +67,68 @@ const navLinks: NavLink[] = [
 ];
 
 const Contact: React.FC = () => {
-  // State for the form
-  const [formState, setFormState] = useState<FormState>({
-    name: "",
-    email: "",
-    message: "",
-  });
-  const [submissionStatus, setSubmissionStatus] = useState<"success" | "error" | null>(null);
+  const { addNotification } = useNotification();
 
-  // --- Handler for input changes ---
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
-    setFormState({ ...formState, [e.target.name]: e.target.value });
-  };
+  // --- React 19 Action ---
+  const submitAction = async (_prevState: ActionState, formData: FormData): Promise<ActionState> => {
+    
+    // 1. Bot Protection
+    if (formData.get("bot-field")) {
+      return { success: true }; // Silently succeed
+    }
 
-  // --- Handler for form submission ---
-  const handleSubmit = (e: React.FormEvent) => {
-    e.preventDefault();
-    if (formState["bot-field"]) return;
+    // 2. Validate Input with Zod
+    const rawData = {
+      name: formData.get("name"),
+      email: formData.get("email"),
+      message: formData.get("message"),
+    };
 
-    const formData = new FormData();
-    formData.append("form-name", "contact");
-    Object.keys(formState).forEach((key) => {
-        const val = formState[key];
-        if (val !== undefined) {
-             formData.append(key, val);
-        }
-    });
+    const validated = ContactSchema.safeParse(rawData);
 
-    fetch("/", {
-      method: "POST",
-      headers: { "Content-Type": "application/x-www-form-urlencoded" },
-      body: new URLSearchParams(formData as any).toString(),
-    })
-      .then(() => {
-        setSubmissionStatus("success");
-        setFormState({ name: "", email: "", message: "" }); // Clear form
-        setTimeout(() => setSubmissionStatus(null), 5000); // Hide message after 5 seconds
-      })
-      .catch((error) => {
-        setSubmissionStatus("error");
-        console.error(error);
-        setTimeout(() => setSubmissionStatus(null), 5000); // Hide message after 5 seconds
+    if (!validated.success) {
+      return {
+        error: "Validation Failed",
+        validationErrors: validated.error.flatten().fieldErrors,
+      };
+    }
+
+    // 3. Perform Submission (Mock or Fetch)
+    try {
+      // Re-construct FormData for the Netlify/Fetch call
+      // In a real Server Action, we would call the email service directly here.
+      // Since this runs on client (for now), we proxy to fetch.
+      const submissionData = new URLSearchParams();
+      submissionData.append("form-name", "contact");
+      Object.entries(rawData).forEach(([key, val]) => {
+          if (val) submissionData.append(key, val as string);
       });
+
+      const response = await fetch("/", {
+        method: "POST",
+        headers: { "Content-Type": "application/x-www-form-urlencoded" },
+        body: submissionData.toString(),
+      });
+
+      if (!response.ok) throw new Error("Network response was not ok");
+      
+      addNotification("Message sent successfully!", "success");
+      return { success: true };
+
+    } catch (error) {
+      console.error(error);
+      addNotification("Failed to send message.", "error");
+      return { error: "Failed to send message. Please try again." };
+    }
   };
+
+  const [state, formAction, isPending] = useActionState(submitAction, null);
+
+  // Optimistic UI for button label (optional, as isPending covers it, but demonstrated for completeness)
+  const [optimisticLabel, setOptimisticLabel] = useOptimistic(
+    "Send",
+    (_cur, pending: boolean) => (pending ? "Sending..." : "Send")
+  );
 
   return (
     <section id="contact" className="relative pt-30 pb-8 px-8 min-h-[90vh] flex flex-col overflow-hidden text-(--text-primary)">
@@ -144,58 +180,59 @@ const Contact: React.FC = () => {
                 animate={{ opacity: 1, y: 0 }}
               >
                 <form
-                  name="contact"
-                  method="POST"
-                  data-netlify="true"
-                  data-netlify-honeypot="bot-field"
-                  onSubmit={handleSubmit}
+                  action={async (formData) => {
+                      setOptimisticLabel(true);
+                      await formAction(formData);
+                      setOptimisticLabel(false);
+                  }}
                   className="flex flex-col gap-4 flex-grow"
                 >
                   <input type="hidden" name="form-name" value="contact" />
                   <p hidden>
-                    <input name="bot-field" onChange={handleChange} />
+                    <input name="bot-field" />
                   </p>
 
-                  <input
-                    type="text"
-                    name="name"
-                    placeholder="Enter your name"
-                    value={formState.name}
-                    onChange={handleChange}
-                    required
-                    className="bg-(--prelayer-1) border border-(--prelayer-2) p-3 rounded-lg text-(--text-primary) font-inherit"
-                  />
-                  <input
-                    type="email"
-                    name="email"
-                    placeholder="Enter your email"
-                    value={formState.email}
-                    onChange={handleChange}
-                    required
-                    className="bg-(--prelayer-1) border border-(--prelayer-2) p-3 rounded-lg text-(--text-primary) font-inherit"
-                  />
-                  <textarea
-                    name="message"
-                    placeholder="Write a message"
-                    value={formState.message}
-                    onChange={handleChange}
-                    required
-                    className="bg-(--prelayer-1) border border-(--prelayer-2) p-3 rounded-lg text-(--text-primary) font-inherit min-h-[1px] resize-y flex-grow"
-                  ></textarea>
-                  <button type="submit" className="bg-(--accent) text-(--background) border-none p-3 rounded-lg font-semibold cursor-pointer transition-opacity duration-200 hover:opacity-80">
-                    Send
-                  </button>
+                  <div className="flex flex-col gap-1">
+                    <input
+                      type="text"
+                      name="name"
+                      placeholder="Enter your name"
+                      required
+                      className="bg-(--prelayer-1) border border-(--prelayer-2) p-3 rounded-lg text-(--text-primary) font-inherit aria-[invalid=true]:border-red-500"
+                      aria-invalid={!!state?.validationErrors?.name}
+                    />
+                     {state?.validationErrors?.name && <span className="text-sm text-red-500">{state.validationErrors.name[0]}</span>}
+                  </div>
 
-                  {submissionStatus === "success" && (
-                    <p className="text-green-500 font-medium text-center">
-                      Thanks! Your message has been sent.
-                    </p>
-                  )}
-                  {submissionStatus === "error" && (
-                    <p className="text-red-500 font-medium text-center">
-                      Oops! Something went wrong.
-                    </p>
-                  )}
+                  <div className="flex flex-col gap-1">
+                    <input
+                      type="email"
+                      name="email"
+                      placeholder="Enter your email"
+                      required
+                      className="bg-(--prelayer-1) border border-(--prelayer-2) p-3 rounded-lg text-(--text-primary) font-inherit aria-[invalid=true]:border-red-500"
+                      aria-invalid={!!state?.validationErrors?.email}
+                    />
+                    {state?.validationErrors?.email && <span className="text-sm text-red-500">{state.validationErrors.email[0]}</span>}
+                  </div>
+
+                  <div className="flex flex-col gap-1 flex-grow">
+                    <textarea
+                      name="message"
+                      placeholder="Write a message"
+                      required
+                      className="bg-(--prelayer-1) border border-(--prelayer-2) p-3 rounded-lg text-(--text-primary) font-inherit min-h-[1px] resize-y flex-grow aria-[invalid=true]:border-red-500"
+                       aria-invalid={!!state?.validationErrors?.message}
+                    ></textarea>
+                     {state?.validationErrors?.message && <span className="text-sm text-red-500">{state.validationErrors.message[0]}</span>}
+                  </div>
+
+                  <RippleButton type="submit" disabled={isPending} className="bg-(--accent) text-(--background) border-none p-3 rounded-lg font-semibold cursor-pointer transition-opacity duration-200 hover:opacity-80 disabled:opacity-50">
+                    {optimisticLabel}
+                  </RippleButton>
+                  
+                  {state?.success && <p className="text-green-500 text-center">Message sent successfully!</p>}
+                  {state?.error && <p className="text-red-500 text-center">{state.error}</p>}
                 </form>
               </motion.div>
             </div>

@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
+import { PixelImage } from "@/shared/ui/magicui/pixel-image";
 
 // Interface for the data structure
 interface AccordionItemData {
@@ -112,10 +113,10 @@ const AccordionCard: React.FC = () => {
   return (
     <div className="flex flex-col gap-6 h-full w-full md:flex-row">
       <div className="w-full shrink-0 md:w-[35%]">
-        <img
+        <PixelImage
           src="/profile-image.jpg"
           alt="Bony Koshy"
-          className="w-full h-full aspect-square object-cover rounded-xl"
+          className="w-full h-full aspect-square rounded-xl"
         />
       </div>
       <div className="w-full flex flex-col">

@@ -1,0 +1,52 @@
+
+> com.bonykoshy.portfolio@0.0.0 lint
+> eslint .
+
+
+E:\Project\Portfolio\src\app\ReloadPrompt.tsx
+  13:28  warning  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+
+E:\Project\Portfolio\src\features\theme\ThemeContext.tsx
+  9:14  warning  Fast refresh only works when a file only exports components. Move your React context(s) to a separate file  react-refresh/only-export-components
+
+E:\Project\Portfolio\src\features\theme\ui\ThemeToggle.tsx
+  11:45  warning  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+
+E:\Project\Portfolio\src\shared\ui\LogoLoop\LogoLoop.tsx
+   75:6   warning  React Hook useEffect was passed a dependency list that is not an array literal. This means we can't statically verify whether you've passed the correct dependencies                                                                              react-hooks/exhaustive-deps
+   75:6   warning  React Hook useEffect has missing dependencies: 'callback' and 'elements'. Either include them or remove the dependency array. If 'callback' changes too often, find the parent component that defines it and wrap that definition in useCallback  react-hooks/exhaustive-deps
+  115:6   warning  React Hook useEffect was passed a dependency list that is not an array literal. This means we can't statically verify whether you've passed the correct dependencies                                                                              react-hooks/exhaustive-deps
+  115:6   warning  React Hook useEffect has missing dependencies: 'onLoad' and 'seqRef'. Either include them or remove the dependency array. If 'onLoad' changes too often, find the parent component that defines it and wrap that definition in useCallback        react-hooks/exhaustive-deps
+  194:6   warning  React Hook useEffect has a missing dependency: 'trackRef'. Either include it or remove the dependency array                                                                                                                                       react-hooks/exhaustive-deps
+  336:37  warning  Unexpected any. Specify a different type                                                                                                                                                                                                          @typescript-eslint/no-explicit-any
+  336:60  warning  Unexpected any. Specify a different type                                                                                                                                                                                                          @typescript-eslint/no-explicit-any
+  338:23  warning  Unexpected any. Specify a different type                                                                                                                                                                                                          @typescript-eslint/no-explicit-any
+  350:27  warning  Unexpected any. Specify a different type                                                                                                                                                                                                          @typescript-eslint/no-explicit-any
+  351:30  warning  Unexpected any. Specify a different type                                                                                                                                                                                                          @typescript-eslint/no-explicit-any
+  352:29  warning  Unexpected any. Specify a different type                                                                                                                                                                                                          @typescript-eslint/no-explicit-any
+  353:29  warning  Unexpected any. Specify a different type                                                                                                                                                                                                          @typescript-eslint/no-explicit-any
+  354:30  warning  Unexpected any. Specify a different type                                                                                                                                                                                                          @typescript-eslint/no-explicit-any
+  355:27  warning  Unexpected any. Specify a different type                                                                                                                                                                                                          @typescript-eslint/no-explicit-any
+  356:29  warning  Unexpected any. Specify a different type                                                                                                                                                                                                          @typescript-eslint/no-explicit-any
+  364:23  warning  Unexpected any. Specify a different type                                                                                                                                                                                                          @typescript-eslint/no-explicit-any
+  364:50  warning  Unexpected any. Specify a different type                                                                                                                                                                                                          @typescript-eslint/no-explicit-any
+  365:23  warning  Unexpected any. Specify a different type                                                                                                                                                                                                          @typescript-eslint/no-explicit-any
+  365:44  warning  Unexpected any. Specify a different type                                                                                                                                                                                                          @typescript-eslint/no-explicit-any
+  367:32  warning  Unexpected any. Specify a different type                                                                                                                                                                                                          @typescript-eslint/no-explicit-any
+  375:28  warning  Unexpected any. Specify a different type                                                                                                                                                                                                          @typescript-eslint/no-explicit-any
+
+E:\Project\Portfolio\src\shared\ui\VariableProximity\VariableProximity.tsx
+  65:18  warning  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+
+E:\Project\Portfolio\src\types\declarations.d.ts
+   5:18  warning  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+  34:31  warning  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+
+E:\Project\Portfolio\src\vite-env.d.ts
+  4:18  warning  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+
+E:\Project\Portfolio\src\widgets\Contact\Contact.tsx
+  83:45  warning  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+
+Γ£û 29 problems (0 errors, 29 warnings)
+

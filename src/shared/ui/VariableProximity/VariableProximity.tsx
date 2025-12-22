@@ -90,8 +90,8 @@ const VariableProximity = forwardRef<HTMLSpanElement, VariableProximityProps>((p
           .map((s) => s.trim())
           .map((s) => {
             const parts = s.split(" ");
-            const name = parts[0];
-            const value = parts[1];
+            const name = parts[0] || "";
+            const value = parts[1] || "0";
             return [name.replace(/['"]/g, ""), parseFloat(value)] as [string, number];
           })
       );

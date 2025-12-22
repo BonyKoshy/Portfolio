@@ -1,10 +1,12 @@
 import { useRegisterSW } from "virtual:pwa-register/react";
-import { X, RefreshCw } from "lucide-react";
+import { RefreshCw } from "lucide-react";
+import { useEffect } from "react";
+import { useNotification } from "@/features/notifications/NotificationContext";
 
 function ReloadPrompt() {
   const {
     offlineReady: [offlineReady, setOfflineReady],
-    needRefresh: [needRefresh, setNeedRefresh],
+    needRefresh: [needRefresh],
     updateServiceWorker,
   } = useRegisterSW({
     onRegistered(r: ServiceWorkerRegistration | undefined) {
@@ -15,46 +17,33 @@ function ReloadPrompt() {
     },
   });
 
-  const close = () => {
-    setOfflineReady(false);
-    setNeedRefresh(false);
-  };
+  const { addNotification } = useNotification();
 
-  if (!offlineReady && !needRefresh) {
-    return null;
-  }
+  useEffect(() => {
+    if (offlineReady) {
+        addNotification("App ready to work offline", "success");
+        setOfflineReady(false);
+    }
+  }, [offlineReady, addNotification, setOfflineReady]);
 
-  return (
-    <div
-      className="fixed right-4 bottom-4 m-4 p-3 border border-(--prelayer-2) rounded-lg z-[1000] text-left shadow-[0_4px_12px_rgba(0,0,0,0.1)] bg-(--panel-bg) text-(--text-primary) flex items-center gap-4"
-      role="alert"
-    >
-      <div className="flex-grow">
-        {offlineReady ? (
-          <span>App ready to work offline</span>
-        ) : (
-          <span>New content available, click on reload button to update.</span>
-        )}
-      </div>
-      <div className="flex gap-2">
-        {needRefresh && (
-          <button
-            className="flex items-center gap-2 bg-(--accent) text-(--background) border-none rounded-md px-4 py-2 cursor-pointer font-medium"
-            onClick={() => updateServiceWorker(true)}
-          >
-            <RefreshCw size={16} />
-            Reload
-          </button>
-        )}
-        <button
-          className="flex items-center gap-2 bg-(--prelayer-1) text-(--text-secondary) border-none rounded-md px-4 py-2 cursor-pointer font-medium"
-          onClick={() => close()}
-        >
-          <X size={16} />
-        </button>
-      </div>
-    </div>
-  );
+  useEffect(() => {
+      if (needRefresh) {
+          addNotification(
+            <div className="flex flex-col gap-2">
+                <span>New content available.</span>
+                <button 
+                    onClick={() => updateServiceWorker(true)}
+                    className="flex items-center gap-2 bg-white text-blue-500 px-3 py-1 rounded font-bold text-sm w-fit"
+                >
+                    <RefreshCw size={14} /> Reload
+                </button>
+            </div>,
+            "info"
+          )
+      }
+  }, [needRefresh, addNotification, updateServiceWorker]);
+
+  return null;
 }
 
 export default ReloadPrompt;

@@ -1,12 +1,9 @@
-import React, { createContext, useState, useEffect, ReactNode } from "react";
+import React, { useState, useEffect, ReactNode } from "react";
+import { ThemeContext } from "./ThemeContextDefinition";
+import type { ThemeContextValues } from "./ThemeContextDefinition";
 
-export interface ThemeContextValues {
-  theme: string;
-  toggleTheme: () => void;
-  setTheme: React.Dispatch<React.SetStateAction<string>>;
-}
-
-export const ThemeContext = createContext<ThemeContextValues | undefined>(undefined);
+export type { ThemeContextValues };
+export { ThemeContext };
 
 interface ThemeProviderProps {
   children: ReactNode;

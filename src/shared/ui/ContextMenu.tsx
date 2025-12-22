@@ -2,7 +2,7 @@
 import * as React from "react";
 import * as ContextMenuPrimitive from "@radix-ui/react-context-menu";
 import { Check, ChevronRight, Circle } from "lucide-react";
-import { cn } from "@/shared/lib/utils";
+import { cn } from "@/shared/lib";
 
 const ContextMenu = ContextMenuPrimitive.Root;
 const ContextMenuTrigger = ContextMenuPrimitive.Trigger;
@@ -20,7 +20,7 @@ const ContextMenuSubTrigger = React.forwardRef<
   <ContextMenuPrimitive.SubTrigger
     ref={ref}
     className={cn(
-      "flex cursor-default select-none items-center rounded-lg px-3 py-2.5 text-sm font-medium outline-none text-(--text-secondary) focus:bg-(--accent) focus:text-white data-[state=open]:bg-(--accent) data-[state=open]:text-white gap-3 transition-colors duration-100",
+      "flex cursor-default select-none items-center rounded-lg px-3 py-2.5 text-sm font-medium outline-none text-(--text-secondary) focus:bg-(--accent) focus:text-white hover:bg-(--accent) hover:text-white data-[state=open]:bg-(--accent) data-[state=open]:text-white gap-3 transition-colors duration-100",
       inset && "pl-8",
       className
     )}
@@ -39,7 +39,7 @@ const ContextMenuSubContent = React.forwardRef<
   <ContextMenuPrimitive.SubContent
     ref={ref}
     className={cn(
-      "min-w-[12rem] overflow-hidden rounded-xl border-none bg-(--panel-bg) p-2 text-(--text-primary) shadow-[0_10px_38px_-10px_rgba(22,23,24,0.35),0_10px_20px_-15px_rgba(22,23,24,0.2)] backdrop-blur-md animate-in fade-in zoom-in-95 data-[side=bottom]:slide-in-from-top-1 data-[side=left]:slide-in-from-right-1 data-[side=right]:slide-in-from-left-1 data-[side=top]:slide-in-from-bottom-1",
+      "min-w-[12rem] z-[9999] overflow-hidden rounded-xl border-none bg-(--panel-bg) p-2 text-(--text-primary) shadow-[0_10px_38px_-10px_rgba(22,23,24,0.35),0_10px_20px_-15px_rgba(22,23,24,0.2)] backdrop-blur-md data-[state=open]:animate-[scale-in_0.2s_ease-out] data-[side=bottom]:slide-in-from-top-1 data-[side=left]:slide-in-from-right-1 data-[side=right]:slide-in-from-left-1 data-[side=top]:slide-in-from-bottom-1",
       className
     )}
     {...props}
@@ -55,7 +55,7 @@ const ContextMenuContent = React.forwardRef<
     <ContextMenuPrimitive.Content
       ref={ref}
       className={cn(
-        "min-w-[12rem] overflow-hidden rounded-xl border-none bg-(--panel-bg) p-2 text-(--text-primary) shadow-[0_10px_38px_-10px_rgba(22,23,24,0.35),0_10px_20px_-15px_rgba(22,23,24,0.2)] backdrop-blur-md animate-in fade-in zoom-in-95",
+        "min-w-[12rem] z-[9999] overflow-hidden rounded-xl border-none bg-(--panel-bg) p-2 text-(--text-primary) shadow-[0_10px_38px_-10px_rgba(22,23,24,0.35),0_10px_20px_-15px_rgba(22,23,24,0.2)] backdrop-blur-md data-[state=open]:animate-[scale-in_0.2s_ease-out]",
         className
       )}
       {...props}
@@ -73,7 +73,7 @@ const ContextMenuItem = React.forwardRef<
   <ContextMenuPrimitive.Item
     ref={ref}
     className={cn(
-      "relative flex cursor-default select-none items-center rounded-lg px-3 py-2.5 text-sm font-medium outline-none text-(--text-secondary) focus:bg-(--accent) focus:text-white data-[disabled]:pointer-events-none data-[disabled]:text-(--prelayer-2) gap-3 transition-colors duration-100",
+      "relative flex cursor-default select-none items-center rounded-lg px-3 py-2.5 text-sm font-medium outline-none text-(--text-secondary) focus:bg-(--accent) focus:text-white hover:bg-(--accent) hover:text-white data-[disabled]:pointer-events-none data-[disabled]:text-(--prelayer-2) gap-3 transition-colors duration-100",
       inset && "pl-8",
       className
     )}
@@ -85,11 +85,11 @@ ContextMenuItem.displayName = ContextMenuPrimitive.Item.displayName;
 const ContextMenuCheckboxItem = React.forwardRef<
   React.ElementRef<typeof ContextMenuPrimitive.CheckboxItem>,
   React.ComponentPropsWithoutRef<typeof ContextMenuPrimitive.CheckboxItem>
->(({ className, children, checked, ...props }, ref) => (
+>(({ className, children, checked = false, ...props }, ref) => (
   <ContextMenuPrimitive.CheckboxItem
     ref={ref}
     className={cn(
-      "relative flex cursor-default select-none items-center rounded-lg py-2.5 pl-8 pr-3 text-sm font-medium outline-none text-(--text-secondary) focus:bg-(--accent) focus:text-white data-[disabled]:pointer-events-none data-[disabled]:text-(--prelayer-2) transition-colors duration-100",
+      "relative flex cursor-default select-none items-center rounded-lg py-2.5 pl-8 pr-3 text-sm font-medium outline-none text-(--text-secondary) focus:bg-(--accent) focus:text-white hover:bg-(--accent) hover:text-white data-[disabled]:pointer-events-none data-[disabled]:text-(--prelayer-2) transition-colors duration-100",
       className
     )}
     checked={checked}
@@ -113,7 +113,7 @@ const ContextMenuRadioItem = React.forwardRef<
   <ContextMenuPrimitive.RadioItem
     ref={ref}
     className={cn(
-      "relative flex cursor-default select-none items-center rounded-lg py-2.5 pl-8 pr-3 text-sm font-medium outline-none text-(--text-secondary) focus:bg-(--accent) focus:text-white data-[disabled]:pointer-events-none data-[disabled]:text-(--prelayer-2) transition-colors duration-100",
+      "relative flex cursor-default select-none items-center rounded-lg py-2.5 pl-8 pr-3 text-sm font-medium outline-none text-(--text-secondary) focus:bg-(--accent) focus:text-white hover:bg-(--accent) hover:text-white data-[disabled]:pointer-events-none data-[disabled]:text-(--prelayer-2) transition-colors duration-100",
       className
     )}
     {...props}

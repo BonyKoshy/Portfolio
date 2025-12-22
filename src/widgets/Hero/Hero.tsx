@@ -2,6 +2,7 @@ import React, { useRef } from "react";
 import { FileUser, ArrowDown } from "lucide-react";
 import TextPressure from "@/shared/ui/TextPressure/TextPressure";
 import VariableProximity from "@/shared/ui/VariableProximity/VariableProximity";
+import { RippleButton } from "@/shared/ui/magicui/ripple-button";
 
 const Hero: React.FC = () => {
   const heroRef = useRef<HTMLElement>(null);
@@ -45,22 +46,23 @@ const Hero: React.FC = () => {
           </p>
 
           <div className="flex gap-4 mt-6">
-            <a
-              href="/resume.pdf"
-              target="_blank"
-              rel="noopener noreferrer"
+            <RippleButton
+              onClick={() => window.open("/resume.pdf", "_blank")}
               className="inline-flex items-center gap-2 px-6 py-3 rounded-lg no-underline font-semibold text-lg transition-all duration-300 border-2 border-transparent bg-(--accent) text-(--background) hover:bg-transparent hover:text-(--accent) hover:border-(--accent) group"
             >
               <FileUser size={20} className="transition-transform duration-300 group-hover:translate-y-0.5 max-[640px]:hidden" />
               <span>My Resume</span>
-            </a>
-            <a
-              href="#about"
+            </RippleButton>
+            <RippleButton
+              onClick={() => {
+                const element = document.getElementById("about");
+                if (element) element.scrollIntoView({ behavior: "smooth" });
+              }}
               className="inline-flex items-center gap-2 px-6 py-3 rounded-lg no-underline font-semibold text-lg transition-all duration-300 border-2 bg-transparent text-(--text-secondary) border-(--text-secondary) hover:text-(--accent) hover:border-(--accent) group"
             >
               <ArrowDown size={20} className="transition-transform duration-300 group-hover:translate-y-0.5 max-[640px]:hidden" />
               <span>View More</span>
-            </a>
+            </RippleButton>
           </div>
         </div>
       </div>

@@ -1,15 +1,23 @@
 import { defineConfig } from "vite";
 import react from "@vitejs/plugin-react";
+import { reactRouter } from "@react-router/dev/vite";
 import { VitePWA } from "vite-plugin-pwa";
+import { ViteImageOptimizer } from "vite-plugin-image-optimizer";
 import path from "path";
 
 // https://vite.dev/config/
 export default defineConfig({
   plugins: [
+    // reactRouter(),
+    // Note: Framework Mode configured but disabled until server runtime is set up.
+    // See react-router.config.ts and src/root.tsx
     react({
       babel: {
         plugins: [["babel-plugin-react-compiler", {}]],
       },
+    }),
+    ViteImageOptimizer({
+      /* verify default options or configure as needed */
     }),
     VitePWA({
       registerType: "autoUpdate",

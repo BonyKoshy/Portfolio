@@ -26,18 +26,21 @@ import {
   ChevronUp,
 } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
+import { SmoothCursor } from "@/shared/ui/magicui/smooth-cursor";
+import { NotificationProvider, useNotification } from "@/features/notifications/NotificationContext";
+import { AnimatedList } from "@/shared/ui/magicui/animated-list";
+import { cn } from "@/shared/lib";
 
 // Component Imports
-import Squares from "@/shared/ui/Squares/Squares";
-import Header from "@/widgets/Header/Header";
-import GradualBlur from "@/shared/ui/GradualBlur/GradualBlur";
-import Hero from "@/widgets/Hero/Hero";
-import About from "@/widgets/About/About";
-import CertificatesList from "@/widgets/CertificatesList/CertificatesList";
-import Projects from "@/widgets/Projects/Projects";
-import Contact from "@/widgets/Contact/Contact";
+import { Squares } from "@/shared/ui/Squares";
+import { Header } from "@/widgets/Header";
+import { GradualBlur } from "@/shared/ui/GradualBlur";
+import { Hero } from "@/widgets/Hero";
+import { About } from "@/widgets/About";
+import { CertificatesList } from "@/widgets/CertificatesList";
+import { Projects } from "@/widgets/Projects";
+import { Contact } from "@/widgets/Contact";
 import PrivacyPolicy from "@/pages/PrivacyPolicy";
-// css removed
 import ReloadPrompt from "./ReloadPrompt";
 
 // Error Pages
@@ -244,19 +247,45 @@ function AppContent() {
   );
 }
 
+// Notification Renderer Component
+function NotificationListRenderer() {
+  const { notifications } = useNotification();
+  return (
+    <AnimatedList>
+      {notifications.map((n) => (
+        <div
+          key={n.id}
+          className={cn(
+            "pointer-events-auto flex w-[350px] items-center gap-3 rounded-xl p-4 shadow-lg transition-all",
+            n.type === "error" ? "bg-red-500 text-white" : "bg-white text-black dark:bg-zinc-900 dark:text-white"
+          )}
+        >
+          {/* Simple Icon based on type */}
+          <div className={cn("h-2 w-2 rounded-full", n.type === "error" ? "bg-white" : "bg-blue-500")} />
+          <p className="text-sm font-medium">{n.message}</p>
+        </div>
+      ))}
+    </AnimatedList>
+  );
+}
+
 function App() {
   return (
     <ThemeProvider>
-      <Router>
-        <Routes>
-          <Route path="/" element={<AppContent />} />
-          <Route path="/privacy" element={<PrivacyPolicy />} />
-          <Route path="/unauthorized" element={<Unauthorized />} />
-          <Route path="/forbidden" element={<Forbidden />} />
-          <Route path="*" element={<NotFound />} />
-        </Routes>
-      </Router>
-      <ReloadPrompt />
+      <NotificationProvider>
+        <Router>
+            <Routes>
+            <Route path="/" element={<AppContent />} />
+            <Route path="/privacy" element={<PrivacyPolicy />} />
+            <Route path="/unauthorized" element={<Unauthorized />} />
+            <Route path="/forbidden" element={<Forbidden />} />
+            <Route path="*" element={<NotFound />} />
+            </Routes>
+        </Router>
+        <ReloadPrompt />
+        <SmoothCursor />
+        <NotificationListRenderer />
+      </NotificationProvider>
     </ThemeProvider>
   );
 }
