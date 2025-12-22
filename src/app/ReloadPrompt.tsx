@@ -26,7 +26,7 @@ function ReloadPrompt() {
 
   return (
     <div
-      className="fixed right-4 bottom-4 m-4 p-3 border border-[var(--prelayer-2)] rounded-lg z-[1000] text-left shadow-[0_4px_12px_rgba(0,0,0,0.1)] bg-[var(--panel-bg)] text-[var(--text-primary)] flex items-center gap-4"
+      className="fixed right-4 bottom-4 m-4 p-3 border border-(--prelayer-2) rounded-lg z-[1000] text-left shadow-[0_4px_12px_rgba(0,0,0,0.1)] bg-(--panel-bg) text-(--text-primary) flex items-center gap-4"
       role="alert"
     >
       <div className="flex-grow">
@@ -39,7 +39,7 @@ function ReloadPrompt() {
       <div className="flex gap-2">
         {needRefresh && (
           <button
-            className="flex items-center gap-2 bg-[var(--accent)] text-[var(--background)] border-none rounded-md px-4 py-2 cursor-pointer font-medium"
+            className="flex items-center gap-2 bg-(--accent) text-(--background) border-none rounded-md px-4 py-2 cursor-pointer font-medium"
             onClick={() => updateServiceWorker(true)}
           >
             <RefreshCw size={16} />
@@ -47,7 +47,7 @@ function ReloadPrompt() {
           </button>
         )}
         <button
-          className="flex items-center gap-2 bg-[var(--prelayer-1)] text-[var(--text-secondary)] border-none rounded-md px-4 py-2 cursor-pointer font-medium"
+          className="flex items-center gap-2 bg-(--prelayer-1) text-(--text-secondary) border-none rounded-md px-4 py-2 cursor-pointer font-medium"
           onClick={() => close()}
         >
           <X size={16} />

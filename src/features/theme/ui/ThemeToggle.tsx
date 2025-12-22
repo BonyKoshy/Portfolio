@@ -15,7 +15,7 @@ const ThemeToggle: React.FC = () => {
     <div className="inline-block relative">
       <label
         htmlFor="theme-switch"
-        className="group relative grid place-items-center w-[48px] h-[48px] bg-[var(--panel-bg)] rounded-full cursor-pointer shadow-[0_0_20px_2px_rgba(0,0,0,0.05)] transition-colors duration-300 z-10 text-[var(--text-primary)]"
+        className="group relative grid place-items-center w-[48px] h-[48px] bg-(--panel-bg) rounded-full cursor-pointer shadow-[0_0_20px_2px_rgba(0,0,0,0.05)] transition-colors duration-300 z-10 text-(--text-primary)"
         aria-label="Toggle Theme"
       >
         <input

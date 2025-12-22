@@ -49,7 +49,7 @@ const PrivacyPolicy: React.FC = () => {
         <div className="pointer-events-auto">
           <Link 
             to="/" 
-            className="flex items-center gap-2 text-[var(--text-primary)] hover:text-[var(--accent)] transition-colors duration-300 font-medium no-underline group"
+            className="flex items-center gap-2 text-(--text-primary) hover:text-(--accent) transition-colors duration-300 font-medium no-underline group"
           >
             <ArrowLeft size={20} className="transition-transform duration-300 group-hover:-translate-x-1" />
             <span className="text-sm uppercase tracking-wider font-bold">Back to Home</span>
@@ -64,7 +64,7 @@ const PrivacyPolicy: React.FC = () => {
           <button
             className={`
               relative w-12 h-12 rounded-full border-none cursor-pointer flex flex-col justify-center items-center gap-[5px] z-[1001]
-              bg-[var(--panel-bg)] shadow-[0_0_20px_2px_rgba(0,0,0,0.05)] transition-colors duration-300
+              bg-(--panel-bg) shadow-[0_0_20px_2px_rgba(0,0,0,0.05)] transition-colors duration-300
               ${isMenuOpen ? "is-open" : ""}
             `}
             onClick={handleMenuToggle}
@@ -74,7 +74,7 @@ const PrivacyPolicy: React.FC = () => {
             {/* Line 1 */}
             <span 
               className={`
-                block w-[22px] h-[2px] bg-[var(--text-primary)] rounded-[2px] transition-all duration-300 ease-out origin-center
+                block w-[22px] h-[2px] bg-(--text-primary) rounded-[2px] transition-all duration-300 ease-out origin-center
                 ${isMenuOpen ? "translate-y-[7px] rotate-45" : ""}
               `}
             ></span>
@@ -82,7 +82,7 @@ const PrivacyPolicy: React.FC = () => {
             {/* Line 2 */}
             <span 
                className={`
-                block w-[22px] h-[2px] bg-[var(--text-primary)] rounded-[2px] transition-all duration-300 ease-out origin-center
+                block w-[22px] h-[2px] bg-(--text-primary) rounded-[2px] transition-all duration-300 ease-out origin-center
                 ${isMenuOpen ? "opacity-0" : ""}
               `}
             ></span>
@@ -90,7 +90,7 @@ const PrivacyPolicy: React.FC = () => {
             {/* Line 3 */}
             <span 
                className={`
-                block w-[22px] h-[2px] bg-[var(--text-primary)] rounded-[2px] transition-all duration-300 ease-out origin-center
+                block w-[22px] h-[2px] bg-(--text-primary) rounded-[2px] transition-all duration-300 ease-out origin-center
                 ${isMenuOpen ? "-translate-y-[7px] -rotate-45" : ""}
               `}
             ></span>
@@ -107,15 +107,15 @@ const PrivacyPolicy: React.FC = () => {
       />
 
       {/* Main Content */}
-      <div className="min-h-screen pt-32 pb-12 px-6 bg-[var(--background)] text-[var(--text-primary)]">
-        <div className="max-w-3xl mx-auto bg-[var(--panel-bg)] backdrop-blur-md rounded-2xl p-10 md:p-14 border border-[var(--prelayer-1)] shadow-xl animate-in fade-in duration-700 slide-in-from-bottom-8">
+      <div className="min-h-screen pt-32 pb-12 px-6 bg-(--background) text-(--text-primary)">
+        <div className="max-w-3xl mx-auto bg-(--panel-bg) backdrop-blur-md rounded-2xl p-10 md:p-14 border border-(--prelayer-1) shadow-xl animate-in fade-in duration-700 slide-in-from-bottom-8">
             {/* Title - Removed subtitle effect, just clean typography */}
-            <h1 className="text-4xl md:text-5xl font-bold mb-2 text-[var(--text-primary)] tracking-tight">Privacy Policy</h1>
-            <p className="text-[var(--text-secondary)] mb-10 text-sm uppercase tracking-widest font-medium border-b border-[var(--prelayer-2)] pb-6 inline-block w-full">
+            <h1 className="text-4xl md:text-5xl font-bold mb-2 text-(--text-primary) tracking-tight">Privacy Policy</h1>
+            <p className="text-(--text-secondary) mb-10 text-sm uppercase tracking-widest font-medium border-b border-(--prelayer-2) pb-6 inline-block w-full">
               Effective Date: September 2025
             </p>
 
-            <div className="prose prose-lg prose-invert text-[var(--text-secondary)] leading-relaxed">
+            <div className="prose prose-lg prose-invert text-(--text-secondary) leading-relaxed">
               <p className="mb-8">
                 This Privacy Policy describes how personal information is collected,
                 used, and protected when you interact with this website. By using
@@ -123,25 +123,25 @@ const PrivacyPolicy: React.FC = () => {
                 outlined below.
               </p>
 
-              <h2 className="text-2xl font-semibold mb-4 text-[var(--text-primary)] mt-10">Information Collected</h2>
+              <h2 className="text-2xl font-semibold mb-4 text-(--text-primary) mt-10">Information Collected</h2>
               <p className="mb-4">
                 When you submit a message through the contact form, the following
                 information may be collected:
               </p>
-              <ul className="list-disc pl-5 mb-8 space-y-2 marker:text-[var(--accent)]">
+              <ul className="list-disc pl-5 mb-8 space-y-2 marker:text-(--accent)">
                 <li>Your name</li>
                 <li>Your email address</li>
                 <li>Your message content</li>
               </ul>
 
-              <h2 className="text-2xl font-semibold mb-4 text-[var(--text-primary)] mt-10">Use of Information</h2>
+              <h2 className="text-2xl font-semibold mb-4 text-(--text-primary) mt-10">Use of Information</h2>
               <p className="mb-8">
                 The information you provide is used solely for the purpose of
                 responding to your inquiry. It will not be used for unsolicited
                 marketing, newsletters, or promotional purposes.
               </p>
 
-              <h2 className="text-2xl font-semibold mb-4 text-[var(--text-primary)] mt-10">Data Sharing & Disclosure</h2>
+              <h2 className="text-2xl font-semibold mb-4 text-(--text-primary) mt-10">Data Sharing & Disclosure</h2>
               <p className="mb-8">
                 Your information will not be sold, rented, or shared with third
                 parties. It may, however, be processed and temporarily stored
@@ -149,7 +149,7 @@ const PrivacyPolicy: React.FC = () => {
                 to deliver form functionality.
               </p>
 
-              <h2 className="text-2xl font-semibold mb-4 text-[var(--text-primary)] mt-10">Data Security</h2>
+              <h2 className="text-2xl font-semibold mb-4 text-(--text-primary) mt-10">Data Security</h2>
               <p className="mb-8">
                 Reasonable technical and organizational measures are implemented to
                 protect your personal data. While every effort is made to safeguard
@@ -157,29 +157,29 @@ const PrivacyPolicy: React.FC = () => {
                 completely secure.
               </p>
 
-              <h2 className="text-2xl font-semibold mb-4 text-[var(--text-primary)] mt-10">Data Retention & Your Rights</h2>
+              <h2 className="text-2xl font-semibold mb-4 text-(--text-primary) mt-10">Data Retention & Your Rights</h2>
               <p className="mb-4">
                 Submitted information is retained only as long as necessary to
                 respond to your inquiry. You have the right to request deletion of
                 your data at any time by contacting:
               </p>
-              <p className="font-medium text-[var(--accent)] mb-8 hover:underline">
+              <p className="font-medium text-(--accent) mb-8 hover:underline">
                  <a href="mailto:bonykoshy@gmail.com">bonykoshy@gmail.com</a>
               </p>
 
-              <h2 className="text-2xl font-semibold mb-4 text-[var(--text-primary)] mt-10">Updates to This Policy</h2>
+              <h2 className="text-2xl font-semibold mb-4 text-(--text-primary) mt-10">Updates to This Policy</h2>
               <p className="mb-8">
                 This Privacy Policy may be updated periodically to reflect changes
                 in practices or services. The “Effective Date” above will always
                 indicate the latest version.
               </p>
 
-              <h2 className="text-2xl font-semibold mb-4 text-[var(--text-primary)] mt-10">Contact</h2>
+              <h2 className="text-2xl font-semibold mb-4 text-(--text-primary) mt-10">Contact</h2>
               <p className="mb-2">
                 If you have any questions or concerns about this Privacy Policy,
                 please contact:
               </p>
-               <p className="font-medium text-[var(--accent)] hover:underline">
+               <p className="font-medium text-(--accent) hover:underline">
                  <a href="mailto:bonykoshy@gmail.com">bonykoshy@gmail.com</a>
               </p>
             </div>
