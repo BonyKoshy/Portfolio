@@ -70,8 +70,10 @@ const Contact: React.FC = () => {
   const { addNotification } = useNotification();
 
   // --- React 19 Action ---
-  const submitAction = async (_prevState: ActionState, formData: FormData): Promise<ActionState> => {
-    
+  const submitAction = async (
+    _prevState: ActionState,
+    formData: FormData
+  ): Promise<ActionState> => {
     // 1. Bot Protection
     if (formData.get("bot-field")) {
       return { success: true }; // Silently succeed
@@ -101,7 +103,7 @@ const Contact: React.FC = () => {
       const submissionData = new URLSearchParams();
       submissionData.append("form-name", "contact");
       Object.entries(rawData).forEach(([key, val]) => {
-          if (val) submissionData.append(key, val as string);
+        if (val) submissionData.append(key, val as string);
       });
 
       const response = await fetch("/", {
@@ -111,10 +113,9 @@ const Contact: React.FC = () => {
       });
 
       if (!response.ok) throw new Error("Network response was not ok");
-      
+
       addNotification("Message sent successfully!", "success");
       return { success: true };
-
     } catch (error) {
       console.error(error);
       addNotification("Failed to send message.", "error");
@@ -131,21 +132,30 @@ const Contact: React.FC = () => {
   );
 
   return (
-    <section id="contact" className="relative pt-30 pb-8 px-8 min-h-[90vh] flex flex-col overflow-hidden text-(--text-primary)">
+    <section
+      id="contact"
+      className="relative pt-30 pb-8 px-8 min-h-[90vh] flex flex-col overflow-hidden text-(--text-primary)"
+    >
       {/* Gradient Overlay */}
       <div className="absolute top-0 left-0 w-full h-full z-0 pointer-events-none bg-[linear-gradient(to_top,var(--background)_70%,transparent_100%)]" />
-      
-      <div className="relative z-1 max-w-7xl mx-auto w-full flex-grow flex flex-col">
+
+      <div className="relative z-1 max-w-7xl mx-auto w-full grow flex flex-col">
         <SectionTitle title="Get In Touch" />
-        <div className="grid grid-cols-1 gap-16 flex-grow items-end lg:grid-cols-[1fr_1.5fr] lg:gap-24">
+        <div className="grid grid-cols-1 gap-16 grow items-end lg:grid-cols-[1fr_1.5fr] lg:gap-24">
           <div className="text-left flex flex-col justify-end">
             <h2 className="text-[2rem] font-bold">BONY KOSHY</h2>
-            <a href="mailto:bonykoshy@gmail.com" className="inline-flex items-center gap-1 text-(--text-secondary) no-underline font-medium mt-2 relative w-fit group">
+            <a
+              href="mailto:bonykoshy@gmail.com"
+              className="inline-flex items-center gap-1 text-(--text-secondary) no-underline font-medium mt-2 relative w-fit group"
+            >
               bonykoshy@gmail.com
-              <ArrowUpRight className="opacity-100 transition-transform duration-300 group-hover:translate-x-[2px] group-hover:translate-y-[-2px]" size={20} />
-              <span className="absolute bottom-[-2px] left-0 w-full h-[1px] bg-(--text-secondary) scale-x-0 origin-right transition-transform duration-300 ease-out group-hover:scale-x-100 group-hover:origin-left"></span>
+              <ArrowUpRight
+                className="opacity-100 transition-transform duration-300 group-hover:translate-x-0.5 group-hover:-translate-y-0.5"
+                size={20}
+              />
+              <span className="absolute -bottom-0.5 left-0 w-full h-px bg-(--text-secondary) scale-x-0 origin-right transition-transform duration-300 ease-out group-hover:scale-x-100 group-hover:origin-left"></span>
             </a>
-            <p className="text-[1rem] text-(--text-secondary) max-w-[400px] my-6">
+            <p className="text-[1rem] text-(--text-secondary) max-w-100 my-6">
               I'm always open to discussing new projects, creative ideas, or
               opportunities to be part of an ambitious team. Feel free to reach
               out.
@@ -169,7 +179,11 @@ const Contact: React.FC = () => {
           <div className="flex flex-col justify-end">
             <div className="hidden justify-end gap-8 mb-8 lg:flex">
               {navLinks.map((link) => (
-                <a key={link.name} href={link.href} className="no-underline text-(--text-secondary) font-medium transition-colors duration-200 hover:text-(--accent)">
+                <a
+                  key={link.name}
+                  href={link.href}
+                  className="no-underline text-(--text-secondary) font-medium transition-colors duration-200 hover:text-(--accent)"
+                >
                   {link.name}
                 </a>
               ))}
@@ -181,11 +195,11 @@ const Contact: React.FC = () => {
               >
                 <form
                   action={async (formData) => {
-                      setOptimisticLabel(true);
-                      await formAction(formData);
-                      setOptimisticLabel(false);
+                    setOptimisticLabel(true);
+                    await formAction(formData);
+                    setOptimisticLabel(false);
                   }}
-                  className="flex flex-col gap-4 flex-grow"
+                  className="flex flex-col gap-4 grow"
                 >
                   <input type="hidden" name="form-name" value="contact" />
                   <p hidden>
@@ -198,10 +212,14 @@ const Contact: React.FC = () => {
                       name="name"
                       placeholder="Enter your name"
                       required
-                      className="bg-(--prelayer-1) border border-(--prelayer-2) p-3 rounded-lg text-(--text-primary) font-inherit aria-[invalid=true]:border-red-500"
+                      className="bg-(--prelayer-1) border border-(--prelayer-2) p-3 rounded-lg text-(--text-primary) font-inherit aria-invalid:border-red-500"
                       aria-invalid={!!state?.validationErrors?.name}
                     />
-                     {state?.validationErrors?.name && <span className="text-sm text-red-500">{state.validationErrors.name[0]}</span>}
+                    {state?.validationErrors?.name && (
+                      <span className="text-sm text-red-500">
+                        {state.validationErrors.name[0]}
+                      </span>
+                    )}
                   </div>
 
                   <div className="flex flex-col gap-1">
@@ -210,29 +228,47 @@ const Contact: React.FC = () => {
                       name="email"
                       placeholder="Enter your email"
                       required
-                      className="bg-(--prelayer-1) border border-(--prelayer-2) p-3 rounded-lg text-(--text-primary) font-inherit aria-[invalid=true]:border-red-500"
+                      className="bg-(--prelayer-1) border border-(--prelayer-2) p-3 rounded-lg text-(--text-primary) font-inherit aria-invalid:border-red-500"
                       aria-invalid={!!state?.validationErrors?.email}
                     />
-                    {state?.validationErrors?.email && <span className="text-sm text-red-500">{state.validationErrors.email[0]}</span>}
+                    {state?.validationErrors?.email && (
+                      <span className="text-sm text-red-500">
+                        {state.validationErrors.email[0]}
+                      </span>
+                    )}
                   </div>
 
-                  <div className="flex flex-col gap-1 flex-grow">
+                  <div className="flex flex-col gap-1 grow">
                     <textarea
                       name="message"
                       placeholder="Write a message"
                       required
-                      className="bg-(--prelayer-1) border border-(--prelayer-2) p-3 rounded-lg text-(--text-primary) font-inherit min-h-[1px] resize-y flex-grow aria-[invalid=true]:border-red-500"
-                       aria-invalid={!!state?.validationErrors?.message}
+                      className="bg-(--prelayer-1) border border-(--prelayer-2) p-3 rounded-lg text-(--text-primary) font-inherit min-h-px resize-y grow aria-invalid:border-red-500"
+                      aria-invalid={!!state?.validationErrors?.message}
                     ></textarea>
-                     {state?.validationErrors?.message && <span className="text-sm text-red-500">{state.validationErrors.message[0]}</span>}
+                    {state?.validationErrors?.message && (
+                      <span className="text-sm text-red-500">
+                        {state.validationErrors.message[0]}
+                      </span>
+                    )}
                   </div>
 
-                  <RippleButton type="submit" disabled={isPending} className="bg-(--accent) text-(--background) border-none p-3 rounded-lg font-semibold cursor-pointer transition-opacity duration-200 hover:opacity-80 disabled:opacity-50">
+                  <RippleButton
+                    type="submit"
+                    disabled={isPending}
+                    className="bg-(--accent) text-(--background) border-none p-3 rounded-lg font-semibold cursor-pointer transition-opacity duration-200 hover:opacity-80 disabled:opacity-50"
+                  >
                     {optimisticLabel}
                   </RippleButton>
-                  
-                  {state?.success && <p className="text-green-500 text-center">Message sent successfully!</p>}
-                  {state?.error && <p className="text-red-500 text-center">{state.error}</p>}
+
+                  {state?.success && (
+                    <p className="text-green-500 text-center">
+                      Message sent successfully!
+                    </p>
+                  )}
+                  {state?.error && (
+                    <p className="text-red-500 text-center">{state.error}</p>
+                  )}
                 </form>
               </motion.div>
             </div>
@@ -244,7 +280,12 @@ const Contact: React.FC = () => {
             <span>© 2025 Bony Koshy. All rights reserved.</span>
           </div>
           <div className="flex-1 text-right max-[768px]:text-center">
-            <a href="/privacy" className="no-underline text-(--text-secondary) transition-all duration-200 hover:underline">Privacy Policy</a>
+            <a
+              href="/privacy"
+              className="no-underline text-(--text-secondary) transition-all duration-200 hover:underline"
+            >
+              Privacy Policy
+            </a>
           </div>
         </footer>
       </div>

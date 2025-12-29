@@ -41,14 +41,14 @@ const Header: React.FC = () => {
         <div className="flex items-center gap-6 relative z-60 pointer-events-auto">
           <ThemeToggle />
           <button
-            className={`relative w-12 h-12 bg-(--panel-bg) border-none rounded-full cursor-pointer grid place-items-center z-[1001] transition-colors duration-300 shadow-[0_0_20px_2px_rgba(0,0,0,0.05)] ${
+            className={`relative w-12 h-12 bg-(--panel-bg) border-none rounded-full cursor-pointer grid place-items-center z-1001 transition-colors duration-300 shadow-[0_0_20px_2px_rgba(0,0,0,0.05)] ${
               isMenuOpen ? "is-open" : ""
             } group`}
             onClick={handleMenuToggle}
             aria-label="Toggle Menu"
             aria-expanded={isMenuOpen}
           >
-            <div className="relative w-6 h-[18px]">
+            <div className="relative w-6 h-4.5">
               <span
                 className={`absolute left-0 h-0.5 w-6 bg-(--text-primary) rounded-full transition-all duration-300 origin-center ${
                   isMenuOpen ? "top-1/2 -translate-y-1/2 rotate-45" : "top-0"
@@ -61,7 +61,9 @@ const Header: React.FC = () => {
               ></span>
               <span
                 className={`absolute left-0 h-0.5 w-6 bg-(--text-primary) rounded-full transition-all duration-300 origin-center ${
-                  isMenuOpen ? "top-1/2 -translate-y-1/2 -rotate-45" : "bottom-0"
+                  isMenuOpen
+                    ? "top-1/2 -translate-y-1/2 -rotate-45"
+                    : "bottom-0"
                 }`}
               ></span>
             </div>

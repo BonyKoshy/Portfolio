@@ -1,6 +1,9 @@
 import React, { useState, useRef } from "react";
 import { AnimatePresence, motion } from "framer-motion";
-import { Carousel, ProjectCardData } from "@/widgets/ProjectsCarousel/ProjectsCarousel";
+import {
+  Carousel,
+  ProjectCardData,
+} from "@/widgets/ProjectsCarousel/ProjectsCarousel";
 import SectionTitle from "@/shared/ui/SectionTitle/SectionTitle";
 import { useOutsideClick } from "@/shared/lib";
 import { Github, ExternalLink, Download } from "lucide-react";
@@ -9,61 +12,73 @@ import { RippleButton } from "@/shared/ui/magicui/ripple-button";
 
 // This is the detailed content that appears in the popup
 // This is the detailed content that appears in the popup
-const ProjectContent: React.FC<{ project: ProjectCardData }> = ({ project }) => (
-  <div className="flex flex-row w-full h-full gap-0 overflow-hidden rounded-[1.5rem] bg-(--panel-bg) max-[768px]:flex-col">
+const ProjectContent: React.FC<{ project: ProjectCardData }> = ({
+  project,
+}) => (
+  <div className="flex flex-row w-full h-full gap-0 overflow-hidden rounded-3xl bg-(--panel-bg) max-[768px]:flex-col">
     {/* Safari Browser Mockup Area - 70% width */}
-    <div className="flex-grow h-full bg-transparent p-8 flex items-center justify-center max-[768px]:h-[40vh] max-[768px]:p-4">
-        <Safari
-            srcs={project.srcs || [project.content.imageSrc]} // Use detail image or fallback
-            url={project.liveLink || project.githubLink}
-            className="w-full h-auto max-h-full object-contain shadow-2xl"
-        />
+    <div className="grow h-full bg-transparent p-8 flex items-center justify-center max-[768px]:h-[40vh] max-[768px]:p-4">
+      <Safari
+        srcs={project.srcs || [project.content.imageSrc]} // Use detail image or fallback
+        url={project.liveLink || project.githubLink}
+        className="w-full h-auto max-h-full object-contain shadow-2xl"
+      />
     </div>
 
     {/* Sidebar Area - 30% width (approx) */}
-    <div className="w-[350px] shrink-0 h-full bg-(--panel-bg) border-l border-(--prelayer-2) p-8 flex flex-col overflow-y-auto max-[768px]:w-full max-[768px]:h-auto max-[768px]:border-l-0 max-[768px]:border-t">
-        <div className="mb-4">
-            <motion.h3 layoutId={`card-title-${project.title}`} className="text-[2rem] font-bold m-0 leading-tight">
-            {project.title}
-            </motion.h3>
-            <motion.p
-            layoutId={`card-category-${project.title}`}
-            className="text-[1rem] font-medium text-(--text-secondary) mt-2"
-            >
-            {project.year} • {project.category}
-            </motion.p>
-        </div>
-
-        <motion.p className="text-[1rem] text-(--text-secondary) leading-[1.7] mb-6 flex-grow">
-            {project.content.description}
+    <div className="w-87.5 shrink-0 h-full bg-(--panel-bg) border-l border-(--prelayer-2) p-8 flex flex-col overflow-y-auto max-[768px]:w-full max-[768px]:h-auto max-[768px]:border-l-0 max-[768px]:border-t">
+      <div className="mb-4">
+        <motion.h3
+          layoutId={`card-title-${project.title}`}
+          className="text-[2rem] font-bold m-0 leading-tight"
+        >
+          {project.title}
+        </motion.h3>
+        <motion.p
+          layoutId={`card-category-${project.title}`}
+          className="text-[1rem] font-medium text-(--text-secondary) mt-2"
+        >
+          {project.year} • {project.category}
         </motion.p>
+      </div>
 
-        <motion.div className="flex flex-wrap gap-2 mb-8">
-            {project.content.tech.map((t, i) => (
-            <span key={i} className="bg-(--prelayer-2) px-3 py-1 rounded-full text-[0.8rem] font-medium">
-                {t}
-            </span>
-            ))}
-        </motion.div>
+      <motion.p className="text-[1rem] text-(--text-secondary) leading-[1.7] mb-6 grow">
+        {project.content.description}
+      </motion.p>
 
-        <div className="flex flex-col gap-3 mt-auto">
-            <RippleButton 
-                className="w-full flex items-center justify-center gap-2 bg-transparent border-2 border-(--text-primary) text-(--text-primary) hover:bg-(--text-primary) hover:text-(--background)"
-                onClick={() => window.open(project.githubLink, '_blank')}
-            >
-                <Github size={18} /> Source Code
-            </RippleButton>
+      <motion.div className="flex flex-wrap gap-2 mb-8">
+        {project.content.tech.map((t, i) => (
+          <span
+            key={i}
+            className="bg-(--prelayer-2) px-3 py-1 rounded-full text-[0.8rem] font-medium"
+          >
+            {t}
+          </span>
+        ))}
+      </motion.div>
 
-            {(project.linkType === "link" || project.linkType === "install") && (
-            <RippleButton 
-                className="w-full flex items-center justify-center gap-2 bg-(--accent) text-white border-2 border-transparent hover:opacity-90"
-                onClick={() => window.open(project.liveLink, '_blank')}
-            >
-                {project.linkType === "install" ? <Download size={18} /> : <ExternalLink size={18} />}
-                {project.linkType === "install" ? "Download App" : "Visit Website"}
-            </RippleButton>
+      <div className="flex flex-col gap-3 mt-auto">
+        <RippleButton
+          className="w-full flex items-center justify-center gap-2 bg-transparent border-2 border-(--text-primary) text-(--text-primary) hover:bg-(--text-primary) hover:text-(--background)"
+          onClick={() => window.open(project.githubLink, "_blank")}
+        >
+          <Github size={18} /> Source Code
+        </RippleButton>
+
+        {(project.linkType === "link" || project.linkType === "install") && (
+          <RippleButton
+            className="w-full flex items-center justify-center gap-2 bg-(--accent) text-white border-2 border-transparent hover:opacity-90"
+            onClick={() => window.open(project.liveLink, "_blank")}
+          >
+            {project.linkType === "install" ? (
+              <Download size={18} />
+            ) : (
+              <ExternalLink size={18} />
             )}
-        </div>
+            {project.linkType === "install" ? "Download App" : "Visit Website"}
+          </RippleButton>
+        )}
+      </div>
     </div>
   </div>
 );
@@ -99,10 +114,7 @@ const data: ProjectCardData[] = [
         "An AI-enhanced, multilingual chat application that offers real-time, one-on-one conversations with live translation, secure user authentication, and a responsive UI, all powered by Python and Flask.",
       tech: ["Python", "Flask", "Socket.IO", "JavaScript", "Bootstrap"],
     },
-    srcs: [
-        "/projects/connectly.png",
-        "/projects/connectly-details.png",
-    ]
+    srcs: ["/projects/connectly.png", "/projects/connectly-details.png"],
   },
   {
     category: "Desktop Application",
@@ -180,7 +192,10 @@ export default function Projects() {
   }));
 
   return (
-    <section id="projects" className="w-full max-w-7xl mx-auto px-4 py-[60px] text-(--text-primary)">
+    <section
+      id="projects"
+      className="w-full max-w-7xl mx-auto px-4 py-15 text-(--text-primary)"
+    >
       <SectionTitle title="My Projects" />
       <Carousel items={cards} onCardClick={setActiveCard} />
 
@@ -201,16 +216,16 @@ export default function Projects() {
               <motion.div
                 layoutId={`card-${activeCard.title}`}
                 ref={ref}
-                className="bg-transparent w-full max-w-[70rem] h-[80vh] overflow-hidden flex relative"
+                className="bg-transparent w-full max-w-280 h-[80vh] overflow-hidden flex relative"
                 onClick={(e) => e.stopPropagation()}
               >
                 <button
-                  className="absolute top-4 right-4 bg-transparent border-none cursor-pointer p-2 flex flex-col justify-center items-center gap-[6px] z-50 group"
+                  className="absolute top-4 right-4 bg-transparent border-none cursor-pointer p-2 flex flex-col justify-center items-center gap-1.5 z-50 group"
                   onClick={() => setActiveCard(null)}
                   aria-label="Close project details"
                 >
-                  <span className="w-6 h-[2px] bg-(--text-secondary) rounded-sm transform rotate-45 translate-y-[4px] transition-colors duration-200 group-hover:bg-(--accent)"></span>
-                  <span className="w-6 h-[2px] bg-(--text-secondary) rounded-sm transform -rotate-45 translate-y-[-4px] transition-colors duration-200 group-hover:bg-(--accent)"></span>
+                  <span className="w-6 h-0.5 bg-(--text-secondary) rounded-sm transform rotate-45 translate-y-1 transition-colors duration-200 group-hover:bg-(--accent)"></span>
+                  <span className="w-6 h-0.5 bg-(--text-secondary) rounded-sm transform -rotate-45 -translate-y-1 transition-colors duration-200 group-hover:bg-(--accent)"></span>
                 </button>
                 <ProjectContent project={activeCard} />
               </motion.div>

@@ -104,7 +104,10 @@ const CertificatesList: React.FC = () => {
   }, [active]);
 
   return (
-    <section id="certificates" className="w-full max-w-7xl mx-auto px-4 py-[60px] text-(--text-primary)">
+    <section
+      id="certificates"
+      className="w-full max-w-7xl mx-auto px-4 py-15 text-(--text-primary)"
+    >
       <SectionTitle title="Certificates" />
       <div className="flex flex-col w-full mx-auto">
         <AnimatePresence>
@@ -128,12 +131,12 @@ const CertificatesList: React.FC = () => {
                 className="w-[80%] max-h-[90vh] bg-(--panel-bg) rounded-2xl overflow-hidden flex flex-col p-6 gap-6 relative"
               >
                 <button
-                  className="absolute top-4 right-4 bg-transparent border-none cursor-pointer p-2 flex flex-col justify-center items-center gap-[6px] z-50 group max-[768px]:hidden"
+                  className="absolute top-4 right-4 bg-transparent border-none cursor-pointer p-2 flex flex-col justify-center items-center gap-1.5 z-50 group max-[768px]:hidden"
                   onClick={() => setActive(null)}
                   aria-label="Close certificate details"
                 >
-                  <span className="w-6 h-[2px] bg-(--text-secondary) rounded-sm transform rotate-45 translate-y-[4px] transition-colors duration-200 group-hover:bg-(--accent)"></span>
-                  <span className="w-6 h-[2px] bg-(--text-secondary) rounded-sm transform -rotate-45 translate-y-[-4px] transition-colors duration-200 group-hover:bg-(--accent)"></span>
+                  <span className="w-6 h-0.5 bg-(--text-secondary) rounded-sm transform rotate-45 translate-y-1 transition-colors duration-200 group-hover:bg-(--accent)"></span>
+                  <span className="w-6 h-0.5 bg-(--text-secondary) rounded-sm transform -rotate-45 -translate-y-1 transition-colors duration-200 group-hover:bg-(--accent)"></span>
                 </button>
 
                 <div className="flex items-start gap-4 max-[768px]:flex-col max-[768px]:items-center max-[768px]:text-center">
@@ -144,7 +147,7 @@ const CertificatesList: React.FC = () => {
                       className="w-20 h-20 rounded-xl object-contain shrink-0 bg-(--prelayer-1)"
                     />
                   </motion.div>
-                  <div className="flex-grow">
+                  <div className="grow">
                     <motion.h3
                       layoutId={`title-${active.title}-${id}`}
                       className="text-[1.25rem] font-bold m-0 text-(--text-primary)"
@@ -161,7 +164,7 @@ const CertificatesList: React.FC = () => {
                 </div>
 
                 <motion.div
-                  className="flex flex-col flex-grow min-h-0"
+                  className="flex flex-col grow min-h-0"
                   initial={{ opacity: 0 }}
                   animate={{
                     opacity: 1,
@@ -169,7 +172,7 @@ const CertificatesList: React.FC = () => {
                   }}
                   exit={{ opacity: 0, transition: { duration: 0.15 } }}
                 >
-                  <div className="text-[1rem] leading-[1.7] text-(--text-secondary) overflow-y-auto pr-2 flex-grow">
+                  <div className="text-[1rem] leading-[1.7] text-(--text-secondary) overflow-y-auto pr-2 grow">
                     {active.content()}
                   </div>
                   <motion.a
@@ -193,11 +196,15 @@ const CertificatesList: React.FC = () => {
               layoutId={`card-${card.title}-${id}`}
               key={`card-${card.title}-${id}`}
               onClick={() => setActive(card)}
-              className="flex flex-wrap justify-between items-center p-4 rounded-xl bg-(--panel-bg) cursor-pointer transition-all duration-200 shadow-sm hover:translate-y-[-2px] hover:bg-(--prelayer-2)"
+              className="flex flex-wrap justify-between items-center p-4 rounded-xl bg-(--panel-bg) cursor-pointer transition-all duration-200 shadow-sm hover:-translate-y-0.5 hover:bg-(--prelayer-2)"
             >
               <div className="flex items-center gap-6 mb-2 sm:mb-0 w-full sm:w-auto max-[640px]:w-full max-[640px]:mb-4">
                 <motion.div layoutId={`image-${card.title}-${id}`}>
-                  <img src={card.src} alt={card.title} className="w-[60px] h-[60px] rounded-[10px] object-contain" />
+                  <img
+                    src={card.src}
+                    alt={card.title}
+                    className="w-15 h-15 rounded-[10px] object-contain"
+                  />
                 </motion.div>
                 <div>
                   <motion.h3
@@ -230,7 +237,10 @@ const CertificatesList: React.FC = () => {
           rel="noopener noreferrer"
           className="inline-flex justify-center items-center gap-2 w-full sm:w-auto px-4 py-3 bg-(--panel-bg) text-(--text-secondary) rounded-full no-underline font-semibold transition-all duration-300 mt-8 shadow-sm self-end hover:bg-(--prelayer-2) lg:w-auto lg:px-4 lg:py-2 lg:mt-8 lg:self-end"
         >
-          <Linkedin className="transition-transform duration-300 hover:scale-110" size={20} />
+          <Linkedin
+            className="transition-transform duration-300 hover:scale-110"
+            size={20}
+          />
           <span>View More on LinkedIn</span>
         </a>
       </div>

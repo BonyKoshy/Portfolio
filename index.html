@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
@@ -13,12 +13,12 @@
       href="https://fonts.googleapis.com/css2?family=Roboto+Flex:opsz,wght@8..144,100..1000&display=swap"
       rel="stylesheet"
     />
-    <link 
-      rel="preload" 
-      href="https://res.cloudinary.com/dr6lvwubh/raw/upload/v1529908256/CompressaPRO-GX.woff2" 
-      as="font" 
-      type="font/woff2" 
-      crossorigin 
+    <link
+      rel="preload"
+      href="https://res.cloudinary.com/dr6lvwubh/raw/upload/v1529908256/CompressaPRO-GX.woff2"
+      as="font"
+      type="font/woff2"
+      crossorigin
     />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta name="theme-color" content="#121212" />
@@ -27,10 +27,21 @@
       name="description"
       content="Personal portfolio of Bony Koshy, a passionate Full-Stack Developer specializing in creating beautiful and functional digital experiences."
     />
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content="Bony Koshy | Portfolio" />
+    <meta
+      property="og:description"
+      content="Personal portfolio of Bony Koshy, a passionate Full-Stack Developer specializing in creating beautiful and functional digital experiences."
+    />
+    <meta property="og:image" content="/og-image.png" />
+    <!-- Twitter -->
+    <meta name="twitter:card" content="summary_large_image" />
   </head>
   <body>
     <div id="root"></div>
     <form name="contact" netlify netlify-honeypot="bot-field" hidden>
+      <input type="hidden" name="bot-field" />
       <input type="text" name="name" />
       <input type="email" name="email" />
       <textarea name="message"></textarea>
