@@ -1,6 +1,6 @@
 import React, { useRef, useState } from "react";
 import StaggeredMenu from "@/shared/ui/StaggeredMenu/StaggeredMenu";
-import Clock from "@/shared/ui/Clock/Clock";
+// Clock import removed
 import ThemeToggle from "@/features/theme/ui/ThemeToggle";
 
 // Define interface for the StaggeredMenu ref if available, otherwise use basic method
@@ -36,7 +36,7 @@ const Header: React.FC = () => {
     <>
       <header className="fixed top-0 left-0 w-full flex justify-between items-center px-8 py-6 z-60 pointer-events-none max-[768px]:p-4">
         <div className="flex items-center gap-6 pointer-events-auto max-[768px]:flex">
-          <Clock />
+          {/* Clock removed */}
         </div>
         <div className="flex items-center gap-6 relative z-60 pointer-events-auto">
           <ThemeToggle />

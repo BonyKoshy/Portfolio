@@ -2,31 +2,8 @@
 import React, { useEffect, useState, useContext } from "react";
 import { ThemeProvider, ThemeContext } from "@/features/theme/ThemeContext";
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
-import {
-  ContextMenu,
-  ContextMenuContent,
-  ContextMenuItem,
-  ContextMenuRadioGroup,
-  ContextMenuRadioItem,
-  ContextMenuSeparator,
-  ContextMenuTrigger,
-} from "@/shared/ui/ContextMenu";
-import {
-  ArrowLeft,
-  ArrowRight,
-  RefreshCw,
-  Sun,
-  Moon,
-  Home,
-  User,
-  Lightbulb,
-  Mail,
-  Link as LinkIcon,
-  ChevronDown,
-  ChevronUp,
-} from "lucide-react";
-import { motion, AnimatePresence } from "framer-motion";
-import { SmoothCursor } from "@/shared/ui/magicui/smooth-cursor";
+
+// SmoothCursor import removed
 import { NotificationProvider, useNotification } from "@/features/notifications/NotificationContext";
 import { AnimatedList } from "@/shared/ui/magicui/animated-list";
 import { cn } from "@/shared/lib";
@@ -44,15 +21,14 @@ import PrivacyPolicy from "@/pages/PrivacyPolicy";
 import ReloadPrompt from "./ReloadPrompt";
 
 // Error Pages
-import Unauthorized from "@/pages/Unauthorized";
-import Forbidden from "@/pages/Forbidden";
+// Error Pages imports removed
 // import NotFound from "@/pages/NotFound"; // Assuming basic text for now because of error boundaries or keeping existing imports
 import NotFound from "@/pages/NotFound";
 // Other error pages can be imported as needed or lazy loaded
 
 function AppContent() {
-  const { theme, setTheme } = useContext(ThemeContext) as { theme: string; setTheme: (t: string) => void };
-  const [openAccordion, setOpenAccordion] = useState<string | null>(null);
+  const { theme } = useContext(ThemeContext) as { theme: string };
+
 
   const [gridColors, setGridColors] = useState({
     border: "transparent",
@@ -92,21 +68,10 @@ function AppContent() {
     updateColors();
   }, [theme]);
 
-  const handleSectionNavigation = (sectionId: string) => {
-    const section = document.getElementById(sectionId);
-    if (section) {
-      section.scrollIntoView({ behavior: "smooth" });
-    }
-  };
 
-  const handleAccordionToggle = (e: React.SyntheticEvent, section: string) => {
-    e.preventDefault();
-    setOpenAccordion(openAccordion === section ? null : section);
-  };
 
   return (
-    <ContextMenu>
-      <ContextMenuTrigger>
+    <>
         <Header />
 
         {/* Background Layer: Squares */}
@@ -141,109 +106,9 @@ function AppContent() {
             <Contact />
           </div>
         </main>
-      </ContextMenuTrigger>
+    </>
 
-      <ContextMenuContent className="w-64">
-        {/* Navigation History */}
-        <ContextMenuItem onSelect={() => window.history.back()}>
-          <ArrowLeft className="h-4 w-4" /> <span>Back</span>
-        </ContextMenuItem>
-        <ContextMenuItem
-          onSelect={() => window.history.forward()}
-          disabled={window.history.length <= 1}
-        >
-          <ArrowRight className="h-4 w-4" /> <span>Forward</span>
-        </ContextMenuItem>
-        <ContextMenuItem onSelect={() => window.location.reload()}>
-          <RefreshCw className="h-4 w-4" /> <span>Reload</span>
-        </ContextMenuItem>
 
-        <ContextMenuSeparator />
-
-        {/* Theme Accordion */}
-        <ContextMenuItem onSelect={(e: React.SyntheticEvent) => handleAccordionToggle(e, "theme")}>
-          {theme === "dark" ? (
-            <Moon className="h-4 w-4" />
-          ) : (
-            <Sun className="h-4 w-4" />
-          )}
-          <span>Theme</span>
-          {openAccordion === "theme" ? (
-            <ChevronUp className="ml-auto h-4 w-4" />
-          ) : (
-            <ChevronDown className="ml-auto h-4 w-4" />
-          )}
-        </ContextMenuItem>
-        <AnimatePresence>
-          {openAccordion === "theme" && (
-            <motion.div
-              initial={{ height: 0, opacity: 0 }}
-              animate={{ height: "auto", opacity: 1 }}
-              exit={{ height: 0, opacity: 0 }}
-              className="overflow-hidden"
-            >
-              <ContextMenuRadioGroup value={theme} className="pl-6">
-                <ContextMenuRadioItem
-                  value="light"
-                  onSelect={() => setTheme("light")}
-                >
-                  <Sun className="h-4 w-4" /> <span>Light</span>
-                </ContextMenuRadioItem>
-                <ContextMenuRadioItem
-                  value="dark"
-                  onSelect={() => setTheme("dark")}
-                >
-                  <Moon className="h-4 w-4" /> <span>Dark</span>
-                </ContextMenuRadioItem>
-              </ContextMenuRadioGroup>
-            </motion.div>
-          )}
-        </AnimatePresence>
-
-        {/* Sections Accordion */}
-        <ContextMenuItem onSelect={(e: React.SyntheticEvent) => handleAccordionToggle(e, "sections")}>
-          <LinkIcon className="h-4 w-4" /> <span>Sections</span>
-          {openAccordion === "sections" ? (
-            <ChevronUp className="ml-auto h-4 w-4" />
-          ) : (
-            <ChevronDown className="ml-auto h-4 w-4" />
-          )}
-        </ContextMenuItem>
-        <AnimatePresence>
-          {openAccordion === "sections" && (
-            <motion.div
-              initial={{ height: 0, opacity: 0 }}
-              animate={{ height: "auto", opacity: 1 }}
-              exit={{ height: 0, opacity: 0 }}
-              className="overflow-hidden"
-            >
-              <div className="pl-6">
-                <ContextMenuItem
-                  onSelect={() => handleSectionNavigation("home")}
-                >
-                  <Home className="h-4 w-4" /> <span>Home</span>
-                </ContextMenuItem>
-                <ContextMenuItem
-                  onSelect={() => handleSectionNavigation("about")}
-                >
-                  <User className="h-4 w-4" /> <span>About</span>
-                </ContextMenuItem>
-                <ContextMenuItem
-                  onSelect={() => handleSectionNavigation("projects")}
-                >
-                  <Lightbulb className="h-4 w-4" /> <span>Projects</span>
-                </ContextMenuItem>
-                <ContextMenuItem
-                  onSelect={() => handleSectionNavigation("contact")}
-                >
-                  <Mail className="h-4 w-4" /> <span>Contact</span>
-                </ContextMenuItem>
-              </div>
-            </motion.div>
-          )}
-        </AnimatePresence>
-      </ContextMenuContent>
-    </ContextMenu>
   );
 }
 
@@ -277,13 +142,12 @@ function App() {
             <Routes>
             <Route path="/" element={<AppContent />} />
             <Route path="/privacy" element={<PrivacyPolicy />} />
-            <Route path="/unauthorized" element={<Unauthorized />} />
-            <Route path="/forbidden" element={<Forbidden />} />
+
             <Route path="*" element={<NotFound />} />
             </Routes>
         </Router>
         <ReloadPrompt />
-        <SmoothCursor />
+
         <NotificationListRenderer />
       </NotificationProvider>
     </ThemeProvider>
