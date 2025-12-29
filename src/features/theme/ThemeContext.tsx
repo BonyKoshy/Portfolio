@@ -1,30 +1,44 @@
-import React, { useState, useEffect, ReactNode } from "react";
-import { ThemeContext } from "./ThemeContextDefinition";
-import type { ThemeContextValues } from "./ThemeContextDefinition";
+import { createContext, useEffect, useState, ReactNode } from "react";
 
-export type { ThemeContextValues };
-export { ThemeContext };
+export type Theme = "light" | "dark";
 
-interface ThemeProviderProps {
-  children: ReactNode;
+export interface ThemeContextValues {
+  theme: Theme;
+  toggleTheme: () => void;
 }
 
-export const ThemeProvider: React.FC<ThemeProviderProps> = ({ children }) => {
-  const [theme, setTheme] = useState<string>(() => {
-    return localStorage.getItem("theme") || "dark";
+export const ThemeContext = createContext<ThemeContextValues | undefined>(
+  undefined
+);
+
+export const ThemeProvider = ({ children }: { children: ReactNode }) => {
+  const [theme, setTheme] = useState<Theme>(() => {
+    // 1. Check Local Storage first (Manual override)
+    const saved = localStorage.getItem("theme");
+    if (saved === "light" || saved === "dark") return saved;
+
+    // 2. Fallback to System Preference
+    if (window.matchMedia("(prefers-color-scheme: light)").matches) {
+      return "light";
+    }
+    return "dark";
   });
 
   useEffect(() => {
-    document.documentElement.setAttribute("data-theme", theme);
+    // 3. Apply the class to the HTML tag
+    const root = window.document.documentElement;
+    root.setAttribute("data-theme", theme);
+
+    // 4. Save to Local Storage
     localStorage.setItem("theme", theme);
   }, [theme]);
 
   const toggleTheme = () => {
-    setTheme((prevTheme) => (prevTheme === "light" ? "dark" : "light"));
+    setTheme((prev) => (prev === "light" ? "dark" : "light"));
   };
 
   return (
-    <ThemeContext.Provider value={{ theme, toggleTheme, setTheme }}>
+    <ThemeContext.Provider value={{ theme, toggleTheme }}>
       {children}
     </ThemeContext.Provider>
   );

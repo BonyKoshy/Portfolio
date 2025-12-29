@@ -1,37 +1,30 @@
-/* src/app/index.css */
 @import "tailwindcss";
 
-/* 1. Imports (Fonts) */
-/* 1. Imports (Fonts) - Moved to index.html for performance */
-
-/* 2. CSS Variables (The Source of Truth) */
+/* 1. CSS Variables */
 :root {
-  /* --- LIGHT THEME (Titanium White / Zinc) --- */
-  /* Neutral, crisp, and professional. No blue tint in the background. */
-  --background-light: #f8f9fa;      /* Clean off-white (Zinc-50 style) */
-  --text-primary-light: #18181b;    /* Near-black (Zinc-900) */
-  --text-secondary-light: #52525b;  /* Neutral Grey (Zinc-600) */
-  --accent-light: #2563eb;          /* International Klein Blue (High contrast against grey) */
+  /* --- LIGHT THEME --- */
+  --background-light: #f8f9fa;
+  --text-primary-light: #18181b;
+  --text-secondary-light: #52525b;
+  --accent-light: #2563eb;
   --panel-bg-light: rgba(255, 255, 255, 0.95);
-  --prelayer-1-light: #e4e4e7;      /* Light Grey (Zinc-200) */
-  --prelayer-2-light: #d4d4d8;      /* Mid Grey (Zinc-300) */
+  --prelayer-1-light: #e4e4e7;
+  --prelayer-2-light: #d4d4d8;
 
-  /* --- DARK THEME (Deep Carbon / Desaturated AMOLED) --- */
-  /* Base is #09090b: A rich, neutral black. Not blue, not brown. */
-  --background-dark: #09090b;       /* Deep Carbon Black */
-  --text-primary-dark: #f4f4f5;     /* Soft White (Zinc-100) */
-  --text-secondary-dark: #a1a1aa;   /* Neutral Silver (Zinc-400) */
-  --accent-dark: #60a5fa;           /* Soft, luminous Sky Blue (less aggressive than electric blue) */
-  --panel-bg-dark: rgba(24, 24, 27, 0.85); /* Translucent Charcoal (Zinc-900) */
-  --prelayer-1-dark: #18181b;       /* Dark Grey Layer */
-  --prelayer-2-dark: #27272a;       /* Lighter Grey Layer */
+  /* --- DARK THEME --- */
+  --background-dark: #09090b;
+  --text-primary-dark: #f4f4f5;
+  --text-secondary-dark: #a1a1aa;
+  --accent-dark: #60a5fa;
+  --panel-bg-dark: rgba(24, 24, 27, 0.85);
+  --prelayer-1-dark: #18181b;
+  --prelayer-2-dark: #27272a;
 }
 
-/* 3. Tailwind v4 Theme Configuration */
+/* 2. Tailwind Configuration */
 @theme {
   --font-sans: "Poppins", system-ui, sans-serif;
 
-  /* Register Colors as Utilities */
   --color-background: var(--background);
   --color-text-primary: var(--text-primary);
   --color-text-secondary: var(--text-secondary);
@@ -40,13 +33,17 @@
   --color-prelayer-1: var(--prelayer-1);
   --color-prelayer-2: var(--prelayer-2);
 
-  /* Z-Index Overrides */
   --z-index-60: 60;
   --z-index-100: 100;
   --z-index-1001: 1001;
 
-  /* Animations */
   --animate-cell-ripple: cell-ripple 0.5s ease-out forwards;
+
+  /* Slower, smoother animations */
+  --animate-logo-loading: logo-loading 4s ease-in-out infinite;
+  --animate-logo-intro: logo-draw 3.5s ease-in-out 1 forwards;
+  --animate-logo-interaction: logo-interaction 2s cubic-bezier(0.25, 1, 0.5, 1)
+    forwards;
 
   @keyframes cell-ripple {
     0% {
@@ -73,27 +70,59 @@
       transform: scale(1);
     }
   }
+
+  @keyframes logo-loading {
+    0% {
+      stroke-dashoffset: 0;
+      opacity: 1;
+    }
+    50% {
+      stroke-dashoffset: 2150;
+      opacity: 0.3;
+    }
+    100% {
+      stroke-dashoffset: 0;
+      opacity: 1;
+    }
+  }
+
+  @keyframes logo-draw {
+    from {
+      stroke-dashoffset: 2150;
+    }
+    to {
+      stroke-dashoffset: 0;
+    }
+  }
+
+  @keyframes logo-interaction {
+    0% {
+      stroke-dashoffset: 0;
+    }
+    40% {
+      stroke-dashoffset: 2150;
+    }
+    100% {
+      stroke-dashoffset: 0;
+    }
+  }
 }
 
-/* View Transition Styles */
+/* 3. View Transitions */
 ::view-transition-old(root),
 ::view-transition-new(root) {
   animation: none;
   mix-blend-mode: normal;
 }
-
 ::view-transition-old(root) {
   z-index: 1;
 }
-
 ::view-transition-new(root) {
   z-index: 99999;
 }
-
 .dark::view-transition-old(root) {
   z-index: 99999;
 }
-
 .dark::view-transition-new(root) {
   z-index: 1;
 }
@@ -103,9 +132,17 @@
   html {
     scroll-behavior: smooth;
     overflow-y: scroll;
+
+    /* DEFAULT THEME (Dark) */
+    --background: var(--background-dark);
+    --text-primary: var(--text-primary-dark);
+    --text-secondary: var(--text-secondary-dark);
+    --accent: var(--accent-dark);
+    --panel-bg: var(--panel-bg-dark);
+    --prelayer-1: var(--prelayer-1-dark);
+    --prelayer-2: var(--prelayer-2-dark);
   }
 
-  /* Theme Mapping */
   html[data-theme="light"] {
     --background: var(--background-light);
     --text-primary: var(--text-primary-light);
@@ -116,58 +153,39 @@
     --prelayer-2: var(--prelayer-2-light);
   }
 
-  html[data-theme="dark"] {
-    --background: var(--background-dark);
-    --text-primary: var(--text-primary-dark);
-    --text-secondary: var(--text-secondary-dark);
-    --accent: var(--accent-dark);
-    --panel-bg: var(--panel-bg-dark);
-    --prelayer-1: var(--prelayer-1-dark);
-    --prelayer-2: var(--prelayer-2-dark);
-  }
-
   body {
     background-color: var(--background);
     color: var(--text-primary);
     font-family: var(--font-sans);
     overflow-x: hidden;
     overflow-y: scroll !important;
-    transition-property: color, background-color, border-color;
-    transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
-    transition-duration: 300ms;
     padding-right: 0 !important;
+    transition:
+      color 0.3s ease,
+      background-color 0.3s ease;
   }
 
-  /* Custom Scrollbar - Now strictly neutral grey */
+  /* Custom Scrollbar */
   ::-webkit-scrollbar {
-    width: 0.625rem;
+    width: 6px;
   }
-
   ::-webkit-scrollbar-track {
     background: transparent;
-    border-radius: 9999px;
   }
-
   ::-webkit-scrollbar-thumb {
     background-color: var(--prelayer-2);
     border-radius: 9999px;
-    border: 2px solid transparent;
-    background-clip: content-box;
-    transition: background-color 0.2s ease;
   }
-
   ::-webkit-scrollbar-thumb:hover {
     background-color: var(--text-secondary);
   }
 
-  /* Accessibility: Global Focus Ring */
   :focus-visible {
     outline: 2px solid var(--accent);
     outline-offset: 2px;
     border-radius: 4px;
   }
 
-  /* Utility: Invert in Dark Mode (for black assets like cursors) */
   html[data-theme="dark"] .cursor-invert {
     filter: invert(1);
   }
