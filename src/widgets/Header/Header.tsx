@@ -1,7 +1,7 @@
 import React, { useRef, useState } from "react";
-import StaggeredMenu from "@/shared/ui/StaggeredMenu/StaggeredMenu";
+import { StaggeredMenu } from "@/shared/ui/StaggeredMenu";
 // Clock import removed
-import ThemeToggle from "@/features/theme/ui/ThemeToggle";
+import { ThemeToggle } from "@/features/theme";
 
 // Define interface for the StaggeredMenu ref if available, otherwise use basic method
 interface StaggeredMenuRef {

@@ -1,5 +1,5 @@
-import Hero from "../widgets/Hero/Hero";
-import Footer from "../widgets/Footer/Footer"; // Import Footer
+import { Hero } from "@/widgets/Hero";
+import { Footer } from "@/widgets/Footer";
 
 const Home = () => {
   return (

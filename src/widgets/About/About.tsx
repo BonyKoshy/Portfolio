@@ -1,5 +1,5 @@
 import React from "react";
-import SectionTitle from "@/shared/ui/SectionTitle/SectionTitle.jsx";
+import { SectionTitle } from "@/shared/ui/SectionTitle";
 
 import AccordionCard from "./AccordionCard/AccordionCard.tsx";
 import TypingSpeed from "./TypingSpeed/TypingSpeed.tsx";

@@ -3,8 +3,8 @@ import { AnimatePresence, motion } from "framer-motion";
 import {
   Carousel,
   ProjectCardData,
-} from "@/widgets/ProjectsCarousel/ProjectsCarousel";
-import SectionTitle from "@/shared/ui/SectionTitle/SectionTitle";
+} from "@/widgets/ProjectsCarousel";
+import { SectionTitle } from "@/shared/ui/SectionTitle";
 import { useOutsideClick } from "@/shared/lib";
 import { Github, ExternalLink, Download } from "lucide-react";
 import { Safari } from "@/shared/ui/magicui/safari";

@@ -1,11 +1,14 @@
 import { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
 import Container from "../../shared/ui/Container";
-import Logo from "../../shared/ui/Logo/Logo";
-import ShinyText from "../../shared/ui/ShinyText/ShinyText";
+import { Logo } from "@/shared/ui/Logo";
+import { ShinyText } from "@/shared/ui/ShinyText";
+import { Button } from "@/shared/ui/Button";
 import { ArrowRight } from "lucide-react";
 
 const Hero = () => {
   const [isPageLoading, setIsPageLoading] = useState(true);
+  const navigate = useNavigate();
 
   useEffect(() => {
     const handleLoad = () => setIsPageLoading(false);
@@ -74,22 +77,23 @@ const Hero = () => {
 
           {/* 5. Actions */}
           <div className="flex w-full flex-col gap-4 sm:w-auto sm:flex-row sm:items-center sm:gap-8">
-            <a
-              href="/projects"
-              className="group relative inline-flex h-12 w-full items-center justify-center overflow-hidden rounded-full bg-text-primary px-8 text-sm font-medium text-background focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-accent outline-none sm:w-auto sm:text-base"
+            <Button
+              variant="primary"
+              size="lg"
+              className="group w-full sm:w-auto"
+              onClick={() => navigate("/projects")}
             >
               <span>View Selected Work</span>
               <ArrowRight className="ml-2 h-4 w-4 transition-transform group-hover:translate-x-1" />
-            </a>
+            </Button>
 
-            <a
-              href="/contact"
-              className="group flex h-12 w-full items-center justify-center rounded-full text-sm font-medium text-zinc-500 transition-colors hover:text-text-primary focus-visible:ring-1 focus-visible:ring-offset-1 focus-visible:ring-text-primary outline-none sm:w-auto sm:justify-start sm:text-base dark:text-zinc-400 dark:hover:text-text-primary"
+            <Button
+              variant="link"
+              size="none"
+              onClick={() => navigate("/contact")}
             >
-              <span className="relative after:absolute after:left-0 after:-bottom-1 after:h-px after:w-full after:origin-left after:scale-x-0 after:bg-current after:transition-transform after:duration-300 group-hover:after:scale-x-100">
-                Contact Me
-              </span>
-            </a>
+              Contact Me
+            </Button>
           </div>
         </div>
       </Container>

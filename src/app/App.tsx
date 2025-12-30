@@ -1,8 +1,8 @@
 import { Suspense, lazy } from "react";
 import { Routes, Route } from "react-router-dom";
-import Navbar from "../widgets/Navbar/Navbar";
+import { Navbar } from "@/widgets/Navbar";
 import PageSkeleton from "../shared/ui/PageSkeleton/PageSkeleton";
-import { ThemeProvider } from "../features/theme/ThemeContext";
+import { ThemeProvider } from "./providers/ThemeProvider";
 
 // Lazy Load Pages
 const Home = lazy(() => import("../pages/Home"));
