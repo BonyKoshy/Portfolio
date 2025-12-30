@@ -20,11 +20,11 @@ const Hero = () => {
   return (
     <section
       id="main-content"
-      // CHANGED:
-      // 1. Removed 'mt-20' and 'min-h-[...]'
-      // 2. Added 'pt-32' (8rem). Since Navbar is 5rem (h-20), this leaves exactly 3rem of visual space at the top.
-      // 3. justify-start ensures it always aligns to the top.
-      className="relative flex w-full flex-col justify-start overflow-hidden pt-32 pb-20 outline-none"
+      // UPDATED:
+      // 1. justify-start: Anchors content to the top (prevents "too low" centering)
+      // 2. pt-28: 7rem top padding. (5rem Navbar + 2rem gap) -> The "Middle" Spot
+      // 3. pb-20: Bottom breathing room
+      className="relative flex w-full flex-col justify-start overflow-hidden pt-28 pb-20 outline-none"
       tabIndex={-1}
     >
       <Container>

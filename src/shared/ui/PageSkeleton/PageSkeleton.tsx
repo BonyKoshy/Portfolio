@@ -3,10 +3,11 @@ import Container from "../Container";
 const PageSkeleton = () => {
   return (
     <div className="min-h-screen animate-pulse bg-(--background) overflow-hidden">
-      {/* HERO SKELETON 
-          Synced to match Hero.tsx: justify-start + pt-32 
+      {/* HERO SKELETON
+          Alignment: justify-start + pt-28
+          Matches Hero.tsx exactly.
       */}
-      <section className="relative flex w-full flex-col justify-start pt-32 pb-20">
+      <section className="relative flex w-full flex-col justify-start pt-28 pb-20">
         <Container>
           <div className="flex flex-col items-start w-full">
             {/* 1. Logo */}
@@ -14,9 +15,7 @@ const PageSkeleton = () => {
 
             {/* 2. Eyebrow */}
             <div className="mb-5 flex items-center gap-4">
-              {/* Line */}
               <div className="hidden h-px w-20 bg-zinc-200/50 dark:bg-zinc-800/50 sm:block"></div>
-              {/* Text */}
               <div className="h-4 w-36 rounded bg-zinc-200/50 dark:bg-zinc-800/50"></div>
             </div>
 
@@ -34,9 +33,7 @@ const PageSkeleton = () => {
 
             {/* 5. Actions */}
             <div className="flex flex-col gap-4 w-full sm:flex-row sm:items-center sm:gap-8">
-              {/* Primary */}
               <div className="h-12 w-full rounded-full bg-zinc-200/50 dark:bg-zinc-800/50 sm:w-48"></div>
-              {/* Secondary */}
               <div className="h-12 w-32 rounded-full bg-transparent sm:w-32"></div>
             </div>
           </div>
