@@ -5,7 +5,7 @@
   /* --- LIGHT THEME --- */
   --background-light: #f8f9fa;
   --text-primary-light: #18181b;
-  --text-secondary-light: #52525b;
+  --text-secondary-light: #909090;
   --accent-light: #2563eb;
   --panel-bg-light: rgba(255, 255, 255, 0.95);
   --prelayer-1-light: #e4e4e7;
@@ -14,7 +14,7 @@
   /* --- DARK THEME --- */
   --background-dark: #09090b;
   --text-primary-dark: #f4f4f5;
-  --text-secondary-dark: #a1a1aa;
+  --text-secondary-dark: #505053;
   --accent-dark: #60a5fa;
   --panel-bg-dark: rgba(24, 24, 27, 0.85);
   --prelayer-1-dark: #18181b;
@@ -39,10 +39,9 @@
 
   --animate-cell-ripple: cell-ripple 0.5s ease-out forwards;
 
-  /* Slower, smoother animations */
-  --animate-logo-loading: logo-loading 4s ease-in-out infinite;
-  --animate-logo-intro: logo-draw 3.5s ease-in-out 1 forwards;
-  --animate-logo-interaction: logo-interaction 2s cubic-bezier(0.25, 1, 0.5, 1)
+  --animate-logo-loading: logo-pulse 2s ease-in-out infinite;
+  --animate-logo-intro: logo-draw-in 2.5s ease-out forwards;
+  --animate-logo-hover-cycle: logo-cycle 2.5s cubic-bezier(0.4, 0, 0.2, 1)
     forwards;
 
   @keyframes cell-ripple {
@@ -71,36 +70,31 @@
     }
   }
 
-  @keyframes logo-loading {
-    0% {
-      stroke-dashoffset: 0;
-      opacity: 1;
-    }
-    50% {
-      stroke-dashoffset: 2150;
+  @keyframes logo-pulse {
+    0%,
+    100% {
       opacity: 0.3;
     }
-    100% {
-      stroke-dashoffset: 0;
-      opacity: 1;
+    50% {
+      opacity: 0.6;
     }
   }
 
-  @keyframes logo-draw {
+  @keyframes logo-draw-in {
     from {
-      stroke-dashoffset: 2150;
+      stroke-dashoffset: 3500;
     }
     to {
       stroke-dashoffset: 0;
     }
   }
 
-  @keyframes logo-interaction {
+  @keyframes logo-cycle {
     0% {
       stroke-dashoffset: 0;
     }
-    40% {
-      stroke-dashoffset: 2150;
+    50% {
+      stroke-dashoffset: 3500;
     }
     100% {
       stroke-dashoffset: 0;

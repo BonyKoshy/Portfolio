@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 
 interface LogoProps {
   className?: string;
@@ -6,53 +6,76 @@ interface LogoProps {
 }
 
 const Logo = ({ className = "", isLoading = false }: LogoProps) => {
-  const [isInteracting, setIsInteracting] = useState(false);
+  const [animationState, setAnimationState] = useState<
+    "loading" | "intro" | "idle" | "hovering"
+  >("loading");
 
-  const triggerAnimation = () => {
-    if (isLoading) return;
-    setIsInteracting(true);
+  // 1. Handle Page Load Logic
+  useEffect(() => {
+    if (isLoading) {
+      setAnimationState("loading");
+    } else {
+      // When loading finishes, start Intro
+      setAnimationState("intro");
+    }
+  }, [isLoading]);
+
+  // 2. Hover Handler
+  const handleHover = () => {
+    // Only allow hover animation if we are currently idle (intro finished)
+    if (animationState === "idle") {
+      setAnimationState("hovering");
+    }
   };
 
+  // 3. Cleanup after animation ends
   const handleAnimationEnd = () => {
-    setIsInteracting(false);
+    // If Intro or Hover finishes, go to Idle state
+    if (animationState === "intro" || animationState === "hovering") {
+      setAnimationState("idle");
+    }
   };
 
   return (
     <div
-      className={`relative flex items-center justify-center text-(--text-primary) ${className} ${!isLoading ? "cursor-pointer" : ""}`}
+      className={`relative flex items-center justify-center ${className} ${animationState === "idle" ? "cursor-pointer" : ""}`}
       aria-label="Bony Koshy Logo"
-      onMouseEnter={triggerAnimation}
-      onClick={triggerAnimation}
+      onMouseEnter={handleHover}
+      onClick={handleHover} // For mobile touch
     >
       <svg
-        viewBox="0 0 314 519"
+        viewBox="0 0 604 726"
+        fill="none"
+        xmlns="http://www.w3.org/2000/svg"
         className="h-full w-full drop-shadow-sm"
         style={{ overflow: "visible" }}
       >
-        {/* Background Ghost Layer */}
-        {/* Darkened the light-mode stroke (zinc-300) for better visibility */}
+        {/* --- GHOST LAYER (Base - Always Grey) --- */}
         <path
-          d="M44.941 470.693 C18.441 417.693 -5.02007 304.707 107.441 249.693 C109.009 248.688 128.023 235.343 129.554 234.331 C205.932 183.84 285.941 55.6932 216.441 26.1932 C108.441 -1.30684 133.297 154.632 129.554 234.331 C127.476 278.563 128.52 325.098 129.02 360.063 C129.43 466.074 144.04 490.295 198.835 494.991 C243.225 497.53 309.203 457.584 285.941 355.193 C268.663 297.025 177.941 284.874 177.941 344.193"
-          className="fill-none stroke-zinc-300 dark:stroke-zinc-800 transition-colors duration-500"
-          strokeWidth="46"
+          d="M61.0964 390.845C-33.0359 152.236 37.348 98.6127 243.597 31.3452C449.845 -35.9223 592.513 214.005 393.597 307.845C587.597 259.345 694.097 583.345 406.097 689.845C212.533 739.938 70.9877 668.127 110.597 493.845C127.208 420.756 166.097 392.845 210.097 333.845C269.2 267.351 303.474 229.957 300.597 189.345C297.02 138.858 240.258 132.588 230.597 180.845C198.076 343.283 243.096 564.345 302.097 569.845C348.597 577.845 404.226 536.284 380.597 434.845C353.379 364.523 302.597 346.845 243.597 417.845"
+          // Uses --text-secondary (Grey) defined in your index.css
+          className="stroke-(--text-secondary) transition-colors duration-500"
+          strokeWidth="40"
           strokeLinecap="round"
           strokeLinejoin="round"
         />
 
-        {/* Foreground Active Layer */}
-        {/* Changed to stroke-current to inherit parent text color */}
+        {/* --- ACTIVE LAYER (Fill - Theme Adaptive) --- */}
         <path
-          d="M44.941 470.693 C18.441 417.693 -5.02007 304.707 107.441 249.693 C109.009 248.688 128.023 235.343 129.554 234.331 C205.932 183.84 285.941 55.6932 216.441 26.1932 C108.441 -1.30684 133.297 154.632 129.554 234.331 C127.476 278.563 128.52 325.098 129.02 360.063 C129.43 466.074 144.04 490.295 198.835 494.991 C243.225 497.53 309.203 457.584 285.941 355.193 C268.663 297.025 177.941 284.874 177.941 344.193"
+          d="M61.0964 390.845C-33.0359 152.236 37.348 98.6127 243.597 31.3452C449.845 -35.9223 592.513 214.005 393.597 307.845C587.597 259.345 694.097 583.345 406.097 689.845C212.533 739.938 70.9877 668.127 110.597 493.845C127.208 420.756 166.097 392.845 210.097 333.845C269.2 267.351 303.474 229.957 300.597 189.345C297.02 138.858 240.258 132.588 230.597 180.845C198.076 343.283 243.096 564.345 302.097 569.845C348.597 577.845 404.226 536.284 380.597 434.845C353.379 364.523 302.597 346.845 243.597 417.845"
+          // Uses --text-primary (Black in Light, White in Dark)
           className={`
-            fill-none stroke-current transition-colors duration-500
-            ${isLoading ? "animate-logo-loading" : ""} 
-            ${isInteracting ? "animate-logo-interaction" : ""}
+            stroke-(--text-primary) transition-colors duration-500
+            ${animationState === "loading" ? "animate-logo-loading" : ""} 
+            ${animationState === "intro" ? "animate-logo-intro" : ""}
+            ${animationState === "hovering" ? "animate-logo-hover-cycle" : ""}
           `}
-          strokeWidth="46"
+          strokeWidth="40"
           strokeLinecap="round"
           strokeLinejoin="round"
-          strokeDasharray="2150"
-          strokeDashoffset="0"
+          // When idle, offset is 0 (fully drawn with theme color)
+          strokeDasharray="3500"
+          strokeDashoffset={animationState === "idle" ? "0" : "3500"}
           onAnimationEnd={handleAnimationEnd}
         />
       </svg>
