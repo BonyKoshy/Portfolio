@@ -29,9 +29,16 @@
   --color-text-primary: var(--text-primary);
   --color-text-secondary: var(--text-secondary);
   --color-accent: var(--accent);
-  --color-panel-bg: var(--panel-bg);
+  --color-panel: var(--panel-bg);
   --color-prelayer-1: var(--prelayer-1);
   --color-prelayer-2: var(--prelayer-2);
+
+  --spacing-30: 7.5rem;
+  --spacing-38: 9.5rem;
+  --spacing-45: 11.25rem;
+  --spacing-50: 12.5rem;
+  --spacing-112: 28rem;
+  --spacing-112.5: 28.125rem;
 
   --z-index-60: 60;
   --z-index-100: 100;

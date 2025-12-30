@@ -14,19 +14,19 @@ const Footer = () => {
           <div className="flex gap-6 text-sm font-medium">
             <a
               href="#"
-              className="text-zinc-400 hover:text-(--accent) transition-colors"
+              className="text-zinc-400 hover:text-accent transition-colors"
             >
               GitHub
             </a>
             <a
               href="#"
-              className="text-zinc-400 hover:text-(--accent) transition-colors"
+              className="text-zinc-400 hover:text-accent transition-colors"
             >
               LinkedIn
             </a>
             <a
               href="#"
-              className="text-zinc-400 hover:text-(--accent) transition-colors"
+              className="text-zinc-400 hover:text-accent transition-colors"
             >
               Email
             </a>
@@ -43,3 +43,4 @@ const Footer = () => {
 };
 
 export default Footer;
+

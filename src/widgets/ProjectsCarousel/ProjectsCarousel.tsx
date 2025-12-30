@@ -42,7 +42,7 @@ export const Card: React.FC<CardProps> = ({ card }) => {
        />
       
       {/* Overlay for Title/Category - positioned over the Safari mock */}
-      <div className="absolute bottom-0 left-0 right-0 p-6 text-(--text-primary) bg-[linear-gradient(to_top,rgba(0,0,0,0.8)_0%,transparent_100%)] rounded-b-xl z-10">
+      <div className="absolute bottom-0 left-0 right-0 p-6 text-text-primary bg-[linear-gradient(to_top,rgba(0,0,0,0.8)_0%,transparent_100%)] rounded-b-xl z-10">
         <motion.p
           layoutId={`card-category-${card.title}`}
           className="text-[0.9rem] font-medium text-gray-300"
@@ -94,7 +94,7 @@ export const Carousel: React.FC<CarouselProps> = ({ items, onCardClick }) => {
           className="flex-none w-[320px] h-120 snap-center cursor-pointer max-[768px]:w-70 max-[768px]:h-105 group"
           onClick={() => onCardClick(card)}
         >
-          <div className="h-full w-full rounded-4xl overflow-hidden relative bg-(--panel-bg) shadow-[0_10px_20px_rgba(0,0,0,0.05)]">
+          <div className="h-full w-full rounded-4xl overflow-hidden relative bg-panel shadow-[0_10px_20px_rgba(0,0,0,0.05)]">
              <div className="absolute inset-0 w-full h-full"> 
                <motion.img
                  layoutId={`card-image-${card.title}`}
@@ -103,14 +103,14 @@ export const Carousel: React.FC<CarouselProps> = ({ items, onCardClick }) => {
                  className="w-full h-full object-cover transition-transform duration-400 group-hover:scale-105"
                />
              </div>
-             <div className="absolute bottom-0 left-0 right-0 p-8 text-(--text-primary) bg-[linear-gradient(to_top,var(--background)_30%,transparent)]">
+             <div className="absolute bottom-0 left-0 right-0 p-8 text-text-primary bg-[linear-gradient(to_top,var(--background)_30%,transparent)]">
                <motion.p
                  layoutId={`card-category-${card.title}`}
-                 className="text-[0.9rem] font-medium text-(--text-secondary)"
+                 className="text-[0.9rem] font-medium text-text-secondary"
                >
                  {card.category}
                </motion.p>
-               <motion.h2 layoutId={`card-title-${card.title}`} className="text-[1.5rem] font-bold mt-1 text-(--text-primary)">
+               <motion.h2 layoutId={`card-title-${card.title}`} className="text-[1.5rem] font-bold mt-1 text-text-primary">
                  {card.title}
                </motion.h2>
              </div>
@@ -132,7 +132,7 @@ export const Carousel: React.FC<CarouselProps> = ({ items, onCardClick }) => {
           href="https://github.com/BonyKoshy?tab=repositories"
           target="_blank"
           rel="noopener noreferrer"
-          className="flex items-center gap-2 px-4 py-2 rounded-full bg-(--prelayer-1) text-(--text-secondary) font-semibold no-underline transition-all duration-200 hover:bg-(--accent) hover:text-(--background)"
+          className="flex items-center gap-2 px-4 py-2 rounded-full bg-prelayer-1 text-text-secondary font-semibold no-underline transition-all duration-200 hover:bg-accent hover:text-background"
         >
           <Github size={18} />
           <span>More Projects</span>
@@ -142,7 +142,7 @@ export const Carousel: React.FC<CarouselProps> = ({ items, onCardClick }) => {
             onClick={() => scroll(-1)} 
             disabled={isAtStart}
             aria-label="Previous project"
-            className="bg-(--prelayer-1) text-(--text-primary) border-none w-10 h-10 rounded-full p-0 cursor-pointer transition-all duration-200 hover:bg-(--accent) hover:text-(--background) disabled:opacity-40 disabled:cursor-not-allowed grid place-items-center"
+            className="bg-prelayer-1 text-text-primary border-none w-10 h-10 rounded-full p-0 cursor-pointer transition-all duration-200 hover:bg-accent hover:text-background disabled:opacity-40 disabled:cursor-not-allowed grid place-items-center"
           >
             <ArrowLeft size={24} />
           </button>
@@ -150,7 +150,7 @@ export const Carousel: React.FC<CarouselProps> = ({ items, onCardClick }) => {
             onClick={() => scroll(1)} 
             disabled={isAtEnd}
             aria-label="Next project"
-             className="bg-(--prelayer-1) text-(--text-primary) border-none w-10 h-10 rounded-full p-0 cursor-pointer transition-all duration-200 hover:bg-(--accent) hover:text-(--background) disabled:opacity-40 disabled:cursor-not-allowed grid place-items-center"
+             className="bg-prelayer-1 text-text-primary border-none w-10 h-10 rounded-full p-0 cursor-pointer transition-all duration-200 hover:bg-accent hover:text-background disabled:opacity-40 disabled:cursor-not-allowed grid place-items-center"
           >
             <ArrowRight size={24} />
           </button>
@@ -159,3 +159,6 @@ export const Carousel: React.FC<CarouselProps> = ({ items, onCardClick }) => {
     </>
   );
 };
+
+
+

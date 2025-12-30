@@ -10,7 +10,7 @@ const Home = lazy(() => import("../pages/Home"));
 const App = () => {
   return (
     <ThemeProvider>
-      <div className="min-h-screen bg-(--background) text-(--text-primary) transition-colors duration-300">
+      <div className="min-h-screen bg-background text-text-primary transition-colors duration-300">
         <Navbar />
 
         <Suspense fallback={<PageSkeleton />}>
@@ -28,3 +28,4 @@ const App = () => {
 };
 
 export default App;
+

@@ -10,7 +10,7 @@ const SectionTitle: React.FC<SectionTitleProps> = ({ title }) => {
 
   return (
     <div className="w-full mb-8" ref={containerRef}>
-      <h2 className="font-sans text-[clamp(1.2rem,3vw,1.5rem)] text-(--accent) m-0 font-semibold uppercase tracking-[1.5px]">
+      <h2 className="font-sans text-[clamp(1.2rem,3vw,1.5rem)] text-accent m-0 font-semibold uppercase tracking-[1.5px]">
         <VariableProximity
           label={title}
           fromFontVariationSettings="'wght' 300, 'opsz' 12"
@@ -24,3 +24,4 @@ const SectionTitle: React.FC<SectionTitleProps> = ({ title }) => {
 };
 
 export default SectionTitle;
+

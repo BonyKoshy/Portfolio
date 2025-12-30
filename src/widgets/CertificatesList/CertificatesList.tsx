@@ -106,7 +106,7 @@ const CertificatesList: React.FC = () => {
   return (
     <section
       id="certificates"
-      className="w-full max-w-7xl mx-auto px-4 py-15 text-(--text-primary)"
+      className="w-full max-w-7xl mx-auto px-4 py-15 text-text-primary"
     >
       <SectionTitle title="Certificates" />
       <div className="flex flex-col w-full mx-auto">
@@ -128,15 +128,15 @@ const CertificatesList: React.FC = () => {
               <motion.div
                 layoutId={`card-${active.title}-${id}`}
                 ref={ref}
-                className="w-[80%] max-h-[90vh] bg-(--panel-bg) rounded-2xl overflow-hidden flex flex-col p-6 gap-6 relative"
+                className="w-[80%] max-h-[90vh] bg-panel rounded-2xl overflow-hidden flex flex-col p-6 gap-6 relative"
               >
                 <button
                   className="absolute top-4 right-4 bg-transparent border-none cursor-pointer p-2 flex flex-col justify-center items-center gap-1.5 z-50 group max-[768px]:hidden"
                   onClick={() => setActive(null)}
                   aria-label="Close certificate details"
                 >
-                  <span className="w-6 h-0.5 bg-(--text-secondary) rounded-sm transform rotate-45 translate-y-1 transition-colors duration-200 group-hover:bg-(--accent)"></span>
-                  <span className="w-6 h-0.5 bg-(--text-secondary) rounded-sm transform -rotate-45 -translate-y-1 transition-colors duration-200 group-hover:bg-(--accent)"></span>
+                  <span className="w-6 h-0.5 bg-text-secondary rounded-sm transform rotate-45 translate-y-1 transition-colors duration-200 group-hover:bg-accent"></span>
+                  <span className="w-6 h-0.5 bg-text-secondary rounded-sm transform -rotate-45 -translate-y-1 transition-colors duration-200 group-hover:bg-accent"></span>
                 </button>
 
                 <div className="flex items-start gap-4 max-[768px]:flex-col max-[768px]:items-center max-[768px]:text-center">
@@ -144,19 +144,19 @@ const CertificatesList: React.FC = () => {
                     <img
                       src={active.src}
                       alt={active.title}
-                      className="w-20 h-20 rounded-xl object-contain shrink-0 bg-(--prelayer-1)"
+                      className="w-20 h-20 rounded-xl object-contain shrink-0 bg-prelayer-1"
                     />
                   </motion.div>
                   <div className="grow">
                     <motion.h3
                       layoutId={`title-${active.title}-${id}`}
-                      className="text-[1.25rem] font-bold m-0 text-(--text-primary)"
+                      className="text-[1.25rem] font-bold m-0 text-text-primary"
                     >
                       {active.title}
                     </motion.h3>
                     <motion.p
                       layoutId={`description-${active.description}-${id}`}
-                      className="text-[0.9rem] text-(--text-secondary) mt-1"
+                      className="text-[0.9rem] text-text-secondary mt-1"
                     >
                       {active.description}
                     </motion.p>
@@ -172,7 +172,7 @@ const CertificatesList: React.FC = () => {
                   }}
                   exit={{ opacity: 0, transition: { duration: 0.15 } }}
                 >
-                  <div className="text-[1rem] leading-[1.7] text-(--text-secondary) overflow-y-auto pr-2 grow">
+                  <div className="text-[1rem] leading-[1.7] text-text-secondary overflow-y-auto pr-2 grow">
                     {active.content()}
                   </div>
                   <motion.a
@@ -180,7 +180,7 @@ const CertificatesList: React.FC = () => {
                     href={active.ctaLink}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="px-6 py-3 rounded-xl bg-(--accent) text-white font-semibold no-underline transition-transform duration-200 mt-6 self-end hover:scale-105 max-[768px]:w-full"
+                    className="px-6 py-3 rounded-xl bg-accent text-white font-semibold no-underline transition-transform duration-200 mt-6 self-end hover:scale-105 max-[768px]:w-full"
                   >
                     {active.ctaText}
                   </motion.a>
@@ -196,7 +196,7 @@ const CertificatesList: React.FC = () => {
               layoutId={`card-${card.title}-${id}`}
               key={`card-${card.title}-${id}`}
               onClick={() => setActive(card)}
-              className="flex flex-wrap justify-between items-center p-4 rounded-xl bg-(--panel-bg) cursor-pointer transition-all duration-200 shadow-sm hover:-translate-y-0.5 hover:bg-(--prelayer-2)"
+              className="flex flex-wrap justify-between items-center p-4 rounded-xl bg-panel cursor-pointer transition-all duration-200 shadow-sm hover:-translate-y-0.5 hover:bg-prelayer-2"
             >
               <div className="flex items-center gap-6 mb-2 sm:mb-0 w-full sm:w-auto max-[640px]:w-full max-[640px]:mb-4">
                 <motion.div layoutId={`image-${card.title}-${id}`}>
@@ -209,13 +209,13 @@ const CertificatesList: React.FC = () => {
                 <div>
                   <motion.h3
                     layoutId={`title-${card.title}-${id}`}
-                    className="font-semibold text-(--text-primary)"
+                    className="font-semibold text-text-primary"
                   >
                     {card.title}
                   </motion.h3>
                   <motion.p
                     layoutId={`description-${card.description}-${id}`}
-                    className="text-(--text-secondary) text-[0.9rem]"
+                    className="text-text-secondary text-[0.9rem]"
                   >
                     {card.description}
                   </motion.p>
@@ -223,7 +223,7 @@ const CertificatesList: React.FC = () => {
               </div>
               <motion.a
                 layoutId={`button-${card.title}-${id}`}
-                className="px-4 py-2 rounded-[10px] bg-(--accent) text-white font-semibold text-[1.1rem] border-none cursor-pointer max-[640px]:w-full max-[640px]:text-center"
+                className="px-4 py-2 rounded-[10px] bg-accent text-white font-semibold text-[1.1rem] border-none cursor-pointer max-[640px]:w-full max-[640px]:text-center"
               >
                 {card.ctaText}
               </motion.a>
@@ -235,7 +235,7 @@ const CertificatesList: React.FC = () => {
           href="https://www.linkedin.com/in/bonykoshy/details/certifications/"
           target="_blank"
           rel="noopener noreferrer"
-          className="inline-flex justify-center items-center gap-2 w-full sm:w-auto px-4 py-3 bg-(--panel-bg) text-(--text-secondary) rounded-full no-underline font-semibold transition-all duration-300 mt-8 shadow-sm self-end hover:bg-(--prelayer-2) lg:w-auto lg:px-4 lg:py-2 lg:mt-8 lg:self-end"
+          className="inline-flex justify-center items-center gap-2 w-full sm:w-auto px-4 py-3 bg-panel text-text-secondary rounded-full no-underline font-semibold transition-all duration-300 mt-8 shadow-sm self-end hover:bg-prelayer-2 lg:w-auto lg:px-4 lg:py-2 lg:mt-8 lg:self-end"
         >
           <Linkedin
             className="transition-transform duration-300 hover:scale-110"
@@ -249,3 +249,6 @@ const CertificatesList: React.FC = () => {
 };
 
 export default CertificatesList;
+
+
+

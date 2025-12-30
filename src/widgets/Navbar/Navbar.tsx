@@ -23,7 +23,7 @@ const Navbar = () => {
         className="
           absolute left-6 top-5 z-100
           flex h-10 items-center justify-center rounded-full 
-          bg-(--text-primary) px-6 text-sm font-medium text-(--background)
+          bg-text-primary px-6 text-sm font-medium text-background
           shadow-lg ring-offset-2 focus:ring-2 ring-black/50
           transform transition-transform duration-300 ease-out
           -translate-y-[250%] focus:translate-y-0
@@ -53,10 +53,10 @@ const Navbar = () => {
               key={item.label}
               to={item.href}
               className={({ isActive }) => `
-                relative text-sm font-medium transition-colors hover:text-(--accent)
-                ${isActive ? "text-(--accent)" : "text-zinc-400"}
+                relative text-sm font-medium transition-colors hover:text-accent
+                ${isActive ? "text-accent" : "text-zinc-400"}
                 after:absolute after:left-0 after:-bottom-2 after:h-px after:w-full 
-                after:origin-left after:scale-x-0 after:bg-(--accent) 
+                after:origin-left after:scale-x-0 after:bg-accent 
                 after:transition-transform after:duration-300
                 hover:after:scale-x-100
               `}
@@ -76,3 +76,5 @@ const Navbar = () => {
 };
 
 export default Navbar;
+
+

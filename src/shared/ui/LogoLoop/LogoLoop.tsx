@@ -312,7 +312,7 @@ export const LogoLoop = React.memo<LogoLoopProps>(
             <li
               className={cx(
                 'flex-none text-(length:--logoloop-logoHeight) leading-none',
-                isVertical ? 'mb-(--logoloop-gap)' : 'mr-(--logoloop-gap)',
+                isVertical ? 'mb-logoloop-gap' : 'mr-logoloop-gap',
                 scaleOnHover && 'overflow-visible group/item'
               )}
               key={key}
@@ -340,7 +340,7 @@ export const LogoLoop = React.memo<LogoLoopProps>(
         ) : (
           <img
             className={cx(
-              'h-(--logoloop-logoHeight) w-auto block object-contain',
+              'h-logoloop-logoHeight w-auto block object-contain',
               '[-webkit-user-drag:none] pointer-events-none',
               '[image-rendering:-webkit-optimize-contrast]',
               'motion-reduce:transition-none',
@@ -387,7 +387,7 @@ export const LogoLoop = React.memo<LogoLoopProps>(
           <li
             className={cx(
               'flex-none text-(length:--logoloop-logoHeight) leading-none',
-              isVertical ? 'mb-(--logoloop-gap)' : 'mr-(--logoloop-gap)',
+              isVertical ? 'mb-logoloop-gap' : 'mr-logoloop-gap',
               scaleOnHover && 'overflow-visible group/item'
             )}
             key={key}
@@ -495,3 +495,4 @@ export const LogoLoop = React.memo<LogoLoopProps>(
 LogoLoop.displayName = 'LogoLoop';
 
 export default LogoLoop;
+

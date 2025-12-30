@@ -46,14 +46,14 @@ const AccordionItem: React.FC<AccordionItemProps> = ({
 }) => {
   const isOpen = item.id === expanded;
   return (
-    <div className="border-b border-(--prelayer-2) last:border-b-0">
+    <div className="border-b border-prelayer-2 last:border-b-0">
       <motion.header
-        className="flex justify-between items-center w-full py-4 text-lg font-semibold text-(--text-primary) cursor-pointer bg-none border-none"
+        className="flex justify-between items-center w-full py-4 text-lg font-semibold text-text-primary cursor-pointer bg-none border-none"
         onClick={() => setExpanded(isOpen ? false : item.id)}
       >
         {item.title}
         <motion.div
-          className="text-(--accent)"
+          className="text-accent"
           animate={{ rotate: isOpen ? 180 : 0 }}
           transition={{ duration: 0.3 }}
         >
@@ -88,7 +88,7 @@ const AccordionItem: React.FC<AccordionItemProps> = ({
             transition={{ duration: 0.4, ease: [0.04, 0.62, 0.23, 0.98] }}
             className="overflow-hidden"
           >
-            <p className="pb-4 text-(--text-secondary) leading-relaxed">
+            <p className="pb-4 text-text-secondary leading-relaxed">
               {item.content}
             </p>
           </motion.section>
@@ -134,3 +134,4 @@ const AccordionCard: React.FC = () => {
 };
 
 export default AccordionCard;
+

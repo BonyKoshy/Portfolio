@@ -134,7 +134,7 @@ const Contact: React.FC = () => {
   return (
     <section
       id="contact"
-      className="relative pt-30 pb-8 px-8 min-h-[90vh] flex flex-col overflow-hidden text-(--text-primary)"
+      className="relative pt-30 pb-8 px-8 min-h-[90vh] flex flex-col overflow-hidden text-text-primary"
     >
       {/* Gradient Overlay */}
       <div className="absolute top-0 left-0 w-full h-full z-0 pointer-events-none bg-[linear-gradient(to_top,var(--background)_70%,transparent_100%)]" />
@@ -146,16 +146,16 @@ const Contact: React.FC = () => {
             <h2 className="text-[2rem] font-bold">BONY KOSHY</h2>
             <a
               href="mailto:bonykoshy@gmail.com"
-              className="inline-flex items-center gap-1 text-(--text-secondary) no-underline font-medium mt-2 relative w-fit group"
+              className="inline-flex items-center gap-1 text-text-secondary no-underline font-medium mt-2 relative w-fit group"
             >
               bonykoshy@gmail.com
               <ArrowUpRight
                 className="opacity-100 transition-transform duration-300 group-hover:translate-x-0.5 group-hover:-translate-y-0.5"
                 size={20}
               />
-              <span className="absolute -bottom-0.5 left-0 w-full h-px bg-(--text-secondary) scale-x-0 origin-right transition-transform duration-300 ease-out group-hover:scale-x-100 group-hover:origin-left"></span>
+              <span className="absolute -bottom-0.5 left-0 w-full h-px bg-text-secondary scale-x-0 origin-right transition-transform duration-300 ease-out group-hover:scale-x-100 group-hover:origin-left"></span>
             </a>
-            <p className="text-[1rem] text-(--text-secondary) max-w-100 my-6">
+            <p className="text-[1rem] text-text-secondary max-w-100 my-6">
               I'm always open to discussing new projects, creative ideas, or
               opportunities to be part of an ambitious team. Feel free to reach
               out.
@@ -168,7 +168,7 @@ const Contact: React.FC = () => {
                     aria-label={social.label}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="text-(--text-secondary) transition-all duration-200 hover:text-(--accent) hover:scale-110 block"
+                    className="text-text-secondary transition-all duration-200 hover:text-accent hover:scale-110 block"
                   >
                     {social.icon}
                   </a>
@@ -182,13 +182,13 @@ const Contact: React.FC = () => {
                 <a
                   key={link.name}
                   href={link.href}
-                  className="no-underline text-(--text-secondary) font-medium transition-colors duration-200 hover:text-(--accent)"
+                  className="no-underline text-text-secondary font-medium transition-colors duration-200 hover:text-accent"
                 >
                   {link.name}
                 </a>
               ))}
             </div>
-            <div className="bg-(--panel-bg) p-8 rounded-2xl flex flex-col max-h-[80vh] h-auto">
+            <div className="bg-panel p-8 rounded-2xl flex flex-col max-h-[80vh] h-auto">
               <motion.div
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
@@ -212,7 +212,7 @@ const Contact: React.FC = () => {
                       name="name"
                       placeholder="Enter your name"
                       required
-                      className="bg-(--prelayer-1) border border-(--prelayer-2) p-3 rounded-lg text-(--text-primary) font-inherit aria-invalid:border-red-500"
+                      className="bg-prelayer-1 border border-prelayer-2 p-3 rounded-lg text-text-primary font-inherit aria-invalid:border-red-500"
                       aria-invalid={!!state?.validationErrors?.name}
                     />
                     {state?.validationErrors?.name && (
@@ -228,7 +228,7 @@ const Contact: React.FC = () => {
                       name="email"
                       placeholder="Enter your email"
                       required
-                      className="bg-(--prelayer-1) border border-(--prelayer-2) p-3 rounded-lg text-(--text-primary) font-inherit aria-invalid:border-red-500"
+                      className="bg-prelayer-1 border border-prelayer-2 p-3 rounded-lg text-text-primary font-inherit aria-invalid:border-red-500"
                       aria-invalid={!!state?.validationErrors?.email}
                     />
                     {state?.validationErrors?.email && (
@@ -243,7 +243,7 @@ const Contact: React.FC = () => {
                       name="message"
                       placeholder="Write a message"
                       required
-                      className="bg-(--prelayer-1) border border-(--prelayer-2) p-3 rounded-lg text-(--text-primary) font-inherit min-h-px resize-y grow aria-invalid:border-red-500"
+                      className="bg-prelayer-1 border border-prelayer-2 p-3 rounded-lg text-text-primary font-inherit min-h-px resize-y grow aria-invalid:border-red-500"
                       aria-invalid={!!state?.validationErrors?.message}
                     ></textarea>
                     {state?.validationErrors?.message && (
@@ -256,7 +256,7 @@ const Contact: React.FC = () => {
                   <RippleButton
                     type="submit"
                     disabled={isPending}
-                    className="bg-(--accent) text-(--background) border-none p-3 rounded-lg font-semibold cursor-pointer transition-opacity duration-200 hover:opacity-80 disabled:opacity-50"
+                    className="bg-accent text-background border-none p-3 rounded-lg font-semibold cursor-pointer transition-opacity duration-200 hover:opacity-80 disabled:opacity-50"
                   >
                     {optimisticLabel}
                   </RippleButton>
@@ -275,14 +275,14 @@ const Contact: React.FC = () => {
           </div>
         </div>
 
-        <footer className="flex justify-between items-center mt-16 pt-8 border-t border-(--prelayer-2) text-(--text-secondary) text-[0.9rem] relative max-[768px]:flex-col max-[768px]:gap-4">
+        <footer className="flex justify-between items-center mt-16 pt-8 border-t border-prelayer-2 text-text-secondary text-[0.9rem] relative max-[768px]:flex-col max-[768px]:gap-4">
           <div className="flex-1 text-left">
             <span>© 2025 Bony Koshy. All rights reserved.</span>
           </div>
           <div className="flex-1 text-right max-[768px]:text-center">
             <a
               href="/privacy"
-              className="no-underline text-(--text-secondary) transition-all duration-200 hover:underline"
+              className="no-underline text-text-secondary transition-all duration-200 hover:underline"
             >
               Privacy Policy
             </a>
@@ -294,3 +294,6 @@ const Contact: React.FC = () => {
 };
 
 export default Contact;
+
+
+

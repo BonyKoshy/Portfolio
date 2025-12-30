@@ -16,12 +16,12 @@ const TypingSpeed: React.FC = () => {
   const progress = (wpm / maxWpm) * circumference;
   
   return (
-    <div className="h-full w-full flex flex-col justify-between relative bg-(--panel-bg) rounded-xl overflow-hidden group p-5">
+    <div className="h-full w-full flex flex-col justify-between relative bg-panel rounded-xl overflow-hidden group p-5">
        {/* Background Decoration */}
-       <div className="absolute inset-0 bg-linear-to-br from-transparent via-(--accent)/5 to-(--accent)/10 opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none" />
+       <div className="absolute inset-0 bg-linear-to-br from-transparent via-accent/5 to-accent/10 opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none" />
       
        {/* Header - Top Left */}
-       <div className="flex items-center gap-3 z-10 w-full justify-start text-(--text-secondary)">
+       <div className="flex items-center gap-3 z-10 w-full justify-start text-text-secondary">
          <Gauge className="" size={26} />
          <h3 className="text-lg font-bold m-0 whitespace-nowrap">Typing Speed</h3>
        </div>
@@ -63,10 +63,10 @@ const TypingSpeed: React.FC = () => {
             
             {/* Centered Text */}
             <div className="absolute bottom-0 flex flex-col items-center mb-1">
-               <span className="text-5xl font-black text-(--text-primary) leading-none tracking-tighter drop-shadow-sm">
+               <span className="text-5xl font-black text-text-primary leading-none tracking-tighter drop-shadow-sm">
                  {wpm}
                </span>
-               <span className="text-xs font-bold text-(--text-secondary) uppercase tracking-widest mt-1">WPM</span>
+               <span className="text-xs font-bold text-text-secondary uppercase tracking-widest mt-1">WPM</span>
             </div>
          </div>
        </div>
@@ -75,3 +75,6 @@ const TypingSpeed: React.FC = () => {
 };
 
 export default TypingSpeed;
+
+
+

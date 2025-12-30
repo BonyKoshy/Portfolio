@@ -2,7 +2,7 @@ import Container from "../Container";
 
 const PageSkeleton = () => {
   return (
-    <div className="min-h-screen animate-pulse bg-(--background) overflow-hidden">
+    <div className="min-h-screen animate-pulse bg-background overflow-hidden">
       {/* HERO SKELETON
           Alignment: justify-start + pt-28
           Matches Hero.tsx exactly.
@@ -67,3 +67,4 @@ const PageSkeleton = () => {
 };
 
 export default PageSkeleton;
+

@@ -20,12 +20,7 @@ const Hero = () => {
   return (
     <section
       id="main-content"
-      // UPDATED:
-      // 1. justify-start: Anchors content to the top (prevents "too low" centering)
-      // 2. pt-28: 7rem top padding. (5rem Navbar + 2rem gap) -> The "Middle" Spot
-      // 3. pb-20: Bottom breathing room
-      className="relative flex w-full flex-col justify-start overflow-hidden pt-28 pb-20 outline-none"
-      tabIndex={-1}
+      className="relative flex w-full flex-col justify-start overflow-hidden pt-32 pb-20"
     >
       <Container>
         <div className="flex flex-col items-start w-full">
@@ -39,7 +34,7 @@ const Hero = () => {
 
           {/* 2. Eyebrow */}
           <div className="mb-5 flex items-center gap-4">
-            <span className="hidden h-px w-20 bg-(--accent) sm:block"></span>
+            <span className="hidden h-px w-20 bg-accent sm:block"></span>
             <span className="font-mono text-base font-medium uppercase tracking-widest">
               <ShinyText
                 text="Creative Developer"
@@ -62,7 +57,7 @@ const Hero = () => {
             <span className="block font-light text-zinc-500 dark:text-zinc-400">
               Designing the
             </span>
-            <span className="block font-bold text-(--text-primary)">
+            <span className="block font-bold text-text-primary">
               future of intelligent web.
             </span>
           </h1>
@@ -70,20 +65,18 @@ const Hero = () => {
           {/* 4. Subtext */}
           <p className="mb-8 max-w-2xl text-base leading-relaxed text-zinc-500 dark:text-zinc-400 sm:text-lg md:text-xl">
             I am{" "}
-            <span className="font-medium text-(--text-primary)">
-              Bony Koshy
-            </span>
-            , an Incoming Associate at{" "}
-            <span className="font-medium text-(--text-primary)">Accenture</span>
-            . I bridge the gap between functional backend code and immersive
-            user interfaces.
+            <span className="font-medium text-text-primary">Bony Koshy</span>,
+            an Incoming Associate at{" "}
+            <span className="font-medium text-text-primary">Accenture</span>. I
+            bridge the gap between functional backend code and immersive user
+            interfaces.
           </p>
 
           {/* 5. Actions */}
           <div className="flex w-full flex-col gap-4 sm:w-auto sm:flex-row sm:items-center sm:gap-8">
             <a
               href="/projects"
-              className="group relative inline-flex h-12 w-full items-center justify-center overflow-hidden rounded-full bg-(--text-primary) px-8 text-sm font-medium text-(--background) transition-transform hover:scale-105 sm:w-auto sm:text-base"
+              className="group relative inline-flex h-12 w-full items-center justify-center overflow-hidden rounded-full bg-text-primary px-8 text-sm font-medium text-background focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-accent outline-none sm:w-auto sm:text-base"
             >
               <span>View Selected Work</span>
               <ArrowRight className="ml-2 h-4 w-4 transition-transform group-hover:translate-x-1" />
@@ -91,7 +84,7 @@ const Hero = () => {
 
             <a
               href="/contact"
-              className="group flex h-12 w-full items-center justify-center rounded-full text-sm font-medium text-zinc-500 transition-colors hover:text-(--text-primary) sm:w-auto sm:justify-start sm:text-base dark:text-zinc-400 dark:hover:text-(--text-primary)"
+              className="group flex h-12 w-full items-center justify-center rounded-full text-sm font-medium text-zinc-500 transition-colors hover:text-text-primary focus-visible:ring-1 focus-visible:ring-offset-1 focus-visible:ring-text-primary outline-none sm:w-auto sm:justify-start sm:text-base dark:text-zinc-400 dark:hover:text-text-primary"
             >
               <span className="relative after:absolute after:left-0 after:-bottom-1 after:h-px after:w-full after:origin-left after:scale-x-0 after:bg-current after:transition-transform after:duration-300 group-hover:after:scale-x-100">
                 Contact Me

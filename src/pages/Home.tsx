@@ -3,7 +3,7 @@ import Footer from "../widgets/Footer/Footer"; // Import Footer
 
 const Home = () => {
   return (
-    <main className="min-h-screen text-(--text-primary) selection:bg-(--accent) selection:text-white">
+    <main className="min-h-screen text-text-primary selection:bg-accent selection:text-white">
       {/* ... (Existing Hero, Projects, Bento code) ... */}
 
       <section className="relative pt-20">
@@ -21,3 +21,5 @@ const Home = () => {
 };
 
 export default Home;
+
+
