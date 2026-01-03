@@ -1,5 +1,5 @@
 import { Hero } from "@/widgets/Hero";
-import { Footer } from "@/widgets/Footer";
+
 
 const Home = () => {
   return (
@@ -14,7 +14,7 @@ const Home = () => {
         {/* ... (Keep your Projects and Bento sections exactly as they were) ... */}
 
         {/* REPLACED FOOTER SECTION */}
-        <Footer />
+
       </div>
     </main>
   );

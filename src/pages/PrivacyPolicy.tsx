@@ -1,127 +1,20 @@
-// src/pages/PrivacyPolicy.tsx
-import React, { useRef, useState } from "react";
-import { Link } from "react-router-dom";
-import { ArrowLeft } from "lucide-react";
-import StaggeredMenu from "@/shared/ui/StaggeredMenu/StaggeredMenu";
-import ThemeToggle from "@/features/theme/ui/ThemeToggle";
-import GradualBlur from "@/shared/ui/GradualBlur/GradualBlur";
-
-interface MenuItem {
-  label: string;
-  link: string;
-}
+import React from "react";
 
 const PrivacyPolicy: React.FC = () => {
-  const menuRef = useRef<{ toggleMenu: () => void }>(null);
-  const [isMenuOpen, setIsMenuOpen] = useState(false);
-
-  const menuItems: MenuItem[] = [
-    { label: "Home", link: "/" },
-    { label: "About", link: "/#about" },
-    { label: "Certificates", link: "/#certificates" },
-    { label: "Projects", link: "/#projects" },
-    { label: "Contact", link: "/#contact" },
-  ];
-
-  const socialItems: MenuItem[] = [
-    { label: "LinkedIn", link: "https://linkedin.com/in/bonykoshy" },
-    { label: "GitHub", link: "https://github.com/BonyKoshy" },
-  ];
-
-  const handleMenuToggle = () => {
-    menuRef.current?.toggleMenu();
-  };
-
   return (
-    <>
-      <GradualBlur
-        preset="header"
-        target="page"
-        strength={3}
-        height="120px"
-        zIndex={40} // Below header (50) but above content
-      />
-      {/* Fixed Navbar similar to Header widget but customized */}
-      {/* REMOVED: mix-blend-difference */}
-      <header className="fixed top-0 left-0 w-full px-4 md:px-8 py-6 flex justify-between items-center z-200 pointer-events-none">
-        {/* Left: Back to Home (Replcaing Clock) */}
-        <div className="pointer-events-auto">
-          <Link
-            to="/"
-            className="flex items-center gap-2 text-text-primary hover:text-accent transition-colors duration-300 font-medium no-underline group"
-          >
-            <ArrowLeft
-              size={20}
-              className="transition-transform duration-300 group-hover:-translate-x-1"
-            />
-            <span className="text-sm uppercase tracking-wider font-bold">
-              Back to Home
-            </span>
-          </Link>
-        </div>
-
-        {/* Right: Theme Toggle & Menu */}
-        <div className="flex items-center gap-6 pointer-events-auto">
-          <ThemeToggle />
-
-          {/* Menu Button - Exact replica of Header.css styles using Tailwind */}
-          <button
-            className={`
-              relative w-12 h-12 rounded-full border-none cursor-pointer flex flex-col justify-center items-center gap-1.25 z-1001
-              bg-panel shadow-[0_0_20px_2px_rgba(0,0,0,0.05)] transition-colors duration-300
-              ${isMenuOpen ? "is-open" : ""}
-            `}
-            onClick={handleMenuToggle}
-            aria-label="Toggle Menu"
-            aria-expanded={isMenuOpen}
-          >
-            {/* Line 1 */}
-            <span
-              className={`
-                block w-5.5 h-0.5 bg-text-primary rounded-xs transition-all duration-300 ease-out origin-center
-                ${isMenuOpen ? "translate-y-1.75 rotate-45" : ""}
-              `}
-            ></span>
-
-            {/* Line 2 */}
-            <span
-              className={`
-                block w-5.5 h-0.5 bg-text-primary rounded-xs transition-all duration-300 ease-out origin-center
-                ${isMenuOpen ? "opacity-0" : ""}
-              `}
-            ></span>
-
-            {/* Line 3 */}
-            <span
-              className={`
-                block w-5.5 h-0.5 bg-text-primary rounded-xs transition-all duration-300 ease-out origin-center
-                ${isMenuOpen ? "-translate-y-1.75 -rotate-45" : ""}
-              `}
-            ></span>
-          </button>
-        </div>
-      </header>
-
-      <StaggeredMenu
-        ref={menuRef}
-        items={menuItems}
-        socialItems={socialItems}
-        onMenuOpen={() => setIsMenuOpen(true)}
-        onMenuClose={() => setIsMenuOpen(false)}
-      />
-
-      {/* Main Content */}
-      <div className="min-h-screen pt-32 pb-12 px-6 bg-background text-text-primary">
-        <div className="max-w-3xl mx-auto bg-panel backdrop-blur-md rounded-2xl p-10 md:p-14 border border-prelayer-1 shadow-xl animate-in fade-in duration-700 slide-in-from-bottom-8">
-          {/* Title - Removed subtitle effect, just clean typography */}
-          <h1 className="text-4xl md:text-5xl font-bold mb-2 text-text-primary tracking-tight">
+    <div className="min-h-screen pt-32 pb-12 px-6 bg-background">
+      <div id="main-content" className="max-w-3xl mx-auto">
+        
+        {/* Removed Card UI - Content directly on background */}
+        <div className="animate-in fade-in duration-700 slide-in-from-bottom-8">
+          <h1 className="text-4xl md:text-5xl font-bold mb-2 text-zinc-900 dark:text-zinc-50 tracking-tight">
             Privacy Policy
           </h1>
-          <p className="text-text-secondary mb-10 text-sm uppercase tracking-widest font-medium border-b border-prelayer-2 pb-6 inline-block w-full">
-            Effective Date: September 2025
+          <p className="text-zinc-600 dark:text-zinc-400 mb-10 text-sm uppercase tracking-widest font-medium border-b border-zinc-200 dark:border-zinc-800 pb-6 inline-block w-full">
+            Effective Date: Jan 2026
           </p>
 
-          <div className="prose prose-lg prose-invert text-text-secondary leading-relaxed">
+          <div className="prose prose-lg prose-zinc dark:prose-invert leading-relaxed text-zinc-800 dark:text-zinc-300">
             <p className="mb-8">
               This Privacy Policy describes how personal information is
               collected, used, and protected when you interact with this
@@ -129,7 +22,7 @@ const PrivacyPolicy: React.FC = () => {
               agree to the practices outlined below.
             </p>
 
-            <h2 className="text-2xl font-semibold mb-4 text-text-primary mt-10">
+            <h2 className="text-2xl font-semibold mb-4 text-zinc-900 dark:text-zinc-100 mt-10">
               Information Collected
             </h2>
             <p className="mb-4">
@@ -142,7 +35,7 @@ const PrivacyPolicy: React.FC = () => {
               <li>Your message content</li>
             </ul>
 
-            <h2 className="text-2xl font-semibold mb-4 text-text-primary mt-10">
+            <h2 className="text-2xl font-semibold mb-4 text-zinc-900 dark:text-zinc-100 mt-10">
               Use of Information
             </h2>
             <p className="mb-8">
@@ -151,7 +44,7 @@ const PrivacyPolicy: React.FC = () => {
               marketing, newsletters, or promotional purposes.
             </p>
 
-            <h2 className="text-2xl font-semibold mb-4 text-text-primary mt-10">
+            <h2 className="text-2xl font-semibold mb-4 text-zinc-900 dark:text-zinc-100 mt-10">
               Data Sharing & Disclosure
             </h2>
             <p className="mb-8">
@@ -161,7 +54,7 @@ const PrivacyPolicy: React.FC = () => {
               necessary to deliver form functionality.
             </p>
 
-            <h2 className="text-2xl font-semibold mb-4 text-text-primary mt-10">
+            <h2 className="text-2xl font-semibold mb-4 text-zinc-900 dark:text-zinc-100 mt-10">
               Data Security
             </h2>
             <p className="mb-8">
@@ -171,7 +64,7 @@ const PrivacyPolicy: React.FC = () => {
               or storage is completely secure.
             </p>
 
-            <h2 className="text-2xl font-semibold mb-4 text-text-primary mt-10">
+            <h2 className="text-2xl font-semibold mb-4 text-zinc-900 dark:text-zinc-100 mt-10">
               Data Retention & Your Rights
             </h2>
             <p className="mb-4">
@@ -183,7 +76,7 @@ const PrivacyPolicy: React.FC = () => {
               <a href="mailto:bonykoshy@gmail.com">bonykoshy@gmail.com</a>
             </p>
 
-            <h2 className="text-2xl font-semibold mb-4 text-text-primary mt-10">
+            <h2 className="text-2xl font-semibold mb-4 text-zinc-900 dark:text-zinc-100 mt-10">
               Updates to This Policy
             </h2>
             <p className="mb-8">
@@ -192,7 +85,7 @@ const PrivacyPolicy: React.FC = () => {
               indicate the latest version.
             </p>
 
-            <h2 className="text-2xl font-semibold mb-4 text-text-primary mt-10">
+            <h2 className="text-2xl font-semibold mb-4 text-zinc-900 dark:text-zinc-100 mt-10">
               Contact
             </h2>
             <p className="mb-2">
@@ -205,7 +98,7 @@ const PrivacyPolicy: React.FC = () => {
           </div>
         </div>
       </div>
-    </>
+    </div>
   );
 };
 

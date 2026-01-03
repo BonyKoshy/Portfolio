@@ -23,7 +23,7 @@ const Hero = () => {
   return (
     <section
       id="main-content"
-      className="relative flex w-full flex-col justify-start overflow-hidden pt-32 pb-20"
+      className="relative flex w-full flex-col justify-start overflow-hidden pt-32 pb-20 outline-none"
     >
       <Container>
         <div className="flex flex-col items-start w-full">
@@ -80,15 +80,16 @@ const Hero = () => {
             <Button
               variant="primary"
               size="lg"
-              className="group w-full sm:w-auto"
+              className="w-full sm:w-auto"
               onClick={() => navigate("/projects")}
+              icon={<ArrowRight className="h-4 w-4" />}
+              iconPosition="right"
             >
-              <span>View Selected Work</span>
-              <ArrowRight className="ml-2 h-4 w-4 transition-transform group-hover:translate-x-1" />
+              View Selected Work
             </Button>
 
             <Button
-              variant="link"
+              variant="underline"
               size="none"
               onClick={() => navigate("/contact")}
             >
