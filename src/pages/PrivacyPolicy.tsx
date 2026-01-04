@@ -2,19 +2,22 @@ import React from "react";
 
 const PrivacyPolicy: React.FC = () => {
   return (
-    <div className="min-h-screen pt-32 pb-12 px-6 bg-background">
+    <div className="min-h-screen pt-32 pb-12 px-6 bg-bg-default">
+
       <div id="main-content" className="max-w-3xl mx-auto">
         
         {/* Removed Card UI - Content directly on background */}
         <div className="animate-in fade-in duration-700 slide-in-from-bottom-8">
-          <h1 className="text-4xl md:text-5xl font-bold mb-2 text-zinc-900 dark:text-zinc-50 tracking-tight">
+          <h1 className="text-4xl md:text-5xl font-bold mb-2 text-fg-primary tracking-tight">
             Privacy Policy
           </h1>
-          <p className="text-zinc-600 dark:text-zinc-400 mb-10 text-sm uppercase tracking-widest font-medium border-b border-zinc-200 dark:border-zinc-800 pb-6 inline-block w-full">
+          <p className="text-fg-secondary mb-10 text-sm uppercase tracking-widest font-medium border-b border-border-default pb-6 inline-block w-full">
             Effective Date: Jan 2026
+
           </p>
 
-          <div className="prose prose-lg prose-zinc dark:prose-invert leading-relaxed text-zinc-800 dark:text-zinc-300">
+          <div className="prose prose-lg prose-zinc dark:prose-invert leading-relaxed text-fg-primary">
+
             <p className="mb-8">
               This Privacy Policy describes how personal information is
               collected, used, and protected when you interact with this
@@ -22,20 +25,23 @@ const PrivacyPolicy: React.FC = () => {
               agree to the practices outlined below.
             </p>
 
-            <h2 className="text-2xl font-semibold mb-4 text-zinc-900 dark:text-zinc-100 mt-10">
+            <h2 className="text-2xl font-semibold mb-4 text-fg-primary mt-10">
               Information Collected
             </h2>
+
             <p className="mb-4">
               When you submit a message through the contact form, the following
               information may be collected:
             </p>
-            <ul className="list-disc pl-5 mb-8 space-y-2 marker:text-accent">
+            <ul className="list-disc pl-5 mb-8 space-y-2 marker:text-primary">
+
               <li>Your name</li>
               <li>Your email address</li>
               <li>Your message content</li>
             </ul>
 
-            <h2 className="text-2xl font-semibold mb-4 text-zinc-900 dark:text-zinc-100 mt-10">
+            <h2 className="text-2xl font-semibold mb-4 text-fg-primary mt-10">
+
               Use of Information
             </h2>
             <p className="mb-8">
@@ -44,7 +50,8 @@ const PrivacyPolicy: React.FC = () => {
               marketing, newsletters, or promotional purposes.
             </p>
 
-            <h2 className="text-2xl font-semibold mb-4 text-zinc-900 dark:text-zinc-100 mt-10">
+            <h2 className="text-2xl font-semibold mb-4 text-fg-primary mt-10">
+
               Data Sharing & Disclosure
             </h2>
             <p className="mb-8">
@@ -54,7 +61,8 @@ const PrivacyPolicy: React.FC = () => {
               necessary to deliver form functionality.
             </p>
 
-            <h2 className="text-2xl font-semibold mb-4 text-zinc-900 dark:text-zinc-100 mt-10">
+            <h2 className="text-2xl font-semibold mb-4 text-fg-primary mt-10">
+
               Data Security
             </h2>
             <p className="mb-8">
@@ -64,7 +72,8 @@ const PrivacyPolicy: React.FC = () => {
               or storage is completely secure.
             </p>
 
-            <h2 className="text-2xl font-semibold mb-4 text-zinc-900 dark:text-zinc-100 mt-10">
+            <h2 className="text-2xl font-semibold mb-4 text-fg-primary mt-10">
+
               Data Retention & Your Rights
             </h2>
             <p className="mb-4">
@@ -72,11 +81,13 @@ const PrivacyPolicy: React.FC = () => {
               respond to your inquiry. You have the right to request deletion of
               your data at any time by contacting:
             </p>
-            <p className="font-medium text-accent mb-8 hover:underline">
+            <p className="font-medium text-primary mb-8 hover:underline">
+
               <a href="mailto:bonykoshy@gmail.com">bonykoshy@gmail.com</a>
             </p>
 
-            <h2 className="text-2xl font-semibold mb-4 text-zinc-900 dark:text-zinc-100 mt-10">
+            <h2 className="text-2xl font-semibold mb-4 text-fg-primary mt-10">
+
               Updates to This Policy
             </h2>
             <p className="mb-8">
@@ -85,14 +96,16 @@ const PrivacyPolicy: React.FC = () => {
               indicate the latest version.
             </p>
 
-            <h2 className="text-2xl font-semibold mb-4 text-zinc-900 dark:text-zinc-100 mt-10">
+            <h2 className="text-2xl font-semibold mb-4 text-fg-primary mt-10">
+
               Contact
             </h2>
             <p className="mb-2">
               If you have any questions or concerns about this Privacy Policy,
               please contact:
             </p>
-            <p className="font-medium text-accent hover:underline">
+            <p className="font-medium text-primary hover:underline">
+
               <a href="mailto:bonykoshy@gmail.com">bonykoshy@gmail.com</a>
             </p>
           </div>

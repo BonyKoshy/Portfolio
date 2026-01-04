@@ -37,15 +37,17 @@ const Hero = () => {
 
           {/* 2. Eyebrow */}
           <div className="mb-5 flex items-center gap-4">
-            <span className="hidden h-px w-20 bg-accent sm:block"></span>
+            <span className="hidden h-px w-20 bg-primary sm:block"></span>
+
             <span className="font-mono text-base font-medium uppercase tracking-widest">
               <ShinyText
                 text="Creative Developer"
                 disabled={false}
                 speed={2}
                 className="font-medium"
-                color="var(--text-secondary)"
-                shineColor="var(--text-primary)"
+                color="var(--fg-secondary)"
+                shineColor="var(--fg-primary)"
+
                 spread={90}
                 yoyo={false}
                 pauseOnHover={true}
@@ -57,20 +59,23 @@ const Hero = () => {
 
           {/* 3. Headline */}
           <h1 className="mb-6 w-full max-w-5xl text-4xl leading-[1.1] tracking-tight sm:text-6xl lg:text-7xl">
-            <span className="block font-light text-zinc-500 dark:text-zinc-400">
+            <span className="block font-light text-fg-secondary">
+
               Designing the
             </span>
-            <span className="block font-bold text-text-primary">
+            <span className="block font-bold text-fg-primary">
+
               future of intelligent web.
             </span>
           </h1>
 
           {/* 4. Subtext */}
-          <p className="mb-8 max-w-2xl text-base leading-relaxed text-zinc-500 dark:text-zinc-400 sm:text-lg md:text-xl">
+          <p className="mb-8 max-w-2xl text-base leading-relaxed text-fg-secondary sm:text-lg md:text-xl">
             I am{" "}
-            <span className="font-medium text-text-primary">Bony Koshy</span>,
+            <span className="font-medium text-fg-primary">Bony Koshy</span>,
             an Incoming Associate at{" "}
-            <span className="font-medium text-text-primary">Accenture</span>. I
+            <span className="font-medium text-fg-primary">Accenture</span>. I
+
             bridge the gap between functional backend code and immersive user
             interfaces.
           </p>

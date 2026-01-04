@@ -1,4 +1,6 @@
 import { createContext, useEffect, useState, ReactNode } from "react";
+import { flushSync } from "react-dom";
+
 
 export type Theme = "light" | "dark";
 
@@ -34,8 +36,11 @@ export const ThemeProvider = ({ children }: { children: ReactNode }) => {
   }, [theme]);
 
   const toggleTheme = () => {
-    setTheme((prev) => (prev === "light" ? "dark" : "light"));
+    flushSync(() => {
+      setTheme((prev) => (prev === "light" ? "dark" : "light"));
+    });
   };
+
 
   return (
     <ThemeContext.Provider value={{ theme, toggleTheme }}>

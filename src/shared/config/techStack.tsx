@@ -51,6 +51,8 @@ export const techLogos: TechLogo[] = [
   { node: <SiMysql />, title: "MySQL" },
   { node: <SiSqlite />, title: "SQLite" },
   { node: <FaAws />, title: "AWS" },
+
+
   { node: <SiNetlify />, title: "Netlify" },
   { node: <SiVercel />, title: "Vercel" },
   { node: <TbBrandPowershell />, title: "PowerShell" },

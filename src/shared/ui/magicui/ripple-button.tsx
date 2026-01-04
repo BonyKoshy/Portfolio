@@ -26,7 +26,8 @@ export const RippleButton = React.forwardRef<HTMLButtonElement, RippleButtonProp
       <button
         ref={ref}
         className={cn(
-          "relative overflow-hidden rounded-lg bg-blue-600 px-6 py-3 text-white transition-transform active:scale-95",
+          "relative overflow-hidden rounded-lg bg-primary px-6 py-3 text-primary-fg transition-transform active:scale-95",
+
           className
         )}
         onMouseDown={handleClick}

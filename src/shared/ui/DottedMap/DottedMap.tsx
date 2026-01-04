@@ -20,7 +20,8 @@ const DottedMap: React.FC<DottedMapProps> = ({
   markers = [],
   className,
   dotColor,
-  markerColor = "#3b82f6", // Default blue for marker
+  markerColor = "var(--primary)", // Default primary for marker
+
 }) => {
   const context = useContext(ThemeContext) as { theme: string } | null;
   const theme = context?.theme || "light";
@@ -39,7 +40,9 @@ const DottedMap: React.FC<DottedMapProps> = ({
     });
 
     // Determine colors based on theme if not provided
-    const dots = dotColor || (theme === "dark" ? "#52525b" : "#52525b"); // zinc-600 / zinc-600 for high contrast
+    const dots = dotColor || "var(--fg-secondary)"; // Use semantic secondary (darker) for better contrast
+
+
 
     // Generate SVG
     const svgStr = map.getSVG({

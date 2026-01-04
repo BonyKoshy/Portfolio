@@ -7,14 +7,30 @@ export default {
   theme: {
     extend: {
       colors: {
-        background: 'var(--background)',
-        'text-primary': 'var(--text-primary)',
-        'text-secondary': 'var(--text-secondary)',
-        accent: 'var(--accent)',
-        panel: 'var(--panel-bg)',
-        'panel-bg': 'var(--panel-bg)',
-        'prelayer-1': 'var(--prelayer-1)',
-        'prelayer-2': 'var(--prelayer-2)',
+        // Backgrounds
+        'bg-default': 'var(--bg-default)',
+        'bg-paper': 'var(--bg-paper)',
+        'bg-surface': 'var(--bg-surface)',
+        'bg-subtle': 'var(--bg-subtle)',
+
+        // Foregrounds (Text)
+        'fg-primary': 'var(--fg-primary)',
+        'fg-secondary': 'var(--fg-secondary)',
+        'fg-tertiary': 'var(--fg-tertiary)',
+
+        // Borders
+        'border-default': 'var(--border-default)',
+        'border-subtle': 'var(--border-subtle)',
+
+        // Brand / Action
+        primary: {
+          DEFAULT: 'var(--primary)',
+          fg: 'var(--primary-fg)',
+          hover: 'var(--primary-hover)',
+        },
+
+        // Utilities
+        'action-hover': 'var(--action-hover)',
       },
       spacing: {
         '30': '7.5rem',

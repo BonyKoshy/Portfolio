@@ -4,6 +4,8 @@ import { BubbleMenu } from "@/shared/ui/BubbleMenu";
 import { Button } from "@/shared/ui/Button";
 import { ArrowDown, ArrowLeft } from "lucide-react";
 
+
+
 const Navbar = () => {
   const location = useLocation();
   const mainPaths = ["/", "/about", "/projects", "/contact"];
@@ -73,6 +75,8 @@ const Navbar = () => {
              )}
          </div>
 
+
+
         {/* DESKTOP NAV: Standard Text Links (Always Visible) */}
         <>
             <div className="hidden items-center gap-8 lg:flex ml-auto">
@@ -81,18 +85,21 @@ const Navbar = () => {
                 key={item.label}
                 to={item.href}
                 className={({ isActive }) => `
-                    relative text-sm font-medium transition-colors hover:text-accent
-                    ${isActive ? "text-accent" : "text-zinc-400"}
+                    relative text-sm font-medium transition-colors hover:text-primary
+                    ${isActive ? "text-primary" : "text-fg-tertiary"}
                     /* Active Indicator */
                     after:absolute after:left-0 after:-bottom-1 after:h-px after:w-full 
-                    after:bg-accent after:transition-transform after:duration-300
+                    after:bg-primary after:transition-transform after:duration-300
                     ${isActive ? "after:scale-x-100" : "after:scale-x-0"}
                 `}
+
                 >
                 {item.label}
                 </NavLink>
             ))}
             </div>
+
+
 
             {/* MOBILE NAV: BubbleMenu Overlay */}
             <div className="lg:hidden ml-auto">

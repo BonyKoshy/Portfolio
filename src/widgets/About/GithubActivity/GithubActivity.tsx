@@ -1,7 +1,8 @@
 import React, { useLayoutEffect, useRef, useContext } from "react";
 import GitHubCalendar from "react-github-calendar";
 import { Github, ArrowUpRight } from "lucide-react";
-import { ThemeContext } from "@/features/theme/ThemeContext";
+import { ThemeContext } from "@/app/providers/ThemeProvider/ThemeContext";
+
 
 interface GithubActivityProps {
   className?: string;
@@ -29,9 +30,10 @@ const GithubActivity: React.FC<GithubActivityProps> = ({ className }) => {
   return (
     <div className={`h-full w-full flex flex-col ${className}`}>
       {/* Header */}
-      <div className="flex items-center gap-3 text-text-primary w-full justify-start pb-[1.2rem]">
+      <div className="flex items-center gap-3 text-fg-primary w-full justify-start pb-[1.2rem]">
         <div className="flex items-center gap-3">
-          <Github className="text-text-primary" size={24} />
+          <Github className="text-fg-primary" size={24} />
+
           <h3 className="m-0 text-base font-semibold">GitHub Activity</h3>
         </div>
       </div>
@@ -41,7 +43,8 @@ const GithubActivity: React.FC<GithubActivityProps> = ({ className }) => {
         {/* Calendar Container */}
         <div 
           ref={calendarWrapperRef} 
-          className="text-text-secondary overflow-x-auto grow pb-3 no-scrollbar"
+          className="text-fg-secondary overflow-x-auto grow pb-3 no-scrollbar"
+
         >
            <GitHubCalendar
               username="BonyKoshy"
@@ -61,7 +64,8 @@ const GithubActivity: React.FC<GithubActivityProps> = ({ className }) => {
           href="https://github.com/BonyKoshy"
           target="_blank"
           rel="noopener noreferrer"
-          className="inline-flex flex-row justify-center items-center gap-2 shrink-0 px-5 py-3 bg-prelayer-1 text-text-secondary rounded-xl no-underline font-semibold transition-all duration-300 mb-3 hover:bg-accent hover:text-background group min-w-70 max-xl:w-full max-xl:h-auto max-xl:rounded-full max-xl:px-4 max-xl:py-3"
+          className="inline-flex flex-row justify-center items-center gap-2 shrink-0 px-5 py-3 bg-bg-subtle text-fg-secondary rounded-xl no-underline font-semibold transition-all duration-300 mb-3 hover:bg-primary hover:text-bg-default group min-w-70 max-xl:w-full max-xl:h-auto max-xl:rounded-full max-xl:px-4 max-xl:py-3"
+
         >
           <ArrowUpRight className="mb-0 max-xl:mb-0" size={24} />
           <span>Visit GitHub Profile</span>

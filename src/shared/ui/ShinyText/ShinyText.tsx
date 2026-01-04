@@ -25,7 +25,8 @@ const ShinyText: React.FC<ShinyTextProps> = ({
   disabled = false,
   speed = 2,
   className = "",
-  color = "#a1a1aa", // Default to zinc-400 equivalent
+  color = "var(--fg-secondary)", // Default to semantic secondary text
+
   shineColor = "#ffffff",
   spread = 90,
   yoyo = false,

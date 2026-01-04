@@ -43,7 +43,8 @@ const TechCarousel: React.FC = () => {
     >
         {/* Force height style from CSS if needed, but flex grow handles it usually */}
         
-      <div className="flex items-center gap-3 text-text-primary w-full justify-start pl-6 pt-6">
+      <div className="flex items-center gap-3 text-fg-primary w-full justify-start pl-6 pt-6">
+
         <Zap size={20} />
         <h3 className="text-base font-semibold m-0">Tech Stack</h3>
       </div>
@@ -58,14 +59,16 @@ const TechCarousel: React.FC = () => {
           logoHeight={60}
           gap={60}
           fadeOut={true}
-          fadeOutColor="var(--panel-bg)"
+          fadeOutColor="var(--bg-paper)"
+
           renderItem={(item) => {
              // Cast item to TechLogo to access title since LogoItem is the union type
              const techItem = item as TechLogo;
              return (
                 <div 
                     onClick={() => handleLogoClick(techItem.title || "")}
-                    className="cursor-pointer transition-transform duration-200 hover:scale-110 active:scale-95 text-text-secondary hover:text-accent"
+                    className="cursor-pointer transition-transform duration-200 hover:scale-110 active:scale-95 text-fg-secondary hover:text-primary"
+
                 >
                     {techItem.node}
                 </div>
@@ -78,7 +81,8 @@ const TechCarousel: React.FC = () => {
       <AnimatePresence>
         {expanded && (
           <motion.div
-            className="text-text-primary font-bold text-[1.5rem] md:text-[1.8rem] whitespace-nowrap overflow-hidden text-ellipsis px-6 pb-6 w-full leading-none text-center md:text-left"
+            className="text-fg-primary font-bold text-[1.5rem] md:text-[1.8rem] whitespace-nowrap overflow-hidden text-ellipsis px-6 pb-6 w-full leading-none text-center md:text-left"
+
             initial={{ opacity: 0, y: 10 }}
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: 10 }}

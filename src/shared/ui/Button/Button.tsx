@@ -15,9 +15,10 @@ export const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
     
     // Variant styles
     const variants = {
-      primary: "bg-text-primary text-background rounded-full hover:opacity-90",
-      underline: "relative text-zinc-500 hover:text-text-primary after:absolute after:left-0 after:-bottom-1 after:h-px after:w-full after:origin-left after:scale-x-0 after:bg-current after:transition-transform after:duration-300 hover:after:scale-x-100 p-0",
-      ghost: "text-zinc-500 rounded-full hover:text-text-primary hover:bg-zinc-100 dark:hover:bg-white/5",
+      primary: "bg-primary text-primary-fg rounded-full hover:bg-primary-hover",
+      underline: "relative text-fg-secondary hover:text-fg-primary after:absolute after:left-0 after:-bottom-1 after:h-px after:w-full after:origin-left after:scale-x-0 after:bg-current after:transition-transform after:duration-300 hover:after:scale-x-100 p-0",
+      ghost: "text-fg-secondary rounded-full hover:text-fg-primary hover:bg-action-hover",
+
     };
 
     // Size styles - Size 'none' for underline or custom

@@ -1,171 +1,203 @@
 @import "tailwindcss";
 
-/* 1. CSS Variables */
+/* 1. CSS Variables - Semantic System */
 :root {
-  /* --- LIGHT THEME --- */
-  --background-light: #f8f9fa;
-  --text-primary-light: #18181b;
-  --text-secondary-light: #909090;
-  --accent-light: #2563eb;
-  --panel-bg-light: rgba(255, 255, 255, 0.95);
-  --prelayer-1-light: #e4e4e7;
-  --prelayer-2-light: #d4d4d8;
-
-  /* --- DARK THEME --- */
-  --background-dark: #09090b;
-  --text-primary-dark: #f4f4f5;
-  --text-secondary-dark: #505053;
-  --accent-dark: #60a5fa;
-  --panel-bg-dark: rgba(24, 24, 27, 0.85);
-  --prelayer-1-dark: #18181b;
-  --prelayer-2-dark: #27272a;
+  /* Shared Defaults & Constants */
+  --overlay: rgba(0, 0, 0, 0.4);
+  --font-sans: "Poppins", system-ui, sans-serif;
+  
+  /* Fallback values (handled by data-theme overrides below) */
+  --bg-default: #ffffff;
+  --fg-primary: #18181b;
 }
 
-/* 2. Tailwind Configuration */
+/* Light Theme Variables */
+html[data-theme="light"] {
+  /* Backgrounds */
+  --bg-default: #ffffff;          /* Pure white for clarity */
+  --bg-paper: #f4f4f5;            /* Zinc-100 */
+  --bg-surface: #ffffff;          
+  --bg-subtle: #fafafa;           /* Zinc-50 */
+
+  /* Text / Foreground */
+  --fg-primary: #18181b;          /* Zinc-950 */
+  --fg-secondary: #52525b;        /* Zinc-600 */
+  --fg-tertiary: #a1a1aa;         /* Zinc-400 */
+  
+  /* Borders */
+  --border-default: #e4e4e7;      /* Zinc-200 */
+  --border-subtle: #f4f4f5;       /* Zinc-100 */
+
+  /* Action / Brand */
+  --primary: #2563eb;             /* Blue-600 */
+  --primary-fg: #ffffff;
+  --primary-hover: #1d4ed8;       
+  
+  /* UI States */
+  --action-hover: #f4f4f5;
+  --overlay: rgba(0, 0, 0, 0.4);
+}
+
+/* Dark Theme Variables */
+html[data-theme="dark"] {
+  /* Backgrounds */
+  --bg-default: #121212;          /* Dark gray, not pitch black */
+  --bg-paper: #1e1e20;
+  --bg-surface: #27272a;
+  --bg-subtle: #2d2d30;
+
+  /* Text / Foreground */
+  --fg-primary: #f4f4f5;          /* Zinc-50 */
+  --fg-secondary: #a1a1aa;        /* Zinc-400 */
+  --fg-tertiary: #52525b;         /* Zinc-600 */
+  
+  /* Borders */
+  --border-default: #27272a;      /* Zinc-800 */
+  --border-subtle: #18181b;       /* Zinc-900 */
+
+  /* Action / Brand */
+  --primary: #3b82f6;             /* Blue-500 */
+  --primary-fg: #ffffff;
+  --primary-hover: #60a5fa;
+  
+  /* UI States */
+  --action-hover: rgba(255, 255, 255, 0.05);
+  --overlay: rgba(0, 0, 0, 0.7);
+}
+
+/* 2. Tailwind Configuration (Theme-aware) */
 @theme {
   --font-sans: "Poppins", system-ui, sans-serif;
 
-  --color-background: var(--background);
-  --color-text-primary: var(--text-primary);
-  --color-text-secondary: var(--text-secondary);
-  --color-accent: var(--accent);
-  --color-panel: var(--panel-bg);
-  --color-prelayer-1: var(--prelayer-1);
-  --color-prelayer-2: var(--prelayer-2);
+  /* Map Tailwind classes to our CSS variables */
 
+  --color-bg-default: var(--bg-default);
+  --color-bg-paper: var(--bg-paper);
+  --color-bg-surface: var(--bg-surface);
+  --color-bg-subtle: var(--bg-subtle);
+
+  --color-fg-primary: var(--fg-primary);
+  --color-fg-secondary: var(--fg-secondary);
+  --color-fg-tertiary: var(--fg-tertiary);
+
+  --color-border-default: var(--border-default);
+  --color-border-subtle: var(--border-subtle);
+
+  --color-primary: var(--primary);
+  --color-primary-fg: var(--primary-fg);
+  --color-primary-hover: var(--primary-hover);
+  
+  --color-action-hover: var(--action-hover);
+
+  /* Animations (Preserved from your original file) */
+  --animate-cell-ripple: cell-ripple 0.5s ease-out forwards;
+  --animate-logo-loading: logo-pulse 2s ease-in-out infinite;
+  --animate-logo-intro: logo-draw-in 2.5s ease-out forwards;
+  --animate-logo-hover-cycle: logo-cycle 2.5s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+
+  @keyframes cell-ripple {
+    0% { opacity: 0.4; background-color: var(--primary); }
+    50% { opacity: 0.8; background-color: var(--primary); }
+    100% { opacity: 0.4; background-color: transparent; }
+  }
+  
+  @keyframes logo-pulse {
+    0%,
+    100% { opacity: 0.3; }
+    50% { opacity: 0.6; }
+  }
+
+  @keyframes logo-draw-in {
+    from { stroke-dashoffset: 3500; }
+    to { stroke-dashoffset: 0; }
+  }
+
+  @keyframes logo-cycle {
+    0% { stroke-dashoffset: 0; }
+    50% { stroke-dashoffset: 3500; }
+    100% { stroke-dashoffset: 0; }
+  }
+  
+  @keyframes scale-in {
+    from { opacity: 0; transform: scale(0.95); }
+    to { opacity: 1; transform: scale(1); }
+  }
+  
+  /* Spacing */
   --spacing-30: 7.5rem;
   --spacing-38: 9.5rem;
   --spacing-45: 11.25rem;
   --spacing-50: 12.5rem;
   --spacing-112: 28rem;
   --spacing-112.5: 28.125rem;
-
+  
+  /* Z-index */
   --z-index-60: 60;
   --z-index-100: 100;
   --z-index-1001: 1001;
-
-  --animate-cell-ripple: cell-ripple 0.5s ease-out forwards;
-
-  --animate-logo-loading: logo-pulse 2s ease-in-out infinite;
-  --animate-logo-intro: logo-draw-in 2.5s ease-out forwards;
-  --animate-logo-hover-cycle: logo-cycle 2.5s cubic-bezier(0.4, 0, 0.2, 1)
-    forwards;
-
-  @keyframes cell-ripple {
-    0% {
-      opacity: 0.4;
-      background-color: var(--accent);
-    }
-    50% {
-      opacity: 0.8;
-      background-color: var(--accent);
-    }
-    100% {
-      opacity: 0.4;
-      background-color: transparent;
-    }
-  }
-
-  @keyframes scale-in {
-    from {
-      opacity: 0;
-      transform: scale(0.95);
-    }
-    to {
-      opacity: 1;
-      transform: scale(1);
-    }
-  }
-
-  @keyframes logo-pulse {
-    0%,
-    100% {
-      opacity: 0.3;
-    }
-    50% {
-      opacity: 0.6;
-    }
-  }
-
-  @keyframes logo-draw-in {
-    from {
-      stroke-dashoffset: 3500;
-    }
-    to {
-      stroke-dashoffset: 0;
-    }
-  }
-
-  @keyframes logo-cycle {
-    0% {
-      stroke-dashoffset: 0;
-    }
-    50% {
-      stroke-dashoffset: 3500;
-    }
-    100% {
-      stroke-dashoffset: 0;
-    }
-  }
 }
 
-/* 3. View Transitions */
-::view-transition-old(root),
-::view-transition-new(root) {
-  animation: none;
-  mix-blend-mode: normal;
-}
-::view-transition-old(root) {
-  z-index: 1;
-}
-::view-transition-new(root) {
-  z-index: 99999;
-}
-.dark::view-transition-old(root) {
-  z-index: 99999;
-}
-.dark::view-transition-new(root) {
-  z-index: 1;
-}
-
-/* 4. Base Styles */
+/* 3. Base Styles */
 @layer base {
   html {
     scroll-behavior: smooth;
     overflow-y: scroll;
-
-    /* DEFAULT THEME (Dark) */
-    --background: var(--background-dark);
-    --text-primary: var(--text-primary-dark);
-    --text-secondary: var(--text-secondary-dark);
-    --accent: var(--accent-dark);
-    --panel-bg: var(--panel-bg-dark);
-    --prelayer-1: var(--prelayer-1-dark);
-    --prelayer-2: var(--prelayer-2-dark);
+    
+    /* Default to Dark Mode variables (or Light depending on your pref) */
+    --bg-default: #09090b;
+    --fg-primary: #f4f4f5;
+    /* ... map other defaults here if JS fails, but ThemeProvider usually handles this */
   }
 
+  /* Apply the class mapping when data-theme="light" is present */
   html[data-theme="light"] {
-    --background: var(--background-light);
-    --text-primary: var(--text-primary-light);
-    --text-secondary: var(--text-secondary-light);
-    --accent: var(--accent-light);
-    --panel-bg: var(--panel-bg-light);
-    --prelayer-1: var(--prelayer-1-light);
-    --prelayer-2: var(--prelayer-2-light);
+    --bg-default: #fbfbfb;          /* Slightly off-white to reduce glare */
+    --bg-paper: #f4f4f5;
+    --bg-surface: #ffffff;
+    --bg-subtle: #fafafa;
+
+    --fg-primary: #18181b;
+    --fg-secondary: #52525b;
+    --fg-tertiary: #a1a1aa;
+    --border-default: #e4e4e7;
+    --border-subtle: #f4f4f5;
+    --primary: #2563eb;
+    --primary-fg: #ffffff;
+    --primary-hover: #1d4ed8;
+    --action-hover: #f4f4f5;
+  }
+  
+  html[data-theme="dark"] {
+    --bg-default: #121212;
+    --bg-paper: #1e1e20;
+    --bg-surface: #27272a;
+    --bg-subtle: #2d2d30;
+
+    --fg-primary: #f4f4f5;
+    --fg-secondary: #a1a1aa;
+    --fg-tertiary: #52525b;
+    --border-default: #27272a;
+    --border-subtle: #18181b;
+    --primary: #3b82f6;
+    --primary-fg: #ffffff;
+    --primary-hover: #60a5fa;
+    --action-hover: rgba(255, 255, 255, 0.05);
   }
 
   body {
-    background-color: var(--background);
-    color: var(--text-primary);
+    background-color: var(--bg-default);
+    color: var(--fg-primary);
     font-family: var(--font-sans);
+    transition: color 0.3s ease, background-color 0.3s ease, border-color 0.3s ease;
     overflow-x: hidden;
-    overflow-y: scroll !important;
-    padding-right: 0 !important;
-    transition:
-      color 0.3s ease,
-      background-color 0.3s ease;
   }
-
+  
+  :focus-visible {
+    outline: 2px solid var(--primary);
+    outline-offset: 2px;
+    border-radius: 4px;
+  }
+  
   /* Custom Scrollbar */
   ::-webkit-scrollbar {
     width: 6px;
@@ -174,20 +206,33 @@
     background: transparent;
   }
   ::-webkit-scrollbar-thumb {
-    background-color: var(--prelayer-2);
+    background-color: var(--border-default);
     border-radius: 9999px;
   }
   ::-webkit-scrollbar-thumb:hover {
-    background-color: var(--text-secondary);
+    background-color: var(--fg-secondary);
   }
-
-  :focus-visible {
-    outline: 2px solid var(--accent);
-    outline-offset: 2px;
-    border-radius: 4px;
-  }
-
+  
   html[data-theme="dark"] .cursor-invert {
     filter: invert(1);
   }
 }
+
+/* 4. View Transitions */
+::view-transition-old(root),
+::view-transition-new(root) {
+  animation: none;
+  mix-blend-mode: normal;
+  height: 100%;
+}
+
+/* Always put the new state on top so the clip-path reveals it */
+::view-transition-old(root) {
+  z-index: 1;
+}
+::view-transition-new(root) {
+  z-index: 9999; 
+}
+/* Removed theme-specific swapping to ensure consistent "grow" animation */
+
+

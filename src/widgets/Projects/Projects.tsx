@@ -15,7 +15,8 @@ import { RippleButton } from "@/shared/ui/magicui/ripple-button";
 const ProjectContent: React.FC<{ project: ProjectCardData }> = ({
   project,
 }) => (
-  <div className="flex flex-row w-full h-full gap-0 overflow-hidden rounded-3xl bg-panel max-[768px]:flex-col">
+  <div className="flex flex-row w-full h-full gap-0 overflow-hidden rounded-3xl bg-bg-paper max-[768px]:flex-col">
+
     {/* Safari Browser Mockup Area - 70% width */}
     <div className="grow h-full bg-transparent p-8 flex items-center justify-center max-[768px]:h-[40vh] max-[768px]:p-4">
       <Safari
@@ -26,7 +27,8 @@ const ProjectContent: React.FC<{ project: ProjectCardData }> = ({
     </div>
 
     {/* Sidebar Area - 30% width (approx) */}
-    <div className="w-87.5 shrink-0 h-full bg-panel border-l border-prelayer-2 p-8 flex flex-col overflow-y-auto max-[768px]:w-full max-[768px]:h-auto max-[768px]:border-l-0 max-[768px]:border-t">
+    <div className="w-87.5 shrink-0 h-full bg-bg-paper border-l border-border-default p-8 flex flex-col overflow-y-auto max-[768px]:w-full max-[768px]:h-auto max-[768px]:border-l-0 max-[768px]:border-t">
+
       <div className="mb-4">
         <motion.h3
           layoutId={`card-title-${project.title}`}
@@ -36,13 +38,15 @@ const ProjectContent: React.FC<{ project: ProjectCardData }> = ({
         </motion.h3>
         <motion.p
           layoutId={`card-category-${project.title}`}
-          className="text-[1rem] font-medium text-text-secondary mt-2"
+          className="text-[1rem] font-medium text-fg-secondary mt-2"
+
         >
           {project.year} • {project.category}
         </motion.p>
       </div>
 
-      <motion.p className="text-[1rem] text-text-secondary leading-[1.7] mb-6 grow">
+      <motion.p className="text-[1rem] text-fg-secondary leading-[1.7] mb-6 grow">
+
         {project.content.description}
       </motion.p>
 
@@ -50,7 +54,8 @@ const ProjectContent: React.FC<{ project: ProjectCardData }> = ({
         {project.content.tech.map((t, i) => (
           <span
             key={i}
-            className="bg-prelayer-2 px-3 py-1 rounded-full text-[0.8rem] font-medium"
+            className="bg-bg-subtle px-3 py-1 rounded-full text-[0.8rem] font-medium"
+
           >
             {t}
           </span>
@@ -59,7 +64,8 @@ const ProjectContent: React.FC<{ project: ProjectCardData }> = ({
 
       <div className="flex flex-col gap-3 mt-auto">
         <RippleButton
-          className="w-full flex items-center justify-center gap-2 bg-transparent border-2 border-text-primary text-text-primary hover:bg-text-primary hover:text-background"
+          className="w-full flex items-center justify-center gap-2 bg-transparent border-2 border-fg-primary text-fg-primary hover:bg-fg-primary hover:text-bg-default"
+
           onClick={() => window.open(project.githubLink, "_blank")}
         >
           <Github size={18} /> Source Code
@@ -67,7 +73,9 @@ const ProjectContent: React.FC<{ project: ProjectCardData }> = ({
 
         {(project.linkType === "link" || project.linkType === "install") && (
           <RippleButton
-            className="w-full flex items-center justify-center gap-2 bg-accent text-white border-2 border-transparent hover:opacity-90"
+            className="w-full flex items-center justify-center gap-2 bg-primary text-primary-fg border-2 border-transparent hover:opacity-90"
+
+
             onClick={() => window.open(project.liveLink, "_blank")}
           >
             {project.linkType === "install" ? (
@@ -194,7 +202,8 @@ export default function Projects() {
   return (
     <section
       id="projects"
-      className="w-full max-w-7xl mx-auto px-4 py-15 text-text-primary"
+      className="w-full max-w-7xl mx-auto px-4 py-15 text-fg-primary"
+
     >
       <SectionTitle title="My Projects" />
       <Carousel items={cards} onCardClick={setActiveCard} />
@@ -224,8 +233,9 @@ export default function Projects() {
                   onClick={() => setActiveCard(null)}
                   aria-label="Close project details"
                 >
-                  <span className="w-6 h-0.5 bg-text-secondary rounded-sm transform rotate-45 translate-y-1 transition-colors duration-200 group-hover:bg-accent"></span>
-                  <span className="w-6 h-0.5 bg-text-secondary rounded-sm transform -rotate-45 -translate-y-1 transition-colors duration-200 group-hover:bg-accent"></span>
+                  <span className="w-6 h-0.5 bg-fg-secondary rounded-sm transform rotate-45 translate-y-1 transition-colors duration-200 group-hover:bg-primary"></span>
+                  <span className="w-6 h-0.5 bg-fg-secondary rounded-sm transform -rotate-45 -translate-y-1 transition-colors duration-200 group-hover:bg-primary"></span>
+
                 </button>
                 <ProjectContent project={activeCard} />
               </motion.div>

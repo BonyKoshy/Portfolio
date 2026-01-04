@@ -27,11 +27,14 @@ export function HomeBentoSection() {
     {
       Icon: SiAccenture,
       name: "Accenture",
-      description: "Associate Software Engineer",
+      description: "Software Engineer",
       href: "/about#experience",
       cta: "Experience",
       minimalCTA: true,
+      ctaLayout: "side" as const,
       className: "row-start-3 md:col-span-2 md:row-start-3",
+
+
       background: (
         <div className="absolute inset-0 pointer-events-none">
           {/* Static Accenture Brand color hint */}
@@ -44,12 +47,15 @@ export function HomeBentoSection() {
     {
       Icon: FileText,
       name: "Resume",
-      description: "Download handcrafted CV.",
+      description: "Download CV.",
       href: "/resume.pdf",
       cta: "CV",
       minimalCTA: true,
+      ctaLayout: "side" as const,
       ctaIcon: <Download className="h-4 w-4" />,
+
       className: "row-start-4 md:col-span-2 md:row-start-4",
+
       background: (
         <div className="absolute inset-0 pointer-events-none">
           {/* Static Blue hint */}
@@ -75,9 +81,10 @@ export function HomeBentoSection() {
               gap={30} // Reduced gap for mobile
               scaleOnHover
               renderItem={(item: any) => (
-                 <div className="text-black dark:text-white transition-colors text-6xl">
+                 <div className="text-fg-primary transition-colors text-6xl">
                     {item.node}
                  </div>
+
               )}
             />
         </div>
@@ -111,14 +118,17 @@ export function HomeBentoSection() {
       background: (
         <div className="absolute inset-x-0 top-0 p-4 grid grid-cols-2 gap-2 min-[375px]:flex min-[375px]:justify-between md:grid md:grid-cols-2 lg:flex lg:justify-between overflow-hidden opacity-60 transition-opacity duration-300 group-hover:opacity-100">
            {['aws', 'google', 'ibm', 'microsoft'].map((cert, i) => (
-             <div key={i} className="aspect-square w-full rounded-2xl bg-black/5 dark:bg-white/5 p-4 flex items-center justify-center">
+             <div key={i} className="aspect-square w-full rounded-2xl bg-border-default/50 p-4 flex items-center justify-center border border-border-default/50">
+
+
                 <img 
                   src={`/certs/${cert}.png`} 
                   alt={cert}
                   className={cn(
-                    "w-full h-full object-contain grayscale transition-all duration-300 group-hover:grayscale-0",
-                    cert === 'aws' && "brightness-0 dark:brightness-100"
+                    "w-full h-full object-contain grayscale transition-all duration-300 group-hover:grayscale-0"
                   )}
+
+
                 />
              </div>
            ))}

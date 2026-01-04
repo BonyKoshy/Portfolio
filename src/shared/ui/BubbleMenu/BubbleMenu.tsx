@@ -80,15 +80,17 @@ export default function BubbleMenu({ items, className }: BubbleMenuProps) {
         <span
           className={`h-0.5 w-6 origin-center rounded-full transition-transform duration-300 ${
             isMenuOpen
-              ? "bg-white translate-y-2 rotate-45"
-              : "bg-text-primary group-hover:bg-accent"
+              ? "bg-fg-primary translate-y-2 rotate-45"
+              : "bg-fg-primary group-hover:bg-primary"
           }`}
+
         />
         <span
           className={`h-0.5 w-6 origin-center rounded-full transition-transform duration-300 ${
             isMenuOpen
-              ? "bg-white translate-y-0 -rotate-45"
-              : "bg-text-primary group-hover:bg-accent"
+              ? "bg-fg-primary translate-y-0 -rotate-45"
+              : "bg-fg-primary group-hover:bg-primary"
+
           }`}
         />
       </button>
@@ -97,7 +99,8 @@ export default function BubbleMenu({ items, className }: BubbleMenuProps) {
       <div ref={overlayRef} className="fixed inset-0 z-1002 hidden">
         {/* Backdrop with Heavy Blur */}
         <div
-          className="absolute inset-0 bg-black/40 backdrop-blur-3xl transition-opacity duration-300"
+          className="absolute inset-0 bg-overlay backdrop-blur-3xl transition-opacity duration-300"
+
           onClick={() => setIsMenuOpen(false)}
         />
 
@@ -119,10 +122,11 @@ export default function BubbleMenu({ items, className }: BubbleMenuProps) {
               className="
                 group relative flex w-full items-center justify-center
                 rounded-full
-                bg-panel/80 backdrop-blur-md
-                px-6 py-4 text-lg font-medium text-text-primary
+                bg-bg-paper/80 backdrop-blur-md
+                px-6 py-4 text-lg font-medium text-fg-primary
                 shadow-lg transition-all
-                hover:bg-panel hover:text-accent
+                hover:bg-bg-paper hover:text-primary
+
                 active:scale-95
                 /* Tablet specific adjustments */
                 md:w-full md:py-3 md:text-base

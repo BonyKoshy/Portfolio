@@ -16,12 +16,14 @@ const TypingSpeed: React.FC = () => {
   const progress = (wpm / maxWpm) * circumference;
   
   return (
-    <div className="h-full w-full flex flex-col justify-between relative bg-panel rounded-xl overflow-hidden group p-5">
+    <div className="h-full w-full flex flex-col justify-between relative bg-bg-paper rounded-xl overflow-hidden group p-5">
        {/* Background Decoration */}
-       <div className="absolute inset-0 bg-linear-to-br from-transparent via-accent/5 to-accent/10 opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none" />
+       <div className="absolute inset-0 bg-linear-to-br from-transparent via-primary/5 to-primary/10 opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none" />
+
       
        {/* Header - Top Left */}
-       <div className="flex items-center gap-3 z-10 w-full justify-start text-text-secondary">
+       <div className="flex items-center gap-3 z-10 w-full justify-start text-fg-secondary">
+
          <Gauge className="" size={26} />
          <h3 className="text-lg font-bold m-0 whitespace-nowrap">Typing Speed</h3>
        </div>
@@ -34,16 +36,17 @@ const TypingSpeed: React.FC = () => {
                {/* Defs for gradients */}
                 <defs>
                     <linearGradient id="gaugeGradient" x1="0%" y1="0%" x2="100%" y2="0%">
-                        <stop offset="0%" stopColor="var(--accent)" stopOpacity="0.4" />
-                        <stop offset="100%" stopColor="var(--accent)" />
+                        <stop offset="0%" stopColor="var(--primary)" stopOpacity="0.4" />
+                        <stop offset="100%" stopColor="var(--primary)" />
                     </linearGradient>
+
                 </defs>
 
                {/* Track */}
                <path 
                  d="M 10 50 A 40 40 0 1 1 90 50"
                  fill="none"
-                 stroke="var(--prelayer-2)"
+                 stroke="var(--border-default)"
                  strokeWidth="10"
                  strokeLinecap="round"
                />
@@ -63,11 +66,12 @@ const TypingSpeed: React.FC = () => {
             
             {/* Centered Text */}
             <div className="absolute bottom-0 flex flex-col items-center mb-1">
-               <span className="text-5xl font-black text-text-primary leading-none tracking-tighter drop-shadow-sm">
+               <span className="text-5xl font-black text-fg-primary leading-none tracking-tighter drop-shadow-sm">
                  {wpm}
                </span>
-               <span className="text-xs font-bold text-text-secondary uppercase tracking-widest mt-1">WPM</span>
+               <span className="text-xs font-bold text-fg-secondary uppercase tracking-widest mt-1">WPM</span>
             </div>
+
          </div>
        </div>
     </div>
