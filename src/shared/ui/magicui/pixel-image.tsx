@@ -23,7 +23,7 @@ export function PixelImage({ src, className, alt }: { src: string; className?: s
 
     img.onload = () => {
         // Animate resolution
-        let pixelSize = 20; // Start with 20px blocks
+        const pixelSize = 20; // Start with 20px blocks
         const targetPixelSize = 1;
         const duration = 1000; // 1s
         const startTime = performance.now();

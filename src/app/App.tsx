@@ -16,62 +16,83 @@ const NotFound = lazy(() => import("../pages/NotFound"));
 const PrivacyPolicy = lazy(() => import("../pages/PrivacyPolicy"));
 
 const App = () => {
+  const fallback = (
+    <PageSkeleton>
+      <PageContentSkeleton />
+    </PageSkeleton>
+  );
+
   return (
     <ThemeProvider>
       <div className="min-h-screen bg-background text-text-primary transition-colors duration-300 flex flex-col">
         <Navbar />
 
-        {/* Wrap Routes in a single Suspense or granular? Plan said granular. */}
-        {/* However, Navbar/Footer are outside. We need skeletons that show inside the layout or full page skeletons? 
-            Since Navbar/Footer are Fixed/Global, we probably only want to skeleton the CONTENT.
-            But user asked for "make bar shaped skelton and reuse that on all for showing navbar and footer." 
-            This implies full page skeleton replacement OR content skeleton.
-            If Navbar is rendered by App, we don't need NavbarSkeleton unless App is suspending?
-            But App renders Navbar immediately. 
-            So we only need Content Skeletons for the Routes.
-            Except PrivacyPolicy which might want to look like it has its specific structure.
-        */}
         <div className="flex-grow">
-            <Routes>
-              <Route path="/" element={
-                 <Suspense fallback={<PageSkeleton><PageContentSkeleton /></PageSkeleton>}>
-                    <Home />
-                 </Suspense>
-              } />
-              
-              <Route path="/about" element={
-                 <Suspense fallback={<PageSkeleton><PageContentSkeleton /></PageSkeleton>}>
-                    <About />
-                 </Suspense>
-              } />
+          <Routes>
+            <Route
+              path="/"
+              element={
+                <Suspense fallback={fallback}>
+                  <Home />
+                </Suspense>
+              }
+            />
 
-              <Route path="/projects" element={
-                 <Suspense fallback={<PageSkeleton><PageContentSkeleton /></PageSkeleton>}>
-                    <Projects />
-                 </Suspense>
-              } />
+            <Route
+              path="/about"
+              element={
+                <Suspense fallback={fallback}>
+                  <About />
+                </Suspense>
+              }
+            />
 
-              <Route path="/contact" element={
-                 <Suspense fallback={<PageSkeleton><PageContentSkeleton /></PageSkeleton>}>
-                    <Contact />
-                 </Suspense>
-              } />
+            <Route
+              path="/projects"
+              element={
+                <Suspense fallback={fallback}>
+                  <Projects />
+                </Suspense>
+              }
+            />
 
-              <Route path="/certificates" element={
-                 <Suspense fallback={<PageSkeleton><PageContentSkeleton /></PageSkeleton>}>
-                    <Certificates />
-                 </Suspense>
-              } />
+            <Route
+              path="/contact"
+              element={
+                <Suspense fallback={fallback}>
+                  <Contact />
+                </Suspense>
+              }
+            />
 
-              <Route path="/privacy" element={
-                  <Suspense fallback={<PageSkeleton><PageContentSkeleton /></PageSkeleton>}>
-                    <PrivacyPolicy />
-                  </Suspense>
-              } />
+            <Route
+              path="/certificates"
+              element={
+                <Suspense fallback={fallback}>
+                  <Certificates />
+                </Suspense>
+              }
+            />
 
-              <Route path="*" element={<NotFound />} />
-            </Routes>
-          </div>
+            <Route
+              path="/privacy"
+              element={
+                <Suspense fallback={fallback}>
+                  <PrivacyPolicy />
+                </Suspense>
+              }
+            />
+
+            <Route
+              path="*"
+              element={
+                <Suspense fallback={fallback}>
+                  <NotFound />
+                </Suspense>
+              }
+            />
+          </Routes>
+        </div>
 
         <Footer />
       </div>
@@ -80,4 +101,3 @@ const App = () => {
 };
 
 export default App;
-

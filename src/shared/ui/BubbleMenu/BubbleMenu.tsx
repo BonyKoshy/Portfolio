@@ -20,7 +20,7 @@ export default function BubbleMenu({ items, className }: BubbleMenuProps) {
 
   // Close menu on route change
   useEffect(() => {
-    if (isMenuOpen) setIsMenuOpen(false);
+    setIsMenuOpen(false);
   }, [location]);
 
   const toggleMenu = () => setIsMenuOpen(!isMenuOpen);

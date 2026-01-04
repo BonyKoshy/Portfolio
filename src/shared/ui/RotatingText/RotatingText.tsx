@@ -17,6 +17,7 @@ import {
 
 // Extend Intl definition locally since it's missing in some standard TS libs
 declare global {
+// eslint-disable-next-line @typescript-eslint/no-namespace
   namespace Intl {
     class Segmenter {
       constructor(

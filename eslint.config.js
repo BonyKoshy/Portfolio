@@ -28,11 +28,10 @@ export default tseslint.config(
       "no-unused-vars": "off",
       "@typescript-eslint/no-unused-vars": ["warn", { varsIgnorePattern: "^[A-Z_]", argsIgnorePattern: "^_" }],
       "@typescript-eslint/no-explicit-any": "warn",
-      "boundaries/no-private": ["error", { "allowUnancestored": true }],
+      "boundaries/no-private": ["error"],
       "boundaries/entry-point": [
         "error",
         {
-          "default": "index",
           "rules": [
             { "target": "shared", "allow": "*.(ts|tsx)" },
             { "target": "app", "allow": "index.css" }

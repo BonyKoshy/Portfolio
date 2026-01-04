@@ -1,8 +1,11 @@
 import ThemeToggle from "../../features/theme/ui/ThemeToggle";
 import { SiGithub, SiLinkedin, SiX } from "react-icons/si";
 import { Button } from "@/shared/ui/Button";
+import { useNavigate } from "react-router-dom";
 
 const Footer = () => {
+  const navigate = useNavigate();
+
   return (
     <footer className="mt-32 pb-8">
         {/* Separator inside container specifically for page width constraint */}
@@ -21,7 +24,7 @@ const Footer = () => {
             <Button 
                 variant="underline" 
                 size="none"
-                onClick={() => window.location.href = '/privacy'}
+                onClick={() => navigate('/privacy')}
                 className="font-normal"
             >
                 Privacy Policy
@@ -59,4 +62,3 @@ const Footer = () => {
 };
 
 export default Footer;
-
