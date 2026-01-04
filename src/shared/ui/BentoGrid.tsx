@@ -1,27 +1,17 @@
-import { ComponentPropsWithoutRef, ReactNode, ElementType } from "react"
+import { ComponentPropsWithoutRef, ReactNode, ElementType, useRef, useState } from "react"
 import { FaArrowRight } from "react-icons/fa6";
+import { Link } from "react-router-dom";
 import { cn } from "@/shared/lib/utils"
 
 interface BentoGridProps extends ComponentPropsWithoutRef<"div"> {
-  children: ReactNode
-  className?: string
-}
-
-interface BentoCardProps extends ComponentPropsWithoutRef<"div"> {
-  name: string
-  className: string
-  background: ReactNode
-  Icon: ElementType
-  description: string
-  href: string
-  cta: string
+  children: ReactNode;
 }
 
 const BentoGrid = ({ children, className, ...props }: BentoGridProps) => {
   return (
     <div
       className={cn(
-        "grid w-full auto-rows-[22rem] grid-cols-3 gap-4",
+        "grid w-full gap-4", // Removed hardcoded cols/rows
         className
       )}
       {...props}
@@ -29,6 +19,19 @@ const BentoGrid = ({ children, className, ...props }: BentoGridProps) => {
       {children}
     </div>
   )
+}
+
+interface BentoCardProps {
+  name: string;
+  className: string;
+  background: ReactNode;
+  Icon: ElementType;
+  description: string;
+  href: string;
+  cta: string;
+  minimalCTA?: boolean;
+  ctaIcon?: ReactNode;
+  spotlightColor?: string;
 }
 
 const BentoCard = ({
@@ -41,64 +44,135 @@ const BentoCard = ({
   cta,
   minimalCTA = false,
   ctaIcon,
-  ...props
-}: BentoCardProps & { minimalCTA?: boolean; ctaIcon?: ReactNode }) => (
-  <div
-    key={name}
-    className={cn(
-      "group relative col-span-3 flex flex-col justify-between overflow-hidden rounded-xl",
-      // theme styles
-      "bg-panel [box-shadow:0_0_0_1px_rgba(0,0,0,.03),0_2px_4px_rgba(0,0,0,.05),0_12px_24px_rgba(0,0,0,.05)]",
-      // dark styles (keep specific shadows if needed, or rely on theme but user liked specific details previously. Let's keep the shadows but ensure bg is panel)
-      "dark:[box-shadow:0_-20px_80px_-20px_#ffffff1f_inset] dark:[border:1px_solid_rgba(255,255,255,.1)]",
-      className
-    )}
-    {...props}
-  >
-    <div>{background}</div>
-    <div className={cn(
-      "pointer-events-none z-10 flex transform-gpu flex-col gap-1 p-6 transition-all duration-300",
-      minimalCTA ? "lg:p-6" : "lg:p-6 lg:group-hover:-translate-y-12"
-    )}>
-      <Icon className={cn(
-        "origin-left transform-gpu text-text-primary transition-all duration-300 ease-in-out",
-        minimalCTA ? "h-8 w-8" : "h-8 w-8 lg:h-12 lg:w-12 group-hover:scale-75"
-      )} />
-      <h3 className="text-xl font-semibold text-text-primary">
-        {name}
-      </h3>
-      <p className="max-w-lg text-sm text-text-secondary">{description}</p>
-    </div>
+  spotlightColor = "rgba(255, 255, 255, 0.15)",
+}: BentoCardProps) => {
+  const isExternal = href.startsWith('http') || href.endsWith('.pdf');
+  const divRef = useRef<HTMLAnchorElement>(null);
+  const [isFocused, setIsFocused] = useState(false);
+  const [position, setPosition] = useState({ x: 0, y: 0 });
+  const [opacity, setOpacity] = useState(0);
 
-    {/* Desktop Hover CTA */}
-    <div
-      className={cn(
-        "pointer-events-none absolute bottom-0 hidden w-full transform-gpu flex-row items-center p-4 opacity-0 transition-all duration-300 group-hover:translate-y-0 group-hover:opacity-100 lg:flex",
-        minimalCTA && "justify-end"
-      )}
-    >
-      {minimalCTA ? (
-        <a href={href} className="pointer-events-auto flex h-10 w-10 items-center justify-center rounded-full bg-black/5 dark:bg-white/10 backdrop-blur-sm text-neutral-700 dark:text-neutral-300 hover:bg-black/10 dark:hover:bg-white/20 transition-colors">
-            {ctaIcon || <FaArrowRight className="h-4 w-4" />}
-        </a>
-      ) : (
-        <a href={href} className="pointer-events-auto flex w-full items-center justify-center gap-2 rounded-full bg-black/5 dark:bg-white/10 px-4 py-2 text-sm font-medium text-neutral-600 dark:text-neutral-300 backdrop-blur-sm hover:bg-black/10 dark:hover:bg-white/20 transition-colors">
-          <span>{cta}</span>
-          <FaArrowRight className="h-3 w-3" />
-        </a>
-      )}
-    </div>
+  const handleMouseMove: React.MouseEventHandler<HTMLAnchorElement> = (e) => {
+    if (!divRef.current || isFocused) return;
 
-    {/* Mobile Persistent CTA */}
-    <div className="absolute bottom-4 right-4 lg:hidden pointer-events-auto">
-      <a href={href} className="flex h-10 w-10 items-center justify-center rounded-full bg-black/10 dark:bg-white/10 backdrop-blur-sm text-neutral-700 dark:text-neutral-300">
-        {ctaIcon || <FaArrowRight className="h-4 w-4" />}
+    const rect = divRef.current.getBoundingClientRect();
+    setPosition({ x: e.clientX - rect.left, y: e.clientY - rect.top });
+  };
+
+  const handleFocus = () => {
+    setIsFocused(true);
+    setOpacity(0.6);
+  };
+
+  const handleBlur = () => {
+    setIsFocused(false);
+    setOpacity(0);
+  };
+
+  const handleMouseEnter = () => {
+    setOpacity(0.6);
+  };
+
+  const handleMouseLeave = () => {
+    setOpacity(0);
+  };
+
+  const content = (
+    <>
+      {/* Background layer with pointer-events-none to prevent blocking interactions */}
+      <div className="absolute inset-0 pointer-events-none">{background}</div>
+      
+      {/* Spotlight Overlay */}
+      <div
+        className="pointer-events-none absolute inset-0 transition-opacity duration-500 ease-in-out"
+        style={{
+          opacity,
+          background: `radial-gradient(circle at ${position.x}px ${position.y}px, ${spotlightColor}, transparent 80%)`
+        }}
+      />
+
+      <div className={cn(
+        "z-10 flex transform-gpu flex-col p-6 pr-16 lg:pr-6 transition-all duration-300 mt-auto",
+        !minimalCTA ? "gap-4 lg:group-hover:-translate-y-10" : "gap-1" // Use gap-4 for non-minimal (standard) cards
+      )}>
+        <Icon className={cn(
+          "origin-left transform-gpu text-black dark:text-white transition-all duration-300 ease-in-out",
+          minimalCTA ? "h-8 w-8" : "h-8 w-8 lg:h-12 lg:w-12 group-hover:scale-75"
+        )} />
+        <h3 className="text-xl font-semibold text-black dark:text-white tracking-tight">
+          {name}
+        </h3>
+        <p className="max-w-lg text-sm text-black/80 dark:text-white/80 leading-relaxed">{description}</p>
+      </div>
+
+      {/* Action Area */}
+      <div
+        className={cn(
+          "absolute bottom-0 w-full transform-gpu flex-row items-center p-6 opacity-0 transition-all duration-300 group-hover:translate-y-0 group-hover:opacity-100 hidden lg:flex",
+          minimalCTA && "justify-end"
+        )}
+      >
+        {minimalCTA ? (
+          <div className="flex h-10 w-10 items-center justify-center rounded-full bg-black/5 dark:bg-white/10 backdrop-blur-sm text-black dark:text-white">
+              {ctaIcon || <FaArrowRight className="h-4 w-4" />}
+          </div>
+        ) : (
+          <div className="flex w-full items-center justify-center gap-2 rounded-full bg-black/5 dark:bg-white/10 px-4 py-2 text-sm font-medium text-black dark:text-white backdrop-blur-sm">
+            <span>{cta}</span>
+            <FaArrowRight className="h-3 w-3" />
+          </div>
+        )}
+      </div>
+
+      {/* Mobile Indicator */}
+      <div className="absolute bottom-4 right-4 lg:hidden">
+        <div className="flex h-10 w-10 items-center justify-center rounded-full bg-black/10 dark:bg-white/10 backdrop-blur-sm text-black dark:text-white">
+          {ctaIcon || <FaArrowRight className="h-4 w-4" />}
+        </div>
+      </div>
+    </>
+  );
+
+  const containerClasses = cn(
+    "group relative flex flex-col justify-between overflow-hidden rounded-3xl", // Using 3xl for Apple-style radius
+    "bg-white dark:bg-neutral-900 border border-black/5 dark:border-white/10",
+    "transition-all duration-300",
+    className
+  );
+
+  if (isExternal) {
+    return (
+      <a
+        href={href}
+        target="_blank"
+        rel="noopener noreferrer"
+        className={containerClasses}
+        ref={divRef}
+        onMouseMove={handleMouseMove}
+        onFocus={handleFocus}
+        onBlur={handleBlur}
+        onMouseEnter={handleMouseEnter}
+        onMouseLeave={handleMouseLeave}
+      >
+        {content}
       </a>
-    </div>
+    );
+  }
 
-    {/* Gradient Overlay: Always visible on touch (default), hover on desktop (lg:group-hover) */}
-    <div className="pointer-events-none absolute inset-0 transform-gpu transition-all duration-300 group-hover:bg-black/[.03] group-hover:dark:bg-neutral-800/10" />
-  </div>
-)
+  return (
+    <Link
+      to={href}
+      className={containerClasses}
+      ref={divRef}
+      onMouseMove={handleMouseMove}
+      onFocus={handleFocus}
+      onBlur={handleBlur}
+      onMouseEnter={handleMouseEnter}
+      onMouseLeave={handleMouseLeave}
+    >
+      {content}
+    </Link>
+  );
+}
 
 export { BentoCard, BentoGrid }

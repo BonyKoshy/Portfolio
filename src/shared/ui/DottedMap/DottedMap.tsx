@@ -1,6 +1,6 @@
 import DottedMapLib from "dotted-map";
 import React, { useMemo, useContext } from "react";
-import { ThemeContext } from "@/features/theme/ThemeContext";
+import { ThemeContext } from "@/app/providers/ThemeProvider/ThemeContext";
 
 interface Marker {
   lat: number;
@@ -39,7 +39,7 @@ const DottedMap: React.FC<DottedMapProps> = ({
     });
 
     // Determine colors based on theme if not provided
-    const dots = dotColor || (theme === "dark" ? "#52525b" : "#a1a1aa"); // zinc-600 / zinc-400
+    const dots = dotColor || (theme === "dark" ? "#52525b" : "#52525b"); // zinc-600 / zinc-600 for high contrast
 
     // Generate SVG
     const svgStr = map.getSVG({
