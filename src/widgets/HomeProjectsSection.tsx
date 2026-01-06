@@ -35,7 +35,7 @@ const HomeProjectsSection = () => {
       </div>
 
       {/* Grid Layout: 1 col (mobile), 2 cols (tablet), 3 cols (desktop) */}
-      <div className="grid gap-8 grid-cols-1 md:grid-cols-2 lg:grid-cols-2">
+      <div className="grid gap-8 grid-cols-1 md:grid-cols-2 lg:grid-cols-3">
         {featuredProjects.map((project) => (
           <Link 
             key={project.title} 
@@ -68,7 +68,7 @@ const HomeProjectsSection = () => {
                 {project.content.tech.slice(0, 3).map((tech) => (
                   <span 
                     key={tech} 
-                    className="px-3 py-1 text-xs font-medium text-text-secondary bg-prelayer-2 rounded-full"
+                    className="px-3 py-1 text-xs font-medium text-fg-secondary bg-bg-subtle rounded-full"
                   >
                     {tech}
                   </span>
