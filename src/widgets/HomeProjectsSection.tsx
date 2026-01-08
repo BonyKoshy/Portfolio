@@ -77,9 +77,9 @@ const HomeProjectsSection = () => {
               
               {/* Read More Button */}
               <div className="mt-auto pt-2 flex justify-start">
-                 <Button variant="underline" className="text-sm text-accent group-hover:gap-2 px-0">
+                 <Button variant="underline" className="text-sm text-accent px-0">
                     Read more
-                    <ArrowRight size={14} className="ml-1 transition-all duration-300" />
+                    <ArrowRight size={14} className="ml-1 transition-transform duration-300 group-hover:translate-x-1" />
                  </Button>
               </div>
             </div>

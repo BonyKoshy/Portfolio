@@ -2,11 +2,16 @@ import { Hero } from "@/widgets/Hero";
 import { HomeBentoSection } from "@/widgets/HomeBentoSection";
 import HomeProjectsSection from "@/widgets/HomeProjectsSection";
 
+
 const Home = () => {
   return (
-    <main id="main-content" className="text-text-primary selection:bg-accent selection:text-white">
+    <main id="main-content" className="relative text-text-primary selection:bg-accent selection:text-white">
+      {/* Background Ripple Effect */}
+      {/* Background Ripple Effect */}
+
+
       {/* Hero Section */}
-      <section className="relative h-screen flex flex-col justify-center">
+      <section className="relative h-screen flex flex-col justify-center pointer-events-none">
         <Hero />
       </section>
 

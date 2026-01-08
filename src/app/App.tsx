@@ -5,6 +5,7 @@ import { Footer } from "@/widgets/Footer";
 import PageSkeleton from "../shared/ui/PageSkeleton/PageSkeleton";
 import { PageContentSkeleton } from "../shared/ui/skeletons";
 import { ThemeProvider } from "./providers/ThemeProvider";
+import ScrollToTop from "@/shared/lib/ScrollToTop";
 
 // Lazy Load Pages
 const Home = lazy(() => import("../pages/Home"));
@@ -24,10 +25,11 @@ const App = () => {
 
   return (
     <ThemeProvider>
+      <ScrollToTop />
       <div className="min-h-screen bg-background text-text-primary transition-colors duration-300 flex flex-col">
         <Navbar />
 
-        <div className="flex-grow">
+        <div className="grow">
           <Routes>
             <Route
               path="/"

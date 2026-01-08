@@ -1,6 +1,6 @@
 import { BentoGrid, BentoCard } from "@/shared/ui/BentoGrid";
 import { cn } from "@/shared/lib/utils";
-import { User, FileText, Code, FileBadge, Download, Globe as GlobeIcon } from "lucide-react";
+import { User, FileText, Code, FileBadge, Globe as GlobeIcon } from "lucide-react";
 import DottedMap from "@/shared/ui/DottedMap/DottedMap";
 import LogoLoop from "@/shared/ui/LogoLoop/LogoLoop";
 import { SiAccenture } from "react-icons/si";
@@ -52,7 +52,7 @@ export function HomeBentoSection() {
       cta: "CV",
       minimalCTA: true,
       ctaLayout: "side" as const,
-      ctaIcon: <Download className="h-4 w-4" />,
+
 
       className: "row-start-4 md:col-span-2 md:row-start-4",
 

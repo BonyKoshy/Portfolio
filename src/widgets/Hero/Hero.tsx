@@ -6,6 +6,7 @@ import { ShinyText } from "@/shared/ui/ShinyText";
 import { Button } from "@/shared/ui/Button";
 import { ArrowRight } from "lucide-react";
 
+
 const Hero = () => {
   const [isPageLoading, setIsPageLoading] = useState(true);
   const navigate = useNavigate();
@@ -25,8 +26,8 @@ const Hero = () => {
       id="main-content"
       className="relative flex w-full flex-col justify-start overflow-hidden pt-32 pb-20 outline-none"
     >
-      <Container>
-        <div className="flex flex-col items-start w-full">
+      <Container className="">
+        <div className="relative z-10 flex flex-col items-start w-full">
           {/* 1. Logo */}
           <div className="mb-8 sm:mb-12">
             <Logo

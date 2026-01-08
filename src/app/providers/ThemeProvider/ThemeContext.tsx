@@ -31,6 +31,7 @@ export const ThemeProvider = ({ children }: { children: ReactNode }) => {
     const root = window.document.documentElement;
     root.setAttribute("data-theme", theme);
 
+
     // 4. Save to Local Storage
     localStorage.setItem("theme", theme);
   }, [theme]);

@@ -1,4 +1,4 @@
-import { Briefcase, ArrowRight, ExternalLink, Github } from "lucide-react";
+import { Briefcase, ExternalLink, Github } from "lucide-react";
 import { projectsData } from "@/shared/config/projects";
 import { Button } from "@/shared/ui/Button";
 
@@ -67,9 +67,9 @@ const Projects = () => {
               {/* Actions */}
               <div className="mt-auto pt-6 flex flex-wrap gap-4">
                  {/* Live Link */}
-                 {project.liveLink && project.liveLink !== "#" && (
+                  {project.liveLink && project.liveLink !== "#" && (
                    <a href={project.liveLink} target="_blank" rel="noopener noreferrer">
-                     <Button variant="default" className="text-sm gap-2 h-10 px-6">
+                     <Button variant="primary" className="text-sm gap-2 h-10 px-6">
                         Live Demo
                         <ExternalLink size={16} />
                      </Button>
@@ -79,7 +79,7 @@ const Projects = () => {
                  {/* Github Link */}
                  {project.githubLink && (
                    <a href={project.githubLink} target="_blank" rel="noopener noreferrer">
-                     <Button variant="outline" className="text-sm gap-2 h-10 px-6 border-border-default hover:bg-bg-subtle hover:text-text-primary">
+                     <Button variant="ghost" className="text-sm gap-2 h-10 px-6 border border-border-default hover:bg-bg-subtle hover:text-text-primary">
                         Source Code
                         <Github size={16} />
                      </Button>
