@@ -1,15 +1,17 @@
 import React from "react";
-import { cn } from "@/shared/lib";
+import { cn } from "@/shared/lib/utils";
+import { Slot } from "@radix-ui/react-slot";
 
 interface ButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
   variant?: "primary" | "underline" | "ghost"; // Keep ghost for internal use if needed
   size?: "sm" | "md" | "lg" | "none";
   icon?: React.ReactNode;
   iconPosition?: "left" | "right" | "down";
+  asChild?: boolean;
 }
 
 export const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
-  ({ className, variant = "primary", size = "md", icon, iconPosition = "left", children, ...props }, ref) => {
+  ({ className, variant = "primary", size = "md", icon, iconPosition = "left", asChild = false, children, ...props }, ref) => {
     // Base styles
     const baseStyles = "group inline-flex items-center justify-center font-medium transition-all active:scale-95 focus-visible:ring-2 focus-visible:ring-offset-2 outline-none disabled:opacity-50 gap-2";
     
@@ -38,29 +40,59 @@ export const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
       iconPosition === "down" ? "group-hover:translate-y-1" :
       "";
 
+    const Comp = asChild ? Slot : "button";
+
     return (
-      <button
+      <Comp
         ref={ref}
         className={cn(baseStyles, variants[variant], currentSize, className)}
         {...props}
       >
-        {icon && iconPosition === "left" && (
-          <span className={cn("flex-shrink-0 transition-transform duration-300", iconTransformClass)}>
-            {icon}
-          </span>
+        {/* If asChild is true, Slot manages children. We just pass local children. 
+            However, Slot expects a single child. If we have icon logic, we need to wrap content.
+            BUT: Slot merges props onto the child. If we render icons here, they become part of the content.
+            Ideally, when using asChild, the consumer provides the children structure.
+            But we want to preserve the icon logic. 
+            
+            Solution: We can't easily reuse the internal icon logic with Slot if the user passes a Link as child.
+            The Link will replace the Comp (button).
+            
+            If we use plain Slot:
+            <Slot><Link>...</Link></Slot>
+            The Link receives the className.
+            The content inside Link is what we see.
+            
+            So if we want icons, we should render them inside the children passed to Button?
+            Or we manually construct the children.
+            
+            If asChild is true, we assume the child is the root element (e.g. Link).
+            We effectively wrap the children content.
+            
+            Let's handle the content composition.
+        */}
+        {asChild ? (
+            children
+        ) : (
+            <>
+                {icon && iconPosition === "left" && (
+                  <span className={cn("flex-shrink-0 transition-transform duration-300", iconTransformClass)}>
+                    {icon}
+                  </span>
+                )}
+                {children}
+                {icon && iconPosition === "right" && (
+                  <span className={cn("flex-shrink-0 transition-transform duration-300", iconTransformClass)}>
+                    {icon}
+                  </span>
+                )}
+                {icon && iconPosition === "down" && (
+                  <span className={cn("flex-shrink-0 transition-transform duration-300", iconTransformClass)}>
+                    {icon}
+                  </span>
+                )}
+            </>
         )}
-        {children}
-        {icon && iconPosition === "right" && (
-          <span className={cn("flex-shrink-0 transition-transform duration-300", iconTransformClass)}>
-            {icon}
-          </span>
-        )}
-        {icon && iconPosition === "down" && (
-          <span className={cn("flex-shrink-0 transition-transform duration-300", iconTransformClass)}>
-            {icon}
-          </span>
-        )}
-      </button>
+      </Comp>
     );
   }
 );

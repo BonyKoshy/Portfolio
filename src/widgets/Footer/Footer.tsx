@@ -1,10 +1,10 @@
 import ThemeToggle from "../../features/theme/ui/ThemeToggle";
 import { SiGithub, SiLinkedin, SiX } from "react-icons/si";
 import { Button } from "@/shared/ui/Button";
-import { useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 
 const Footer = () => {
-  const navigate = useNavigate();
+
 
   return (
     <footer className="mt-32 pb-8">
@@ -25,12 +25,14 @@ const Footer = () => {
 
           
             <Button 
+                asChild
                 variant="underline" 
                 size="none"
-                onClick={() => navigate('/privacy')}
                 className="font-normal"
             >
-                Privacy Policy
+                <Link to="/privacy">
+                    Privacy Policy
+                </Link>
             </Button>
         </div>
 

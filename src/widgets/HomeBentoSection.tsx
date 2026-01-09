@@ -2,18 +2,21 @@ import { BentoGrid, BentoCard } from "@/shared/ui/BentoGrid";
 import { cn } from "@/shared/lib/utils";
 import { User, FileText, Code, FileBadge, Globe as GlobeIcon } from "lucide-react";
 import DottedMap from "@/shared/ui/DottedMap/DottedMap";
-import LogoLoop from "@/shared/ui/LogoLoop/LogoLoop";
+import LogoLoop, { LogoItem } from "@/shared/ui/LogoLoop/LogoLoop";
 import { SiAccenture } from "react-icons/si";
-import { techLogos } from "../shared/config/techStack"; // Recommended to move data to config
+import { techLogos } from "../shared/config/techStack";
+import { homeContent } from "@/shared/config/content";
+
+
 
 export function HomeBentoSection() {
   const features = [
     {
       Icon: User,
-      name: "Profile",
-      description: "Creative Full-stack Developer.",
+      name: homeContent.bento.profile.title,
+      description: homeContent.bento.profile.description,
       href: "/about",
-      cta: "About Me",
+      cta: homeContent.bento.profile.cta,
       className: "row-span-2 md:col-span-2 md:row-span-2",
       background: (
         <img
@@ -26,10 +29,10 @@ export function HomeBentoSection() {
     },
     {
       Icon: SiAccenture,
-      name: "Accenture",
-      description: "Software Engineer",
+      name: homeContent.bento.accenture.title,
+      description: homeContent.bento.accenture.description,
       href: "/about#experience",
-      cta: "Experience",
+      cta: homeContent.bento.accenture.cta,
       minimalCTA: true,
       ctaLayout: "side" as const,
       className: "row-start-3 md:col-span-2 md:row-start-3",
@@ -46,10 +49,10 @@ export function HomeBentoSection() {
     },
     {
       Icon: FileText,
-      name: "Resume",
-      description: "Download CV.",
+      name: homeContent.bento.resume.title,
+      description: homeContent.bento.resume.description,
       href: "/resume.pdf",
-      cta: "CV",
+      cta: homeContent.bento.resume.cta,
       minimalCTA: true,
       ctaLayout: "side" as const,
 
@@ -67,10 +70,10 @@ export function HomeBentoSection() {
     },
     {
       Icon: Code,
-      name: "Skills",
-      description: "Curated stack for precision.",
+      name: homeContent.bento.skills.title,
+      description: homeContent.bento.skills.description,
       href: "/about#skills",
-      cta: "Deep Dive",
+      cta: homeContent.bento.skills.cta,
       className: "row-span-2 row-start-5 md:col-span-4 md:row-span-2 md:col-start-3 md:row-start-1",
       background: (
         <div className="absolute inset-0 flex items-start pt-12 md:pt-20 justify-center opacity-30 group-hover:opacity-80 transition-opacity duration-500">
@@ -80,22 +83,26 @@ export function HomeBentoSection() {
               logoHeight={45} // Scaled down for mobile
               gap={30} // Reduced gap for mobile
               scaleOnHover
-              renderItem={(item: any) => (
-                 <div className="text-fg-primary transition-colors text-6xl">
-                    {item.node}
-                 </div>
-
-              )}
+              renderItem={(item: LogoItem) => {
+                 if ('node' in item) {
+                    return (
+                        <div className="text-fg-primary transition-colors text-6xl">
+                            {item.node}
+                        </div>
+                    );
+                 }
+                 return null;
+              }}
             />
         </div>
       ),
     },
     {
       Icon: GlobeIcon,
-      name: "Languages",
-      description: "English, Hindi, Malayalam.",
+      name: homeContent.bento.languages.title,
+      description: homeContent.bento.languages.description,
       href: "/about",
-      cta: "Get in touch",
+      cta: homeContent.bento.languages.cta,
       className: "row-span-2 row-start-7 md:col-span-2 md:row-span-2 md:col-start-3 md:row-start-3",
       background: (
         <div className="absolute inset-0 overflow-hidden pointer-events-none">
@@ -110,10 +117,10 @@ export function HomeBentoSection() {
     },
     {
       Icon: FileBadge,
-      name: "Certificates",
-      description: "Industry verified learning.",
+      name: homeContent.bento.certificates.title,
+      description: homeContent.bento.certificates.description,
       href: "/certificates",
-      cta: "View All",
+      cta: homeContent.bento.certificates.cta,
       className: "row-span-2 row-start-9 md:col-span-2 md:row-span-2 md:col-start-5 md:row-start-3",
       background: (
         <div className="absolute inset-x-0 top-0 p-4 grid grid-cols-2 gap-2 min-[375px]:flex min-[375px]:justify-between md:grid md:grid-cols-2 lg:flex lg:justify-between overflow-hidden opacity-60 transition-opacity duration-300 group-hover:opacity-100">

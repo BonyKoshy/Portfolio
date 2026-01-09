@@ -2,19 +2,19 @@ import { Suspense, lazy } from "react";
 import { Routes, Route } from "react-router-dom";
 import { Navbar } from "@/widgets/Navbar";
 import { Footer } from "@/widgets/Footer";
-import PageSkeleton from "../shared/ui/PageSkeleton/PageSkeleton";
-import { PageContentSkeleton } from "../shared/ui/skeletons";
+import PageSkeleton from "@/shared/ui/PageSkeleton/PageSkeleton";
+import { PageContentSkeleton } from "@/shared/ui/skeletons";
 import { ThemeProvider } from "./providers/ThemeProvider";
 import ScrollToTop from "@/shared/lib/ScrollToTop";
 
 // Lazy Load Pages
-const Home = lazy(() => import("../pages/Home"));
-const About = lazy(() => import("../pages/About"));
-const Projects = lazy(() => import("../pages/Projects"));
-const Contact = lazy(() => import("../pages/Contact"));
-const Certificates = lazy(() => import("../pages/Certificates"));
-const NotFound = lazy(() => import("../pages/NotFound"));
-const PrivacyPolicy = lazy(() => import("../pages/PrivacyPolicy"));
+const Home = lazy(() => import("@/pages/Home"));
+const About = lazy(() => import("@/pages/About"));
+const Projects = lazy(() => import("@/pages/Projects"));
+const Contact = lazy(() => import("@/pages/Contact"));
+const Certificates = lazy(() => import("@/pages/Certificates"));
+const NotFound = lazy(() => import("@/pages/NotFound"));
+const PrivacyPolicy = lazy(() => import("@/pages/PrivacyPolicy"));
 
 const App = () => {
   const fallback = (
