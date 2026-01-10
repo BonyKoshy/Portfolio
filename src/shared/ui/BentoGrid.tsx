@@ -108,7 +108,7 @@ export const BentoCard = ({
         <div className={cn("flex flex-col gap-2", ctaLayout === "side" && "basis-1/2")}>
             <Icon className={cn(
                "origin-left transform-gpu text-fg-primary transition-all duration-300 ease-in-out",
-               minimalCTA ? "h-8 w-8" : "h-8 w-8 md:h-12 md:w-12 group-hover:scale-75"
+               minimalCTA ? "h-8 w-8" : "h-8 w-8 md:h-12 md:w-12 [@media(hover:hover)]:group-hover:scale-75"
             )} />
 
             <h3 className="text-xl font-semibold text-fg-primary tracking-tight">
@@ -116,7 +116,7 @@ export const BentoCard = ({
             </h3>
             <p className={cn(
               "max-w-lg text-sm text-fg-secondary leading-relaxed",
-              "pr-12 [@media(pointer:fine)]:md:pr-0" // Padding always present on touch, removed only for desktop mouse
+              "pr-12 pointer-fine:md:pr-0" // Padding always present on touch, removed only for desktop mouse
             )}>
               {description}
             </p>
@@ -125,8 +125,8 @@ export const BentoCard = ({
         {/* Action Area - Mouse Hover Reveal (Hidden on Touch) */}
         <div
           className={cn(
-             "hidden [@media(pointer:fine)]:md:flex transform-gpu transition-all duration-500 ease-in-out",
-             "[@media(pointer:coarse)]:hidden", // Explicitly hide on touch
+             "hidden pointer-fine:md:flex transform-gpu transition-all duration-500 ease-in-out",
+             "pointer-coarse:hidden", // Explicitly hide on touch
              // Standard Bottom Layout: Reveal by expanding in flow
              ctaLayout === "bottom" && "max-h-0 opacity-0 group-hover:max-h-20 group-hover:opacity-100 group-hover:mt-2 overflow-hidden",
              // Side Layout: Reveal by sliding/fading in from right
@@ -134,7 +134,7 @@ export const BentoCard = ({
           )}
         >
           {minimalCTA ? (
-            <div className="flex h-10 w-10 items-center justify-center rounded-full bg-border-default backdrop-blur-sm text-fg-primary cursor-pointer hover:bg-primary hover:text-white transition-colors">
+            <div className="flex h-12 w-12 items-center justify-center rounded-full bg-border-default backdrop-blur-sm text-fg-primary cursor-pointer hover:bg-primary hover:text-white transition-colors">
                 {ctaIcon || <FaArrowRight className="h-4 w-4" />}
             </div>
           ) : (
@@ -151,8 +151,8 @@ export const BentoCard = ({
 
 
       {/* Permanent Indicator for Touch Devices & Mobile Mouse */}
-      <div className="absolute bottom-6 right-6 [@media(pointer:coarse)]:block [@media(pointer:fine)]:md:hidden">
-        <div className="flex h-10 w-10 items-center justify-center rounded-full bg-border-default backdrop-blur-sm text-fg-primary">
+      <div className="absolute bottom-6 right-6 pointer-coarse:block pointer-fine:md:hidden">
+        <div className="flex h-12 w-12 items-center justify-center rounded-full bg-border-default backdrop-blur-sm text-fg-primary">
           {ctaIcon || <FaArrowRight className="h-4 w-4" />}
         </div>
       </div>

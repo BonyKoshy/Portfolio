@@ -1,4 +1,5 @@
 import { BentoGrid, BentoCard } from "@/shared/ui/BentoGrid";
+import { AspectRatio } from "@/shared/ui/AspectRatio/AspectRatio";
 import { cn } from "@/shared/lib/utils";
 import { User, FileText, Code, FileBadge, Globe as GlobeIcon } from "lucide-react";
 import DottedMap from "@/shared/ui/DottedMap/DottedMap";
@@ -20,10 +21,10 @@ export function HomeBentoSection() {
       className: "row-span-2 md:col-span-2 md:row-span-2",
       background: (
         <img
-          src="/profile-image.jpg"
+          src="/profile-image.webp"
           alt="Bony Koshy"
           loading="eager"
-          className="absolute inset-0 h-full w-full object-cover transition-all duration-700 grayscale group-hover:grayscale-0 opacity-40 group-hover:opacity-60"
+          className="absolute inset-0 h-full w-full object-cover transition-all duration-700 grayscale pointer-coarse:grayscale-0 [@media(hover:hover)]:group-hover:grayscale-0 opacity-40 pointer-coarse:opacity-60 [@media(hover:hover)]:group-hover:opacity-60"
         />
       ),
     },
@@ -41,9 +42,9 @@ export function HomeBentoSection() {
       background: (
         <div className="absolute inset-0 pointer-events-none">
           {/* Static Accenture Brand color hint */}
-          <div className="absolute inset-0 bg-[#A100FF]/[0.02]" />
+          <div className="absolute inset-0 bg-[#A100FF]/2" />
           {/* Animated Gradient on Hover - Increased blending and coverage */}
-          <div className="absolute inset-0 bg-gradient-to-br from-[#A100FF]/60 via-[#A100FF]/10 to-transparent opacity-0 transition-opacity duration-500 group-hover:opacity-100" />
+          <div className="absolute inset-0 bg-linear-to-br from-[#A100FF]/60 via-[#A100FF]/10 to-transparent opacity-0 transition-opacity duration-500 pointer-coarse:opacity-100 [@media(hover:hover)]:group-hover:opacity-100" />
         </div>
       ),
     },
@@ -62,9 +63,9 @@ export function HomeBentoSection() {
       background: (
         <div className="absolute inset-0 pointer-events-none">
           {/* Static Blue hint */}
-          <div className="absolute inset-0 bg-blue-500/[0.02]" />
+          <div className="absolute inset-0 bg-blue-500/2" />
           {/* Animated Gradient on Hover */}
-          <div className="absolute inset-0 bg-gradient-to-br from-blue-500/60 via-blue-500/10 to-transparent opacity-0 transition-opacity duration-500 group-hover:opacity-100" />
+          <div className="absolute inset-0 bg-linear-to-br from-blue-500/60 via-blue-500/10 to-transparent opacity-0 transition-opacity duration-500 pointer-coarse:opacity-100 [@media(hover:hover)]:group-hover:opacity-100" />
         </div>
       ),
     },
@@ -76,7 +77,7 @@ export function HomeBentoSection() {
       cta: homeContent.bento.skills.cta,
       className: "row-span-2 row-start-5 md:col-span-4 md:row-span-2 md:col-start-3 md:row-start-1",
       background: (
-        <div className="absolute inset-0 flex items-start pt-12 md:pt-20 justify-center opacity-30 group-hover:opacity-80 transition-opacity duration-500">
+        <div className="absolute inset-0 flex items-start pt-12 md:pt-20 justify-center opacity-30 pointer-coarse:opacity-80 [@media(hover:hover)]:group-hover:opacity-80 transition-opacity duration-500">
              <LogoLoop
               logos={techLogos}
               speed={40}
@@ -123,20 +124,18 @@ export function HomeBentoSection() {
       cta: homeContent.bento.certificates.cta,
       className: "row-span-2 row-start-9 md:col-span-2 md:row-span-2 md:col-start-5 md:row-start-3",
       background: (
-        <div className="absolute inset-x-0 top-0 p-4 grid grid-cols-2 gap-2 min-[375px]:flex min-[375px]:justify-between md:grid md:grid-cols-2 lg:flex lg:justify-between overflow-hidden opacity-60 transition-opacity duration-300 group-hover:opacity-100">
+        <div className="absolute inset-x-0 top-0 p-4 grid grid-cols-2 gap-2 min-[375px]:flex min-[375px]:justify-between md:grid md:grid-cols-2 lg:flex lg:justify-between overflow-hidden opacity-60 transition-opacity duration-300 pointer-coarse:opacity-100 [@media(hover:hover)]:group-hover:opacity-100">
            {['aws', 'google', 'ibm', 'microsoft'].map((cert, i) => (
              <div key={i} className="aspect-square w-full rounded-2xl bg-border-default/50 p-4 flex items-center justify-center border border-border-default/50">
-
-
-                <img 
-                  src={`/certs/${cert}.png`} 
-                  alt={cert}
-                  className={cn(
-                    "w-full h-full object-contain grayscale transition-all duration-300 group-hover:grayscale-0"
-                  )}
-
-
-                />
+                <AspectRatio ratio={1}>
+                    <img 
+                      src={`/certs/${cert}.webp`} 
+                      alt={cert}
+                      className={cn(
+                        "w-full h-full object-contain grayscale transition-all duration-300 pointer-coarse:grayscale-0 [@media(hover:hover)]:group-hover:grayscale-0"
+                      )}
+                    />
+                </AspectRatio>
              </div>
            ))}
         </div>
@@ -145,7 +144,7 @@ export function HomeBentoSection() {
   ];
 
   return (
-    <BentoGrid className="grid-cols-1 grid-rows-10 md:grid-cols-6 md:grid-rows-4 h-auto md:min-h-[700px] md:h-[calc(100vh-12rem)] md:max-h-[900px] gap-4">
+    <BentoGrid className="grid-cols-1 grid-rows-10 md:grid-cols-6 md:grid-rows-4 h-auto md:min-h-175 md:h-[calc(100vh-12rem)] md:max-h-225 gap-4">
       {features.map((feature, idx) => (
         <BentoCard key={idx} {...feature} />
       ))}

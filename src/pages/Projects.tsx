@@ -26,7 +26,7 @@ const Projects = () => {
             className="group flex flex-col md:flex-row gap-8 bg-bg-paper border border-border-default rounded-2xl overflow-hidden hover:border-text-secondary transition-colors duration-300 p-6"
           >
             {/* Image Section (Left) */}
-            <div className="w-full md:w-5/12 lg:w-4/12 flex-shrink-0">
+            <div className="w-full md:w-5/12 lg:w-4/12 shrink-0">
               <div className="rounded-xl overflow-hidden aspect-video w-full bg-bg-subtle border border-border-subtle shadow-sm relative group-hover:shadow-md transition-shadow duration-300">
                 <img
                   src={project.src}
@@ -37,7 +37,7 @@ const Projects = () => {
             </div>
 
             {/* Details Section (Right) */}
-            <div className="flex flex-col flex-grow gap-4">
+            <div className="flex flex-col grow gap-4">
               <div className="flex items-center gap-2 mb-1">
                  <span className="text-sm font-semibold text-primary">{project.year}</span>
                  <span className="w-1 h-1 rounded-full bg-border-default"></span>

@@ -1,6 +1,7 @@
 import { Hero } from "@/widgets/Hero";
 import { HomeBentoSection } from "@/widgets/HomeBentoSection";
 import HomeProjectsSection from "@/widgets/HomeProjectsSection";
+import { ContactSection } from "@/widgets/ContactSection";
 
 
 const Home = () => {
@@ -13,13 +14,18 @@ const Home = () => {
       </section>
 
       {/* Bento Section */}
-      <section className="min-h-screen lg:h-screen flex flex-col justify-center mx-auto max-w-7xl px-6 w-full py-20 lg:py-0">
+      <section className="min-h-screen flex flex-col justify-center mx-auto max-w-7xl px-6 w-full py-20 lg:py-0">
         <HomeBentoSection />
       </section>
 
       {/* Projects Section - Placed under Bento */}
-      <section className="flex flex-col justify-center mx-auto max-w-7xl px-6 w-full py-20">
+      <section className="min-h-screen flex flex-col justify-center mx-auto max-w-7xl px-6 w-full py-20">
         <HomeProjectsSection />
+      </section>
+
+      {/* Contact Section */}
+      <section className="flex flex-col justify-center mx-auto max-w-7xl px-6 w-full pb-20">
+        <ContactSection />
       </section>
     </main>
   );

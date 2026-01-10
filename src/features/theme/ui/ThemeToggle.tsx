@@ -79,7 +79,7 @@ const ThemeToggle: React.FC = () => {
           fill="currentColor"
           stroke="none"
 
-          className="w-full h-full p-2.5 transition-transform duration-400 ease-out rotate-40 group-has-[:checked]:rotate-90"
+          className="w-full h-full p-2.5 transition-transform duration-400 ease-out rotate-40 group-has-checked:rotate-90"
         >
 
           <mask id="moon-mask">
@@ -90,11 +90,11 @@ const ThemeToggle: React.FC = () => {
               cy="3"
               r="8"
               fill="black"
-              className="origin-center transition-transform duration-640 ease-[cubic-bezier(0.41,0.64,0.32,1.575)] translate-0 group-has-[:checked]:translate-x-4 group-has-[:checked]:-translate-y-0.75"
+              className="origin-center transition-transform duration-640 ease-[cubic-bezier(0.41,0.64,0.32,1.575)] translate-0 group-has-checked:translate-x-4 group-has-checked:-translate-y-0.75"
             />
           </mask>
           <circle
-            className="sunMoon origin-center transition-transform duration-400 ease-out scale-100 group-has-[:checked]:scale-55"
+            className="sunMoon origin-center transition-transform duration-400 ease-out scale-100 group-has-checked:scale-55"
             cx="10"
 
             cy="10"
@@ -103,42 +103,42 @@ const ThemeToggle: React.FC = () => {
           />
           <g>
             <circle
-              className="sunRay sunRay1 origin-center transition-transform duration-400 ease-out scale-0 group-has-[:checked]:scale-100"
+              className="sunRay sunRay1 origin-center transition-transform duration-400 ease-out scale-0 group-has-checked:scale-100"
               cx="18"
 
               cy="10"
               r="1.5"
             />
             <circle
-              className="sunRay sunRay2 origin-center transition-transform duration-400 ease-out scale-0 group-has-[:checked]:scale-100 delay-50"
+              className="sunRay sunRay2 origin-center transition-transform duration-400 ease-out scale-0 group-has-checked:scale-100 delay-50"
               cx="14"
 
               cy="16.928"
               r="1.5"
             />
             <circle
-              className="sunRay sunRay3 origin-center transition-transform duration-400 ease-out scale-0 group-has-[:checked]:scale-100 delay-100"
+              className="sunRay sunRay3 origin-center transition-transform duration-400 ease-out scale-0 group-has-checked:scale-100 delay-100"
               cx="6"
 
               cy="16.928"
               r="1.5"
             />
             <circle
-              className="sunRay sunRay4 origin-center transition-transform duration-400 ease-out scale-0 group-has-[:checked]:scale-100 delay-170"
+              className="sunRay sunRay4 origin-center transition-transform duration-400 ease-out scale-0 group-has-checked:scale-100 delay-170"
               cx="2"
 
               cy="10"
               r="1.5"
             />
             <circle
-              className="sunRay sunRay5 origin-center transition-transform duration-400 ease-out scale-0 group-has-[:checked]:scale-100 delay-250"
+              className="sunRay sunRay5 origin-center transition-transform duration-400 ease-out scale-0 group-has-checked:scale-100 delay-250"
               cx="6"
 
               cy="3.1718"
               r="1.5"
             />
             <circle
-              className="sunRay sunRay6 origin-center transition-transform duration-400 ease-out scale-0 group-has-[:checked]:scale-100 delay-290"
+              className="sunRay sunRay6 origin-center transition-transform duration-400 ease-out scale-0 group-has-checked:scale-100 delay-290"
               cx="14"
 
               cy="3.1718"

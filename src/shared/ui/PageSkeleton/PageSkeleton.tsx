@@ -10,7 +10,7 @@ const PageSkeleton: React.FC<PageSkeletonProps> = ({ children }) => {
 
       <NavbarSkeleton />
       
-      <main className="flex-grow">
+      <main className="grow">
           {children ? children : (
              <div className="min-h-screen animate-pulse bg-bg-default overflow-hidden relative pt-20">
 

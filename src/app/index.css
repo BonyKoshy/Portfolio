@@ -22,7 +22,7 @@ html[data-theme="light"] {
   /* Text / Foreground */
   --fg-primary: #18181b;          /* Zinc-950 */
   --fg-secondary: #52525b;        /* Zinc-600 */
-  --fg-tertiary: #a1a1aa;         /* Zinc-400 */
+  --fg-tertiary: #71717a;         /* Zinc-500 */
   
   /* Borders */
   --border-default: #e4e4e7;      /* Zinc-200 */
@@ -114,6 +114,19 @@ html[data-theme="dark"] {
     50% { stroke-dashoffset: 3500; }
     100% { stroke-dashoffset: 0; }
   }
+
+  @keyframes accordion-down {
+    from { height: 0; }
+    to { height: var(--radix-accordion-content-height); }
+  }
+
+  @keyframes accordion-up {
+    from { height: var(--radix-accordion-content-height); }
+    to { height: 0; }
+  }
+
+  --animate-accordion-down: accordion-down 0.2s ease-out;
+  --animate-accordion-up: accordion-up 0.2s ease-out;
 
   
   @keyframes scale-in {

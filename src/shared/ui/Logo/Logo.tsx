@@ -40,6 +40,7 @@ const Logo = ({ className = "", isLoading = false }: LogoProps) => {
     <div
       className={`relative flex items-center justify-center ${className} ${animationState === "idle" ? "cursor-pointer" : ""}`}
       aria-label="Bony Koshy Logo"
+      role="img"
       onMouseEnter={handleHover}
       onClick={handleHover} // For mobile touch
     >

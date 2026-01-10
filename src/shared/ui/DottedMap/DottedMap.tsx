@@ -1,6 +1,5 @@
 import DottedMapLib from "dotted-map";
-import React, { useMemo, useContext } from "react";
-import { ThemeContext } from "@/app/providers/ThemeProvider/ThemeContext";
+import React, { useMemo } from "react";
 
 interface Marker {
   lat: number;
@@ -23,8 +22,7 @@ const DottedMap: React.FC<DottedMapProps> = ({
   markerColor = "var(--primary)", // Default primary for marker
 
 }) => {
-  const context = useContext(ThemeContext) as { theme: string } | null;
-  const theme = context?.theme || "light";
+  // context removed as it was unused
 
   const svgMap = useMemo(() => {
     // Create map instance
@@ -53,7 +51,7 @@ const DottedMap: React.FC<DottedMapProps> = ({
     });
 
     return svgStr;
-  }, [theme, markers, dotColor, markerColor]);
+  }, [markers, dotColor, markerColor]);
 
   return (
     <div

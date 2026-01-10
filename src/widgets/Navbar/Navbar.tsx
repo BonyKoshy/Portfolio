@@ -3,8 +3,7 @@ import { GradualBlur } from "@/shared/ui/GradualBlur";
 import { BubbleMenu } from "@/shared/ui/BubbleMenu";
 import { Button } from "@/shared/ui/Button";
 import { ArrowDown, ArrowLeft } from "lucide-react";
-
-
+import { homeContent } from "@/shared/config/content";
 
 const Navbar = () => {
   const location = useLocation();
@@ -12,10 +11,10 @@ const Navbar = () => {
   const isSpecialPage = !mainPaths.includes(location.pathname);
 
   const menuItems = [
-    { label: "Home", href: "/" },
-    { label: "About", href: "/about" },
-    { label: "Projects", href: "/projects" },
-    { label: "Contact", href: "/contact" },
+    { label: homeContent.navbar.links.home, href: "/" },
+    { label: homeContent.navbar.links.about, href: "/about" },
+    { label: homeContent.navbar.links.projects, href: "/projects" },
+    { label: homeContent.navbar.cta, href: "/contact" },
   ];
 
   const handleSkipToMain = () => {
@@ -43,7 +42,7 @@ const Navbar = () => {
       </div>
 
        {/* Skip to Main - Fixed & Accessible */}
-       <div className="fixed top-4 left-4 z-[100] pointer-events-auto">
+       <div className="fixed top-4 left-4 z-100 pointer-events-auto">
             <Button 
                 variant="primary" 
                 size="md" 
@@ -53,7 +52,7 @@ const Navbar = () => {
                 className="opacity-0 focus:opacity-100 pointer-events-none focus:pointer-events-auto transition-all duration-200 -translate-y-[200%] focus:translate-y-0 shadow-xl"
                 tabIndex={0}
             >
-                Skip to Main
+                {homeContent.navbar.skipToMain}
             </Button>
        </div>
 
@@ -69,17 +68,14 @@ const Navbar = () => {
                         icon={<ArrowLeft size={16} className="transition-transform duration-300 group-hover:-translate-x-1" />}
                         iconPosition="left"
                     >
-                        Back to Home
+                        {homeContent.navbar.backToHome}
                     </Button>
                 </NavLink>
              )}
          </div>
 
-
-
-        {/* DESKTOP NAV: Standard Text Links (Always Visible) */}
-        <>
-            <div className="hidden items-center gap-8 lg:flex ml-auto">
+         {/* DESKTOP NAV: Standard Text Links */}
+         <div className="hidden items-center gap-8 lg:flex ml-auto">
             {menuItems.map((item) => (
                 <NavLink
                 key={item.label}
@@ -92,20 +88,24 @@ const Navbar = () => {
                     after:bg-primary after:transition-transform after:duration-300
                     ${isActive ? "after:scale-x-100" : "after:scale-x-0"}
                 `}
-
                 >
                 {item.label}
                 </NavLink>
             ))}
-            </div>
+         </div>
 
-
-
-            {/* MOBILE NAV: BubbleMenu Overlay */}
-            <div className="lg:hidden ml-auto">
-            <BubbleMenu items={menuItems} />
-            </div>
-        </>
+        {/* MOBILE NAV: BubbleMenu Overlay (< 1024px) */}
+        <div className="lg:hidden ml-auto">
+             <BubbleMenu 
+                items={[
+                    { label: homeContent.navbar.links.home, href: "/" },
+                    { label: homeContent.navbar.links.about, href: "/about" },
+                    { label: homeContent.navbar.links.projects, href: "/projects" },
+                    { label: homeContent.navbar.cta, href: "/contact" },
+                ]}
+                useFixedPosition={true} 
+             />
+         </div>
       </div>
     </nav>
   );

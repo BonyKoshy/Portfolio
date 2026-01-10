@@ -52,17 +52,13 @@ function useMousePositionRef(containerRef: React.RefObject<HTMLElement | null>) 
   return positionRef;
 }
 
-interface VariableProximityProps {
+interface VariableProximityProps extends React.HTMLAttributes<HTMLSpanElement> {
   label: string;
   fromFontVariationSettings: string;
   toFontVariationSettings: string;
   containerRef: React.RefObject<HTMLElement | null>;
   radius?: number;
   falloff?: "linear" | "exponential" | "gaussian";
-  className?: string;
-  onClick?: (event: React.MouseEvent<HTMLSpanElement>) => void;
-  style?: React.CSSProperties;
-  [key: string]: any; // Allow other props
 }
 
 const VariableProximity = forwardRef<HTMLSpanElement, VariableProximityProps>((props, ref) => {
