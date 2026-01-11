@@ -24,20 +24,12 @@ import { FaWindows } from "@react-icons/all-files/fa/FaWindows";
 import { FaLinux } from "@react-icons/all-files/fa/FaLinux";
 import { FaUbuntu } from "@react-icons/all-files/fa/FaUbuntu";
 
-// Note: react-icons/all-files might not have all newer icons. 
-// If some are missing (like TbBrandCSharp, TbBrandPowershell, BiLogoVisualStudio)
-// we might need to keep them or find alternatives.
-// Checking specifically if we can import them from specific folders if they exist or fallback to main package if unavoidable but sparingly.
-// Since @react-icons/all-files is v4 based, some icons might be missing.
-// For now, let's keep the ones that are likely present and check for missing ones.
-// I'll assume TbBrandCSharp and TbBrandPowershell might effectively be missing in older versions or need check.
-// Using default react-icons for specific newer ones if needed, but trying to minimize.
 import { TbBrandCSharp } from "react-icons/tb";
 import { TbBrandPowershell } from "react-icons/tb";
 import { DiVisualstudio } from "@react-icons/all-files/di/DiVisualstudio";
 import { BiLogoVisualStudio } from "react-icons/bi";
 
-// Define logo type for TechCarousel
+// Define logo type
 export type TechLogo = {
   node: React.ReactNode;
   title: string;
@@ -61,8 +53,6 @@ export const techLogos: TechLogo[] = [
   { node: <SiMysql />, title: "MySQL" },
   { node: <SiSqlite />, title: "SQLite" },
   { node: <FaAws />, title: "AWS" },
-
-
   { node: <SiNetlify />, title: "Netlify" },
   { node: <SiVercel />, title: "Vercel" },
   { node: <TbBrandPowershell />, title: "PowerShell" },

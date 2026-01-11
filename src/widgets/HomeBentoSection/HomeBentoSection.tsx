@@ -5,7 +5,7 @@ import { User, FileText, Code, FileBadge, Globe as GlobeIcon } from "lucide-reac
 import DottedMap from "@/shared/ui/DottedMap/DottedMap";
 import LogoLoop, { LogoItem } from "@/shared/ui/LogoLoop/LogoLoop";
 import { SiAccenture } from "react-icons/si";
-import { techLogos } from "../shared/config/techStack";
+import { techLogos } from "@/entities/technology/model/techStack";
 import { homeContent } from "@/shared/config/content";
 
 

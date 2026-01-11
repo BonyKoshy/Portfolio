@@ -1,5 +1,5 @@
 import { Briefcase, ExternalLink, Github } from "lucide-react";
-import { projectsData } from "@/shared/config/projects";
+import { projectsData } from "@/entities/project/model/data";
 import { Button } from "@/shared/ui/Button";
 
 const Projects = () => {

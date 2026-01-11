@@ -1,0 +1,1 @@
+export { HomeBentoSection } from "./HomeBentoSection";

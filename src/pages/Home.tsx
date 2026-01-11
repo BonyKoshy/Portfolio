@@ -1,6 +1,6 @@
 import { Hero } from "@/widgets/Hero";
 import { HomeBentoSection } from "@/widgets/HomeBentoSection";
-import HomeProjectsSection from "@/widgets/HomeProjectsSection";
+import { HomeProjectsSection } from "@/widgets/HomeProjectsSection";
 import { ContactSection } from "@/widgets/ContactSection";
 
 

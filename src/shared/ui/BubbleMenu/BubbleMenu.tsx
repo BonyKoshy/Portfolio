@@ -3,6 +3,7 @@ import { useEffect, useRef, useState } from 'react';
 import { gsap } from 'gsap';
 import { GradualBlur } from '@/shared/ui/GradualBlur';
 import { NavLink } from 'react-router-dom';
+import { useOutsideClick } from '@/shared/lib/use-outside-click';
 
 type MenuItem = {
   label: string;
@@ -88,6 +89,11 @@ export default function BubbleMenu({
   const overlayRef = useRef<HTMLDivElement>(null);
   const bubblesRef = useRef<HTMLAnchorElement[]>([]);
   const labelRefs = useRef<HTMLSpanElement[]>([]);
+  const listRef = useRef<HTMLUListElement>(null);
+
+  useOutsideClick(listRef, () => {
+    if (isMenuOpen) handleToggle();
+  });
 
   const menuItems = items?.length ? items : DEFAULT_ITEMS;
 
@@ -308,6 +314,7 @@ export default function BubbleMenu({
              />
           </div>
           <ul
+            ref={listRef}
             className={[
               'pill-list',
               'relative z-10', // Ensure above blur

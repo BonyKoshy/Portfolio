@@ -128,8 +128,7 @@ const Footer = () => {
                                         </AccordionTrigger>
                                         <AccordionContent>
                                             <div className="flex flex-col gap-3 pl-2 pt-2">
-                                                <a href="#" className="text-sm text-fg-secondary transition-colors hover:text-fg-primary">Instagram</a>
-                                                <a href="#" className="text-sm text-fg-secondary transition-colors hover:text-fg-primary">Facebook</a>
+
                                                 <a href="#" className="text-sm text-fg-secondary transition-colors hover:text-fg-primary">X (Twitter)</a>
                                                 <a href="#" className="text-sm text-fg-secondary transition-colors hover:text-fg-primary">LinkedIn</a>
                                                 <a href="#" className="text-sm text-fg-secondary transition-colors hover:text-fg-primary">Pinterest</a>
@@ -145,8 +144,7 @@ const Footer = () => {
                              <div className="hidden lg:flex flex-col gap-4">
                                 <h3 className="text-sm font-semibold text-fg-primary">{homeContent.footer.sections.socials}</h3>
                                 <div className="flex flex-col gap-3">
-                                    <a href="#" className="text-sm text-fg-secondary transition-colors hover:text-fg-primary w-fit">Instagram</a>
-                                    <a href="#" className="text-sm text-fg-secondary transition-colors hover:text-fg-primary w-fit">Facebook</a>
+
                                     <a href="#" className="text-sm text-fg-secondary transition-colors hover:text-fg-primary w-fit">X (Twitter)</a>
                                     <a href="#" className="text-sm text-fg-secondary transition-colors hover:text-fg-primary w-fit">LinkedIn</a>
                                     <a href="#" className="text-sm text-fg-secondary transition-colors hover:text-fg-primary w-fit">Pinterest</a>
@@ -172,8 +170,7 @@ const Footer = () => {
                                                 <a href="#" className="text-sm text-fg-secondary transition-colors hover:text-fg-primary">Whatsapp</a>
                                                 <a href="#" className="text-sm text-fg-secondary transition-colors hover:text-fg-primary">Leetcode</a>
                                                 <Link to="/404" className="text-sm text-fg-secondary transition-colors hover:text-fg-primary">404 Page</Link>
-                                                <Link to="/privacy" className="text-sm text-fg-secondary transition-colors hover:text-fg-primary">Privacy Policy</Link>
-                                                <Link to="/terms" className="text-sm text-fg-secondary transition-colors hover:text-fg-primary">Terms of Service</Link>
+
                                             </div>
                                         </AccordionContent>
                                     </AccordionItem>
@@ -189,8 +186,7 @@ const Footer = () => {
                                     <a href="#" className="text-sm text-fg-secondary transition-colors hover:text-fg-primary w-fit">Whatsapp</a>
                                     <a href="#" className="text-sm text-fg-secondary transition-colors hover:text-fg-primary w-fit">Leetcode</a>
                                     <Link to="/404" className="text-sm text-fg-secondary transition-colors hover:text-fg-primary w-fit">404 Page</Link>
-                                    <Link to="/privacy" className="text-sm text-fg-secondary transition-colors hover:text-fg-primary w-fit">Privacy Policy</Link>
-                                    <Link to="/terms" className="text-sm text-fg-secondary transition-colors hover:text-fg-primary w-fit">Terms of Service</Link>
+
                                 </div>
                              </div>
                         </div>

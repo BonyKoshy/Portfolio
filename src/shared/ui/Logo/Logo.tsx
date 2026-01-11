@@ -38,7 +38,9 @@ const Logo = ({ className = "", isLoading = false }: LogoProps) => {
 
   return (
     <div
-      className={`relative flex items-center justify-center ${className} ${animationState === "idle" ? "cursor-pointer" : ""}`}
+      className={`relative flex items-center justify-center ${className} ${
+        animationState === "idle" ? "cursor-pointer" : ""
+      }`}
       aria-label="Bony Koshy Logo"
       role="img"
       onMouseEnter={handleHover}
@@ -56,7 +58,6 @@ const Logo = ({ className = "", isLoading = false }: LogoProps) => {
           d="M61.0964 390.845C-33.0359 152.236 37.348 98.6127 243.597 31.3452C449.845 -35.9223 592.513 214.005 393.597 307.845C587.597 259.345 694.097 583.345 406.097 689.845C212.533 739.938 70.9877 668.127 110.597 493.845C127.208 420.756 166.097 392.845 210.097 333.845C269.2 267.351 303.474 229.957 300.597 189.345C297.02 138.858 240.258 132.588 230.597 180.845C198.076 343.283 243.096 564.345 302.097 569.845C348.597 577.845 404.226 536.284 380.597 434.845C353.379 364.523 302.597 346.845 243.597 417.845"
           // Uses --fg-secondary (Grey) defined in your index.css
           className="stroke-fg-secondary transition-colors duration-500"
-
           strokeWidth="40"
           strokeLinecap="round"
           strokeLinejoin="round"
@@ -87,4 +88,3 @@ const Logo = ({ className = "", isLoading = false }: LogoProps) => {
 };
 
 export default Logo;
-
