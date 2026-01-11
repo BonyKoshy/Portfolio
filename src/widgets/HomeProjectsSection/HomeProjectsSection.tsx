@@ -5,7 +5,7 @@ import { ProjectCard } from "@/entities/project/ui/ProjectCard";
 import { homeContent } from "@/shared/config/content";
 
 export const HomeProjectsSection = () => {
-  // Use first 3 projects
+  // Displaying top 2 featured projects
   const featuredProjects = projectsData.slice(0, 2);
 
   return (

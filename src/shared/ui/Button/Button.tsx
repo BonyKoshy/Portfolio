@@ -15,7 +15,7 @@ const buttonVariants = cva(
         ghost:
           "text-fg-secondary rounded-full hover:text-fg-primary hover:bg-action-hover",
         outline:
-          "border border-input bg-background hover:bg-accent hover:text-accent-foreground", // Added for Calendar compatibility if needed, though mostly ghost used
+          "border border-input bg-background rounded-full hover:bg-accent hover:text-accent-foreground", // Added for Calendar compatibility if needed, though mostly ghost used
       },
       size: {
         sm: "h-9 px-4 text-xs",

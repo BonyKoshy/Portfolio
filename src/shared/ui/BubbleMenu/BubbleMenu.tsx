@@ -88,8 +88,10 @@ export default function BubbleMenu({
   const bubblesRef = useRef<HTMLAnchorElement[]>([]);
   const labelRefs = useRef<HTMLSpanElement[]>([]);
   const listRef = useRef<HTMLUListElement>(null);
+  const toggleRef = useRef<HTMLButtonElement>(null);
 
-  useOutsideClick(listRef, () => {
+  useOutsideClick(listRef, (e) => {
+    if (toggleRef.current && toggleRef.current.contains(e.target as Node)) return;
     if (isMenuOpen) handleToggle();
   });
 
@@ -114,6 +116,17 @@ export default function BubbleMenu({
     setIsMenuOpen(nextState);
     onMenuClick?.(nextState);
   };
+
+  useEffect(() => {
+    if (isMenuOpen) {
+      document.body.style.overflow = "hidden";
+    } else {
+      document.body.style.overflow = "";
+    }
+    return () => {
+      document.body.style.overflow = "";
+    };
+  }, [isMenuOpen]);
 
   useEffect(() => {
     const overlay = overlayRef.current;
@@ -259,6 +272,7 @@ export default function BubbleMenu({
             "border-0 cursor-pointer p-0",
             "will-change-transform",
           ].join(" ")}
+          ref={toggleRef}
           onClick={handleToggle}
           aria-label={menuAriaLabel}
           aria-pressed={isMenuOpen}
@@ -296,7 +310,7 @@ export default function BubbleMenu({
             useFixedPosition ? "fixed" : "absolute",
             "inset-0",
             "flex items-center justify-center",
-            "pointer-events-none",
+            "pointer-events-auto",
             "z-1000",
           ].join(" ")}
           style={{

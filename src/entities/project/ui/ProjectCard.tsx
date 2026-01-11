@@ -15,7 +15,7 @@ export const ProjectCard = ({ project }: ProjectCardProps) => {
       className="group space-y-6 flex flex-col h-full no-underline"
     >
       {/* Image Container */}
-      <div className="overflow-hidden rounded-lg aspect-[1.75] w-full bg-panel shadow-sm border border-transparent group-hover:border-prelayer-2 transition-colors duration-300">
+      <div className="overflow-hidden rounded-(--radius-card) aspect-[1.75] w-full bg-panel shadow-sm border border-transparent group-hover:border-prelayer-2 transition-colors duration-300">
         <img
           src={project.src}
           alt={project.title}

@@ -57,7 +57,7 @@ const ThemeToggle: React.FC = () => {
       >
         <input
           type="checkbox"
-          className="peer appearance-none hidden"
+          className="peer appearance-none sr-only"
           id="theme-switch"
           checked={isChecked}
           onChange={(e) => {

@@ -1,4 +1,3 @@
-import { useRef } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { Container } from "@/shared/ui/Container";
 import { Logo } from "@/shared/ui/Logo";
@@ -7,7 +6,7 @@ import { Button } from "@/shared/ui/Button";
 import { homeContent } from "@/shared/config/content";
 import { ArrowRight } from "lucide-react";
 
-// Imports for custom components
+// Custom UI components
 import CardSwap, { Card } from "@/shared/ui/CardSwap";
 import { Tooltip } from "@/shared/ui/Tooltip";
 import {
@@ -19,15 +18,14 @@ import {
 } from "react-icons/si";
 import { FaLayerGroup, FaFolderOpen } from "react-icons/fa6";
 
-// Imported Entities
+// Entity components
 import { ProfileTooltipCard } from "@/entities/profile/ui/ProfileTooltipCard";
 import { CompanyTooltipCard } from "@/entities/profile/ui/CompanyTooltipCard";
-import { ProjectsCarousel } from "@/entities/project/ui/ProjectsCarousel";
 
 const Hero = () => {
-  const containerRef = useRef<HTMLDivElement>(null);
   const navigate = useNavigate();
 
+  // Keyboard navigation handler
   const handleCardKeyDown = (e: React.KeyboardEvent, path: string) => {
     if (e.key === "Enter" || e.key === " ") {
       e.preventDefault();
@@ -37,13 +35,12 @@ const Hero = () => {
 
   return (
     <section
-      ref={containerRef}
       className="relative flex min-h-[90vh] w-full flex-col justify-center overflow-hidden pt-20 pb-20 outline-none"
     >
-      {/* --- BACKGROUND --- */}
+      // Background effects
       <div className="absolute inset-0 z-0 pointer-events-none">
         <div className="absolute inset-0 bg-bg-default" />
-        {/* Right-side subtle static gradient */}
+        // Right-side static glow
         <div className="absolute top-1/2 right-[-10%] -translate-y-1/2 h-[80%] w-[40%] bg-primary/5 blur-[120px] rounded-full" />
       </div>
 
@@ -85,7 +82,7 @@ const Hero = () => {
               </span>
             </h1>
 
-            {/* 4. Subtext: With Tooltips */}
+            {/* 4. Subtext with interactive tooltips */}
             <div className="mb-8 max-w-2xl text-base leading-relaxed text-fg-secondary sm:text-lg md:text-xl relative z-30">
               {homeContent.hero.subtext.prefix} {/* Tooltip: Name */}
               <Tooltip
@@ -101,7 +98,7 @@ const Hero = () => {
                 </span>
               </Tooltip>
               , {homeContent.hero.subtext.role}{" "}
-              {/* Tooltip: Company (Accenture) */}
+              {/* Tooltip: Company */}
               <Tooltip
                 content={<CompanyTooltipCard />}
                 containerClassName="inline-block align-baseline"
@@ -139,9 +136,9 @@ const Hero = () => {
             </div>
           </div>
 
-          {/* --- RIGHT COLUMN: CARD SWAP (Span 5) --- */}
+          {/* --- RIGHT COLUMN: CARD SWAP --- */}
           <div className="hidden lg:block lg:col-span-5 relative h-150 w-full pointer-events-none">
-            {/* Positioned on the right gradient */}
+            {/* 3D Effect container */}
             <div className="absolute -right-5 xl:right-0 top-[75%] -translate-y-1/2 pointer-events-auto scale-90 xl:scale-100 origin-center">
               <CardSwap
                 cardDistance={30}
@@ -272,7 +269,7 @@ const Hero = () => {
                   </div>
                 </Card>
 
-                {/* Card 3: Projects Carousel */}
+                {/* Card 3: Selected Work */}
                 <Card
                   onClick={(e) => {
                     e.stopPropagation();
@@ -290,20 +287,26 @@ const Hero = () => {
                     </h2>
                   </div>
 
+                  {/* Static Decoration */}
+                  <div className="absolute inset-0 z-0 opacity-10 pointer-events-none">
+                    <div className="absolute top-10 right-10 text-8xl font-mono rotate-12 text-fg-primary/20 select-none">
+                      {"{}"}
+                    </div>
+                  </div>
+
                   {/* Content */}
-                  <div className="relative z-10 h-full flex flex-col p-8 pb-6">
-                    {/* Header */}
-                    <div className="flex justify-between items-start mb-6">
+                  <div className="relative z-10 h-full flex flex-col justify-between p-10">
+                    <div className="flex justify-between items-start">
                       <div className="flex items-center gap-4">
                         <div className="h-12 w-12 rounded-xl bg-green-500/10 text-green-500 flex items-center justify-center shadow-lg shadow-green-500/10 group-hover:scale-110 transition-transform duration-300 border border-green-500/20 motion-reduce:transform-none motion-reduce:transition-none">
                           <FaFolderOpen size={24} />
                         </div>
                         <div>
                           <p className="text-fg-tertiary text-xs uppercase tracking-widest mb-1">
-                            {homeContent.hero.cards.build.subtitle}
+                            Explore Portfolio
                           </p>
                           <p className="text-fg-primary font-bold tracking-wide">
-                            {homeContent.hero.cards.build.title}
+                            {homeContent.hero.cards.build.mainTitle}
                           </p>
                         </div>
                       </div>
@@ -313,9 +316,13 @@ const Hero = () => {
                       </div>
                     </div>
 
-                    {/* Carousel Area */}
-                    <div className="flex-1 min-h-0">
-                      <ProjectsCarousel />
+                    <div>
+                      <h3 className="text-4xl font-bold text-fg-primary mb-2 group-hover:translate-x-2 transition-transform duration-300 whitespace-pre-line motion-reduce:transform-none motion-reduce:transition-none">
+                        {homeContent.hero.cards.build.title}
+                      </h3>
+                      <p className="text-fg-secondary text-sm leading-relaxed max-w-[80%]">
+                        Discover my latest case studies and experiments.
+                      </p>
                     </div>
                   </div>
                 </Card>

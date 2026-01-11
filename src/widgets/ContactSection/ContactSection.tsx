@@ -28,13 +28,13 @@ export function ContactSection() {
         className="max-w-7xl mx-auto w-full group"
       >
         {/* Card Container with Gradient Depth Effect */}
-        <div className="relative p-px rounded-[2.5rem] overflow-hidden">
+        <div className="relative p-px rounded-[var(--radius-card)] overflow-hidden">
           {/* Animated Gradient Border/Glow */}
           <div className="absolute inset-0 bg-linear-to-br from-white/20 via-transparent to-transparent dark:from-white/10 dark:via-transparent dark:to-transparent opacity-100 pointer-events-none" />
           <div className="absolute inset-0 bg-[radial-gradient(circle_at_top_right,var(--color-primary),transparent_80%)] opacity-20 dark:opacity-40 blur-xl pointer-events-none" />
 
           <div
-            className="relative bg-bg-paper rounded-[2.5rem] p-6 md:p-12 lg:p-16 border border-white/10 dark:border-white/5 overflow-hidden flex flex-col lg:flex-row items-center lg:items-center justify-between gap-12 lg:gap-20 box-border shadow-2xl shadow-black/5"
+            className="relative bg-bg-paper rounded-[var(--radius-card)] p-6 md:p-12 lg:p-16 border border-white/10 dark:border-white/5 overflow-hidden flex flex-col lg:flex-row items-center lg:items-center justify-between gap-12 lg:gap-20 box-border shadow-2xl shadow-black/5"
             style={{ maxHeight: "max(80vh, 600px)" }}
           >
             {/* Inner Depth Highlight */}

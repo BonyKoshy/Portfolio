@@ -43,6 +43,8 @@ interface BentoCardProps {
   ctaIcon?: ReactNode;
   spotlightColor?: string;
   ctaLayout?: "bottom" | "side";
+  target?: string;
+  rel?: string;
 }
 
 export const BentoCard = ({
@@ -57,6 +59,8 @@ export const BentoCard = ({
   ctaIcon,
   spotlightColor = "rgba(255, 255, 255, 0.15)",
   ctaLayout = "bottom",
+  target,
+  rel,
 }: BentoCardProps) => {
   const isExternal = href.startsWith("http") || href.endsWith(".pdf");
   const divRef = useRef<HTMLAnchorElement>(null);
@@ -176,7 +180,7 @@ export const BentoCard = ({
   );
 
   const containerClasses = cn(
-    "group relative flex flex-col justify-between overflow-hidden rounded-3xl", // Using 3xl for Apple-style radius
+    "group relative flex flex-col justify-between overflow-hidden rounded-[var(--radius-card)]", // Consistent global radius
     "bg-bg-paper border border-border-default",
     "transition-all duration-300",
 
@@ -187,8 +191,8 @@ export const BentoCard = ({
     return (
       <a
         href={href}
-        target="_blank"
-        rel="noopener noreferrer"
+        target={target || "_blank"}
+        rel={rel || "noopener noreferrer"}
         className={containerClasses}
         ref={divRef}
         onMouseMove={handleMouseMove}

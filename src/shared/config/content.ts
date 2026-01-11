@@ -23,7 +23,7 @@ export const homeContent = {
       },
       company: {
         name: "Accenture",
-        role: "Software Engineer",
+        role: "Incoming Associate",
       },
     },
     cards: {
@@ -35,9 +35,9 @@ export const homeContent = {
       },
       work: {
         backgroundTitle: "WORK",
-        subtitle: "Current",
+        subtitle: "Offer Accepted",
         title: "Accenture",
-        mainTitle: "Software\nEngineer",
+        mainTitle: "Incoming\nAssociate",
         description:
           "Driving digital transformation through modern web technologies.",
       },
@@ -57,7 +57,7 @@ export const homeContent = {
     },
     accenture: {
       title: "Accenture",
-      description: "Software Engineer",
+      description: "Incoming Associate",
       cta: "Experience",
     },
     resume: {

@@ -7,6 +7,7 @@ const Home = () => {
   return (
     <main
       id="main-content"
+      tabIndex={-1}
       className="relative text-text-primary selection:bg-accent selection:text-white"
     >
       {/* Hero Section */}

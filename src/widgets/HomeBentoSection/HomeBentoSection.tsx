@@ -56,6 +56,7 @@ export function HomeBentoSection() {
       name: homeContent.bento.resume.title,
       description: homeContent.bento.resume.description,
       href: "/resume.pdf",
+      target: "_blank",
       cta: homeContent.bento.resume.cta,
       minimalCTA: true,
       ctaLayout: "side" as const,
@@ -111,7 +112,7 @@ export function HomeBentoSection() {
         "row-span-2 row-start-7 md:col-span-2 md:row-span-2 md:col-start-3 md:row-start-3",
       background: (
         <div className="absolute inset-0 overflow-hidden pointer-events-none">
-          <div className="absolute top-[-35%] right-[-50%] w-[300%] sm:w-[170%] sm:top-[-25%] sm:right-[-5%] md:w-[300%] md:top-[-35%] md:right-[-50%] lg:w-[170%] lg:top-[-25%] lg:right-[-5%] opacity-50">
+          <div className="absolute top-[-35%] right-[-50%] w-[300%] sm:w-[170%] sm:top-[-25%] sm:right-[-5%] md:w-[300%] md:top-[-35%] md:right-[-50%] lg:w-[170%] lg:top-[-25%] lg:right-[-5%] opacity-50 transition-transform duration-700 ease-out group-hover:scale-105">
             <DottedMap
               markers={[{ lat: 10.8505, lng: 76.2711, size: 0.6 }]}
               markerColor="#3b82f6"

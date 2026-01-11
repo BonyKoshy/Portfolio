@@ -1,4 +1,7 @@
 @import "tailwindcss";
+@import "tw-animate-css";
+
+@custom-variant dark (&:is(.dark *));
 
 /* 1. CSS Variables - Semantic System */
 :root {
@@ -9,6 +12,8 @@
   /* Fallback values (handled by data-theme overrides below) */
   --bg-default: #ffffff;
   --fg-primary: #18181b;
+  --radius-card: 1.5rem; /* 24px - Consistent card radius */
+  --radius-button: 9999px; /* Pill shape */
 }
 
 /* Light Theme Variables */

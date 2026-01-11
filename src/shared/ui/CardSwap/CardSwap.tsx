@@ -34,7 +34,7 @@ export const Card = forwardRef<HTMLDivElement, CardProps>(
     <div
       ref={ref}
       {...rest}
-      className={`absolute top-1/2 left-1/2 rounded-xl border border-border-default bg-bg-surface transform-3d will-change-transform backface-hidden ${
+      className={`absolute top-1/2 left-1/2 rounded-[var(--radius-card)] border border-border-default bg-bg-surface transform-3d will-change-transform backface-hidden ${
         customClass ?? ""
       } ${rest.className ?? ""}`.trim()}
     />
