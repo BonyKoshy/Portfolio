@@ -3,11 +3,12 @@ import { HomeBentoSection } from "@/widgets/HomeBentoSection";
 import { HomeProjectsSection } from "@/widgets/HomeProjectsSection";
 import { ContactSection } from "@/widgets/ContactSection";
 
-
 const Home = () => {
   return (
-    <main id="main-content" className="relative text-text-primary selection:bg-accent selection:text-white">
-
+    <main
+      id="main-content"
+      className="relative text-text-primary selection:bg-accent selection:text-white"
+    >
       {/* Hero Section */}
       <section className="relative h-screen flex flex-col justify-center">
         <Hero />

@@ -41,46 +41,63 @@ const Navbar = () => {
         />
       </div>
 
-       {/* Skip to Main - Fixed & Accessible */}
-       <div className="fixed top-4 left-4 z-100 pointer-events-auto">
-            <Button 
-                variant="primary" 
-                size="md" 
-                onClick={handleSkipToMain}
-                icon={<ArrowDown size={16} className="transition-transform duration-300 group-hover:translate-y-1" />}
-                iconPosition="right"
-                className="opacity-0 focus:opacity-100 pointer-events-none focus:pointer-events-auto transition-all duration-200 -translate-y-[200%] focus:translate-y-0 shadow-xl"
-                tabIndex={0}
-            >
-                {homeContent.navbar.skipToMain}
-            </Button>
-       </div>
+      {/* Skip to Main - Fixed & Accessible */}
+      <div className="fixed top-4 left-4 z-100 pointer-events-auto">
+        <Button
+          variant="primary"
+          size="md"
+          onClick={handleSkipToMain}
+          icon={
+            <ArrowDown
+              size={16}
+              className="transition-transform duration-300 group-hover:translate-y-1"
+            />
+          }
+          iconPosition="right"
+          className="opacity-0 focus:opacity-100 pointer-events-none focus:pointer-events-auto transition-all duration-200 -translate-y-[200%] focus:translate-y-0 shadow-xl"
+          tabIndex={0}
+        >
+          {homeContent.navbar.skipToMain}
+        </Button>
+      </div>
 
       <div className="mx-auto flex h-full max-w-7xl items-center justify-between px-6 pointer-events-auto relative">
-         {/* Top Left Slot: Back to Home (Conditional) */}
-         <div className="absolute top-1/2 -translate-y-1/2 left-0 pl-6 z-50 flex items-center gap-4">
-             {/* Back to Home - Only on Special Pages */}
-             {isSpecialPage && (
-                 <NavLink to="/" className={isSpecialPage ? "opacity-100 transition-opacity duration-300" : ""}>
-                    <Button
-                        variant="primary"
-                        size="md"
-                        icon={<ArrowLeft size={16} className="transition-transform duration-300 group-hover:-translate-x-1" />}
-                        iconPosition="left"
-                    >
-                        {homeContent.navbar.backToHome}
-                    </Button>
-                </NavLink>
-             )}
-         </div>
+        {/* Top Left Slot: Back to Home (Conditional) */}
+        <div className="absolute top-1/2 -translate-y-1/2 left-0 pl-6 z-50 flex items-center gap-4">
+          {/* Back to Home - Only on Special Pages */}
+          {isSpecialPage && (
+            <NavLink
+              to="/"
+              className={
+                isSpecialPage
+                  ? "opacity-100 transition-opacity duration-300"
+                  : ""
+              }
+            >
+              <Button
+                variant="primary"
+                size="md"
+                icon={
+                  <ArrowLeft
+                    size={16}
+                    className="transition-transform duration-300 group-hover:-translate-x-1"
+                  />
+                }
+                iconPosition="left"
+              >
+                {homeContent.navbar.backToHome}
+              </Button>
+            </NavLink>
+          )}
+        </div>
 
-         {/* DESKTOP NAV: Standard Text Links */}
-         <div className="hidden items-center gap-8 lg:flex ml-auto">
-            {menuItems.map((item) => (
-                <NavLink
-                key={item.label}
-                to={item.href}
-                className={({ isActive }) => `
+        {/* DESKTOP NAV: Standard Text Links */}
+        <div className="hidden items-center gap-8 lg:flex ml-auto">
+          {menuItems.map((item) => (
+            <NavLink
+              key={item.label}
+              to={item.href}
+              className={({ isActive }) => `
                     relative text-sm font-medium transition-colors hover:text-primary
                     ${isActive ? "text-primary" : "text-fg-tertiary"}
                     /* Active Indicator */
@@ -88,29 +105,27 @@ const Navbar = () => {
                     after:bg-primary after:transition-transform after:duration-300
                     ${isActive ? "after:scale-x-100" : "after:scale-x-0"}
                 `}
-                >
-                {item.label}
-                </NavLink>
-            ))}
-         </div>
+            >
+              {item.label}
+            </NavLink>
+          ))}
+        </div>
 
         {/* MOBILE NAV: BubbleMenu Overlay (< 1024px) */}
         <div className="lg:hidden ml-auto">
-             <BubbleMenu 
-                items={[
-                    { label: homeContent.navbar.links.home, href: "/" },
-                    { label: homeContent.navbar.links.about, href: "/about" },
-                    { label: homeContent.navbar.links.projects, href: "/projects" },
-                    { label: homeContent.navbar.cta, href: "/contact" },
-                ]}
-                useFixedPosition={true} 
-             />
-         </div>
+          <BubbleMenu
+            items={[
+              { label: homeContent.navbar.links.home, href: "/" },
+              { label: homeContent.navbar.links.about, href: "/about" },
+              { label: homeContent.navbar.links.projects, href: "/projects" },
+              { label: homeContent.navbar.cta, href: "/contact" },
+            ]}
+            useFixedPosition={true}
+          />
+        </div>
       </div>
     </nav>
   );
 };
 
 export default Navbar;
-
-

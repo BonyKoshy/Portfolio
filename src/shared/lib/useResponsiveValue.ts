@@ -1,8 +1,14 @@
 import { useState, useEffect } from "react";
 
-const useResponsiveValue = <T>(desktopValue: T, mobileValue: T, breakpoint = 768): T => {
+const useResponsiveValue = <T>(
+  desktopValue: T,
+  mobileValue: T,
+  breakpoint = 768
+): T => {
   const [value, setValue] = useState<T>(
-    typeof window !== "undefined" && window.innerWidth > breakpoint ? desktopValue : mobileValue
+    typeof window !== "undefined" && window.innerWidth > breakpoint
+      ? desktopValue
+      : mobileValue
   );
 
   useEffect(() => {

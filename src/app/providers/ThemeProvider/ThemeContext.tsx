@@ -1,7 +1,6 @@
 import { createContext, useEffect, useState, ReactNode } from "react";
 import { flushSync } from "react-dom";
 
-
 export type Theme = "light" | "dark";
 
 export interface ThemeContextValues {
@@ -32,7 +31,6 @@ export const ThemeProvider = ({ children }: { children: ReactNode }) => {
     const root = window.document.documentElement;
     root.setAttribute("data-theme", theme);
 
-
     // 4. Save to Local Storage
     localStorage.setItem("theme", theme);
   }, [theme]);
@@ -42,7 +40,6 @@ export const ThemeProvider = ({ children }: { children: ReactNode }) => {
       setTheme((prev) => (prev === "light" ? "dark" : "light"));
     });
   };
-
 
   return (
     <ThemeContext.Provider value={{ theme, toggleTheme }}>

@@ -3,9 +3,7 @@ import React from "react";
 const PrivacyPolicy: React.FC = () => {
   return (
     <div className="min-h-screen pt-32 pb-12 px-6 bg-bg-default">
-
       <div id="main-content" className="max-w-3xl mx-auto">
-        
         {/* Removed Card UI - Content directly on background */}
         <div className="animate-in fade-in duration-700 slide-in-from-bottom-8">
           <h1 className="text-4xl md:text-5xl font-bold mb-2 text-fg-primary tracking-tight">
@@ -13,11 +11,9 @@ const PrivacyPolicy: React.FC = () => {
           </h1>
           <p className="text-fg-secondary mb-10 text-sm uppercase tracking-widest font-medium border-b border-border-default pb-6 inline-block w-full">
             Effective Date: Jan 2026
-
           </p>
 
           <div className="prose prose-lg prose-zinc dark:prose-invert leading-relaxed text-fg-primary">
-
             <p className="mb-8">
               This Privacy Policy describes how personal information is
               collected, used, and protected when you interact with this
@@ -34,14 +30,12 @@ const PrivacyPolicy: React.FC = () => {
               information may be collected:
             </p>
             <ul className="list-disc pl-5 mb-8 space-y-2 marker:text-primary">
-
               <li>Your name</li>
               <li>Your email address</li>
               <li>Your message content</li>
             </ul>
 
             <h2 className="text-2xl font-semibold mb-4 text-fg-primary mt-10">
-
               Use of Information
             </h2>
             <p className="mb-8">
@@ -51,7 +45,6 @@ const PrivacyPolicy: React.FC = () => {
             </p>
 
             <h2 className="text-2xl font-semibold mb-4 text-fg-primary mt-10">
-
               Data Sharing & Disclosure
             </h2>
             <p className="mb-8">
@@ -62,7 +55,6 @@ const PrivacyPolicy: React.FC = () => {
             </p>
 
             <h2 className="text-2xl font-semibold mb-4 text-fg-primary mt-10">
-
               Data Security
             </h2>
             <p className="mb-8">
@@ -73,7 +65,6 @@ const PrivacyPolicy: React.FC = () => {
             </p>
 
             <h2 className="text-2xl font-semibold mb-4 text-fg-primary mt-10">
-
               Data Retention & Your Rights
             </h2>
             <p className="mb-4">
@@ -82,12 +73,10 @@ const PrivacyPolicy: React.FC = () => {
               your data at any time by contacting:
             </p>
             <p className="font-medium text-primary mb-8 hover:underline">
-
               <a href="mailto:bonykoshy@gmail.com">bonykoshy@gmail.com</a>
             </p>
 
             <h2 className="text-2xl font-semibold mb-4 text-fg-primary mt-10">
-
               Updates to This Policy
             </h2>
             <p className="mb-8">
@@ -97,7 +86,6 @@ const PrivacyPolicy: React.FC = () => {
             </p>
 
             <h2 className="text-2xl font-semibold mb-4 text-fg-primary mt-10">
-
               Contact
             </h2>
             <p className="mb-2">
@@ -105,7 +93,6 @@ const PrivacyPolicy: React.FC = () => {
               please contact:
             </p>
             <p className="font-medium text-primary hover:underline">
-
               <a href="mailto:bonykoshy@gmail.com">bonykoshy@gmail.com</a>
             </p>
           </div>
@@ -116,6 +103,3 @@ const PrivacyPolicy: React.FC = () => {
 };
 
 export default PrivacyPolicy;
-
-
-

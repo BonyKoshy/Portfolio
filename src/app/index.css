@@ -5,7 +5,7 @@
   /* Shared Defaults & Constants */
   --overlay: rgba(0, 0, 0, 0.4);
   --font-sans: "Poppins", system-ui, sans-serif;
-  
+
   /* Fallback values (handled by data-theme overrides below) */
   --bg-default: #ffffff;
   --fg-primary: #18181b;
@@ -14,25 +14,25 @@
 /* Light Theme Variables */
 html[data-theme="light"] {
   /* Backgrounds */
-  --bg-default: #ffffff;          /* Pure white for clarity */
-  --bg-paper: #f4f4f5;            /* Zinc-100 */
-  --bg-surface: #ffffff;          
-  --bg-subtle: #fafafa;           /* Zinc-50 */
+  --bg-default: #ffffff; /* Pure white for clarity */
+  --bg-paper: #f4f4f5; /* Zinc-100 */
+  --bg-surface: #ffffff;
+  --bg-subtle: #fafafa; /* Zinc-50 */
 
   /* Text / Foreground */
-  --fg-primary: #18181b;          /* Zinc-950 */
-  --fg-secondary: #52525b;        /* Zinc-600 */
-  --fg-tertiary: #71717a;         /* Zinc-500 */
-  
+  --fg-primary: #18181b; /* Zinc-950 */
+  --fg-secondary: #52525b; /* Zinc-600 */
+  --fg-tertiary: #71717a; /* Zinc-500 */
+
   /* Borders */
-  --border-default: #e4e4e7;      /* Zinc-200 */
-  --border-subtle: #f4f4f5;       /* Zinc-100 */
+  --border-default: #e4e4e7; /* Zinc-200 */
+  --border-subtle: #f4f4f5; /* Zinc-100 */
 
   /* Action / Brand */
-  --primary: #2563eb;             /* Blue-600 */
+  --primary: #2563eb; /* Blue-600 */
   --primary-fg: #ffffff;
-  --primary-hover: #1d4ed8;       
-  
+  --primary-hover: #1d4ed8;
+
   /* UI States */
   --action-hover: #f4f4f5;
   --overlay: rgba(0, 0, 0, 0.4);
@@ -41,25 +41,25 @@ html[data-theme="light"] {
 /* Dark Theme Variables */
 html[data-theme="dark"] {
   /* Backgrounds */
-  --bg-default: #121212;          /* Dark gray, not pitch black */
+  --bg-default: #121212; /* Dark gray, not pitch black */
   --bg-paper: #1e1e20;
   --bg-surface: #27272a;
   --bg-subtle: #2d2d30;
 
   /* Text / Foreground */
-  --fg-primary: #f4f4f5;          /* Zinc-50 */
-  --fg-secondary: #a1a1aa;        /* Zinc-400 */
-  --fg-tertiary: #52525b;         /* Zinc-600 */
-  
+  --fg-primary: #f4f4f5; /* Zinc-50 */
+  --fg-secondary: #a1a1aa; /* Zinc-400 */
+  --fg-tertiary: #52525b; /* Zinc-600 */
+
   /* Borders */
-  --border-default: #27272a;      /* Zinc-800 */
-  --border-subtle: #18181b;       /* Zinc-900 */
+  --border-default: #27272a; /* Zinc-800 */
+  --border-subtle: #18181b; /* Zinc-900 */
 
   /* Action / Brand */
-  --primary: #3b82f6;             /* Blue-500 */
+  --primary: #3b82f6; /* Blue-500 */
   --primary-fg: #ffffff;
   --primary-hover: #60a5fa;
-  
+
   /* UI States */
   --action-hover: rgba(255, 255, 255, 0.05);
   --overlay: rgba(0, 0, 0, 0.7);
@@ -86,54 +86,79 @@ html[data-theme="dark"] {
   --color-primary: var(--primary);
   --color-primary-fg: var(--primary-fg);
   --color-primary-hover: var(--primary-hover);
-  
+
   --color-action-hover: var(--action-hover);
 
   /* Animations (Preserved from your original file) */
 
   --animate-logo-loading: logo-pulse 2s ease-in-out infinite;
   --animate-logo-intro: logo-draw-in 2.5s ease-out forwards;
-  --animate-logo-hover-cycle: logo-cycle 2.5s cubic-bezier(0.4, 0, 0.2, 1) forwards;
-  
-
-
+  --animate-logo-hover-cycle: logo-cycle 2.5s cubic-bezier(0.4, 0, 0.2, 1)
+    forwards;
 
   @keyframes logo-pulse {
     0%,
-    100% { opacity: 0.3; }
-    50% { opacity: 0.6; }
+    100% {
+      opacity: 0.3;
+    }
+    50% {
+      opacity: 0.6;
+    }
   }
 
   @keyframes logo-draw-in {
-    from { stroke-dashoffset: 3500; }
-    to { stroke-dashoffset: 0; }
+    from {
+      stroke-dashoffset: 3500;
+    }
+    to {
+      stroke-dashoffset: 0;
+    }
   }
 
   @keyframes logo-cycle {
-    0% { stroke-dashoffset: 0; }
-    50% { stroke-dashoffset: 3500; }
-    100% { stroke-dashoffset: 0; }
+    0% {
+      stroke-dashoffset: 0;
+    }
+    50% {
+      stroke-dashoffset: 3500;
+    }
+    100% {
+      stroke-dashoffset: 0;
+    }
   }
 
   @keyframes accordion-down {
-    from { height: 0; }
-    to { height: var(--radix-accordion-content-height); }
+    from {
+      height: 0;
+    }
+    to {
+      height: var(--radix-accordion-content-height);
+    }
   }
 
   @keyframes accordion-up {
-    from { height: var(--radix-accordion-content-height); }
-    to { height: 0; }
+    from {
+      height: var(--radix-accordion-content-height);
+    }
+    to {
+      height: 0;
+    }
   }
 
   --animate-accordion-down: accordion-down 0.2s ease-out;
   --animate-accordion-up: accordion-up 0.2s ease-out;
 
-  
   @keyframes scale-in {
-    from { opacity: 0; transform: scale(0.95); }
-    to { opacity: 1; transform: scale(1); }
+    from {
+      opacity: 0;
+      transform: scale(0.95);
+    }
+    to {
+      opacity: 1;
+      transform: scale(1);
+    }
   }
-  
+
   /* Spacing */
   --spacing-30: 7.5rem;
   --spacing-38: 9.5rem;
@@ -141,7 +166,7 @@ html[data-theme="dark"] {
   --spacing-50: 12.5rem;
   --spacing-112: 28rem;
   --spacing-112.5: 28.125rem;
-  
+
   /* Z-index */
   --z-index-60: 60;
   --z-index-100: 100;
@@ -153,7 +178,7 @@ html[data-theme="dark"] {
   html {
     scroll-behavior: smooth;
     overflow-y: scroll;
-    
+
     /* Default to Dark Mode variables (or Light depending on your pref) */
     --bg-default: #09090b;
     --fg-primary: #f4f4f5;
@@ -162,7 +187,7 @@ html[data-theme="dark"] {
 
   /* Apply the class mapping when data-theme="light" is present */
   html[data-theme="light"] {
-    --bg-default: #fbfbfb;          /* Slightly off-white to reduce glare */
+    --bg-default: #fbfbfb; /* Slightly off-white to reduce glare */
     --bg-paper: #f4f4f5;
     --bg-surface: #ffffff;
     --bg-subtle: #fafafa;
@@ -177,7 +202,7 @@ html[data-theme="dark"] {
     --primary-hover: #1d4ed8;
     --action-hover: #f4f4f5;
   }
-  
+
   html[data-theme="dark"] {
     --bg-default: #121212;
     --bg-paper: #1e1e20;
@@ -199,16 +224,17 @@ html[data-theme="dark"] {
     background-color: var(--bg-default);
     color: var(--fg-primary);
     font-family: var(--font-sans);
-    transition: color 0.3s ease, background-color 0.3s ease, border-color 0.3s ease;
+    transition: color 0.3s ease, background-color 0.3s ease,
+      border-color 0.3s ease;
     overflow-x: hidden;
   }
-  
+
   :focus-visible {
     outline: 2px solid var(--primary);
     outline-offset: 2px;
     border-radius: 4px;
   }
-  
+
   /* Custom Scrollbar */
   ::-webkit-scrollbar {
     width: 6px;
@@ -223,7 +249,7 @@ html[data-theme="dark"] {
   ::-webkit-scrollbar-thumb:hover {
     background-color: var(--fg-secondary);
   }
-  
+
   html[data-theme="dark"] .cursor-invert {
     filter: invert(1);
   }
@@ -242,6 +268,6 @@ html[data-theme="dark"] {
   z-index: 1;
 }
 ::view-transition-new(root) {
-  z-index: 9999; 
+  z-index: 9999;
 }
 /* Removed theme-specific swapping to ensure consistent "grow" animation */

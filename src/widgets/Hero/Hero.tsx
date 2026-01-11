@@ -1,6 +1,6 @@
 import { useRef } from "react";
 import { Link, useNavigate } from "react-router-dom";
-import Container from "@/shared/ui/Container";
+import { Container } from "@/shared/ui/Container";
 import { Logo } from "@/shared/ui/Logo";
 import { ShinyText } from "@/shared/ui/ShinyText";
 import { Button } from "@/shared/ui/Button";
@@ -10,7 +10,13 @@ import { ArrowRight } from "lucide-react";
 // Imports for custom components
 import CardSwap, { Card } from "@/shared/ui/CardSwap";
 import { Tooltip } from "@/shared/ui/Tooltip";
-import { SiPython, SiReact, SiTypescript, SiTailwindcss, SiAccenture } from "react-icons/si";
+import {
+  SiPython,
+  SiReact,
+  SiTypescript,
+  SiTailwindcss,
+  SiAccenture,
+} from "react-icons/si";
 import { FaLayerGroup, FaFolderOpen } from "react-icons/fa6";
 
 // Imported Entities
@@ -23,7 +29,7 @@ const Hero = () => {
   const navigate = useNavigate();
 
   const handleCardKeyDown = (e: React.KeyboardEvent, path: string) => {
-    if (e.key === 'Enter' || e.key === ' ') {
+    if (e.key === "Enter" || e.key === " ") {
       e.preventDefault();
       navigate(path);
     }
@@ -87,7 +93,7 @@ const Hero = () => {
                 containerClassName="inline-block align-baseline"
                 unstyled={true}
               >
-                <span 
+                <span
                   className="font-medium relative text-fg-primary after:absolute after:left-0 after:-bottom-1 after:h-px after:w-full after:origin-left after:scale-x-0 after:bg-current after:transition-transform after:duration-300 hover:after:scale-x-100 cursor-pointer"
                   tabIndex={0}
                 >
@@ -101,7 +107,7 @@ const Hero = () => {
                 containerClassName="inline-block align-baseline"
                 unstyled={true}
               >
-                <span 
+                <span
                   className="font-medium relative text-fg-primary after:absolute after:left-0 after:-bottom-1 after:h-px after:w-full after:origin-left after:scale-x-0 after:bg-current after:transition-transform after:duration-300 hover:after:scale-x-100 cursor-pointer"
                   tabIndex={0}
                 >
@@ -147,15 +153,15 @@ const Hero = () => {
                 height={400}
               >
                 {/* Card 1: Top Skills */}
-                <Card 
+                <Card
                   onClick={(e) => {
                     e.stopPropagation();
-                    navigate('/about#skills');
+                    navigate("/about#skills");
                   }}
                   customClass="bg-bg-surface border-border-default border flex flex-col justify-between overflow-hidden cursor-pointer group shadow-2xl focus-visible:ring-2 focus-visible:ring-primary focus-visible:outline-none"
                   role="button"
                   tabIndex={0}
-                  onKeyDown={(e) => handleCardKeyDown(e, '/about#skills')}
+                  onKeyDown={(e) => handleCardKeyDown(e, "/about#skills")}
                 >
                   {/* Background Typography */}
                   <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-full text-center pointer-events-none">
@@ -173,13 +179,17 @@ const Hero = () => {
                           <FaLayerGroup size={24} />
                         </div>
                         <div>
-                          <p className="text-fg-tertiary text-xs uppercase tracking-widest mb-1">{homeContent.hero.cards.tech.subtitle}</p>
-                          <p className="text-fg-primary font-bold tracking-wide">{homeContent.hero.cards.tech.title}</p>
+                          <p className="text-fg-tertiary text-xs uppercase tracking-widest mb-1">
+                            {homeContent.hero.cards.tech.subtitle}
+                          </p>
+                          <p className="text-fg-primary font-bold tracking-wide">
+                            {homeContent.hero.cards.tech.title}
+                          </p>
                         </div>
                       </div>
-                      
+
                       <div className="h-10 w-10 rounded-full border border-border-default flex items-center justify-center group-hover:bg-fg-primary group-hover:text-bg-default transition-colors duration-300 text-fg-secondary">
-                         <ArrowRight className="h-4 w-4 -rotate-45" />
+                        <ArrowRight className="h-4 w-4 -rotate-45" />
                       </div>
                     </div>
 
@@ -188,14 +198,17 @@ const Hero = () => {
                       <h3 className="text-4xl font-bold text-fg-primary mb-6 group-hover:translate-x-2 transition-transform duration-300 whitespace-pre-line motion-reduce:transition-none motion-reduce:transform-none">
                         {homeContent.hero.cards.tech.mainTitle}
                       </h3>
-                      
+
                       {/* Icons Row */}
                       <div className="flex items-center gap-6">
                         <div className="text-fg-secondary hover:text-[#3776AB] transition-colors transform hover:scale-110 duration-300 bg-bg-paper/50 p-2 rounded-lg border border-border-default/50 motion-reduce:transform-none">
                           <SiPython size={32} />
                         </div>
                         <div className="text-fg-secondary hover:text-[#61DAFB] transition-colors transform hover:scale-110 duration-300 bg-bg-paper/50 p-2 rounded-lg border border-border-default/50 motion-reduce:transform-none">
-                          <SiReact size={32} className="animate-spin-slow duration-[10s] motion-reduce:animate-none" />
+                          <SiReact
+                            size={32}
+                            className="animate-spin-slow duration-[10s] motion-reduce:animate-none"
+                          />
                         </div>
                         <div className="text-fg-secondary hover:text-[#3178C6] transition-colors transform hover:scale-110 duration-300 bg-bg-paper/50 p-2 rounded-lg border border-border-default/50 motion-reduce:transform-none">
                           <SiTypescript size={32} />
@@ -209,15 +222,15 @@ const Hero = () => {
                 </Card>
 
                 {/* Card 2: Accenture */}
-                <Card 
+                <Card
                   onClick={(e) => {
                     e.stopPropagation();
-                    navigate('/about#experience');
+                    navigate("/about#experience");
                   }}
                   customClass="bg-bg-surface border-border-default border flex flex-col justify-between overflow-hidden cursor-pointer group shadow-2xl focus-visible:ring-2 focus-visible:ring-primary focus-visible:outline-none"
                   role="button"
                   tabIndex={0}
-                  onKeyDown={(e) => handleCardKeyDown(e, '/about#experience')}
+                  onKeyDown={(e) => handleCardKeyDown(e, "/about#experience")}
                 >
                   {/* Background Typography */}
                   <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-full text-center pointer-events-none">
@@ -225,7 +238,7 @@ const Hero = () => {
                       {homeContent.hero.cards.work.backgroundTitle}
                     </h2>
                   </div>
-                  
+
                   {/* Content */}
                   <div className="relative z-10 h-full flex flex-col justify-between p-10">
                     <div className="flex justify-between items-start">
@@ -234,18 +247,24 @@ const Hero = () => {
                           <SiAccenture size={28} />
                         </div>
                         <div>
-                          <p className="text-fg-tertiary text-xs uppercase tracking-widest mb-1">{homeContent.hero.cards.work.subtitle}</p>
-                          <p className="text-fg-primary font-bold tracking-wide">{homeContent.hero.cards.work.title}</p>
+                          <p className="text-fg-tertiary text-xs uppercase tracking-widest mb-1">
+                            {homeContent.hero.cards.work.subtitle}
+                          </p>
+                          <p className="text-fg-primary font-bold tracking-wide">
+                            {homeContent.hero.cards.work.title}
+                          </p>
                         </div>
                       </div>
-                      
+
                       <div className="h-10 w-10 rounded-full border border-border-default flex items-center justify-center group-hover:bg-fg-primary group-hover:text-bg-default transition-colors duration-300 text-fg-secondary">
-                         <ArrowRight className="h-4 w-4 -rotate-45" />
+                        <ArrowRight className="h-4 w-4 -rotate-45" />
                       </div>
                     </div>
 
                     <div>
-                      <h3 className="text-4xl font-bold text-fg-primary mb-2 group-hover:translate-x-2 transition-transform duration-300 whitespace-pre-line motion-reduce:transform-none motion-reduce:transition-none">{homeContent.hero.cards.work.mainTitle}</h3>
+                      <h3 className="text-4xl font-bold text-fg-primary mb-2 group-hover:translate-x-2 transition-transform duration-300 whitespace-pre-line motion-reduce:transform-none motion-reduce:transition-none">
+                        {homeContent.hero.cards.work.mainTitle}
+                      </h3>
                       <p className="text-fg-secondary text-sm leading-relaxed max-w-[80%]">
                         {homeContent.hero.cards.work.description}
                       </p>
@@ -254,15 +273,15 @@ const Hero = () => {
                 </Card>
 
                 {/* Card 3: Projects Carousel */}
-                <Card 
-                   onClick={(e) => {
-                      e.stopPropagation();
-                      navigate('/projects');
-                   }}
-                   customClass="bg-bg-surface border-border-default border flex flex-col justify-between overflow-hidden cursor-pointer group shadow-2xl focus-visible:ring-2 focus-visible:ring-primary focus-visible:outline-none"
-                   role="button"
-                   tabIndex={0}
-                   onKeyDown={(e) => handleCardKeyDown(e, '/projects')}
+                <Card
+                  onClick={(e) => {
+                    e.stopPropagation();
+                    navigate("/projects");
+                  }}
+                  customClass="bg-bg-surface border-border-default border flex flex-col justify-between overflow-hidden cursor-pointer group shadow-2xl focus-visible:ring-2 focus-visible:ring-primary focus-visible:outline-none"
+                  role="button"
+                  tabIndex={0}
+                  onKeyDown={(e) => handleCardKeyDown(e, "/projects")}
                 >
                   {/* Background Typography */}
                   <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-full text-center pointer-events-none">
@@ -273,20 +292,24 @@ const Hero = () => {
 
                   {/* Content */}
                   <div className="relative z-10 h-full flex flex-col p-8 pb-6">
-                     {/* Header */}
-                     <div className="flex justify-between items-start mb-6">
+                    {/* Header */}
+                    <div className="flex justify-between items-start mb-6">
                       <div className="flex items-center gap-4">
                         <div className="h-12 w-12 rounded-xl bg-green-500/10 text-green-500 flex items-center justify-center shadow-lg shadow-green-500/10 group-hover:scale-110 transition-transform duration-300 border border-green-500/20 motion-reduce:transform-none motion-reduce:transition-none">
                           <FaFolderOpen size={24} />
                         </div>
                         <div>
-                          <p className="text-fg-tertiary text-xs uppercase tracking-widest mb-1">{homeContent.hero.cards.build.subtitle}</p>
-                          <p className="text-fg-primary font-bold tracking-wide">{homeContent.hero.cards.build.title}</p>
+                          <p className="text-fg-tertiary text-xs uppercase tracking-widest mb-1">
+                            {homeContent.hero.cards.build.subtitle}
+                          </p>
+                          <p className="text-fg-primary font-bold tracking-wide">
+                            {homeContent.hero.cards.build.title}
+                          </p>
                         </div>
                       </div>
-                      
+
                       <div className="h-10 w-10 rounded-full border border-border-default flex items-center justify-center group-hover:bg-fg-primary group-hover:text-bg-default transition-colors duration-300 text-fg-secondary">
-                         <ArrowRight className="h-4 w-4 -rotate-45" />
+                        <ArrowRight className="h-4 w-4 -rotate-45" />
                       </div>
                     </div>
 

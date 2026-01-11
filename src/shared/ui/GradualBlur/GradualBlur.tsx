@@ -113,7 +113,8 @@ const GradualBlur: React.FC<GradualBlurProps> = (props) => {
         ? config.strength * config.hoverIntensity
         : config.strength;
 
-    const curveFunc = (CURVE_FUNCTIONS[config.curve] || CURVE_FUNCTIONS.linear) as (p: number) => number;
+    const curveFunc = (CURVE_FUNCTIONS[config.curve] ||
+      CURVE_FUNCTIONS.linear) as (p: number) => number;
 
     for (let i = 1; i <= config.divCount; i++) {
       let progress = i / config.divCount;

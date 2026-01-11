@@ -1,6 +1,6 @@
 /// <reference types="vite/client" />
 
-declare module '*.jsx' {
+declare module "*.jsx" {
   const content: unknown;
   export default content;
 }
@@ -13,5 +13,7 @@ interface ViewTransition {
 }
 
 interface Document {
-  startViewTransition(updateCallback: () => Promise<void> | void): ViewTransition;
+  startViewTransition(
+    updateCallback: () => Promise<void> | void
+  ): ViewTransition;
 }

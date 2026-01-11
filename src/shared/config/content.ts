@@ -19,34 +19,35 @@ export const homeContent = {
     tooltips: {
       profile: {
         alt: "Profile",
-        role: "Creative Dev"
+        role: "Creative Dev",
       },
       company: {
         name: "Accenture",
-        role: "Software Engineer"
-      }
+        role: "Software Engineer",
+      },
     },
     cards: {
       tech: {
         backgroundTitle: "TECH",
         subtitle: "Core Stack",
         title: "Technologies",
-        mainTitle: "Full Stack\nDeveloper"
+        mainTitle: "Full Stack\nDeveloper",
       },
       work: {
         backgroundTitle: "WORK",
         subtitle: "Current",
         title: "Accenture",
         mainTitle: "Software\nEngineer",
-        description: "Driving digital transformation through modern web technologies."
+        description:
+          "Driving digital transformation through modern web technologies.",
       },
       build: {
         backgroundTitle: "BUILD",
         subtitle: "Portfolio",
         title: "Selected Work",
-        mainTitle: "Projects"
-      }
-    }
+        mainTitle: "Projects",
+      },
+    },
   },
   bento: {
     profile: {
@@ -82,7 +83,8 @@ export const homeContent = {
   },
   contact: {
     title: "Ready to start?",
-    description: "I'm currently seeking full-time opportunities where I can contribute my skills to meaningful projects. Let's build something amazing together.",
+    description:
+      "I'm currently seeking full-time opportunities where I can contribute my skills to meaningful projects. Let's build something amazing together.",
     email: "bonykoshy@gmail.com",
     cta: "Get in Touch",
   },
@@ -98,7 +100,7 @@ export const homeContent = {
       work: "Work",
       socials: "Socials",
       legal: "Legal & Extras",
-    }
+    },
   },
   projects: {
     title: "Projects",
@@ -115,5 +117,5 @@ export const homeContent = {
     cta: "Contact",
     skipToMain: "Skip to Main",
     backToHome: "Back to Home",
-  }
+  },
 };

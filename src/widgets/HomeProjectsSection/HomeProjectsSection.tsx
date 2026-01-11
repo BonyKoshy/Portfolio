@@ -13,10 +13,15 @@ export const HomeProjectsSection = () => {
       {/* Header Section */}
       <div className="flex flex-col lg:flex-row items-end justify-between gap-4 mb-12">
         <div className="flex flex-col gap-4 w-full lg:w-auto">
-           {/* Title with Icon */}
-           <div className="flex items-center gap-3">
-             <Briefcase className="w-8 h-8 text-text-primary" strokeWidth={1.5} />
-             <h2 className="text-4xl font-bold text-text-primary m-0">{homeContent.projects.title}</h2>
+          {/* Title with Icon */}
+          <div className="flex items-center gap-3">
+            <Briefcase
+              className="w-8 h-8 text-text-primary"
+              strokeWidth={1.5}
+            />
+            <h2 className="text-4xl font-bold text-text-primary m-0">
+              {homeContent.projects.title}
+            </h2>
           </div>
           {/* Subtitle */}
           <p className="text-lg text-text-secondary font-medium m-0">
@@ -29,7 +34,10 @@ export const HomeProjectsSection = () => {
           <Link to="/projects" className="no-underline">
             <span className="inline-flex items-center justify-center pb-1 text-base group text-text-primary border-b border-transparent hover:border-text-primary transition-colors cursor-pointer">
               {homeContent.projects.viewAll}
-              <ArrowRight size={16} className="ml-2 transition-transform duration-300 group-hover:translate-x-1" />
+              <ArrowRight
+                size={16}
+                className="ml-2 transition-transform duration-300 group-hover:translate-x-1"
+              />
             </span>
           </Link>
         </div>

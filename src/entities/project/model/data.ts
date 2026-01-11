@@ -7,11 +7,12 @@ export const projectsData: ProjectCardData[] = [
     year: 2026,
     src: "/projects/proj1.webp",
     githubLink: "https://github.com/BonyKoshy/Portfolio",
-    liveLink: "/", 
+    liveLink: "/",
     linkType: "link",
     content: {
       imageSrc: "/projects/proj1.webp",
-      description: "A living proof-of-concept for 2026 web architecture. Built with React 19, Vite 7, and Feature-Sliced Design (FSD) to decouple logic from UI.",
+      description:
+        "A living proof-of-concept for 2026 web architecture. Built with React 19, Vite 7, and Feature-Sliced Design (FSD) to decouple logic from UI.",
       tech: ["React 19", "Vite 7", "FSD", "GSAP", "Framer Motion", "Radix UI"],
     },
   },
@@ -25,7 +26,8 @@ export const projectsData: ProjectCardData[] = [
     linkType: "github",
     content: {
       imageSrc: "/projects/proj2.webp",
-      description: "Privacy-focused AI engine optimized for Intel NPUs. Uses OpenVINO to run BERT models locally with zero latency.",
+      description:
+        "Privacy-focused AI engine optimized for Intel NPUs. Uses OpenVINO to run BERT models locally with zero latency.",
       tech: ["Python", "OpenVINO", "Hugging Face", "Intel NPU", "Flask"],
     },
   },
@@ -39,8 +41,15 @@ export const projectsData: ProjectCardData[] = [
     linkType: "github",
     content: {
       imageSrc: "/projects/proj3.webp",
-      description: "Real-time chat platform with live AI translation. Built with WebSockets for seamless multilingual communication.",
-      tech: ["Python", "Flask-SocketIO", "Deep Translator API", "SQLite", "Bootstrap"],
+      description:
+        "Real-time chat platform with live AI translation. Built with WebSockets for seamless multilingual communication.",
+      tech: [
+        "Python",
+        "Flask-SocketIO",
+        "Deep Translator API",
+        "SQLite",
+        "Bootstrap",
+      ],
     },
   },
   {
@@ -48,13 +57,20 @@ export const projectsData: ProjectCardData[] = [
     category: "Low-Level Systems",
     year: 2024,
     src: "/projects/proj4.webp",
-    githubLink: "https://github.com/BonyKoshy/timeless_library_management_system",
+    githubLink:
+      "https://github.com/BonyKoshy/timeless_library_management_system",
     liveLink: "#",
     linkType: "github",
     content: {
       imageSrc: "/projects/proj4.webp",
-      description: "Cross-platform system in ANSI C (C89). Uses a custom abstraction layer to run on hardware from 1990 to 2026.",
-      tech: ["ANSI C", "System Abstraction", "Binary DB", "Role-Based Security"],
+      description:
+        "Cross-platform system in ANSI C (C89). Uses a custom abstraction layer to run on hardware from 1990 to 2026.",
+      tech: [
+        "ANSI C",
+        "System Abstraction",
+        "Binary DB",
+        "Role-Based Security",
+      ],
     },
   },
   {
@@ -67,7 +83,8 @@ export const projectsData: ProjectCardData[] = [
     linkType: "github",
     content: {
       imageSrc: "/projects/proj5.webp",
-      description: "Native Windows app built with .NET MAUI that automates file organization using extension-based sorting logic.",
+      description:
+        "Native Windows app built with .NET MAUI that automates file organization using extension-based sorting logic.",
       tech: [".NET MAUI", "C#", ".NET 8", "Fluent Design"],
     },
   },
@@ -81,7 +98,8 @@ export const projectsData: ProjectCardData[] = [
     linkType: "github",
     content: {
       imageSrc: "/projects/proj6.webp",
-      description: "Spring Boot backend using a hybrid SQL (MySQL) and NoSQL (MongoDB) architecture for scalable data management.",
+      description:
+        "Spring Boot backend using a hybrid SQL (MySQL) and NoSQL (MongoDB) architecture for scalable data management.",
       tech: ["Java 17", "Spring Boot 3.4", "JPA", "MySQL", "MongoDB"],
     },
   },
@@ -90,12 +108,14 @@ export const projectsData: ProjectCardData[] = [
     category: "Frontend Dev",
     year: 2024,
     src: "/projects/proj7.webp",
-    githubLink: "https://github.com/BonyKoshy/bony_portfolio_firebasestudio_test",
+    githubLink:
+      "https://github.com/BonyKoshy/bony_portfolio_firebasestudio_test",
     liveLink: "#",
     linkType: "github",
     content: {
       imageSrc: "/projects/proj7.webp",
-      description: "A practice build exploring Next.js App Router and shadcn/ui. Developed as an experiment with Firebase Studio.",
+      description:
+        "A practice build exploring Next.js App Router and shadcn/ui. Developed as an experiment with Firebase Studio.",
       tech: ["Next.js", "React", "Tailwind CSS", "shadcn/ui"],
     },
   },
@@ -109,7 +129,8 @@ export const projectsData: ProjectCardData[] = [
     linkType: "github",
     content: {
       imageSrc: "/projects/proj8.webp",
-      description: "Inventory manager with Material 3 design, real-time stock tracking, and automated PDF report generation.",
+      description:
+        "Inventory manager with Material 3 design, real-time stock tracking, and automated PDF report generation.",
       tech: ["Python", "Flask", "SQLite", "ReportLab", "Material 3"],
     },
   },
@@ -123,7 +144,8 @@ export const projectsData: ProjectCardData[] = [
     linkType: "github",
     content: {
       imageSrc: "/projects/proj9.webp",
-      description: "Digital forensics tool for bulk file analysis. Extracts timestamps and generates visual digital event sequences.",
+      description:
+        "Digital forensics tool for bulk file analysis. Extracts timestamps and generates visual digital event sequences.",
       tech: ["Python", "Flask", "SQLite", "JavaScript", "Forensics"],
     },
   },
@@ -137,7 +159,8 @@ export const projectsData: ProjectCardData[] = [
     linkType: "github",
     content: {
       imageSrc: "/projects/proj10.webp",
-      description: "Web app utilizing IBM Watson NLP to detect dominant emotions in text, featuring comprehensive unit testing.",
+      description:
+        "Web app utilizing IBM Watson NLP to detect dominant emotions in text, featuring comprehensive unit testing.",
       tech: ["Python", "Flask", "IBM Watson NLP", "Unit Testing"],
     },
   },
@@ -151,7 +174,8 @@ export const projectsData: ProjectCardData[] = [
     linkType: "link",
     content: {
       imageSrc: "/projects/proj11.webp",
-      description: "Interactive MCU timeline with AI-generated synopses and dynamic dashboard filters.",
+      description:
+        "Interactive MCU timeline with AI-generated synopses and dynamic dashboard filters.",
       tech: ["HTML", "Tailwind CSS", "JavaScript", "Netlify"],
     },
   },
@@ -165,7 +189,8 @@ export const projectsData: ProjectCardData[] = [
     linkType: "github",
     content: {
       imageSrc: "/projects/proj12.webp",
-      description: "The original Python + Tkinter utility built for automated file sorting and folder cleanup.",
+      description:
+        "The original Python + Tkinter utility built for automated file sorting and folder cleanup.",
       tech: ["Python", "Tkinter", "File System API"],
     },
   },

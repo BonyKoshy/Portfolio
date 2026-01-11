@@ -20,7 +20,6 @@ const DottedMap: React.FC<DottedMapProps> = ({
   className,
   dotColor,
   markerColor = "var(--primary)", // Default primary for marker
-
 }) => {
   // context removed as it was unused
 
@@ -39,8 +38,6 @@ const DottedMap: React.FC<DottedMapProps> = ({
 
     // Determine colors based on theme if not provided
     const dots = dotColor || "var(--fg-secondary)"; // Use semantic secondary (darker) for better contrast
-
-
 
     // Generate SVG
     const svgStr = map.getSVG({
