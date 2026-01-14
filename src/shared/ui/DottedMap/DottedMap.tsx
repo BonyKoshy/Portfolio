@@ -15,6 +15,12 @@ interface DottedMapProps {
   markerColor?: string;
 }
 
+// Security: Basic input validation to prevent injection in dangerous usage (DottedMap library output is HTML string)
+export const isSafeColor = (color: string) => {
+  // Reject if it contains dangerous characters commonly used for injection: < > " ' `
+  return !/[<>"'`]/.test(color);
+};
+
 const DottedMap: React.FC<DottedMapProps> = ({
   markers = [],
   className,
@@ -27,25 +33,36 @@ const DottedMap: React.FC<DottedMapProps> = ({
     // Create map instance
     const map = new DottedMapLib({ height: 60, grid: "diagonal" });
 
+    // Validate inputs before using them in SVG generation
+    const safeMarkerColor =
+      markerColor && isSafeColor(markerColor) ? markerColor : "var(--primary)";
+    const safeDotColor =
+      dotColor && isSafeColor(dotColor) ? dotColor : "var(--fg-secondary)";
+
     // Add markers
     markers.forEach((marker) => {
       map.addPin({
         lat: marker.lat,
         lng: marker.lng,
-        svgOptions: { color: markerColor, radius: marker.size || 0.4 },
+        svgOptions: { color: safeMarkerColor, radius: marker.size || 0.4 },
       });
     });
-
-    // Determine colors based on theme if not provided
-    const dots = dotColor || "var(--fg-secondary)"; // Use semantic secondary (darker) for better contrast
 
     // Generate SVG
     const svgStr = map.getSVG({
       radius: 0.22,
-      color: dots,
+      color: safeDotColor,
       shape: "circle",
       backgroundColor: "transparent",
     });
+
+    // Final safety check: ensure no <script> tags made it into the output
+    if (svgStr.includes("<script")) {
+      console.error(
+        "🛡️ Sentinel blocked potential XSS in DottedMap: <script> tag detected in SVG output."
+      );
+      return "";
+    }
 
     return svgStr;
   }, [markers, dotColor, markerColor]);
