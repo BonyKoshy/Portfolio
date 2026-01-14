@@ -1,10 +1,15 @@
 import { Briefcase, ExternalLink, Github } from "lucide-react";
 import { projectsData } from "@/entities/project/model/data";
-import { Button } from "@/shared/ui/Button";
+import { PrimaryButton, SecondaryButton } from "@/shared/ui/Button";
+import { Meta } from "@/shared/ui/Meta/Meta";
 
 const Projects = () => {
   return (
     <div className="w-full max-w-7xl mx-auto text-text-primary px-4 pt-24 pb-16">
+      <Meta
+        title="Projects of Bony"
+        description="Explore my portfolio of projects, including web applications, desktop utilities, and system architecture experiments."
+      />
       {/* Header Section */}
       <div className="flex flex-col gap-4 mb-16">
         {/* Title with Icon */}
@@ -78,13 +83,13 @@ const Projects = () => {
                     target="_blank"
                     rel="noopener noreferrer"
                   >
-                    <Button
-                      variant="primary"
+                    <PrimaryButton
                       className="text-sm gap-2 h-10 px-6"
+                      icon={<ExternalLink size={16} />}
+                      iconPosition="right"
                     >
                       Live Demo
-                      <ExternalLink size={16} />
-                    </Button>
+                    </PrimaryButton>
                   </a>
                 )}
 
@@ -95,13 +100,14 @@ const Projects = () => {
                     target="_blank"
                     rel="noopener noreferrer"
                   >
-                    <Button
+                    <SecondaryButton
                       variant="ghost"
                       className="text-sm gap-2 h-10 px-6 border border-border-default hover:bg-bg-subtle hover:text-text-primary"
+                      icon={<Github size={16} />}
+                      iconPosition="right"
                     >
                       Source Code
-                      <Github size={16} />
-                    </Button>
+                    </SecondaryButton>
                   </a>
                 )}
               </div>

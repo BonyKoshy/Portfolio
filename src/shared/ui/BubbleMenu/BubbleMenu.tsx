@@ -14,6 +14,7 @@ type MenuItem = {
     bgColor?: string;
     textColor?: string;
   };
+  onClick?: () => void;
 };
 
 export type BubbleMenuProps = {
@@ -357,7 +358,10 @@ export default function BubbleMenu({
                 <NavLink
                   to={item.href}
                   aria-label={item.ariaLabel || item.label}
-                  onClick={handleToggle} // Close menu on click
+                  onClick={() => {
+                    item.onClick?.();
+                    handleToggle();
+                  }}
                   className={[
                     "pill-link",
                     "w-full",

@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { motion } from "framer-motion";
-import { Button } from "@/shared/ui/Button/Button";
+import { PrimaryButton } from "@/shared/ui/Button";
 import { ArrowRight, Copy, Check } from "lucide-react";
 import { Link } from "react-router-dom";
 import { Calendar } from "@/shared/ui/Calendar/Calendar";
@@ -53,19 +53,18 @@ export function ContactSection() {
 
               <div className="flex flex-col sm:flex-row gap-4 pt-2 w-full sm:w-auto items-center sm:items-stretch">
                 {/* Primary Button - Matches Hero Style EXACTLY */}
-                <Button
+                <PrimaryButton
                   asChild
-                  variant="primary"
                   size="lg"
                   className="w-full sm:w-auto"
                 >
                   <Link to="/contact">
                     {homeContent.contact.cta}
                     <span className="shrink-0 transition-transform duration-300 group-hover:translate-x-1">
-                      <ArrowRight className="h-4 w-4" />
+                      <ArrowRight className="h-4 w-4 ml-2" />
                     </span>
                   </Link>
-                </Button>
+                </PrimaryButton>
 
                 <button
                   onClick={handleCopy}
@@ -91,25 +90,25 @@ export function ContactSection() {
                   className="rounded-xl border-none p-0"
                   classNames={{
                     head_cell:
-                      "text-fg-tertiary font-medium text-[0.8rem] uppercase tracking-wider pb-2",
-                    cell: "text-center text-sm p-0 m-0.5 relative [&:has([aria-selected].day-range-end)]:rounded-r-md [&:has([aria-selected].day-outside)]:bg-accent/50 [&:has([aria-selected])]:bg-accent first:[&:has([aria-selected])]:rounded-l-md last:[&:has([aria-selected])]:rounded-r-md focus-within:relative focus-within:z-20",
+                      "text-fg-secondary font-semibold text-[0.8rem] uppercase tracking-wider pb-4",
+                    cell: "text-center text-sm p-0 m-0.5 relative [&:has([aria-selected].day-range-end)]:rounded-r-md [&:has([aria-selected].day-outside)]:bg-primary/10 [&:has([aria-selected])]:bg-transparent first:[&:has([aria-selected])]:rounded-l-md last:[&:has([aria-selected])]:rounded-r-md focus-within:relative focus-within:z-20",
                     day: cn(
-                      "h-10 w-10 p-0 font-bold aria-selected:opacity-100 hover:bg-bg-paper rounded-full transition-all duration-200 text-fg-primary opacity-90"
+                      "h-10 w-10 p-0 font-medium aria-selected:opacity-100 hover:bg-bg-subtle rounded-full transition-all duration-200 text-fg-primary"
                     ),
                     day_selected:
-                      "bg-primary text-white hover:bg-primary hover:text-white focus:bg-primary focus:text-white shadow-lg shadow-primary/30 scale-110 font-black",
+                      "bg-primary text-primary-fg hover:bg-primary-hover hover:text-primary-fg focus:bg-primary focus:text-primary-fg shadow-lg shadow-primary/25 scale-105 font-bold",
                     day_today:
-                      "bg-accent text-accent-foreground font-extrabold ring-2 ring-primary/20",
+                      "text-primary font-bold ring-1 ring-primary/30 bg-primary/5",
                     day_outside:
-                      "text-fg-tertiary opacity-20 font-normal hover:bg-transparent hover:text-fg-tertiary cursor-default",
-                    day_disabled: "text-fg-tertiary opacity-10",
+                      "text-fg-tertiary/50 opacity-100 font-normal hover:bg-transparent hover:text-fg-tertiary/70 cursor-default",
+                    day_disabled: "text-fg-tertiary opacity-30",
                     day_range_middle:
                       "aria-selected:bg-accent aria-selected:text-accent-foreground",
                     day_hidden: "invisible",
                     nav_button:
-                      "border border-border-default hover:bg-bg-paper rounded-full shadow-xs transition-colors",
+                      "border border-border-default hover:bg-bg-subtle/50 hover:text-fg-primary text-fg-secondary rounded-full shadow-sm transition-all duration-200",
                     caption:
-                      "flex justify-center pt-1 relative items-center mb-4 text-fg-primary font-bold",
+                      "flex justify-center pt-1 relative items-center mb-6 text-fg-primary font-bold text-lg",
                   }}
                 />
               </div>

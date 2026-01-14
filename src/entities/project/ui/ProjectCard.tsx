@@ -1,5 +1,6 @@
 import { Link } from "react-router-dom";
 import { ArrowRight } from "lucide-react";
+import { SecondaryButton } from "@/shared/ui/Button";
 import { ProjectCardData } from "../model/types";
 import { homeContent } from "@/shared/config/content";
 
@@ -19,6 +20,7 @@ export const ProjectCard = ({ project }: ProjectCardProps) => {
         <img
           src={project.src}
           alt={project.title}
+          loading="lazy"
           className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
         />
       </div>
@@ -49,13 +51,19 @@ export const ProjectCard = ({ project }: ProjectCardProps) => {
 
         {/* Read More Button */}
         <div className="mt-auto pt-2 flex justify-start">
-          <span className="inline-flex items-center text-sm text-accent border-b border-transparent hover:border-accent transition-colors">
+          <SecondaryButton
+            variant="default"
+            className="text-sm text-accent hover:text-accent border-b-current" // Adjusting classes to match original look if needed, but SecondaryButton has its own style.
+            // User requested "Secondary button(underline): view all projects and read more in projects section"
+            // The SecondaryButton default variant has the underline effect.
+            // Original used text-accent. Secondary uses text-fg-secondary -> hover text-fg-primary.
+            // The user said "secondary button with hover underline animation".
+            // I should just use SecondaryButton with default variant.
+            icon={<ArrowRight size={14} />}
+            iconPosition="right"
+          >
             {homeContent.projects.readMore}
-            <ArrowRight
-              size={14}
-              className="ml-1 transition-transform duration-300 group-hover:translate-x-1"
-            />
-          </span>
+          </SecondaryButton>
         </div>
       </div>
     </Link>

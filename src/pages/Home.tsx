@@ -11,7 +11,7 @@ const Home = () => {
       className="relative text-text-primary selection:bg-accent selection:text-white"
     >
       {/* Hero Section */}
-      <section className="relative h-screen flex flex-col justify-center">
+      <section id="hero" className="relative h-screen flex flex-col justify-center">
         <Hero />
       </section>
 
@@ -21,7 +21,7 @@ const Home = () => {
       </section>
 
       {/* Projects Section - Placed under Bento */}
-      <section className="min-h-screen flex flex-col justify-center mx-auto max-w-7xl px-6 w-full py-20">
+      <section id="projects" className="min-h-screen flex flex-col justify-center mx-auto max-w-7xl px-6 w-full py-20">
         <HomeProjectsSection />
       </section>
 

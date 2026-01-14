@@ -1,5 +1,6 @@
 import { Link } from "react-router-dom";
 import { ArrowRight, Briefcase } from "lucide-react";
+import { SecondaryButton } from "@/shared/ui/Button";
 import { projectsData } from "@/entities/project/model/data";
 import { ProjectCard } from "@/entities/project/ui/ProjectCard";
 import { homeContent } from "@/shared/config/content";
@@ -31,15 +32,14 @@ export const HomeProjectsSection = () => {
 
         {/* View All Button */}
         <div className="w-full lg:w-auto flex justify-start lg:justify-end">
-          <Link to="/projects" className="no-underline">
-            <span className="inline-flex items-center justify-center pb-1 text-base group text-text-primary border-b border-transparent hover:border-text-primary transition-colors cursor-pointer">
-              {homeContent.projects.viewAll}
-              <ArrowRight
-                size={16}
-                className="ml-2 transition-transform duration-300 group-hover:translate-x-1"
-              />
-            </span>
-          </Link>
+            <SecondaryButton asChild variant="default">
+              <Link to="/projects">
+                {homeContent.projects.viewAll}
+                <span className="shrink-0 transition-transform duration-300 group-hover:translate-x-1 ml-2">
+                   <ArrowRight size={16} />
+                </span>
+              </Link>
+            </SecondaryButton>
         </div>
       </div>
 

@@ -5,7 +5,7 @@ import { SiLinkedin } from "@react-icons/all-files/si/SiLinkedin";
 // SiX is newer, might not be in all-files v4. Using fallback or alternative.
 // If SiX is not in all-files, we might need to keep using "react-icons/si" for it, or use a FaTwitter from all-files if acceptable, but USER has "X (Twitter)".
 import { SiX } from "react-icons/si";
-import { Button } from "@/shared/ui/Button";
+import { SecondaryButton } from "@/shared/ui/Button";
 import { Link } from "react-router-dom";
 import { ChevronDown } from "lucide-react";
 import { AnimatePresence, motion } from "framer-motion";
@@ -17,9 +17,18 @@ import {
 } from "@/shared/ui/Accordion/Accordion";
 
 import { homeContent } from "@/shared/config/content";
+import { useLocation } from "react-router-dom";
 
 const Footer = () => {
   const [isOpen, setIsOpen] = useState(false);
+  const location = useLocation();
+
+  const handleHomeClick = (e: React.MouseEvent) => {
+    if (location.pathname === "/") {
+      e.preventDefault();
+      document.getElementById("hero")?.scrollIntoView({ behavior: "smooth" });
+    }
+  };
 
   return (
     <footer className="mt-32 pb-8">
@@ -66,6 +75,7 @@ const Footer = () => {
                           <div className="flex flex-col gap-3 pl-2 pt-2">
                             <Link
                               to="/"
+                              onClick={handleHomeClick}
                               className="text-sm text-fg-secondary transition-colors hover:text-fg-primary"
                             >
                               Home
@@ -102,28 +112,31 @@ const Footer = () => {
                     <div className="flex flex-col gap-3">
                       <Link
                         to="/"
+                        onClick={handleHomeClick}
                         className="text-sm text-fg-secondary transition-colors hover:text-fg-primary w-fit"
                       >
                         Home
                       </Link>
                       <Link
-                        to="/#about"
+                        to="/about"
                         className="text-sm text-fg-secondary transition-colors hover:text-fg-primary w-fit"
                       >
                         About
                       </Link>
                       <Link
-                        to="/#contact"
+                        to="/contact"
                         className="text-sm text-fg-secondary transition-colors hover:text-fg-primary w-fit"
                       >
                         Contact
                       </Link>
-                      <Link
-                        to="/sitemap"
+                      <a
+                        href="/sitemap.xml"
+                        target="_blank"
+                        rel="noopener noreferrer"
                         className="text-sm text-fg-secondary transition-colors hover:text-fg-primary w-fit"
                       >
                         Sitemap
-                      </Link>
+                      </a>
                     </div>
                   </div>
                 </div>
@@ -170,19 +183,21 @@ const Footer = () => {
                     </h3>
                     <div className="flex flex-col gap-3">
                       <Link
-                        to="/#projects"
+                        to="/projects"
                         className="text-sm text-fg-secondary transition-colors hover:text-fg-primary w-fit"
                       >
                         Projects
                       </Link>
                       <Link
-                        to="/#certificates"
+                        to="/certificates"
                         className="text-sm text-fg-secondary transition-colors hover:text-fg-primary w-fit"
                       >
                         Certificates
                       </Link>
                       <a
-                        href="#"
+                        href="/resume.pdf"
+                        target="_blank"
+                        rel="noopener noreferrer"
                         className="text-sm text-fg-secondary transition-colors hover:text-fg-primary w-fit"
                       >
                         Resume
@@ -244,36 +259,48 @@ const Footer = () => {
                       {homeContent.footer.sections.socials}
                     </h3>
                     <div className="flex flex-col gap-3">
+                    <div className="flex flex-col gap-3">
                       <a
-                        href="#"
+                        href="https://x.com/Bony_Koshy"
+                        target="_blank"
+                        rel="noopener noreferrer"
                         className="text-sm text-fg-secondary transition-colors hover:text-fg-primary w-fit"
                       >
                         X (Twitter)
                       </a>
                       <a
-                        href="#"
+                        href="https://www.linkedin.com/in/bonykoshy/"
+                        target="_blank"
+                        rel="noopener noreferrer"
                         className="text-sm text-fg-secondary transition-colors hover:text-fg-primary w-fit"
                       >
                         LinkedIn
                       </a>
                       <a
-                        href="#"
+                        href="https://in.pinterest.com/bonykoshy/"
+                        target="_blank"
+                        rel="noopener noreferrer"
                         className="text-sm text-fg-secondary transition-colors hover:text-fg-primary w-fit"
                       >
                         Pinterest
                       </a>
                       <a
-                        href="#"
+                        href="https://dribbble.com/bonykoshy"
+                        target="_blank"
+                        rel="noopener noreferrer"
                         className="text-sm text-fg-secondary transition-colors hover:text-fg-primary w-fit"
                       >
                         Dribbble
                       </a>
                       <a
-                        href="#"
+                        href="https://www.behance.net/bonykoshy"
+                        target="_blank"
+                        rel="noopener noreferrer"
                         className="text-sm text-fg-secondary transition-colors hover:text-fg-primary w-fit"
                       >
                         Behance
                       </a>
+                    </div>
                     </div>
                   </div>
                 </div>
@@ -332,25 +359,25 @@ const Footer = () => {
                     </h3>
                     <div className="flex flex-col gap-3">
                       <a
-                        href="#"
+                        href="https://discordapp.com/users/bonykoshy"
+                        target="_blank"
+                        rel="noopener noreferrer"
                         className="text-sm text-fg-secondary transition-colors hover:text-fg-primary w-fit"
                       >
                         Discord
                       </a>
                       <a
-                        href="#"
-                        className="text-sm text-fg-secondary transition-colors hover:text-fg-primary w-fit"
-                      >
-                        Telegram
-                      </a>
-                      <a
-                        href="#"
+                        href="https://wa.me/919447132399"
+                        target="_blank"
+                        rel="noopener noreferrer"
                         className="text-sm text-fg-secondary transition-colors hover:text-fg-primary w-fit"
                       >
                         Whatsapp
                       </a>
                       <a
-                        href="#"
+                        href="https://leetcode.com/u/Bonykoshy/"
+                        target="_blank"
+                        rel="noopener noreferrer"
                         className="text-sm text-fg-secondary transition-colors hover:text-fg-primary w-fit"
                       >
                         Leetcode
@@ -380,14 +407,13 @@ const Footer = () => {
           {/* Visual Separator */}
           <span className="hidden h-6 w-px bg-border-default sm:inline-block"></span>
 
-          <Button
+          <SecondaryButton
             asChild
-            variant="underline"
-            size="none"
+            variant="default"
             className="font-normal"
           >
             <Link to="/privacy">Privacy Policy</Link>
-          </Button>
+          </SecondaryButton>
         </div>
 
         {/* Right Side: Social Media | Theme Toggle */}
@@ -398,7 +424,7 @@ const Footer = () => {
               <a
                 href="https://github.com/BonyKoshy"
                 target="_blank"
-                rel="noreferrer"
+                rel="noreferrer noopener"
                 aria-label="GitHub"
                 className="flex h-10 w-10 items-center justify-center rounded-full bg-bg-surface shadow-[0_0_20px_2px_rgba(0,0,0,0.05)] text-fg-primary transition-colors border border-border-default/50"
               >
@@ -407,7 +433,7 @@ const Footer = () => {
               <a
                 href="https://linkedin.com/in/bonykoshy"
                 target="_blank"
-                rel="noreferrer"
+                rel="noreferrer noopener"
                 aria-label="LinkedIn"
                 className="flex h-10 w-10 items-center justify-center rounded-full bg-bg-surface shadow-[0_0_20px_2px_rgba(0,0,0,0.05)] text-fg-primary transition-colors border border-border-default/50"
               >
@@ -416,7 +442,7 @@ const Footer = () => {
               <a
                 href="https://x.com/Bony_Koshy"
                 target="_blank"
-                rel="noreferrer"
+                rel="noreferrer noopener"
                 aria-label="X (Twitter)"
                 className="flex h-10 w-10 items-center justify-center rounded-full bg-bg-surface shadow-[0_0_20px_2px_rgba(0,0,0,0.05)] text-fg-primary transition-colors border border-border-default/50"
               >

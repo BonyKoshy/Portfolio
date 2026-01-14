@@ -1,7 +1,7 @@
 import { NavLink, useLocation } from "react-router-dom";
 import { GradualBlur } from "@/shared/ui/GradualBlur";
 import { BubbleMenu } from "@/shared/ui/BubbleMenu";
-import { Button } from "@/shared/ui/Button";
+import { PrimaryButton } from "@/shared/ui/Button";
 import { ArrowDown, ArrowLeft } from "lucide-react";
 import { homeContent } from "@/shared/config/content";
 
@@ -43,8 +43,7 @@ const Navbar = () => {
 
       {/* Skip to Main - Fixed & Accessible */}
       <div className="fixed top-4 left-4 z-100 pointer-events-auto">
-        <Button
-          variant="primary"
+        <PrimaryButton
           size="md"
           onClick={handleSkipToMain}
           icon={
@@ -58,7 +57,7 @@ const Navbar = () => {
           tabIndex={0}
         >
           {homeContent.navbar.skipToMain}
-        </Button>
+        </PrimaryButton>
       </div>
 
       <div className="mx-auto flex h-full max-w-7xl items-center justify-between px-6 pointer-events-auto relative">
@@ -74,8 +73,7 @@ const Navbar = () => {
                   : ""
               }
             >
-              <Button
-                variant="primary"
+              <PrimaryButton
                 size="md"
                 icon={
                   <ArrowLeft
@@ -86,7 +84,7 @@ const Navbar = () => {
                 iconPosition="left"
               >
                 {homeContent.navbar.backToHome}
-              </Button>
+              </PrimaryButton>
             </NavLink>
           )}
         </div>
@@ -97,6 +95,12 @@ const Navbar = () => {
             <NavLink
               key={item.label}
               to={item.href}
+              onClick={(e) => {
+                if (item.href === "/" && location.pathname === "/") {
+                  e.preventDefault();
+                  document.getElementById("hero")?.scrollIntoView({ behavior: "smooth" });
+                }
+              }}
               className={({ isActive }) => `
                     relative text-sm font-medium transition-colors hover:text-primary
                     ${isActive ? "text-primary" : "text-fg-tertiary"}
@@ -115,7 +119,15 @@ const Navbar = () => {
         <div className="lg:hidden ml-auto">
           <BubbleMenu
             items={[
-              { label: homeContent.navbar.links.home, href: "/" },
+              { 
+                label: homeContent.navbar.links.home, 
+                href: "/",
+                onClick: () => {
+                   if (location.pathname === "/") {
+                      document.getElementById("hero")?.scrollIntoView({ behavior: "smooth" });
+                   }
+                }
+              },
               { label: homeContent.navbar.links.about, href: "/about" },
               { label: homeContent.navbar.links.projects, href: "/projects" },
               { label: homeContent.navbar.cta, href: "/contact" },

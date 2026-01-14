@@ -140,6 +140,7 @@ export function HomeBentoSection() {
                 <img
                   src={`/certs/${cert}.webp`}
                   alt={cert}
+                  loading="lazy"
                   className={cn(
                     "w-full h-full object-contain grayscale transition-all duration-300 pointer-coarse:grayscale-0 [@media(hover:hover)]:group-hover:grayscale-0"
                   )}

@@ -24,6 +24,12 @@ const DottedMap: React.FC<DottedMapProps> = ({
   // context removed as it was unused
 
   const svgMap = useMemo(() => {
+    // Input validation for colors to prevent XSS
+    const isSafeColor = (color?: string) => !color || !/[<>"']/.test(color);
+    
+    const safeMarkerColor = isSafeColor(markerColor) ? markerColor : "var(--primary)";
+    const safeDotColor = isSafeColor(dotColor) ? dotColor : undefined;
+
     // Create map instance
     const map = new DottedMapLib({ height: 60, grid: "diagonal" });
 
@@ -32,12 +38,12 @@ const DottedMap: React.FC<DottedMapProps> = ({
       map.addPin({
         lat: marker.lat,
         lng: marker.lng,
-        svgOptions: { color: markerColor, radius: marker.size || 0.4 },
+        svgOptions: { color: safeMarkerColor, radius: marker.size || 0.4 },
       });
     });
 
     // Determine colors based on theme if not provided
-    const dots = dotColor || "var(--fg-secondary)"; // Use semantic secondary (darker) for better contrast
+    const dots = safeDotColor || "var(--fg-secondary)"; // Use semantic secondary (darker) for better contrast
 
     // Generate SVG
     const svgStr = map.getSVG({

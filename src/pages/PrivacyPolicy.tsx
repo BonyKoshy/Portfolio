@@ -1,8 +1,13 @@
 import React from "react";
+import { Meta } from "@/shared/ui/Meta/Meta";
 
 const PrivacyPolicy: React.FC = () => {
   return (
     <div className="min-h-screen pt-32 pb-12 px-6 bg-bg-default">
+      <Meta
+        title="Privacy Policy"
+        description="Privacy Policy for Bony Koshy's portfolio website. Learn how your data is handled."
+      />
       <div id="main-content" className="max-w-3xl mx-auto">
         {/* Removed Card UI - Content directly on background */}
         <div className="animate-in fade-in duration-700 slide-in-from-bottom-8">
@@ -12,6 +17,8 @@ const PrivacyPolicy: React.FC = () => {
           <p className="text-fg-secondary mb-10 text-sm uppercase tracking-widest font-medium border-b border-border-default pb-6 inline-block w-full">
             Effective Date: Jan 2026
           </p>
+
+
 
           <div className="prose prose-lg prose-zinc dark:prose-invert leading-relaxed text-fg-primary">
             <p className="mb-8">
