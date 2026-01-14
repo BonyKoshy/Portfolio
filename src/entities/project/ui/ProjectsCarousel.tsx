@@ -21,6 +21,7 @@ export const ProjectsCarousel = () => {
             <img
               src={project.content.imageSrc}
               alt={project.title}
+              loading="lazy"
               className="absolute inset-0 h-full w-full object-cover opacity-60 group-hover/card:opacity-40 transition-opacity grayscale group-hover/card:grayscale-0"
             />
 
