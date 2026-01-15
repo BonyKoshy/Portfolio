@@ -1,6 +1,6 @@
 import { Link, useNavigate } from "react-router-dom";
 import { Container } from "@/shared/ui/Container";
-import { useMemo, useCallback } from "react";
+
 
 
 import { ShinyText } from "@/shared/ui/ShinyText";
@@ -29,7 +29,7 @@ const Hero = () => {
   const navigate = useNavigate();
 
   // Keyboard navigation handler
-  const handleCardKeyDown = useCallback((e: React.KeyboardEvent, path: string) => {
+  const handleCardKeyDown = (e: React.KeyboardEvent, path: string) => {
     if (e.key === "Enter" || e.key === " ") {
       e.preventDefault();
       if (path.startsWith("#")) {
@@ -39,9 +39,9 @@ const Hero = () => {
         navigate(path);
       }
     }
-  }, [navigate]);
+  };
 
-  const cards = useMemo(() => [
+  const cards = [
      // Card 1: Top Skills
     <Card
       key="skills"
@@ -222,7 +222,7 @@ const Hero = () => {
         </div>
       </div>
     </Card>
-  ], [navigate, handleCardKeyDown]);
+  ];
 
   return (
     <section

@@ -10,6 +10,13 @@ export interface ProjectCardData {
     imageSrc: string;
     description: string;
     tech: string[];
+    role?: string;
+    problem?: string;
+    solution?: string;
+    features?: string[];
+    challenges?: string;
+    installCommand?: string;
+    screenshots?: string[];
   };
   srcs?: string[];
   key?: string;

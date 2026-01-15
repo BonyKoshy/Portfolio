@@ -1,7 +1,8 @@
-import { Briefcase, ExternalLink, Github } from "lucide-react";
+import { ArrowRight, Briefcase, Download, ArrowUpRight } from "lucide-react";
 import { projectsData } from "@/entities/project/model/data";
 import { PrimaryButton, SecondaryButton } from "@/shared/ui/Button";
 import { Meta } from "@/shared/ui/Meta/Meta";
+import { ProjectDetailsSheet } from "@/entities/project/ui/ProjectDetailsSheet";
 
 const Projects = () => {
   return (
@@ -77,39 +78,54 @@ const Projects = () => {
               {/* Actions */}
               <div className="mt-auto pt-6 flex flex-wrap gap-4">
                 {/* Live Link */}
-                {project.liveLink && project.liveLink !== "#" && (
+                {/* Action Button: Install (if available) > Live Demo (if available) */}
+                {project.content.installCommand && project.githubLink ? (
+                   <a
+                      href={`${project.githubLink}/releases`}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                   >
+                     <PrimaryButton
+                      withHoverAnimation={false}
+                      className="text-sm gap-2 h-10 px-6"
+                      icon={<Download size={16} />} 
+                      iconPosition="right"
+                    >
+                       Install
+                    </PrimaryButton>
+                  </a>
+                ) : project.liveLink && project.liveLink !== "#" ? (
                   <a
                     href={project.liveLink}
                     target="_blank"
                     rel="noopener noreferrer"
                   >
                     <PrimaryButton
+                      withHoverAnimation={false}
                       className="text-sm gap-2 h-10 px-6"
-                      icon={<ExternalLink size={16} />}
+                      icon={<ArrowUpRight size={16} />}
                       iconPosition="right"
                     >
                       Live Demo
                     </PrimaryButton>
                   </a>
-                )}
+                ) : null}
 
-                {/* Github Link */}
-                {project.githubLink && (
-                  <a
-                    href={project.githubLink}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                  >
+                {/* Removed Source Code button from here, kept in Side Sheet */}
+
+                {/* Read More (Side Sheet) */}
+                <ProjectDetailsSheet project={project}>
                     <SecondaryButton
-                      variant="ghost"
-                      className="text-sm gap-2 h-10 px-6 border border-border-default hover:bg-bg-subtle hover:text-text-primary"
-                      icon={<Github size={16} />}
+                      withHoverAnimation={false}
+                      className="text-sm gap-2 h-10 px-6"
+                      icon={<ArrowRight size={16} />}
                       iconPosition="right"
                     >
-                      Source Code
+                      Read More
                     </SecondaryButton>
-                  </a>
-                )}
+                </ProjectDetailsSheet>
+
+
               </div>
             </div>
           </div>

@@ -2,8 +2,13 @@ import { Suspense, lazy } from "react";
 import { Routes, Route } from "react-router-dom";
 import { Navbar } from "@/widgets/Navbar";
 import { Footer } from "@/widgets/Footer";
-import PageSkeleton from "@/shared/ui/PageSkeleton/PageSkeleton";
-import { PageContentSkeleton } from "@/shared/ui/skeletons";
+import {
+  HomeSkeleton,
+  ProjectsSkeleton,
+  SimplePageSkeleton,
+  PrivacySkeleton,
+  NotFoundSkeleton,
+} from "@/shared/ui/skeletons";
 import { ThemeProvider } from "./providers/ThemeProvider";
 import ScrollToTop from "@/shared/lib/ScrollToTop";
 
@@ -17,12 +22,6 @@ const NotFound = lazy(() => import("@/pages/NotFound"));
 const PrivacyPolicy = lazy(() => import("@/pages/PrivacyPolicy"));
 
 const App = () => {
-  const fallback = (
-    <PageSkeleton>
-      <PageContentSkeleton />
-    </PageSkeleton>
-  );
-
   return (
     <ThemeProvider>
       <ScrollToTop />
@@ -34,7 +33,7 @@ const App = () => {
             <Route
               path="/"
               element={
-                <Suspense fallback={fallback}>
+                <Suspense fallback={<HomeSkeleton />}>
                   <Home />
                 </Suspense>
               }
@@ -43,7 +42,7 @@ const App = () => {
             <Route
               path="/about"
               element={
-                <Suspense fallback={fallback}>
+                <Suspense fallback={<SimplePageSkeleton />}>
                   <About />
                 </Suspense>
               }
@@ -52,7 +51,7 @@ const App = () => {
             <Route
               path="/projects"
               element={
-                <Suspense fallback={fallback}>
+                <Suspense fallback={<ProjectsSkeleton />}>
                   <Projects />
                 </Suspense>
               }
@@ -61,7 +60,7 @@ const App = () => {
             <Route
               path="/contact"
               element={
-                <Suspense fallback={fallback}>
+                <Suspense fallback={<SimplePageSkeleton />}>
                   <Contact />
                 </Suspense>
               }
@@ -70,7 +69,7 @@ const App = () => {
             <Route
               path="/certificates"
               element={
-                <Suspense fallback={fallback}>
+                <Suspense fallback={<SimplePageSkeleton />}>
                   <Certificates />
                 </Suspense>
               }
@@ -79,7 +78,7 @@ const App = () => {
             <Route
               path="/privacy"
               element={
-                <Suspense fallback={fallback}>
+                <Suspense fallback={<PrivacySkeleton />}>
                   <PrivacyPolicy />
                 </Suspense>
               }
@@ -88,7 +87,7 @@ const App = () => {
             <Route
               path="*"
               element={
-                <Suspense fallback={fallback}>
+                <Suspense fallback={<NotFoundSkeleton />}>
                   <NotFound />
                 </Suspense>
               }

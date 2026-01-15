@@ -1,7 +1,8 @@
 import { Hero } from "@/widgets/Hero";
 import { HomeBentoSection } from "@/widgets/HomeBentoSection";
 import { HomeProjectsSection } from "@/widgets/HomeProjectsSection";
-import { ContactSection } from "@/widgets/ContactSection";
+import { HomeContactSection } from "@/widgets/HomeContactSection/HomeContactSection";
+import { RevealOnScroll } from "@/shared/ui/RevealOnScroll";
 
 const Home = () => {
   return (
@@ -26,8 +27,10 @@ const Home = () => {
       </section>
 
       {/* Contact Section */}
-      <section className="flex flex-col justify-center mx-auto max-w-7xl px-6 w-full pb-20">
-        <ContactSection />
+      <section className="flex flex-col justify-center mx-auto max-w-7xl px-6 w-full pb-20 border-t border-border-default/40">
+        <RevealOnScroll width="100%">
+          <HomeContactSection />
+        </RevealOnScroll>
       </section>
     </main>
   );

@@ -1,7 +1,6 @@
 import React, {
   Children,
   cloneElement,
-  forwardRef,
   isValidElement,
   ReactElement,
   ReactNode,
@@ -29,16 +28,18 @@ export interface CardProps extends React.HTMLAttributes<HTMLDivElement> {
   customClass?: string;
 }
 
-export const Card = forwardRef<HTMLDivElement, CardProps>(
-  ({ customClass, ...rest }, ref) => (
-    <div
-      ref={ref}
-      {...rest}
-      className={`absolute top-1/2 left-1/2 rounded-[var(--radius-card)] border border-border-default bg-bg-surface transform-3d will-change-transform backface-hidden ${
-        customClass ?? ""
-      } ${rest.className ?? ""}`.trim()}
-    />
-  )
+export const Card = ({
+  customClass,
+  ref,
+  ...rest
+}: CardProps & { ref?: React.Ref<HTMLDivElement> }) => (
+  <div
+    ref={ref}
+    {...rest}
+    className={`absolute top-1/2 left-1/2 rounded-[var(--radius-card)] border border-border-default bg-bg-surface transform-3d will-change-transform backface-hidden ${
+      customClass ?? ""
+    } ${rest.className ?? ""}`.trim()}
+  />
 );
 Card.displayName = "Card";
 

@@ -9,7 +9,7 @@ const secondaryButtonVariants = cva(
     variants: {
       variant: {
         default:
-          "relative text-fg-secondary hover:text-fg-primary after:absolute after:left-0 after:-bottom-1 after:h-px after:w-full after:origin-left after:scale-x-0 after:bg-current after:transition-transform after:duration-300 hover:after:scale-x-100 p-0",
+          "relative text-fg-secondary hover:text-fg-primary after:absolute after:left-0 after:bottom-0 after:h-px after:w-full after:origin-left after:scale-x-0 after:bg-current after:transition-transform after:duration-300 hover:after:scale-x-100 p-0",
         ghost:
             "text-fg-secondary rounded-full hover:text-fg-primary hover:bg-action-hover p-2", // Optional, if needed for some contexts
       },
@@ -25,6 +25,7 @@ interface SecondaryButtonProps
     VariantProps<typeof secondaryButtonVariants> {
   icon?: React.ReactNode;
   iconPosition?: "left" | "right";
+  withHoverAnimation?: boolean;
   asChild?: boolean;
 }
 
@@ -35,6 +36,7 @@ const SecondaryButton = React.forwardRef<HTMLButtonElement, SecondaryButtonProps
       variant,
       icon,
       iconPosition = "right",
+      withHoverAnimation = true,
       asChild = false,
       children,
       ...props
@@ -43,10 +45,11 @@ const SecondaryButton = React.forwardRef<HTMLButtonElement, SecondaryButtonProps
   ) => {
     const Comp = asChild ? Slot : "button";
 
-    const iconTransformClass = 
-       iconPosition === "left"
+    const iconTransformClass = withHoverAnimation
+       ? iconPosition === "left"
         ? "group-hover:-translate-x-1"
-        : "group-hover:translate-x-1";
+        : "group-hover:translate-x-1"
+       : "";
 
     if (asChild) {
       return (
