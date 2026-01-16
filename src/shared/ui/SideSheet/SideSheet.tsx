@@ -1,4 +1,5 @@
 "use client";
+import FocusTrap from "focus-trap-react";
 import React, {
   createContext,
   useContext,
@@ -378,10 +379,7 @@ const SideSheetContent = ({
   return (
     <SideSheetPortal>
       <div
-        className={cn(
-          "fixed inset-0 z-999",
-          !isOpen && "pointer-events-none"
-        )}
+        className={cn("fixed inset-0 z-999", !isOpen && "pointer-events-none")}
       >
         <motion.div
           ref={overlayRef}
@@ -392,46 +390,53 @@ const SideSheetContent = ({
           className="absolute inset-0 bg-black/20 backdrop-blur-sm"
           style={{ pointerEvents: isOpen ? "auto" : "none" }}
         />
-        <motion.div
-          drag="x"
-          dragConstraints={getDragConstraints()}
-          dragElastic={0}
-          dragMomentum={false}
-          onDragEnd={handleDragEnd}
-          animate={controls}
-          initial={{ x: getInitialX() }}
-          className={cn(
-            "absolute bg-bg-paper text-text-primary shadow-2xl",
-            side === "left" ? "rounded-r-lg" : "rounded-l-lg",
-            className
-          )}
-          style={{
-            width: sheetWidth,
-            ...getPositionStyles(),
-          }}
+        <FocusTrap
+          active={isOpen}
+          focusTrapOptions={{ allowOutsideClick: true }}
         >
-          <div className="h-full overflow-hidden">
-            <div
-              ref={scrollRef}
-              className="h-full overflow-y-auto px-6 py-6 scrollbar-hide overscroll-contain"
-              style={{
-                scrollbarWidth: "none",
-                msOverflowStyle: "none",
-              }}
-            >
-              {children}
-            </div>
-          </div>
-
-          <div
+          <motion.div
+            drag="x"
+            dragConstraints={getDragConstraints()}
+            dragElastic={0}
+            dragMomentum={false}
+            onDragEnd={handleDragEnd}
+            animate={controls}
+            initial={{ x: getInitialX() }}
             className={cn(
-              "absolute top-1/2 -translate-y-1/2 flex items-center",
-              side === "left" ? "right-0 pr-2" : "left-0 pl-2"
+              "absolute bg-bg-paper text-text-primary shadow-2xl",
+              side === "left" ? "rounded-r-lg" : "rounded-l-lg",
+              className
             )}
+            style={{
+              width: sheetWidth,
+              ...getPositionStyles(),
+              outline: "none",
+            }}
+            tabIndex={-1}
           >
-            <div className="w-2 h-16 rounded-full bg-muted cursor-grab active:cursor-grabbing" />
-          </div>
-        </motion.div>
+            <div className="h-full overflow-hidden">
+              <div
+                ref={scrollRef}
+                className="h-full overflow-y-auto px-6 py-6 scrollbar-hide overscroll-contain"
+                style={{
+                  scrollbarWidth: "none",
+                  msOverflowStyle: "none",
+                }}
+              >
+                {children}
+              </div>
+            </div>
+
+            <div
+              className={cn(
+                "absolute top-1/2 -translate-y-1/2 flex items-center",
+                side === "left" ? "right-0 pr-2" : "left-0 pl-2"
+              )}
+            >
+              <div className="w-2 h-16 rounded-full bg-muted cursor-grab active:cursor-grabbing" />
+            </div>
+          </motion.div>
+        </FocusTrap>
       </div>
     </SideSheetPortal>
   );

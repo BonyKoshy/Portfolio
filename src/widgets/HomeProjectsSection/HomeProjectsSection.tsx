@@ -1,15 +1,14 @@
 import { Link } from "react-router-dom";
 import { ArrowRight, Briefcase } from "lucide-react";
 import { SecondaryButton } from "@/shared/ui/Button";
-import { projectsData } from "@/entities/project/model/data";
+import { useProjects } from "@/entities/project/model/useProjects";
 import { ProjectCard } from "@/entities/project/ui/ProjectCard";
 import { homeContent } from "@/shared/config/content";
 import { RevealOnScroll } from "@/shared/ui/RevealOnScroll";
 
-// Displaying top 2 featured projects
-const featuredProjects = projectsData.slice(0, 2);
-
 export const HomeProjectsSection = () => {
+  const { getFeaturedProjects } = useProjects();
+  const featuredProjects = getFeaturedProjects(2);
   return (
     <div className="w-full max-w-7xl mx-auto text-text-primary px-4">
       {/* Header Section */}

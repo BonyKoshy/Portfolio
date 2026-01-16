@@ -1,9 +1,22 @@
-import { useEffect } from "react";
+import { useEffect, lazy, Suspense } from "react";
 import { Hero } from "@/widgets/Hero";
-import { HomeBentoSection } from "@/widgets/HomeBentoSection";
-import { HomeProjectsSection } from "@/widgets/HomeProjectsSection";
-import { HomeContactSection } from "@/widgets/HomeContactSection/HomeContactSection";
 import { RevealOnScroll } from "@/shared/ui/RevealOnScroll";
+
+const HomeBentoSection = lazy(() =>
+  import("@/widgets/HomeBentoSection").then((module) => ({
+    default: module.HomeBentoSection,
+  }))
+);
+const HomeProjectsSection = lazy(() =>
+  import("@/widgets/HomeProjectsSection").then((module) => ({
+    default: module.HomeProjectsSection,
+  }))
+);
+const HomeContactSection = lazy(() =>
+  import("@/widgets/HomeContactSection/HomeContactSection").then((module) => ({
+    default: module.HomeContactSection,
+  }))
+);
 
 const Home = () => {
   useEffect(() => {
@@ -49,7 +62,9 @@ const Home = () => {
 
       {/* Bento Section */}
       <section className="min-h-screen flex flex-col justify-center mx-auto max-w-7xl px-6 w-full py-20 lg:py-0">
-        <HomeBentoSection />
+        <Suspense fallback={<div className="min-h-screen" />}>
+          <HomeBentoSection />
+        </Suspense>
       </section>
 
       {/* Projects Section - Placed under Bento */}
@@ -57,13 +72,17 @@ const Home = () => {
         id="projects"
         className="min-h-screen flex flex-col justify-center mx-auto max-w-7xl px-6 w-full py-20"
       >
-        <HomeProjectsSection />
+        <Suspense fallback={<div className="min-h-screen" />}>
+          <HomeProjectsSection />
+        </Suspense>
       </section>
 
       {/* Contact Section */}
       <section className="flex flex-col justify-center mx-auto max-w-7xl px-6 w-full pb-20 border-t border-border-default/40">
         <RevealOnScroll width="100%">
-          <HomeContactSection />
+          <Suspense fallback={<div className="min-h-[50vh]" />}>
+            <HomeContactSection />
+          </Suspense>
         </RevealOnScroll>
       </section>
     </main>

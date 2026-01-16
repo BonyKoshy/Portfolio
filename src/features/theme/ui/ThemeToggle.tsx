@@ -52,8 +52,17 @@ const ThemeToggle: React.FC = () => {
     <div className="inline-block relative">
       <label
         htmlFor="theme-switch"
-        className="group relative grid place-items-center w-10 h-10 bg-bg-surface rounded-full cursor-pointer shadow-[0_0_20px_2px_rgba(0,0,0,0.05)] transition-colors duration-300 z-10 text-fg-primary border border-border-default/50"
+        className="group relative grid place-items-center w-10 h-10 bg-bg-surface rounded-full cursor-pointer shadow-[0_0_20px_2px_rgba(0,0,0,0.05)] transition-colors duration-300 z-10 text-fg-primary border border-border-default/50 focus-within:ring-2 focus-within:ring-primary focus-within:ring-offset-2"
         aria-label="Toggle Theme"
+        onKeyDown={(e) => {
+          if (e.key === "Enter" || e.key === " ") {
+            e.preventDefault();
+            const rect = e.currentTarget.getBoundingClientRect();
+            const x = rect.left + rect.width / 2;
+            const y = rect.top + rect.height / 2;
+            handleToggle(x, y);
+          }
+        }}
       >
         <input
           type="checkbox"

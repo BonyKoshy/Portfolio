@@ -8,6 +8,7 @@ import ScrollToTop from "@/shared/lib/ScrollToTop";
 import { GlobalLoader } from "@/shared/ui/GlobalLoader/GlobalLoader";
 import { LoadingProvider } from "@/shared/lib/context/LoadingContext";
 import { SuspenseTrigger } from "@/shared/ui/GlobalLoader/SuspenseTrigger";
+import { StructuredData } from "@/shared/lib/seo/StructuredData";
 
 // Lazy Load Pages
 const Home = lazy(() => import("@/pages/Home"));
@@ -25,6 +26,7 @@ const App = () => {
         <ScrollToTop />
         <GlobalLoader />
         <div className="min-h-screen bg-background text-text-primary transition-colors duration-300 flex flex-col">
+          <StructuredData />
           <Navbar />
 
           <div className="grow">

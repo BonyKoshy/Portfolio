@@ -6,7 +6,11 @@
 :root {
   /* Shared Defaults & Constants */
   --overlay: rgba(0, 0, 0, 0.4);
-  --font-sans: "Poppins", system-ui, sans-serif;
+  --font-sans: "Roboto Flex", system-ui, sans-serif;
+  --font-display: "Poppins", system-ui, sans-serif;
+  
+  /* Sync ring color with primary for consistent focus rings */
+  --ring: var(--primary);
 
   /* Fallback values (handled by data-theme overrides below) */
   --bg-default: #ffffff;
@@ -71,7 +75,8 @@ html[data-theme="dark"] {
 
 /* 2. Tailwind Configuration (Theme-aware) */
 @theme {
-  --font-sans: "Poppins", system-ui, sans-serif;
+  --font-sans: "Roboto Flex", system-ui, sans-serif;
+  --font-display: "Poppins", system-ui, sans-serif;
 
   /* Map Tailwind classes to our CSS variables */
 
@@ -204,6 +209,7 @@ html[data-theme="dark"] {
     --primary: #2563eb;
     --primary-fg: #ffffff;
     --primary-hover: #1d4ed8;
+    --ring: var(--primary);
     --action-hover: #f4f4f5;
   }
 
@@ -218,9 +224,10 @@ html[data-theme="dark"] {
     --fg-tertiary: #52525b;
     --border-default: #27272a;
     --border-subtle: #18181b;
-    --primary: #3b82f6;
+    --primary: #3b82f6; /* Blue-500 */
     --primary-fg: #ffffff;
     --primary-hover: #60a5fa;
+    --ring: var(--primary);
     --action-hover: rgba(255, 255, 255, 0.05);
   }
 
@@ -233,10 +240,19 @@ html[data-theme="dark"] {
     overflow-x: hidden;
   }
 
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
+    font-family: var(--font-display);
+  }
+
   :focus-visible {
     outline: 2px solid var(--primary);
     outline-offset: 2px;
-    border-radius: 4px;
+    border-radius: 4px; 
   }
 
   /* Custom Scrollbar */

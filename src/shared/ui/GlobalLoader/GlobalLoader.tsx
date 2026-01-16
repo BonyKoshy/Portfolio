@@ -24,6 +24,8 @@ export const GlobalLoader = () => {
     // Wait for transition to finish before hiding container
     setTimeout(() => {
       setIsVisible(false);
+      // Dispatch event for prerendering
+      document.dispatchEvent(new Event("prerender-trigger"));
     }, 500); // Matches duration-500
   };
 

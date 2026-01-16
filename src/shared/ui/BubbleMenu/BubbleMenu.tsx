@@ -179,11 +179,7 @@ export default function BubbleMenu({
         .bubble-menu-items .pill-list .pill-col:nth-child(4):last-child {
           margin-left: calc(100% / 3);
         }
-        @media (min-width: 1024px) {
-          .bubble-menu-items .pill-link {
-            /* rotation handled by framer or inline style */
-          }
-        }
+
         @media (max-width: 1023px) {
           .bubble-menu-items {
             padding-top: 120px;

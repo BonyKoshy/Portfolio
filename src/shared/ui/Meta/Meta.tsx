@@ -3,12 +3,31 @@ import { Helmet } from "react-helmet-async";
 interface MetaProps {
   title?: string;
   description?: string;
+  schema?: Record<string, any>;
 }
 
-export const Meta = ({ title, description }: MetaProps) => {
+export const Meta = ({ title, description, schema }: MetaProps) => {
   const siteTitle = "Bony Koshy | Portfolio";
   const defaultDescription =
     "Personal portfolio of Bony Koshy, a passionate Full-Stack Developer specializing in creating beautiful and functional digital experiences.";
+
+  const defaultSchema = {
+    "@context": "https://schema.org",
+    "@type": "Person",
+    name: "Bony Koshy",
+    url: "https://bonykoshy.netlify.app", // Replace with actual domain if different
+    image: "/profile-image.jpg",
+    sameAs: [
+      "https://github.com/BonyKoshy",
+      "https://linkedin.com/in/bonykoshy",
+      "https://x.com/Bony_Koshy",
+    ],
+    jobTitle: "Full-Stack Developer",
+    worksFor: {
+      "@type": "Organization",
+      name: "Freelance",
+    },
+  };
 
   return (
     <Helmet defer={false}>
@@ -24,6 +43,9 @@ export const Meta = ({ title, description }: MetaProps) => {
         name="twitter:description"
         content={description || defaultDescription}
       />
+      <script type="application/ld+json">
+        {JSON.stringify(schema || defaultSchema)}
+      </script>
     </Helmet>
   );
 };

@@ -1,10 +1,11 @@
 import { ArrowRight, Briefcase, Download, ArrowUpRight } from "lucide-react";
-import { projectsData } from "@/entities/project/model/data";
+import { useProjects } from "@/entities/project/model/useProjects";
 import { PrimaryButton, SecondaryButton } from "@/shared/ui/Button";
 import { Meta } from "@/shared/ui/Meta/Meta";
 import { ProjectDetailsSheet } from "@/entities/project/ui/ProjectDetailsSheet";
 
 const Projects = () => {
+  const { projects } = useProjects();
   return (
     <div className="w-full max-w-7xl mx-auto text-text-primary px-4 pt-24 pb-16">
       <Meta
@@ -27,7 +28,7 @@ const Projects = () => {
 
       {/* Projects List - Vertical Stack of Horizontal Cards */}
       <div className="flex flex-col gap-12">
-        {projectsData.map((project) => (
+        {projects.map((project) => (
           <div
             key={project.title}
             className="group flex flex-col md:flex-row gap-8 bg-bg-paper border border-border-default rounded-2xl overflow-hidden hover:border-text-secondary transition-colors duration-300 p-6"

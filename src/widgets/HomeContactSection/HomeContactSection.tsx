@@ -30,7 +30,6 @@ export const HomeContactSection = () => {
           <ScrollFloat
             animationDuration={1}
             ease="back.inOut(2)"
-
             stagger={0.03}
             textClassName="text-fg-primary"
             containerClassName="my-0"
@@ -40,7 +39,6 @@ export const HomeContactSection = () => {
           <ScrollFloat
             animationDuration={1}
             ease="back.inOut(2)"
-
             stagger={0.03}
             textClassName="text-fg-primary"
             containerClassName="my-0"
@@ -54,7 +52,6 @@ export const HomeContactSection = () => {
           <ScrollFloat
             animationDuration={1}
             ease="back.inOut(2)"
-
             stagger={0.03}
             textClassName="text-fg-primary"
           >
@@ -73,7 +70,7 @@ export const HomeContactSection = () => {
         >
           <SecondaryButton
             className="font-medium text-fg-primary px-0 h-auto"
-            tabIndex={0}
+            onClick={(e) => e.preventDefault()}
           >
             Accenture
           </SecondaryButton>
@@ -109,7 +106,11 @@ export const HomeContactSection = () => {
 
         {/* Secondary Action: Go to Full Contact Page */}
         <Link to="/contact" className="w-full sm:w-auto">
-          <SecondaryButton className="w-full justify-center h-full py-4 text-base">
+          <SecondaryButton
+            className="w-full justify-center h-full py-4 text-base"
+            tabIndex={-1}
+            aria-hidden="true"
+          >
             More options
             <ArrowRight
               size={18}
