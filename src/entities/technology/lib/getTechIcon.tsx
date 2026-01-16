@@ -6,11 +6,15 @@ import { FaCode } from "react-icons/fa6";
 export const getTechIcon = (techName: string) => {
   const normalizedTech = techName.toLowerCase();
 
-// React icon with strict regex matching
+  // React icon with strict regex matching
   if (/^react(\s|$|\.)/i.test(normalizedTech)) return <SiReact />;
 
   // Initial manual check for C/C++ variants
-  if (normalizedTech === "c" || normalizedTech === "c++" || normalizedTech === "cpp")
+  if (
+    normalizedTech === "c" ||
+    normalizedTech === "c++" ||
+    normalizedTech === "cpp"
+  )
     return <FaCode />;
 
   // Find matching logo using strict word boundaries

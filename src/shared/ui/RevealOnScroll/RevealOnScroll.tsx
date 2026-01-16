@@ -30,20 +30,20 @@ export const RevealOnScroll = ({
   }, [isInView, mainControls]);
 
   const variants: Record<string, Variant> = {
-    hidden: { 
-      opacity: 0, 
+    hidden: {
+      opacity: 0,
       y: direction === "up" ? 20 : direction === "down" ? -20 : 0,
       x: direction === "left" ? 20 : direction === "right" ? -20 : 0,
     },
-    visible: { 
-      opacity: 1, 
-      y: 0, 
+    visible: {
+      opacity: 1,
+      y: 0,
       x: 0,
-      transition: { 
-        duration: duration, 
+      transition: {
+        duration: duration,
         delay: delay,
-        ease: "easeOut" 
-      }
+        ease: "easeOut",
+      },
     },
   };
 

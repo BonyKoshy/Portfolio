@@ -20,7 +20,6 @@ export const HomeContactSection = () => {
 
   return (
     <section className="relative w-full py-24 px-6 flex flex-col items-center justify-center overflow-hidden">
-      
       {/* 1. Background Glow (Subtle) */}
       <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[60%] h-[60%] bg-primary/5 blur-[120px] rounded-full pointer-events-none" />
 
@@ -31,8 +30,7 @@ export const HomeContactSection = () => {
           <ScrollFloat
             animationDuration={1}
             ease="back.inOut(2)"
-            scrollStart="top bottom+=20%"
-            scrollEnd="bottom bottom-=20%"
+
             stagger={0.03}
             textClassName="text-fg-primary"
             containerClassName="my-0"
@@ -42,8 +40,7 @@ export const HomeContactSection = () => {
           <ScrollFloat
             animationDuration={1}
             ease="back.inOut(2)"
-            scrollStart="top bottom+=20%"
-            scrollEnd="bottom bottom-=20%"
+
             stagger={0.03}
             textClassName="text-fg-primary"
             containerClassName="my-0"
@@ -57,8 +54,7 @@ export const HomeContactSection = () => {
           <ScrollFloat
             animationDuration={1}
             ease="back.inOut(2)"
-            scrollStart="top bottom+=20%"
-            scrollEnd="bottom bottom-=20%"
+
             stagger={0.03}
             textClassName="text-fg-primary"
           >
@@ -82,12 +78,12 @@ export const HomeContactSection = () => {
             Accenture
           </SecondaryButton>
         </Tooltip>
-        , but the learning never stops. Drop a line if you want to discuss bleeding-edge UI, optimize some render cycles, or just say hi.
+        , but the learning never stops. Drop a line if you want to discuss
+        bleeding-edge UI, optimize some render cycles, or just say hi.
       </div>
 
       {/* 4. Action Buttons */}
       <div className="relative z-10 flex flex-col sm:flex-row items-center gap-4 w-full sm:w-auto">
-        
         {/* Primary Action: Copy Email */}
         <button
           onClick={handleCopy}
@@ -113,13 +109,15 @@ export const HomeContactSection = () => {
 
         {/* Secondary Action: Go to Full Contact Page */}
         <Link to="/contact" className="w-full sm:w-auto">
-            <SecondaryButton className="w-full justify-center h-full py-4 text-base">
-                More options
-                <ArrowRight size={18} className="ml-2 group-hover:translate-x-1 transition-transform" />
-            </SecondaryButton>
+          <SecondaryButton className="w-full justify-center h-full py-4 text-base">
+            More options
+            <ArrowRight
+              size={18}
+              className="ml-2 group-hover:translate-x-1 transition-transform"
+            />
+          </SecondaryButton>
         </Link>
       </div>
-
     </section>
   );
 };

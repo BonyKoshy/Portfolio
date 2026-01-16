@@ -1,85 +1,87 @@
-import React, { useEffect, useMemo, useRef, ReactNode, RefObject } from 'react';
-import { gsap } from 'gsap';
-import { ScrollTrigger } from 'gsap/ScrollTrigger';
-
-gsap.registerPlugin(ScrollTrigger);
+import React, { useMemo } from "react";
+import { motion, Variants } from "framer-motion";
 
 interface ScrollFloatProps {
-  children: ReactNode;
-  scrollContainerRef?: RefObject<HTMLElement>;
+  children: React.ReactNode;
   containerClassName?: string;
   textClassName?: string;
   animationDuration?: number;
   ease?: string;
-  scrollStart?: string;
-  scrollEnd?: string;
   stagger?: number;
 }
 
 const ScrollFloat: React.FC<ScrollFloatProps> = ({
   children,
-  scrollContainerRef,
-  containerClassName = '',
-  textClassName = '',
+  containerClassName = "",
+  textClassName = "",
   animationDuration = 1,
-  ease = 'back.inOut(2)',
-  scrollStart = 'center bottom+=50%',
-  scrollEnd = 'bottom bottom-=40%',
-  stagger = 0.03
+  // ease = 'back.inOut(2)', // Framer motion uses different easing strings
+  stagger = 0.03,
 }) => {
-  const containerRef = useRef<HTMLHeadingElement>(null);
-
   const splitText = useMemo(() => {
-    const text = typeof children === 'string' ? children : '';
-    return text.split('').map((char, index) => (
-      <span className="inline-block word" key={index}>
-        {char === ' ' ? '\u00A0' : char}
+    const text = typeof children === "string" ? children : "";
+    return text.split("").map((char, index) => (
+      <span className="inline-block" key={index}>
+        {char === " " ? "\u00A0" : char}
       </span>
     ));
   }, [children]);
 
-  useEffect(() => {
-    const el = containerRef.current;
-    if (!el) return;
-
-    const scroller = scrollContainerRef && scrollContainerRef.current ? scrollContainerRef.current : window;
-    const charElements = el.querySelectorAll('.inline-block');
-
-    gsap.fromTo(
-      charElements,
-      {
-        willChange: 'opacity, transform',
-        opacity: 0,
-        yPercent: 120,
-        scaleY: 2.3,
-        scaleX: 0.7,
-        transformOrigin: '50% 0%'
+  const containerVariants: Variants = {
+    hidden: {},
+    visible: {
+      transition: {
+        staggerChildren: stagger,
       },
-      {
+    },
+  };
+
+  const charVariants: Variants = {
+    hidden: {
+      opacity: 0,
+      y: "120%",
+      scaleY: 2.3,
+      scaleX: 0.7,
+      transformOrigin: "50% 0%",
+      transition: {
+        duration: 0.8, // Optional: faster exit than entry?
+        ease: "easeInOut",
+      },
+    },
+    visible: {
+      opacity: 1,
+      y: 0,
+      scaleY: 1,
+      scaleX: 1,
+      transition: {
         duration: animationDuration,
-        ease: ease,
-        opacity: 1,
-        yPercent: 0,
-        scaleY: 1,
-        scaleX: 1,
-        stagger: stagger,
-        scrollTrigger: {
-          trigger: el,
-          scroller,
-          start: scrollStart,
-          end: scrollEnd,
-          scrub: true
-        }
-      }
-    );
-  }, [scrollContainerRef, animationDuration, ease, scrollStart, scrollEnd, stagger]);
+        ease: [0.22, 1, 0.36, 1], // Custom cubic bezier similar to back.inOut, or just standard easeOut
+      },
+    },
+  };
 
   return (
-    <h2 ref={containerRef} className={`my-5 overflow-hidden ${containerClassName}`}>
-      <span className={`inline-block text-[clamp(2.5rem,8vw,6rem)] leading-[1] font-bold tracking-tighter ${textClassName}`}>
-        {splitText}
+    <motion.h2
+      className={`my-5 overflow-hidden ${containerClassName}`}
+      initial="hidden"
+      whileInView="visible"
+      viewport={{ once: false, margin: "-10% 0px -10% 0px" }} // Adjust viewport as needed
+      variants={containerVariants}
+    >
+      <span
+        className={`inline-block text-[clamp(2.5rem,8vw,6rem)] leading-none font-bold tracking-tighter ${textClassName}`}
+      >
+        {splitText.map((char, index) => (
+          <motion.span
+            key={index}
+            className="inline-block"
+            variants={charVariants}
+          >
+            {char}
+          </motion.span>
+        ))}
       </span>
-    </h2>
+    </motion.h2>
   );
 };
 

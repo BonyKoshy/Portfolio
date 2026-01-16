@@ -72,7 +72,7 @@ export const BentoCard = ({
 
   const handleMouseMove: React.MouseEventHandler<HTMLAnchorElement> = (e) => {
     if (!divRef.current || isFocused) return;
-    
+
     const rect = boundsRef.current;
     if (rect) {
       setPosition({ x: e.clientX - rect.left, y: e.clientY - rect.top });
@@ -91,7 +91,7 @@ export const BentoCard = ({
 
   const handleMouseEnter = () => {
     if (divRef.current) {
-        boundsRef.current = divRef.current.getBoundingClientRect();
+      boundsRef.current = divRef.current.getBoundingClientRect();
     }
     setOpacity(0.6);
   };

@@ -18,8 +18,6 @@ const PrivacyPolicy: React.FC = () => {
             Effective Date: Jan 2026
           </p>
 
-
-
           <div className="prose prose-lg prose-zinc dark:prose-invert leading-relaxed text-fg-primary">
             <p className="mb-8">
               This Privacy Policy describes how personal information is

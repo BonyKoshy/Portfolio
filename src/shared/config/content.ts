@@ -99,7 +99,7 @@ export const homeContent = {
       explore: "Explore",
       work: "Work",
       socials: "Socials",
-      legal: "Legal & Extras",
+      connect: "Connect",
     },
   },
   projects: {
@@ -118,4 +118,43 @@ export const homeContent = {
     skipToMain: "Skip to Main",
     backToHome: "Back to Home",
   },
+  socialLinks: [
+    { label: "GitHub", href: "https://github.com/BonyKoshy", icon: "SiGithub" },
+    {
+      label: "LinkedIn",
+      href: "https://linkedin.com/in/bonykoshy",
+      icon: "SiLinkedin",
+    },
+    { label: "X (Twitter)", href: "https://x.com/Bony_Koshy", icon: "SiX" },
+    {
+      label: "Pinterest",
+      href: "https://in.pinterest.com/bonykoshy/",
+      icon: "SiPinterest",
+    },
+    {
+      label: "Dribbble",
+      href: "https://dribbble.com/bonykoshy",
+      icon: "SiDribbble",
+    },
+    {
+      label: "Behance",
+      href: "https://www.behance.net/bonykoshy",
+      icon: "SiBehance",
+    },
+    {
+      label: "Discord",
+      href: "https://discordapp.com/users/bonykoshy",
+      icon: "SiDiscord",
+    },
+    {
+      label: "Whatsapp",
+      href: "https://wa.me/919447132399",
+      icon: "SiWhatsapp",
+    },
+    {
+      label: "Leetcode",
+      href: "https://leetcode.com/u/Bonykoshy/",
+      icon: "SiLeetcode",
+    },
+  ],
 };

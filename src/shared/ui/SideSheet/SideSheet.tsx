@@ -197,9 +197,9 @@ const SideSheetTrigger = ({
   }
 
   return (
-    <div onClick={handleClick} className={cn("", className)}>
+    <button type="button" onClick={handleClick} className={cn("", className)}>
       {children}
-    </div>
+    </button>
   );
 };
 
@@ -283,7 +283,7 @@ const SideSheetContent = ({
   // Reset scroll on open
   useEffect(() => {
     if (isOpen && scrollRef.current) {
-        scrollRef.current.scrollTop = 0;
+      scrollRef.current.scrollTop = 0;
     }
   }, [isOpen]);
 
@@ -304,10 +304,10 @@ const SideSheetContent = ({
       controls.start({
         x: getInitialX(),
         transition: {
-            type: "tween",
-            ease: [0.25, 0.46, 0.45, 0.94],
-            duration: 0.3,
-          },
+          type: "tween",
+          ease: [0.25, 0.46, 0.45, 0.94],
+          duration: 0.3,
+        },
       });
     }
     return () => {
@@ -379,7 +379,7 @@ const SideSheetContent = ({
     <SideSheetPortal>
       <div
         className={cn(
-          "fixed inset-0 z-[999]",
+          "fixed inset-0 z-999",
           !isOpen && "pointer-events-none"
         )}
       >
@@ -478,9 +478,7 @@ const SideSheetDescription = ({
   className,
 }: SideSheetDescriptionProps) => {
   return (
-    <p className={cn("text-sm text-text-secondary", className)}>
-      {children}
-    </p>
+    <p className={cn("text-sm text-text-secondary", className)}>{children}</p>
   );
 };
 
@@ -534,7 +532,14 @@ const SideSheetClose = ({
   }
 
   return (
-    <button onClick={handleClick} type="button" className={cn("transition-opacity hover:opacity-75 focus:outline-hidden", className)}>
+    <button
+      onClick={handleClick}
+      type="button"
+      className={cn(
+        "transition-opacity hover:opacity-75 focus:outline-hidden",
+        className
+      )}
+    >
       {children}
     </button>
   );

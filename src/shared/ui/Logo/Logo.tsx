@@ -3,9 +3,10 @@ import { useState, useEffect } from "react";
 interface LogoProps {
   className?: string;
   isLoading?: boolean;
+  onComplete?: () => void;
 }
 
-const Logo = ({ className = "", isLoading = false }: LogoProps) => {
+const Logo = ({ className = "", isLoading = false, onComplete }: LogoProps) => {
   const [animationState, setAnimationState] = useState<
     "loading" | "intro" | "idle" | "hovering"
   >("loading");
@@ -31,7 +32,10 @@ const Logo = ({ className = "", isLoading = false }: LogoProps) => {
   // 3. Cleanup after animation ends
   const handleAnimationEnd = () => {
     // If Intro or Hover finishes, go to Idle state
-    if (animationState === "intro" || animationState === "hovering") {
+    if (animationState === "intro") {
+      setAnimationState("idle");
+      if (onComplete) onComplete();
+    } else if (animationState === "hovering") {
       setAnimationState("idle");
     }
   };

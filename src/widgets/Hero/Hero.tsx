@@ -1,7 +1,5 @@
-import { Link, useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 import { Container } from "@/shared/ui/Container";
-
-
 
 import { ShinyText } from "@/shared/ui/ShinyText";
 import { PrimaryButton, SecondaryButton } from "@/shared/ui/Button";
@@ -22,37 +20,20 @@ import {
 import { FaLayerGroup, FaFolderOpen } from "react-icons/fa6";
 
 // Entity components
+import { useScrollToAnchor } from "@/shared/lib/useScrollToAnchor";
 import { ProfileTooltipCard } from "@/entities/profile/ui/ProfileTooltipCard";
 import { CompanyTooltipCard } from "@/entities/profile/ui/CompanyTooltipCard";
 
 const Hero = () => {
-  const navigate = useNavigate();
-
-  // Keyboard navigation handler
-  const handleCardKeyDown = (e: React.KeyboardEvent, path: string) => {
-    if (e.key === "Enter" || e.key === " ") {
-      e.preventDefault();
-      if (path.startsWith("#")) {
-        const id = path.substring(1);
-        document.getElementById(id)?.scrollIntoView({ behavior: "smooth" });
-      } else {
-        navigate(path);
-      }
-    }
-  };
+  const scrollTo = useScrollToAnchor();
 
   const cards = [
-     // Card 1: Top Skills
+    // Card 1: Top Skills
     <Card
       key="skills"
-      onClick={(e) => {
-        e.stopPropagation();
-        navigate("/about#skills");
-      }}
+      as={Link}
+      to="/about#skills"
       customClass="bg-bg-surface border-border-default border flex flex-col justify-between overflow-hidden cursor-pointer group shadow-2xl focus-visible:ring-2 focus-visible:ring-primary focus-visible:outline-none"
-      role="button"
-      tabIndex={0}
-      onKeyDown={(e) => handleCardKeyDown(e, "/about#skills")}
     >
       {/* Background Typography */}
       <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-full text-center pointer-events-none">
@@ -115,14 +96,9 @@ const Hero = () => {
     // Card 2: Accenture
     <Card
       key="experience"
-      onClick={(e) => {
-        e.stopPropagation();
-        navigate("/about#experience");
-      }}
+      as={Link}
+      to="/about#experience"
       customClass="bg-bg-surface border-border-default border flex flex-col justify-between overflow-hidden cursor-pointer group shadow-2xl focus-visible:ring-2 focus-visible:ring-primary focus-visible:outline-none"
-      role="button"
-      tabIndex={0}
-      onKeyDown={(e) => handleCardKeyDown(e, "/about#experience")}
     >
       {/* Background Typography */}
       <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-full text-center pointer-events-none">
@@ -167,14 +143,10 @@ const Hero = () => {
     // Card 3: Selected Work
     <Card
       key="projects"
-      onClick={(e) => {
-        e.stopPropagation();
-        document.getElementById("projects")?.scrollIntoView({ behavior: "smooth" });
-      }}
+      as={Link}
+      to="#projects"
+      onClick={() => scrollTo("/", "projects")}
       customClass="bg-bg-surface border-border-default border flex flex-col justify-between overflow-hidden cursor-pointer group shadow-2xl focus-visible:ring-2 focus-visible:ring-primary focus-visible:outline-none"
-      role="button"
-      tabIndex={0}
-      onKeyDown={(e) => handleCardKeyDown(e, "#projects")}
     >
       {/* Background Typography */}
       <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-full text-center pointer-events-none">
@@ -221,13 +193,11 @@ const Hero = () => {
           </p>
         </div>
       </div>
-    </Card>
+    </Card>,
   ];
 
   return (
-    <section
-      className="relative flex min-h-[90vh] w-full flex-col justify-center overflow-hidden pt-20 pb-20 outline-none"
-    >
+    <section className="relative flex min-h-[90vh] w-full flex-col justify-center overflow-hidden pt-20 pb-20 outline-none">
       <Meta
         title="Portfolio | Bony Koshy"
         description="Personal portfolio of Bony Koshy, a passionate Full-Stack Developer specializing in modern web technologies, React, and system architecture."
@@ -243,8 +213,6 @@ const Hero = () => {
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
           {/* --- LEFT COLUMN: CONTENT (Span 7) --- */}
           <div className="flex flex-col items-start w-full lg:col-span-7">
-
-
             {/* 2. Eyebrow */}
             <div className="mb-6 flex items-center gap-3 rounded-full border border-border-default bg-bg-paper/50 px-4 py-1.5 backdrop-blur-sm">
               <span className="relative flex h-2 w-2">
@@ -287,8 +255,7 @@ const Hero = () => {
                   {homeContent.hero.subtext.name}
                 </SecondaryButton>
               </Tooltip>
-              , {homeContent.hero.subtext.role}{" "}
-              {/* Tooltip: Company */}
+              , {homeContent.hero.subtext.role} {/* Tooltip: Company */}
               <Tooltip
                 content={<CompanyTooltipCard />}
                 containerClassName="inline-block align-baseline"
@@ -307,11 +274,7 @@ const Hero = () => {
 
             {/* 5. Actions */}
             <div className="flex w-full flex-col gap-4 sm:w-auto sm:flex-row sm:items-center sm:gap-8">
-              <PrimaryButton
-                asChild
-                size="lg"
-                className="w-full sm:w-auto"
-              >
+              <PrimaryButton asChild size="lg" className="w-full sm:w-auto">
                 <Link to="/projects">
                   {homeContent.hero.cta.primary}
                   <span className="shrink-0 transition-transform duration-300 group-hover:translate-x-1 motion-reduce:transition-none">
@@ -327,13 +290,13 @@ const Hero = () => {
           </div>
 
           {/* --- RIGHT COLUMN: CARD SWAP --- */}
-          <div className="hidden lg:block lg:col-span-5 relative h-150 w-full pointer-events-none">
+          <div className="hidden lg:flex lg:col-span-5 relative h-150 w-full items-center justify-center pointer-events-none">
             {/* 3D Effect container */}
-            <div className="absolute -right-5 xl:right-0 top-[75%] -translate-y-1/2 pointer-events-auto scale-90 xl:scale-100 origin-center">
+            <div className="pointer-events-auto origin-center">
               <CardSwap
                 cardDistance={30}
                 verticalDistance={50}
-                skewAmount={12}
+                // skewAmount={12} // Removed
                 delay={3000}
                 pauseOnHover={true}
                 width={500}
@@ -350,4 +313,3 @@ const Hero = () => {
 };
 
 export default Hero;
-

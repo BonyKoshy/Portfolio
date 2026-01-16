@@ -35,7 +35,11 @@ export const Tooltip = ({
     return window.matchMedia("(hover: none)").matches;
   };
 
-  const calculatePosition = (x: number, y: number, isKeyboard: boolean = false) => {
+  const calculatePosition = (
+    x: number,
+    y: number,
+    isKeyboard: boolean = false
+  ) => {
     if (!contentRef.current) return { x: x + 12, y: y + 12 };
 
     const tooltip = contentRef.current;
@@ -60,13 +64,17 @@ export const Tooltip = ({
 
     // Boundary checks (same as before)
     if (finalX + tooltipWidth > viewportWidth) {
-      finalX = isKeyboard ? viewportWidth - tooltipWidth - 12 : x - tooltipWidth - 12;
+      finalX = isKeyboard
+        ? viewportWidth - tooltipWidth - 12
+        : x - tooltipWidth - 12;
     }
     if (finalX < 12) {
       finalX = 12;
     }
     if (finalY + tooltipHeight > viewportHeight) {
-      finalY = isKeyboard ? containerRef.current!.getBoundingClientRect().top - tooltipHeight - 12 : y - tooltipHeight - 12;
+      finalY = isKeyboard
+        ? containerRef.current!.getBoundingClientRect().top - tooltipHeight - 12
+        : y - tooltipHeight - 12;
     }
     if (finalY < 12) {
       finalY = 12;
@@ -75,15 +83,19 @@ export const Tooltip = ({
     return { x: finalX, y: finalY };
   };
 
-  const updatePosition = (x: number, y: number, isKeyboard: boolean = false) => {
+  const updatePosition = (
+    x: number,
+    y: number,
+    isKeyboard: boolean = false
+  ) => {
     if (isKeyboard) {
-       // For keyboard, we pass 0,0 but the calculator will ignore them if isKeyboard is true and use containerRef
-       const newPosition = calculatePosition(0, 0, true);
-       setPosition(newPosition);
+      // For keyboard, we pass 0,0 but the calculator will ignore them if isKeyboard is true and use containerRef
+      const newPosition = calculatePosition(0, 0, true);
+      setPosition(newPosition);
     } else {
-       setMouse({ x, y });
-       const newPosition = calculatePosition(x, y, false);
-       setPosition(newPosition);
+      setMouse({ x, y });
+      const newPosition = calculatePosition(x, y, false);
+      setPosition(newPosition);
     }
   };
 
@@ -119,12 +131,12 @@ export const Tooltip = ({
         // Optional: return focus to container? It's likely already focused.
       }
     };
-    
+
     // Position update for keyboard focus needs to happen after visibility
     if (isVisible && !mouse.x && !mouse.y && containerRef.current) {
-        // Assume keyboard if mouse is 0,0 or we rely on the implementation detail that we don't set mouse on focus
-        const newPos = calculatePosition(0, 0, true);
-        setPosition(newPos);
+      // Assume keyboard if mouse is 0,0 or we rely on the implementation detail that we don't set mouse on focus
+      const newPos = calculatePosition(0, 0, true);
+      setPosition(newPos);
     }
 
     window.addEventListener("keydown", handleKeyDown);
@@ -156,7 +168,7 @@ export const Tooltip = ({
                   type: "spring",
                   stiffness: 200,
                   damping: 20,
-                  duration: 0.2
+                  duration: 0.2,
                 }}
                 className={cn(
                   "pointer-events-none fixed z-9999 overflow-hidden",

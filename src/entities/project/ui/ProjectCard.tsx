@@ -12,10 +12,11 @@ interface ProjectCardProps {
 
 export const ProjectCard = ({ project }: ProjectCardProps) => {
   return (
-    <div
-      className="group space-y-6 flex flex-col h-full"
-    >
-      <Link to="/projects" className="space-y-6 flex flex-col grow no-underline">
+    <div className="group space-y-6 flex flex-col h-full">
+      <Link
+        to="/projects"
+        className="space-y-6 flex flex-col grow no-underline"
+      >
         {/* Image Container */}
         <div className="overflow-hidden rounded-(--radius-card) w-full bg-panel shadow-sm border border-transparent group-hover:border-prelayer-2 transition-colors duration-300">
           <AspectRatio ratio={1.75}>
@@ -57,15 +58,15 @@ export const ProjectCard = ({ project }: ProjectCardProps) => {
       {/* Read More Button */}
       <div className="mt-auto pt-2 flex justify-start">
         <ProjectDetailsSheet project={project}>
-            <SecondaryButton
-              variant="default"
-              className="text-sm text-accent hover:text-accent border-b-current" 
-              icon={<ArrowRight size={14} />}
-              iconPosition="right"
-            >
-              {homeContent.projects.readMore}
-            </SecondaryButton>
-         </ProjectDetailsSheet>
+          <SecondaryButton
+            variant="default"
+            className="text-sm text-accent hover:text-accent border-b-current"
+            icon={<ArrowRight size={14} />}
+            iconPosition="right"
+          >
+            {homeContent.projects.readMore}
+          </SecondaryButton>
+        </ProjectDetailsSheet>
       </div>
     </div>
   );

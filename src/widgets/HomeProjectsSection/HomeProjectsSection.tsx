@@ -6,10 +6,10 @@ import { ProjectCard } from "@/entities/project/ui/ProjectCard";
 import { homeContent } from "@/shared/config/content";
 import { RevealOnScroll } from "@/shared/ui/RevealOnScroll";
 
-export const HomeProjectsSection = () => {
-  // Displaying top 2 featured projects
-  const featuredProjects = projectsData.slice(0, 2);
+// Displaying top 2 featured projects
+const featuredProjects = projectsData.slice(0, 2);
 
+export const HomeProjectsSection = () => {
   return (
     <div className="w-full max-w-7xl mx-auto text-text-primary px-4">
       {/* Header Section */}
@@ -34,14 +34,14 @@ export const HomeProjectsSection = () => {
 
           {/* View All Button */}
           <div className="w-full lg:w-auto flex justify-start lg:justify-end">
-              <SecondaryButton asChild variant="default">
-                <Link to="/projects">
-                  {homeContent.projects.viewAll}
-                  <span className="shrink-0 transition-transform duration-300 group-hover:translate-x-1 ml-2">
-                     <ArrowRight size={16} />
-                  </span>
-                </Link>
-              </SecondaryButton>
+            <SecondaryButton asChild variant="default">
+              <Link to="/projects">
+                {homeContent.projects.viewAll}
+                <span className="shrink-0 transition-transform duration-300 group-hover:translate-x-1 ml-2">
+                  <ArrowRight size={16} />
+                </span>
+              </Link>
+            </SecondaryButton>
           </div>
         </div>
       </RevealOnScroll>

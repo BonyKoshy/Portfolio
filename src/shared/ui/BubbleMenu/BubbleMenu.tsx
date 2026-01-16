@@ -1,6 +1,6 @@
 import type { CSSProperties } from "react";
 import { useEffect, useRef, useState } from "react";
-import { gsap } from "gsap";
+import { motion, AnimatePresence, Variants } from "framer-motion";
 import { GradualBlur } from "@/shared/ui/GradualBlur";
 import { NavLink } from "react-router-dom";
 import { useOutsideClick } from "@/shared/lib/use-outside-click";
@@ -26,7 +26,7 @@ export type BubbleMenuProps = {
   menuContentColor?: string;
   useFixedPosition?: boolean;
   items?: MenuItem[];
-  animationEase?: string;
+  animationEase?: string; // Not used directly in framer map, simplified
   animationDuration?: number;
   staggerDelay?: number;
 };
@@ -78,21 +78,16 @@ export default function BubbleMenu({
   menuContentColor = "var(--fg-primary)",
   useFixedPosition = false,
   items,
-  animationEase = "back.out(1.5)",
   animationDuration = 0.5,
-  staggerDelay = 0.12,
+  staggerDelay = 0.1,
 }: BubbleMenuProps) {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
-  const [showOverlay, setShowOverlay] = useState(false);
-
-  const overlayRef = useRef<HTMLDivElement>(null);
-  const bubblesRef = useRef<HTMLAnchorElement[]>([]);
-  const labelRefs = useRef<HTMLSpanElement[]>([]);
   const listRef = useRef<HTMLUListElement>(null);
   const toggleRef = useRef<HTMLButtonElement>(null);
 
   useOutsideClick(listRef, (e) => {
-    if (toggleRef.current && toggleRef.current.contains(e.target as Node)) return;
+    if (toggleRef.current && toggleRef.current.contains(e.target as Node))
+      return;
     if (isMenuOpen) handleToggle();
   });
 
@@ -113,7 +108,6 @@ export default function BubbleMenu({
 
   const handleToggle = () => {
     const nextState = !isMenuOpen;
-    if (nextState) setShowOverlay(true);
     setIsMenuOpen(nextState);
     onMenuClick?.(nextState);
   };
@@ -129,80 +123,51 @@ export default function BubbleMenu({
     };
   }, [isMenuOpen]);
 
-  useEffect(() => {
-    const overlay = overlayRef.current;
-    const bubbles = bubblesRef.current.filter(Boolean);
-    const labels = labelRefs.current.filter(Boolean);
-    if (!overlay || !bubbles.length) return;
+  // Framer Motion Variants
+  const containerVariants: Variants = {
+    hidden: {
+      transition: {
+        staggerChildren: 0.05,
+        staggerDirection: -1,
+      },
+    },
+    visible: {
+      transition: {
+        staggerChildren: staggerDelay,
+        delayChildren: 0.1,
+      },
+    },
+  };
 
-    if (isMenuOpen) {
-      gsap.set(overlay, { display: "flex" });
-      gsap.killTweensOf([...bubbles, ...labels]);
-      gsap.set(bubbles, { scale: 0, transformOrigin: "50% 50%" });
-      gsap.set(labels, { y: 24, autoAlpha: 0 });
+  const itemVariants: Variants = {
+    hidden: { scale: 0, opacity: 0 },
+    visible: {
+      scale: 1,
+      opacity: 1,
+      transition: {
+        type: "spring",
+        damping: 15,
+        stiffness: 200,
+        duration: animationDuration,
+      },
+    },
+  };
 
-      bubbles.forEach((bubble, i) => {
-        const delay = i * staggerDelay + gsap.utils.random(-0.05, 0.05);
-        const tl = gsap.timeline({ delay });
-        tl.to(bubble, {
-          scale: 1,
-          duration: animationDuration,
-          ease: animationEase,
-        });
-        if (labels[i]) {
-          tl.to(
-            labels[i],
-            {
-              y: 0,
-              autoAlpha: 1,
-              duration: animationDuration,
-              ease: "power3.out",
-            },
-            "-=" + animationDuration * 0.9
-          );
-        }
-      });
-    } else if (showOverlay) {
-      gsap.killTweensOf([...bubbles, ...labels]);
-      gsap.to(labels, {
-        y: 24,
-        autoAlpha: 0,
-        duration: 0.2,
-        ease: "power3.in",
-      });
-      gsap.to(bubbles, {
-        scale: 0,
-        duration: 0.2,
-        ease: "power3.in",
-        onComplete: () => {
-          gsap.set(overlay, { display: "none" });
-          setShowOverlay(false);
-        },
-      });
-    }
-  }, [isMenuOpen, showOverlay, animationEase, animationDuration, staggerDelay]);
-
-  useEffect(() => {
-    const handleResize = () => {
-      if (isMenuOpen) {
-        const bubbles = bubblesRef.current.filter(Boolean);
-        const isDesktop = window.innerWidth >= 1024;
-        bubbles.forEach((bubble, i) => {
-          const item = menuItems[i];
-          if (bubble && item) {
-            const rotation = isDesktop ? item.rotation ?? 0 : 0;
-            gsap.set(bubble, { rotation });
-          }
-        });
-      }
-    };
-    window.addEventListener("resize", handleResize);
-    return () => window.removeEventListener("resize", handleResize);
-  }, [isMenuOpen, menuItems]);
+  const labelVariants: Variants = {
+    hidden: { y: 24, opacity: 0 },
+    visible: {
+      y: 0,
+      opacity: 1,
+      transition: {
+        ease: "easeOut",
+        duration: 0.3,
+      },
+    },
+  };
 
   return (
     <>
-      {/* Workaround for silly Tailwind capabilities */}
+      {/* Retaining Styles for layout */}
       <style>{`
         .bubble-menu .menu-line {
           transition: transform 0.3s ease, opacity 0.3s ease;
@@ -216,15 +181,7 @@ export default function BubbleMenu({
         }
         @media (min-width: 1024px) {
           .bubble-menu-items .pill-link {
-            transform: rotate(var(--item-rot));
-          }
-          .bubble-menu-items .pill-link:hover {
-            transform: rotate(var(--item-rot)) scale(1.06);
-            background: var(--hover-bg) !important;
-            color: var(--hover-color) !important;
-          }
-          .bubble-menu-items .pill-link:active {
-            transform: rotate(var(--item-rot)) scale(.94);
+            /* rotation handled by framer or inline style */
           }
         }
         @media (max-width: 1023px) {
@@ -244,14 +201,6 @@ export default function BubbleMenu({
             font-size: clamp(1.2rem, 3vw, 4rem);
             padding: clamp(1rem, 2vw, 2rem) 0;
             min-height: 80px !important;
-          }
-          .bubble-menu-items .pill-link:hover {
-            transform: scale(1.06);
-            background: var(--hover-bg);
-            color: var(--hover-color);
-          }
-          .bubble-menu-items .pill-link:active {
-            transform: scale(.94);
           }
         }
       `}</style>
@@ -303,122 +252,157 @@ export default function BubbleMenu({
         </button>
       </nav>
 
-      {showOverlay && (
-        <div
-          ref={overlayRef}
-          className={[
-            "bubble-menu-items",
-            useFixedPosition ? "fixed" : "absolute",
-            "inset-0",
-            "flex items-center justify-center",
-            "pointer-events-auto",
-            "z-1000",
-          ].join(" ")}
-          style={{
-            backgroundColor: "var(--overlay)", // Keep tint
-          }}
-          aria-hidden={!isMenuOpen}
-        >
-          <div className="absolute inset-0 pointer-events-none">
-            <GradualBlur
-              position="top"
-              height="100%"
-              strength={1}
-              opacity={1}
-              zIndex={0}
-              curve="ease-out"
-              target="parent"
-            />
-          </div>
-          <ul
-            ref={listRef}
+      <AnimatePresence>
+        {isMenuOpen && (
+          <motion.div
+            key="overlay"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            transition={{ duration: 0.2 }}
             className={[
-              "pill-list",
-              "relative z-10", // Ensure above blur
-              "list-none m-0 px-6",
-              "w-full max-w-400 mx-auto",
-              "flex flex-wrap",
-              "gap-x-0 gap-y-1",
+              "bubble-menu-items",
+              useFixedPosition ? "fixed" : "absolute",
+              "inset-0",
+              "flex items-center justify-center",
               "pointer-events-auto",
+              "z-1000",
             ].join(" ")}
-            role="menu"
-            aria-label="Menu links"
+            style={{
+              backgroundColor: "var(--overlay)", // Keep tint
+            }}
+            aria-hidden={!isMenuOpen}
           >
-            {menuItems.map((item, idx) => (
-              <li
-                key={idx}
-                role="none"
-                className={[
-                  "pill-col",
-                  "flex justify-center items-stretch",
-                  "flex-[0_0_calc(100%/3)]",
-                  "box-border",
-                ].join(" ")}
-              >
-                <NavLink
-                  to={item.href}
-                  aria-label={item.ariaLabel || item.label}
-                  onClick={() => {
-                    item.onClick?.();
-                    handleToggle();
-                  }}
-                  className={[
-                    "pill-link",
-                    "w-full",
-                    "rounded-[999px]",
-                    "no-underline",
-                    "bg-white",
-                    "dark:bg-(--bg-paper)",
-                    "text-inherit",
-                    "shadow-[0_4px_14px_rgba(0,0,0,0.10)]",
-                    "flex items-center justify-center",
-                    "relative",
-                    "transition-[background,color] duration-300 ease-in-out",
-                    "box-border",
-                    "whitespace-nowrap overflow-hidden",
-                  ].join(" ")}
-                  style={
-                    {
-                      ["--item-rot"]: `${item.rotation ?? 0}deg`,
-                      ["--pill-bg"]: menuBg,
-                      ["--pill-color"]: menuContentColor,
-                      ["--hover-bg"]: item.hoverStyles?.bgColor || "#f3f4f6",
-                      ["--hover-color"]:
-                        item.hoverStyles?.textColor || menuContentColor,
-                      background: "var(--pill-bg)",
-                      color: "var(--pill-color)",
-                      minHeight: "var(--pill-min-h, 160px)",
-                      padding: "clamp(1.5rem, 3vw, 8rem) 0",
-                      fontSize: "clamp(1.5rem, 4vw, 4rem)",
-                      fontWeight: 400,
-                      lineHeight: 0,
-                      willChange: "transform",
-                      height: 10,
-                    } as CSSProperties
-                  }
-                  ref={(el) => {
-                    if (el) bubblesRef.current[idx] = el;
-                  }}
-                >
-                  <span
-                    className="pill-label inline-block"
-                    style={{
-                      willChange: "transform, opacity",
-                      height: "1.2em",
-                      lineHeight: 1.2,
-                    }}
-                    ref={(el) => {
-                      if (el) labelRefs.current[idx] = el;
-                    }}
+            <div className="absolute inset-0 pointer-events-none">
+              <GradualBlur
+                position="top"
+                height="100%"
+                strength={1}
+                opacity={1}
+                zIndex={0}
+                curve="ease-out"
+                target="parent"
+              />
+            </div>
+
+            <motion.ul
+              ref={listRef}
+              variants={containerVariants}
+              initial="hidden"
+              animate="visible"
+              exit="hidden"
+              className={[
+                "pill-list",
+                "relative z-10", // Ensure above blur
+                "list-none m-0 px-6",
+                "w-full max-w-400 mx-auto",
+                "flex flex-wrap",
+                "gap-x-0 gap-y-1",
+                "pointer-events-auto",
+              ].join(" ")}
+              role="menu"
+              aria-label="Menu links"
+            >
+              {menuItems.map((item, idx) => {
+                const isDesktop =
+                  typeof window !== "undefined" && window.innerWidth >= 1024;
+                const rotation = isDesktop ? item.rotation ?? 0 : 0;
+
+                return (
+                  <li
+                    key={idx}
+                    role="none"
+                    className={[
+                      "pill-col",
+                      "flex justify-center items-stretch",
+                      "flex-[0_0_calc(100%/3)]",
+                      "box-border",
+                    ].join(" ")}
                   >
-                    {item.label}
-                  </span>
-                </NavLink>
-              </li>
-            ))}
-          </ul>
-        </div>
-      )}
+                    <motion.div
+                      variants={itemVariants}
+                      className="w-full h-full flex justify-center"
+                    >
+                      <NavLink
+                        to={item.href}
+                        aria-label={item.ariaLabel || item.label}
+                        onClick={() => {
+                          item.onClick?.();
+                          handleToggle();
+                        }}
+                        className={[
+                          "pill-link",
+                          "w-full",
+                          "rounded-[999px]",
+                          "no-underline",
+                          "bg-white",
+                          "dark:bg-(--bg-paper)",
+                          "text-inherit",
+                          "shadow-[0_4px_14px_rgba(0,0,0,0.10)]",
+                          "flex items-center justify-center",
+                          "relative",
+                          "transition-[background,color] duration-300 ease-in-out",
+                          "box-border",
+                          "whitespace-nowrap overflow-hidden",
+                        ].join(" ")}
+                        style={
+                          {
+                            ["--pill-bg"]: menuBg,
+                            ["--pill-color"]: menuContentColor,
+                            ["--hover-bg"]:
+                              item.hoverStyles?.bgColor || "#f3f4f6",
+                            ["--hover-color"]:
+                              item.hoverStyles?.textColor || menuContentColor,
+                            background: "var(--pill-bg)",
+                            color: "var(--pill-color)",
+                            minHeight: "var(--pill-min-h, 160px)",
+                            padding: "clamp(1.5rem, 3vw, 8rem) 0",
+                            fontSize: "clamp(1.5rem, 4vw, 4rem)",
+                            fontWeight: 400,
+                            lineHeight: 0,
+                            willChange: "transform",
+                            height: 10,
+                          } as CSSProperties
+                        }
+                        // Apply rotation via frame motion animate prop to be safe or just style?
+                        // Using style is fine as it's static per item mostly, but we have resize listener in old code.
+                        // We can just rely on CSS for rotation if we set the var.
+                      >
+                        <motion.span
+                          className="pill-link-inner block w-full h-full absolute inset-0 rounded-[999px]"
+                          // To recreate hover effect if needed, but CSS handles hover.
+                          // Just need to apply rotation.
+                          style={{ transform: `rotate(${rotation}deg)` }}
+                          whileHover={{
+                            scale: 1.06,
+                            rotate: rotation,
+                            backgroundColor: "var(--hover-bg)",
+                            color: "var(--hover-color)",
+                          }}
+                          whileTap={{ scale: 0.94 }}
+                          transition={{ duration: 0.2 }}
+                        />
+
+                        <motion.span
+                          variants={labelVariants}
+                          className="pill-label inline-block relative z-10 pointers-events-none"
+                          style={{
+                            // transform: `rotate(${rotation}deg)` // Text shouldn't rotate?
+                            // Original code rotated the whole bubble.
+                            pointerEvents: "none",
+                          }}
+                        >
+                          {item.label}
+                        </motion.span>
+                      </NavLink>
+                    </motion.div>
+                  </li>
+                );
+              })}
+            </motion.ul>
+          </motion.div>
+        )}
+      </AnimatePresence>
     </>
   );
 }

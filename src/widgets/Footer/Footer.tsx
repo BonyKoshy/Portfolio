@@ -1,10 +1,16 @@
 import { useState } from "react";
 import ThemeToggle from "../../features/theme/ui/ThemeToggle";
-import { SiGithub } from "@react-icons/all-files/si/SiGithub";
-import { SiLinkedin } from "@react-icons/all-files/si/SiLinkedin";
-// SiX is newer, might not be in all-files v4. Using fallback or alternative.
-// If SiX is not in all-files, we might need to keep using "react-icons/si" for it, or use a FaTwitter from all-files if acceptable, but USER has "X (Twitter)".
-import { SiX } from "react-icons/si";
+import {
+  SiGithub,
+  SiLinkedin,
+  SiX,
+  SiPinterest,
+  SiDribbble,
+  SiBehance,
+  SiDiscord,
+  SiWhatsapp,
+  SiLeetcode,
+} from "react-icons/si";
 import { SecondaryButton } from "@/shared/ui/Button";
 import { Link } from "react-router-dom";
 import { ChevronDown } from "lucide-react";
@@ -17,18 +23,35 @@ import {
 } from "@/shared/ui/Accordion/Accordion";
 
 import { homeContent } from "@/shared/config/content";
-import { useLocation } from "react-router-dom";
+
+import { useScrollToAnchor } from "@/shared/lib/useScrollToAnchor";
+
+const SocialIconsMap: Record<string, React.ElementType> = {
+  SiGithub,
+  SiLinkedin,
+  SiX,
+  SiPinterest,
+  SiDribbble,
+  SiBehance,
+  SiDiscord,
+  SiWhatsapp,
+  SiLeetcode,
+};
 
 const Footer = () => {
   const [isOpen, setIsOpen] = useState(false);
-  const location = useLocation();
+
+  const scrollTo = useScrollToAnchor();
 
   const handleHomeClick = (e: React.MouseEvent) => {
-    if (location.pathname === "/") {
-      e.preventDefault();
-      document.getElementById("hero")?.scrollIntoView({ behavior: "smooth" });
-    }
+    e.preventDefault();
+    scrollTo("/", "hero");
   };
+
+  const socialLinks =
+    homeContent.socialLinks?.filter((link) =>
+      ["GitHub", "LinkedIn", "X (Twitter)"].includes(link.label)
+    ) || [];
 
   return (
     <footer className="mt-32 pb-8">
@@ -81,13 +104,13 @@ const Footer = () => {
                               Home
                             </Link>
                             <Link
-                              to="/#about"
+                              to="/about"
                               className="text-sm text-fg-secondary transition-colors hover:text-fg-primary"
                             >
                               About
                             </Link>
                             <Link
-                              to="/#contact"
+                              to="/contact"
                               className="text-sm text-fg-secondary transition-colors hover:text-fg-primary"
                             >
                               Contact
@@ -153,19 +176,21 @@ const Footer = () => {
                         <AccordionContent>
                           <div className="flex flex-col gap-3 pl-2 pt-2">
                             <Link
-                              to="/#projects"
+                              to="/projects"
                               className="text-sm text-fg-secondary transition-colors hover:text-fg-primary"
                             >
                               Projects
                             </Link>
                             <Link
-                              to="/#certificates"
+                              to="/certificates"
                               className="text-sm text-fg-secondary transition-colors hover:text-fg-primary"
                             >
                               Certificates
                             </Link>
                             <a
-                              href="#"
+                              href="/resume.pdf"
+                              target="_blank"
+                              rel="noopener noreferrer"
                               className="text-sm text-fg-secondary transition-colors hover:text-fg-primary"
                             >
                               Resume
@@ -218,34 +243,36 @@ const Footer = () => {
                         <AccordionContent>
                           <div className="flex flex-col gap-3 pl-2 pt-2">
                             <a
-                              href="#"
+                              href="https://x.com/Bony_Koshy"
+                              target="_blank"
+                              rel="noopener noreferrer"
                               className="text-sm text-fg-secondary transition-colors hover:text-fg-primary"
                             >
                               X (Twitter)
                             </a>
                             <a
-                              href="#"
+                              href="https://www.linkedin.com/in/bonykoshy/"
+                              target="_blank"
+                              rel="noopener noreferrer"
                               className="text-sm text-fg-secondary transition-colors hover:text-fg-primary"
                             >
                               LinkedIn
                             </a>
                             <a
-                              href="#"
+                              href="https://in.pinterest.com/bonykoshy/"
+                              target="_blank"
+                              rel="noopener noreferrer"
                               className="text-sm text-fg-secondary transition-colors hover:text-fg-primary"
                             >
                               Pinterest
                             </a>
                             <a
-                              href="#"
+                              href="https://dribbble.com/bonykoshy"
+                              target="_blank"
+                              rel="noopener noreferrer"
                               className="text-sm text-fg-secondary transition-colors hover:text-fg-primary"
                             >
                               Dribbble
-                            </a>
-                            <a
-                              href="#"
-                              className="text-sm text-fg-secondary transition-colors hover:text-fg-primary"
-                            >
-                              Behance
                             </a>
                           </div>
                         </AccordionContent>
@@ -258,7 +285,6 @@ const Footer = () => {
                     <h3 className="text-sm font-semibold text-fg-primary">
                       {homeContent.footer.sections.socials}
                     </h3>
-                    <div className="flex flex-col gap-3">
                     <div className="flex flex-col gap-3">
                       <a
                         href="https://x.com/Bony_Koshy"
@@ -292,60 +318,54 @@ const Footer = () => {
                       >
                         Dribbble
                       </a>
-                      <a
-                        href="https://www.behance.net/bonykoshy"
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="text-sm text-fg-secondary transition-colors hover:text-fg-primary w-fit"
-                      >
-                        Behance
-                      </a>
-                    </div>
                     </div>
                   </div>
                 </div>
 
-                {/* Column 4: Legal & Extras */}
+                {/* Column 4: Connect */}
                 <div className="w-full">
                   {/* Mobile Accordion */}
                   <div className="block lg:hidden">
                     <Accordion type="single" collapsible className="w-full">
-                      <AccordionItem value="legal" className="border-b-0">
+                      <AccordionItem value="connect" className="border-b-0">
                         <AccordionTrigger className="py-2 text-base font-medium text-fg-primary decoration-transparent hover:no-underline">
-                          {homeContent.footer.sections.legal}
+                          {/* @ts-ignore */}
+                          {homeContent.footer.sections.connect}
                         </AccordionTrigger>
                         <AccordionContent>
                           <div className="flex flex-col gap-3 pl-2 pt-2">
                             <a
-                              href="#"
+                              href="https://www.behance.net/bonykoshy"
+                              target="_blank"
+                              rel="noopener noreferrer"
+                              className="text-sm text-fg-secondary transition-colors hover:text-fg-primary"
+                            >
+                              Behance
+                            </a>
+                            <a
+                              href="https://discordapp.com/users/bonykoshy"
+                              target="_blank"
+                              rel="noopener noreferrer"
                               className="text-sm text-fg-secondary transition-colors hover:text-fg-primary"
                             >
                               Discord
                             </a>
                             <a
-                              href="#"
-                              className="text-sm text-fg-secondary transition-colors hover:text-fg-primary"
-                            >
-                              Telegram
-                            </a>
-                            <a
-                              href="#"
+                              href="https://wa.me/919447132399"
+                              target="_blank"
+                              rel="noopener noreferrer"
                               className="text-sm text-fg-secondary transition-colors hover:text-fg-primary"
                             >
                               Whatsapp
                             </a>
                             <a
-                              href="#"
+                              href="https://leetcode.com/u/Bonykoshy/"
+                              target="_blank"
+                              rel="noopener noreferrer"
                               className="text-sm text-fg-secondary transition-colors hover:text-fg-primary"
                             >
                               Leetcode
                             </a>
-                            <Link
-                              to="/404"
-                              className="text-sm text-fg-secondary transition-colors hover:text-fg-primary"
-                            >
-                              404 Page
-                            </Link>
                           </div>
                         </AccordionContent>
                       </AccordionItem>
@@ -355,9 +375,18 @@ const Footer = () => {
                   {/* Desktop List */}
                   <div className="hidden lg:flex flex-col gap-4">
                     <h3 className="text-sm font-semibold text-fg-primary">
-                      {homeContent.footer.sections.legal}
+                      {/* @ts-ignore */}
+                      {homeContent.footer.sections.connect}
                     </h3>
                     <div className="flex flex-col gap-3">
+                      <a
+                        href="https://www.behance.net/bonykoshy"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="text-sm text-fg-secondary transition-colors hover:text-fg-primary w-fit"
+                      >
+                        Behance
+                      </a>
                       <a
                         href="https://discordapp.com/users/bonykoshy"
                         target="_blank"
@@ -382,12 +411,6 @@ const Footer = () => {
                       >
                         Leetcode
                       </a>
-                      <Link
-                        to="/404"
-                        className="text-sm text-fg-secondary transition-colors hover:text-fg-primary w-fit"
-                      >
-                        404 Page
-                      </Link>
                     </div>
                   </div>
                 </div>
@@ -407,11 +430,7 @@ const Footer = () => {
           {/* Visual Separator */}
           <span className="hidden h-6 w-px bg-border-default sm:inline-block"></span>
 
-          <SecondaryButton
-            asChild
-            variant="default"
-            className="font-normal"
-          >
+          <SecondaryButton asChild variant="default" className="font-normal">
             <Link to="/privacy">Privacy Policy</Link>
           </SecondaryButton>
         </div>
@@ -421,33 +440,21 @@ const Footer = () => {
           <div className="flex items-center gap-4">
             {/* Social Icons group */}
             <div className="flex gap-4">
-              <a
-                href="https://github.com/BonyKoshy"
-                target="_blank"
-                rel="noreferrer noopener"
-                aria-label="GitHub"
-                className="flex h-10 w-10 items-center justify-center rounded-full bg-bg-surface shadow-[0_0_20px_2px_rgba(0,0,0,0.05)] text-fg-primary transition-colors border border-border-default/50"
-              >
-                <SiGithub size={18} />
-              </a>
-              <a
-                href="https://linkedin.com/in/bonykoshy"
-                target="_blank"
-                rel="noreferrer noopener"
-                aria-label="LinkedIn"
-                className="flex h-10 w-10 items-center justify-center rounded-full bg-bg-surface shadow-[0_0_20px_2px_rgba(0,0,0,0.05)] text-fg-primary transition-colors border border-border-default/50"
-              >
-                <SiLinkedin size={18} />
-              </a>
-              <a
-                href="https://x.com/Bony_Koshy"
-                target="_blank"
-                rel="noreferrer noopener"
-                aria-label="X (Twitter)"
-                className="flex h-10 w-10 items-center justify-center rounded-full bg-bg-surface shadow-[0_0_20px_2px_rgba(0,0,0,0.05)] text-fg-primary transition-colors border border-border-default/50"
-              >
-                <SiX size={18} />
-              </a>
+              {socialLinks.map((link) => {
+                const Icon = SocialIconsMap[link.icon as string] || SiGithub;
+                return (
+                  <a
+                    key={link.label}
+                    href={link.href}
+                    target="_blank"
+                    rel="noreferrer noopener"
+                    aria-label={link.label}
+                    className="flex h-10 w-10 items-center justify-center rounded-full bg-bg-surface shadow-[0_0_20px_2px_rgba(0,0,0,0.05)] text-fg-primary transition-colors border border-border-default/50"
+                  >
+                    <Icon size={18} />
+                  </a>
+                );
+              })}
             </div>
 
             <span className="h-8 w-px bg-border-default"></span>

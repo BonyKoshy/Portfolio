@@ -26,8 +26,10 @@ const DottedMap: React.FC<DottedMapProps> = ({
   const svgMap = useMemo(() => {
     // Input validation for colors to prevent XSS
     const isSafeColor = (color?: string) => !color || !/[<>"']/.test(color);
-    
-    const safeMarkerColor = isSafeColor(markerColor) ? markerColor : "var(--primary)";
+
+    const safeMarkerColor = isSafeColor(markerColor)
+      ? markerColor
+      : "var(--primary)";
     const safeDotColor = isSafeColor(dotColor) ? dotColor : undefined;
 
     // Create map instance

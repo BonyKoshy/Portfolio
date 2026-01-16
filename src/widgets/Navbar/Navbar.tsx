@@ -4,11 +4,17 @@ import { BubbleMenu } from "@/shared/ui/BubbleMenu";
 import { PrimaryButton } from "@/shared/ui/Button";
 import { ArrowDown, ArrowLeft } from "lucide-react";
 import { homeContent } from "@/shared/config/content";
+import { useScrollToAnchor } from "@/shared/lib/useScrollToAnchor";
 
 const Navbar = () => {
   const location = useLocation();
+  const scrollTo = useScrollToAnchor();
+
   const mainPaths = ["/", "/about", "/projects", "/contact"];
-  const isSpecialPage = !mainPaths.includes(location.pathname);
+  // Normalize path by removing trailing slash (unless it's just root)
+  const normalizedPath =
+    location.pathname === "/" ? "/" : location.pathname.replace(/\/$/, "");
+  const isSpecialPage = !mainPaths.includes(normalizedPath);
 
   const menuItems = [
     { label: homeContent.navbar.links.home, href: "/" },
@@ -18,13 +24,14 @@ const Navbar = () => {
   ];
 
   const handleSkipToMain = () => {
-    const mainContent = document.getElementById("main-content");
-    if (mainContent) {
-      mainContent.tabIndex = -1;
-      mainContent.focus({ preventScroll: true }); // Prevent redundant scroll if we use scrollIntoView, or just focus.
-      mainContent.scrollIntoView({ behavior: "smooth" });
-      // Remove tabIndex on blur to clean up? Optional, but -1 is fine to leave.
-    }
+    scrollTo("/", "main-content");
+    // Ensure focus management if needed after navigation/scroll
+    setTimeout(() => {
+      const mainContent = document.getElementById("main-content");
+      if (mainContent) {
+        mainContent.focus({ preventScroll: true });
+      }
+    }, 100);
   };
 
   return (
@@ -65,27 +72,28 @@ const Navbar = () => {
         <div className="absolute top-1/2 -translate-y-1/2 left-0 pl-6 z-50 flex items-center gap-4">
           {/* Back to Home - Only on Special Pages */}
           {isSpecialPage && (
-            <NavLink
-              to="/"
-              className={
-                isSpecialPage
-                  ? "opacity-100 transition-opacity duration-300"
-                  : ""
+            <PrimaryButton
+              asChild
+              size="md"
+              icon={
+                <ArrowLeft
+                  size={16}
+                  className="transition-transform duration-300 group-hover:-translate-x-1"
+                />
               }
+              iconPosition="left"
             >
-              <PrimaryButton
-                size="md"
-                icon={
-                  <ArrowLeft
-                    size={16}
-                    className="transition-transform duration-300 group-hover:-translate-x-1"
-                  />
+              <NavLink
+                to="/"
+                className={
+                  isSpecialPage
+                    ? "opacity-100 transition-opacity duration-300"
+                    : ""
                 }
-                iconPosition="left"
               >
                 {homeContent.navbar.backToHome}
-              </PrimaryButton>
-            </NavLink>
+              </NavLink>
+            </PrimaryButton>
           )}
         </div>
 
@@ -96,9 +104,9 @@ const Navbar = () => {
               key={item.label}
               to={item.href}
               onClick={(e) => {
-                if (item.href === "/" && location.pathname === "/") {
+                if (item.href === "/") {
                   e.preventDefault();
-                  document.getElementById("hero")?.scrollIntoView({ behavior: "smooth" });
+                  scrollTo("/", "hero");
                 }
               }}
               className={({ isActive }) => `
@@ -119,14 +127,10 @@ const Navbar = () => {
         <div className="lg:hidden ml-auto">
           <BubbleMenu
             items={[
-              { 
-                label: homeContent.navbar.links.home, 
+              {
+                label: homeContent.navbar.links.home,
                 href: "/",
-                onClick: () => {
-                   if (location.pathname === "/") {
-                      document.getElementById("hero")?.scrollIntoView({ behavior: "smooth" });
-                   }
-                }
+                onClick: () => scrollTo("/", "hero"),
               },
               { label: homeContent.navbar.links.about, href: "/about" },
               { label: homeContent.navbar.links.projects, href: "/projects" },

@@ -80,18 +80,18 @@ const Projects = () => {
                 {/* Live Link */}
                 {/* Action Button: Install (if available) > Live Demo (if available) */}
                 {project.content.installCommand && project.githubLink ? (
-                   <a
-                      href={`${project.githubLink}/releases`}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                   >
-                     <PrimaryButton
+                  <a
+                    href={`${project.githubLink}/releases`}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                  >
+                    <PrimaryButton
                       withHoverAnimation={false}
                       className="text-sm gap-2 h-10 px-6"
-                      icon={<Download size={16} />} 
+                      icon={<Download size={16} />}
                       iconPosition="right"
                     >
-                       Install
+                      Install
                     </PrimaryButton>
                   </a>
                 ) : project.liveLink && project.liveLink !== "#" ? (
@@ -115,17 +115,15 @@ const Projects = () => {
 
                 {/* Read More (Side Sheet) */}
                 <ProjectDetailsSheet project={project}>
-                    <SecondaryButton
-                      withHoverAnimation={false}
-                      className="text-sm gap-2 h-10 px-6"
-                      icon={<ArrowRight size={16} />}
-                      iconPosition="right"
-                    >
-                      Read More
-                    </SecondaryButton>
+                  <SecondaryButton
+                    withHoverAnimation={false}
+                    className="text-sm gap-2 h-10 px-6"
+                    icon={<ArrowRight size={16} />}
+                    iconPosition="right"
+                  >
+                    Read More
+                  </SecondaryButton>
                 </ProjectDetailsSheet>
-
-
               </div>
             </div>
           </div>
