@@ -1,3 +1,4 @@
+/** Data structure representing a single project entry. */
 export interface ProjectCardData {
   title: string;
   category: string;

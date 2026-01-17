@@ -1,6 +1,7 @@
 import React from "react";
 import { Meta } from "@/shared/ui/Meta/Meta";
 
+/** Renders the Privacy Policy legal document. */
 const PrivacyPolicy: React.FC = () => {
   return (
     <div className="min-h-screen pt-32 pb-12 px-6 bg-bg-default">
@@ -9,7 +10,6 @@ const PrivacyPolicy: React.FC = () => {
         description="Privacy Policy for Bony Koshy's portfolio website. Learn how your data is handled."
       />
       <div id="main-content" className="max-w-3xl mx-auto">
-        {/* Removed Card UI - Content directly on background */}
         <div className="animate-in fade-in duration-700 slide-in-from-bottom-8">
           <h1 className="text-4xl md:text-5xl font-bold mb-2 text-fg-primary tracking-tight">
             Privacy Policy

@@ -21,7 +21,8 @@ const secondaryButtonVariants = cva(
 );
 
 interface SecondaryButtonProps
-  extends React.ButtonHTMLAttributes<HTMLButtonElement>,
+  extends
+    React.ButtonHTMLAttributes<HTMLButtonElement>,
     VariantProps<typeof secondaryButtonVariants> {
   icon?: React.ReactNode;
   iconPosition?: "left" | "right";
@@ -29,6 +30,7 @@ interface SecondaryButtonProps
   asChild?: boolean;
 }
 
+/** Lower-emphasis button for secondary actions or text links. */
 const SecondaryButton = React.forwardRef<
   HTMLButtonElement,
   SecondaryButtonProps

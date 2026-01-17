@@ -15,6 +15,7 @@ const certsDir = path.join(publicDir, "certs");
 const MAX_WIDTH = 800; // Resize large project screenshots
 const QUALITY = 80;
 
+/** Recursively processes directories to optimize images to WebP. */
 async function processDirectory(directory) {
   try {
     if (!fs.existsSync(directory)) {
@@ -36,7 +37,6 @@ async function processDirectory(directory) {
 
         console.log(`Processing: ${file}`);
 
-        // Get metadata to check dimensions
         const image = sharp(filePath);
         const metadata = await image.metadata();
 
@@ -49,7 +49,6 @@ async function processDirectory(directory) {
         await pipeline.toFile(newFilePath);
         console.log(`Created: ${name}.webp`);
 
-        // Delete original file
         await fs.promises.unlink(filePath);
         console.log(`Deleted original: ${file}`);
       }
@@ -63,21 +62,16 @@ console.log("Starting image optimization...");
 await processDirectory(projectsDir);
 await processDirectory(certsDir);
 
-// Also process root profile image if exists
 const profileImgPath = path.join(publicDir, "profile-image.jpg");
 const profilePngPath = path.join(publicDir, "profile-image.png");
-// Check for jpg or png profile image
+
 if (fs.existsSync(profileImgPath)) {
   console.log("Processing profile-image.jpg");
   await sharp(profileImgPath)
-    .resize({ width: 500 }) // Reasonable size for profile
+    .resize({ width: 500 }) // Resizes profile image to optimal display size.
     .webp({ quality: QUALITY })
     .toFile(path.join(publicDir, "profile-image.webp"));
   console.log("Created profile-image.webp");
-  // Optional: Delete original profile image? User said "replace all image". Let's safer keep root one or delete if asked.
-  // User said "delete the png files". Since this is jpg, maybe keep?
-  // actually user said "make every png to webpa and delete the png files"
-  // I will stick to deleting PNGs strictly inside the loop.
 }
 if (fs.existsSync(profilePngPath)) {
   console.log("Processing profile-image.png");

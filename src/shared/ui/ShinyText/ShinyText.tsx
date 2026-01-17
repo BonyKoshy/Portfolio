@@ -20,12 +20,13 @@ interface ShinyTextProps {
   delay?: number;
 }
 
+/** Renders text with a shiny, moving gradient effect. */
 const ShinyText: React.FC<ShinyTextProps> = ({
   text,
   disabled = false,
   speed = 2,
   className = "",
-  color = "var(--fg-secondary)", // Default to semantic secondary text
+  color = "var(--fg-secondary)",
 
   shineColor = "#ffffff",
   spread = 90,
@@ -89,7 +90,6 @@ const ShinyText: React.FC<ShinyTextProps> = ({
     progress.set(0);
   }, [direction, progress]);
 
-  // Transform: p=0 -> 150% (shine off right), p=100 -> -50% (shine off left)
   const backgroundPosition = useTransform(
     progress,
     (p) => `${150 - p * 2}% center`
@@ -103,9 +103,6 @@ const ShinyText: React.FC<ShinyTextProps> = ({
     if (pauseOnHover) setIsPaused(false);
   }, [pauseOnHover]);
 
-  // FIX: Removed ': React.CSSProperties' type annotation.
-  // This prevents TS from injecting undefined optional properties (like 'rotate')
-  // that conflict with Framer Motion's strict types.
   const gradientStyle = {
     backgroundImage: `linear-gradient(${spread}deg, ${color} 0%, ${color} 40%, ${shineColor} 50%, ${color} 60%, ${color} 100%)`,
     backgroundSize: "200% auto",

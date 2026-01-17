@@ -69,6 +69,7 @@ const DEFAULT_ITEMS: MenuItem[] = [
   },
 ];
 
+/** Circular menu that expands with a bubble animation effect. */
 export default function BubbleMenu({
   onMenuClick,
   className,
@@ -123,7 +124,6 @@ export default function BubbleMenu({
     };
   }, [isMenuOpen]);
 
-  // Framer Motion Variants
   const containerVariants: Variants = {
     hidden: {
       transition: {
@@ -167,7 +167,6 @@ export default function BubbleMenu({
 
   return (
     <>
-      {/* Retaining Styles for layout */}
       <style>{`
         .bubble-menu .menu-line {
           transition: transform 0.3s ease, opacity 0.3s ease;
@@ -265,7 +264,7 @@ export default function BubbleMenu({
               "z-1000",
             ].join(" ")}
             style={{
-              backgroundColor: "var(--overlay)", // Keep tint
+              backgroundColor: "var(--overlay)",
             }}
             aria-hidden={!isMenuOpen}
           >
@@ -289,7 +288,7 @@ export default function BubbleMenu({
               exit="hidden"
               className={[
                 "pill-list",
-                "relative z-10", // Ensure above blur
+                "relative z-10",
                 "list-none m-0 px-6",
                 "w-full max-w-400 mx-auto",
                 "flex flex-wrap",
@@ -302,7 +301,7 @@ export default function BubbleMenu({
               {menuItems.map((item, idx) => {
                 const isDesktop =
                   typeof window !== "undefined" && window.innerWidth >= 1024;
-                const rotation = isDesktop ? item.rotation ?? 0 : 0;
+                const rotation = isDesktop ? (item.rotation ?? 0) : 0;
 
                 return (
                   <li
@@ -360,14 +359,9 @@ export default function BubbleMenu({
                             height: 10,
                           } as CSSProperties
                         }
-                        // Apply rotation via frame motion animate prop to be safe or just style?
-                        // Using style is fine as it's static per item mostly, but we have resize listener in old code.
-                        // We can just rely on CSS for rotation if we set the var.
                       >
                         <motion.span
                           className="pill-link-inner block w-full h-full absolute inset-0 rounded-[999px]"
-                          // To recreate hover effect if needed, but CSS handles hover.
-                          // Just need to apply rotation.
                           style={{ transform: `rotate(${rotation}deg)` }}
                           whileHover={{
                             scale: 1.06,
@@ -382,11 +376,7 @@ export default function BubbleMenu({
                         <motion.span
                           variants={labelVariants}
                           className="pill-label inline-block relative z-10 pointers-events-none"
-                          style={{
-                            // transform: `rotate(${rotation}deg)` // Text shouldn't rotate?
-                            // Original code rotated the whole bubble.
-                            pointerEvents: "none",
-                          }}
+                          style={{}}
                         >
                           {item.label}
                         </motion.span>

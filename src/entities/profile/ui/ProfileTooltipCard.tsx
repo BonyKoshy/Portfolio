@@ -1,5 +1,6 @@
 import { homeContent } from "@/shared/config/content";
 
+/** Displays profile image and role in a tooltip card. */
 export const ProfileTooltipCard = () => (
   <div className="relative flex aspect-2/3 w-40 flex-col overflow-hidden rounded-xl border border-border-default bg-bg-surface shadow-2xl">
     <img

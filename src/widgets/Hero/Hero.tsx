@@ -19,32 +19,28 @@ import {
 } from "react-icons/si";
 import { FaLayerGroup, FaFolderOpen } from "react-icons/fa6";
 
-// Entity components
 import { useScrollToAnchor } from "@/shared/lib/useScrollToAnchor";
 import { ProfileTooltipCard } from "@/entities/profile/ui/ProfileTooltipCard";
 import { CompanyTooltipCard } from "@/entities/profile/ui/CompanyTooltipCard";
 
+/** Renders the main Hero section including the 3D CardSwap interactivity. */
 const Hero = () => {
   const scrollTo = useScrollToAnchor();
 
   const cards = [
-    // Card 1: Top Skills
     <Card
       key="skills"
       as={Link}
       to="/about#skills"
       customClass="bg-bg-surface border-border-default border flex flex-col justify-between overflow-hidden cursor-pointer group shadow-2xl focus-visible:ring-2 focus-visible:ring-primary focus-visible:outline-none"
     >
-      {/* Background Typography */}
       <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-full text-center pointer-events-none">
         <h2 className="text-[130px] font-black leading-none text-transparent bg-clip-text bg-linear-to-b from-fg-primary/5 to-transparent select-none tracking-tighter">
           {homeContent.hero.cards.tech.backgroundTitle}
         </h2>
       </div>
 
-      {/* Content */}
       <div className="relative z-10 h-full flex flex-col justify-between p-10">
-        {/* Header */}
         <div className="flex justify-between items-start">
           <div className="flex items-center gap-4">
             <div className="h-12 w-12 rounded-xl bg-blue-500/10 text-[#3776AB] flex items-center justify-center shadow-lg shadow-blue-500/10 group-hover:scale-110 transition-transform duration-300 border border-blue-500/20 motion-reduce:transition-none motion-reduce:transform-none">
@@ -65,13 +61,11 @@ const Hero = () => {
           </div>
         </div>
 
-        {/* Footer / Main Content */}
         <div>
           <h3 className="text-4xl font-bold text-fg-primary mb-6 group-hover:translate-x-2 transition-transform duration-300 whitespace-pre-line motion-reduce:transition-none motion-reduce:transform-none">
             {homeContent.hero.cards.tech.mainTitle}
           </h3>
 
-          {/* Icons Row */}
           <div className="flex items-center gap-6">
             <div className="text-fg-secondary hover:text-[#3776AB] transition-colors transform hover:scale-110 duration-300 bg-bg-paper/50 p-2 rounded-lg border border-border-default/50 motion-reduce:transform-none">
               <SiPython size={32} />
@@ -93,21 +87,18 @@ const Hero = () => {
       </div>
     </Card>,
 
-    // Card 2: Accenture
     <Card
       key="experience"
       as={Link}
       to="/about#experience"
       customClass="bg-bg-surface border-border-default border flex flex-col justify-between overflow-hidden cursor-pointer group shadow-2xl focus-visible:ring-2 focus-visible:ring-primary focus-visible:outline-none"
     >
-      {/* Background Typography */}
       <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-full text-center pointer-events-none">
         <h2 className="text-[130px] font-black leading-none text-transparent bg-clip-text bg-linear-to-b from-fg-primary/5 to-transparent select-none tracking-tighter">
           {homeContent.hero.cards.work.backgroundTitle}
         </h2>
       </div>
 
-      {/* Content */}
       <div className="relative z-10 h-full flex flex-col justify-between p-10">
         <div className="flex justify-between items-start">
           <div className="flex items-center gap-4">
@@ -140,7 +131,6 @@ const Hero = () => {
       </div>
     </Card>,
 
-    // Card 3: Selected Work
     <Card
       key="projects"
       as={Link}
@@ -148,21 +138,18 @@ const Hero = () => {
       onClick={() => scrollTo("/", "projects")}
       customClass="bg-bg-surface border-border-default border flex flex-col justify-between overflow-hidden cursor-pointer group shadow-2xl focus-visible:ring-2 focus-visible:ring-primary focus-visible:outline-none"
     >
-      {/* Background Typography */}
       <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-full text-center pointer-events-none">
         <h2 className="text-[130px] font-black leading-none text-transparent bg-clip-text bg-linear-to-b from-fg-primary/5 to-transparent select-none tracking-tighter">
           {homeContent.hero.cards.build.backgroundTitle}
         </h2>
       </div>
 
-      {/* Static Decoration */}
       <div className="absolute inset-0 z-0 opacity-10 pointer-events-none">
         <div className="absolute top-10 right-10 text-8xl font-mono rotate-12 text-fg-primary/20 select-none">
           {"{}"}
         </div>
       </div>
 
-      {/* Content */}
       <div className="relative z-10 h-full flex flex-col justify-between p-10">
         <div className="flex justify-between items-start">
           <div className="flex items-center gap-4">
@@ -202,18 +189,14 @@ const Hero = () => {
         title="Portfolio | Bony Koshy"
         description="Personal portfolio of Bony Koshy, a passionate Full-Stack Developer specializing in modern web technologies, React, and system architecture."
       />
-      {/* Background effects */}
       <div className="absolute inset-0 z-0 pointer-events-none">
         <div className="absolute inset-0 bg-bg-default" />
-        {/* Right-side static glow */}
         <div className="absolute top-1/2 right-[-10%] -translate-y-1/2 h-[80%] w-[40%] bg-primary/5 blur-[120px] rounded-full" />
       </div>
 
       <Container className="relative z-10">
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
-          {/* --- LEFT COLUMN: CONTENT (Span 7) --- */}
           <div className="flex flex-col items-start w-full lg:col-span-7">
-            {/* 2. Eyebrow */}
             <div className="mb-6 flex items-center gap-3 rounded-full border border-border-default bg-bg-paper/50 px-4 py-1.5 backdrop-blur-sm">
               <span className="relative flex h-2 w-2">
                 <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-green-400 opacity-75 motion-reduce:animate-none"></span>
@@ -229,7 +212,6 @@ const Hero = () => {
               </span>
             </div>
 
-            {/* 3. Headline */}
             <h1 className="mb-6 w-full max-w-5xl text-4xl leading-[1.1] tracking-tight sm:text-6xl lg:text-7xl">
               <span className="block font-light text-fg-secondary">
                 {homeContent.hero.headline.part1}
@@ -239,9 +221,8 @@ const Hero = () => {
               </span>
             </h1>
 
-            {/* 4. Subtext with interactive tooltips */}
             <div className="mb-8 max-w-2xl text-base leading-relaxed text-fg-secondary sm:text-lg md:text-xl relative z-30">
-              {homeContent.hero.subtext.prefix} {/* Tooltip: Name */}
+              {homeContent.hero.subtext.prefix}
               <Tooltip
                 content={<ProfileTooltipCard />}
                 containerClassName="inline-block align-baseline"
@@ -255,7 +236,7 @@ const Hero = () => {
                   {homeContent.hero.subtext.name}
                 </SecondaryButton>
               </Tooltip>
-              , {homeContent.hero.subtext.role} {/* Tooltip: Company */}
+              , {homeContent.hero.subtext.role}
               <Tooltip
                 content={<CompanyTooltipCard />}
                 containerClassName="inline-block align-baseline"
@@ -272,7 +253,6 @@ const Hero = () => {
               {homeContent.hero.subtext.description}
             </div>
 
-            {/* 5. Actions */}
             <div className="flex w-full flex-col gap-4 sm:w-auto sm:flex-row sm:items-center sm:gap-8">
               <PrimaryButton asChild size="lg" className="w-full sm:w-auto">
                 <Link to="/projects">
@@ -289,14 +269,11 @@ const Hero = () => {
             </div>
           </div>
 
-          {/* --- RIGHT COLUMN: CARD SWAP --- */}
           <div className="hidden lg:flex lg:col-span-5 relative h-150 w-full items-center justify-center pointer-events-none">
-            {/* 3D Effect container */}
             <div className="pointer-events-auto origin-center">
               <CardSwap
                 cardDistance={30}
                 verticalDistance={50}
-                // skewAmount={12} // Removed
                 delay={3000}
                 pauseOnHover={true}
                 width={500}

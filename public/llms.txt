@@ -9,7 +9,7 @@
 - **Security:** Zod Validation, Dependency Auditing.
 
 ## Professional Summary
-Senior frontend engineer specializing in scalable React architectures. Unlike typical portfolios, this codebase implements rigorous engineering standards including automated linting boundaries, accessibility-first primitives, and build-time optimization strategies.
+Senior frontend engineer specializing in scalable React architectures. This codebase implements rigorous engineering standards including automated linting boundaries, accessibility-first primitives, and build-time optimization strategies.
 
 ## Featured Projects
 
@@ -18,22 +18,22 @@ Senior frontend engineer specializing in scalable React architectures. Unlike ty
 - **Tech:** React 19, Vite 7, FSD, GSAP, Framer Motion, PWA.
 - **Architecture:** Feature-Sliced Design.
 - **Key Challenge:** Maintaining performance while handling heavy SVG filter animations and complex state transitions in React 19.
-- **Outcome:** Implemented Feature-Sliced Design (FSD) to decouple business logic from UI, ensuring 100% modularity.
+- **Outcome:** Implemented FSD to decouple business logic from UI, ensuring 100% modularity.
 
 ### Local AI Sentiment Analysis
 - **Type:** AI & Hardware
 - **Tech:** Python, Intel OpenVINO, Optimum Intel, Hugging Face, Flask.
-- **Key Challenge:** Ensuring stable inference on NPU drivers by implementing strict padding and static shape management for the model input.
-- **Outcome:** Optimized a DistilBERT model using Intel OpenVINO for native execution on NPUs, achieving millisecond latency locally.
+- **Key Challenge:** Ensuring stable inference on NPU drivers by implementing strict padding and static shape management.
+- **Outcome:** Optimized DistilBERT for Intel OpenVINO, achieving millisecond latency locally.
+
+## Work Experience
+### Accenture (Incoming Associate)
+- Focus: Enterprise Web Applications, Cloud Transformations.
 
 ## Education & Certifications
-- AWS Certified
-- Google Certified
-- IBM Certified
-- Microsoft Certified
+- **Certifications**: AWS Certified Cloud Practitioner, Google Cloud Digital Leader.
 
 ## Contact
-- **GitHub:** https://github.com/BonyKoshy
-- **LinkedIn:** https://linkedin.com/in/bonykoshy
-- **Email:** bonykoshy@gmail.com
-- **X (Twitter):** https://x.com/Bony_Koshy
+- **GitHub**: [github.com/BonyKoshy](https://github.com/BonyKoshy)
+- **LinkedIn**: [linkedin.com/in/bonykoshy](https://linkedin.com/in/bonykoshy)
+- **Email**: bonykoshy@gmail.com

@@ -57,6 +57,7 @@ interface SideSheetRootProps {
   closeThreshold?: number;
 }
 
+/** Root component for the SideSheet, providing context and state management. */
 const SideSheetRoot = ({
   children,
   open,
@@ -219,7 +220,7 @@ const SideSheetContent = ({
   const x = useMotionValue(0);
   useTransform(x, [-100, 0], [0, 1]);
   const overlayRef = useRef<HTMLDivElement>(null);
-  const scrollRef = useRef<HTMLDivElement>(null); // Ref for scroll container
+  const scrollRef = useRef<HTMLDivElement>(null);
   const [sheetWidth, setSheetWidth] = useState(0);
 
   const onClose = useCallback(() => onOpenChange(false), [onOpenChange]);
@@ -281,7 +282,7 @@ const SideSheetContent = ({
     }
   }, [side]);
 
-  // Reset scroll on open
+  // Reset scroll on open.
   useEffect(() => {
     if (isOpen && scrollRef.current) {
       scrollRef.current.scrollTop = 0;

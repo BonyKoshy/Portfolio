@@ -1,5 +1,6 @@
 import { Helmet } from "react-helmet-async";
 
+/** Injects JSON-LD structured data for SEO (Person and Website schemas). */
 export const StructuredData = () => {
   const schema = {
     "@context": "https://schema.org",

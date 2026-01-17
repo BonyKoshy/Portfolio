@@ -30,6 +30,7 @@ interface ProjectDetailsSheetProps {
   className?: string;
 }
 
+/** Displays detailed project information in a side sheet. */
 export const ProjectDetailsSheet = ({
   project,
   children,
@@ -55,7 +56,6 @@ export const ProjectDetailsSheet = ({
     <SideSheet width={width}>
       <SideSheetTrigger asChild>{children}</SideSheetTrigger>
       <SideSheetContent className="overflow-y-auto sm:overscroll-contain">
-        {/* Glassmorphic Close Button */}
         <SideSheetClose className="absolute right-6 top-6 z-50 p-2 rounded-full bg-white/10 dark:bg-black/10 backdrop-blur-md border border-white/20 dark:border-white/10 text-text-primary transition-all hover:bg-white/20 dark:hover:bg-white/10 active:scale-95 focus:outline-hidden">
           <X className="h-5 w-5" />
           <span className="sr-only">Close</span>
@@ -76,7 +76,6 @@ export const ProjectDetailsSheet = ({
             {project.content.description}
           </SideSheetDescription>
 
-          {/* Tech Stack Pills - Top */}
           <div className="flex flex-wrap gap-2 pt-2">
             {project.content.tech.map((tech) => (
               <span
@@ -90,7 +89,6 @@ export const ProjectDetailsSheet = ({
         </SideSheetHeader>
 
         <div className="mt-4 space-y-10 pb-28">
-          {/* Image Slideshow */}
           <div className="space-y-3">
             <div className="rounded-2xl overflow-hidden border border-border-default bg-bg-subtle shadow-sm relative group">
               <AspectRatio ratio={16 / 9}>
@@ -108,7 +106,6 @@ export const ProjectDetailsSheet = ({
                     />
                   </AnimatePresence>
 
-                  {/* Navigation Arrows */}
                   {images.length > 1 && (
                     <>
                       <button
@@ -128,7 +125,6 @@ export const ProjectDetailsSheet = ({
                     </>
                   )}
 
-                  {/* Dot Indicators */}
                   {images.length > 1 && (
                     <div className="absolute bottom-4 left-1/2 -translate-x-1/2 flex items-center gap-2 px-3 py-1.5 rounded-full bg-black/30 backdrop-blur-md">
                       {images.map((_, idx) => (
@@ -151,7 +147,6 @@ export const ProjectDetailsSheet = ({
             </div>
           </div>
 
-          {/* Details Grid */}
           <div className="grid grid-cols-1 gap-8">
             {project.content.role && (
               <div className="space-y-3">
@@ -211,13 +206,9 @@ export const ProjectDetailsSheet = ({
           </div>
         </div>
 
-        {/* Footer Actions */}
         <SideSheetFooter className="absolute bottom-0 left-0 right-0 p-6 bg-bg-paper/80 backdrop-blur-xl border-t border-border-default flex flex-col sm:flex-row gap-4 sm:justify-between items-center z-40">
-          {/* Primary Action (Install or Live) */}
           <div className="w-full sm:w-auto flex-1">
             {project.content.installCommand ? (
-              // Use release link if available, else copy command?
-              // Previous logic was Releases link. User requested "Install" or "Live" in same place.
               <PrimaryButton
                 asChild
                 withHoverAnimation={false}
@@ -228,7 +219,7 @@ export const ProjectDetailsSheet = ({
                 <a
                   href={
                     project.githubLink ? `${project.githubLink}/releases` : "#"
-                  } // fallback
+                  }
                   target="_blank"
                   rel="noopener noreferrer"
                   className="w-full flex items-center justify-center"
@@ -256,7 +247,6 @@ export const ProjectDetailsSheet = ({
             ) : null}
           </div>
 
-          {/* Secondary Action (Source Code) */}
           {project.githubLink && (
             <div className="w-full sm:w-auto">
               <SecondaryButton

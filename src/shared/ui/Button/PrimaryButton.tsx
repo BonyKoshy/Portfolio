@@ -21,7 +21,8 @@ const primaryButtonVariants = cva(
 );
 
 interface PrimaryButtonProps
-  extends React.ButtonHTMLAttributes<HTMLButtonElement>,
+  extends
+    React.ButtonHTMLAttributes<HTMLButtonElement>,
     VariantProps<typeof primaryButtonVariants> {
   icon?: React.ReactNode;
   iconPosition?: "left" | "right";
@@ -30,6 +31,7 @@ interface PrimaryButtonProps
   asChild?: boolean;
 }
 
+/** High-emphasis button component styled with primary theme colors and hover effects. */
 const PrimaryButton = React.forwardRef<HTMLButtonElement, PrimaryButtonProps>(
   (
     {

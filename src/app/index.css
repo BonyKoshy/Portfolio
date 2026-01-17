@@ -6,9 +6,9 @@
 :root {
   /* Shared Defaults & Constants */
   --overlay: rgba(0, 0, 0, 0.4);
-  --font-sans: "Roboto Flex", system-ui, sans-serif;
+  --font-sans: "Poppins", system-ui, sans-serif;
   --font-display: "Poppins", system-ui, sans-serif;
-  
+
   /* Sync ring color with primary for consistent focus rings */
   --ring: var(--primary);
 
@@ -75,7 +75,7 @@ html[data-theme="dark"] {
 
 /* 2. Tailwind Configuration (Theme-aware) */
 @theme {
-  --font-sans: "Roboto Flex", system-ui, sans-serif;
+  --font-sans: "Poppins", system-ui, sans-serif;
   --font-display: "Poppins", system-ui, sans-serif;
 
   /* Map Tailwind classes to our CSS variables */
@@ -104,6 +104,7 @@ html[data-theme="dark"] {
   --animate-logo-intro: logo-draw-in 2.5s ease-out forwards;
   --animate-logo-hover-cycle: logo-cycle 2.5s cubic-bezier(0.4, 0, 0.2, 1)
     forwards;
+  --animate-logo-loop: logo-cycle 3s cubic-bezier(0.4, 0, 0.2, 1) infinite;
 
   @keyframes logo-pulse {
     0%,
@@ -235,7 +236,9 @@ html[data-theme="dark"] {
     background-color: var(--bg-default);
     color: var(--fg-primary);
     font-family: var(--font-sans);
-    transition: color 0.3s ease, background-color 0.3s ease,
+    transition:
+      color 0.3s ease,
+      background-color 0.3s ease,
       border-color 0.3s ease;
     overflow-x: hidden;
   }
@@ -252,7 +255,7 @@ html[data-theme="dark"] {
   :focus-visible {
     outline: 2px solid var(--primary);
     outline-offset: 2px;
-    border-radius: 4px; 
+    border-radius: 4px;
   }
 
   /* Custom Scrollbar */

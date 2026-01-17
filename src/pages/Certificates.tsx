@@ -1,5 +1,6 @@
 import { Meta } from "@/shared/ui/Meta/Meta";
 
+/** Renders the Certificates page displaying professional achievements. */
 const Certificates = () => {
   return (
     <div className="min-h-screen pt-20 px-6 max-w-7xl mx-auto">

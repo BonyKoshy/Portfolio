@@ -1,3 +1,4 @@
+/** Static content configuration for the portfolio, including social links and assets. */
 export const homeContent = {
   hero: {
     eyebrow: "Creative Developer",
@@ -90,16 +91,65 @@ export const homeContent = {
   },
   footer: {
     quickLinks: "Quick Links",
-    copyright: "© 2026 Bony Koshy. All rights reserved.",
-    links: {
-      privacy: "Privacy Policy",
-      terms: "Terms of Service",
-    },
-    sections: {
-      explore: "Explore",
-      work: "Work",
-      socials: "Socials",
-      connect: "Connect",
+    copyright: "© 2026 Bony Koshy. Orginal ideas only.",
+    columns: {
+      explore: {
+        title: "Explore",
+        links: [
+          { label: "Home", href: "/" },
+          { label: "About", href: "/about" },
+          { label: "Projects", href: "/projects" },
+          { label: "Contact", href: "/contact" },
+        ],
+      },
+      work: {
+        title: "Work",
+        links: [
+          { label: "Projects", href: "/projects" },
+          { label: "Certificates", href: "/certificates" },
+          { label: "Resume", href: "/resume.pdf", isExternal: true },
+        ],
+      },
+      profiles: {
+        title: "Profiles",
+        links: [
+          {
+            label: "Leetcode",
+            href: "https://leetcode.com/u/Bonykoshy/",
+            isExternal: true,
+          },
+          {
+            label: "Behance",
+            href: "https://www.behance.net/bonykoshy",
+            isExternal: true,
+          },
+          {
+            label: "Dribbble",
+            href: "https://dribbble.com/bonykoshy",
+            isExternal: true,
+          },
+        ],
+      },
+      connect: {
+        title: "Connect",
+        links: [
+          {
+            label: "Email",
+            href: "mailto:bonykoshy@gmail.com",
+            isExternal: true,
+          },
+          {
+            label: "WhatsApp",
+            href: "https://wa.me/919447132399",
+            isExternal: true,
+          },
+          {
+            label: "Instagram",
+            href: "https://www.instagram.com/bonn_i.e/",
+            isExternal: true,
+          },
+        ],
+      },
     },
   },
   projects: {

@@ -6,12 +6,13 @@ import { ArrowDown, ArrowLeft } from "lucide-react";
 import { homeContent } from "@/shared/config/content";
 import { useScrollToAnchor } from "@/shared/lib/useScrollToAnchor";
 
+/** Renders the responsive navigation bar. */
 const Navbar = () => {
   const location = useLocation();
   const scrollTo = useScrollToAnchor();
 
   const mainPaths = ["/", "/about", "/projects", "/contact"];
-  // Normalize path by removing trailing slash (unless it's just root)
+  // Normalize path by removing trailing slash
   const normalizedPath =
     location.pathname === "/" ? "/" : location.pathname.replace(/\/$/, "");
   const isSpecialPage = !mainPaths.includes(normalizedPath);
@@ -25,7 +26,6 @@ const Navbar = () => {
 
   const handleSkipToMain = () => {
     scrollTo("/", "main-content");
-    // Ensure focus management if needed after navigation/scroll
     setTimeout(() => {
       const mainContent = document.getElementById("main-content");
       if (mainContent) {
@@ -36,7 +36,6 @@ const Navbar = () => {
 
   return (
     <nav className="fixed top-0 left-0 right-0 z-50 h-20 w-full pointer-events-none">
-      {/* Background Blur Logic */}
       <div className="absolute inset-0 -z-10">
         <GradualBlur
           position="top"
@@ -48,7 +47,6 @@ const Navbar = () => {
         />
       </div>
 
-      {/* Skip to Main - Fixed & Accessible */}
       <div className="fixed top-4 left-4 z-100 pointer-events-auto">
         <PrimaryButton
           size="md"
@@ -68,9 +66,7 @@ const Navbar = () => {
       </div>
 
       <div className="mx-auto flex h-full max-w-7xl items-center justify-between px-6 pointer-events-auto relative">
-        {/* Top Left Slot: Back to Home (Conditional) */}
         <div className="absolute top-1/2 -translate-y-1/2 left-0 pl-6 z-50 flex items-center gap-4">
-          {/* Back to Home - Only on Special Pages */}
           {isSpecialPage && (
             <PrimaryButton
               asChild
@@ -97,7 +93,6 @@ const Navbar = () => {
           )}
         </div>
 
-        {/* DESKTOP NAV: Standard Text Links */}
         <div className="hidden items-center gap-8 lg:flex ml-auto">
           {menuItems.map((item) => (
             <NavLink
@@ -123,7 +118,6 @@ const Navbar = () => {
           ))}
         </div>
 
-        {/* MOBILE NAV: BubbleMenu Overlay (< 1024px) */}
         <div className="lg:hidden ml-auto">
           <BubbleMenu
             items={[

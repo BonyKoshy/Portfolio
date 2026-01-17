@@ -3,6 +3,7 @@ import { Link } from "react-router-dom";
 import { PrimaryButton } from "@/shared/ui/Button";
 import { Meta } from "@/shared/ui/Meta/Meta";
 
+/** Props for the ErrorPage component. */
 interface ErrorPageProps {
   errorCode?: string;
   title?: string;
@@ -10,6 +11,7 @@ interface ErrorPageProps {
   imageSrc?: string;
 }
 
+/** Renders a 404 Not Found error page. */
 const NotFound: React.FC<ErrorPageProps> = ({
   errorCode = "404",
   title = "Page Not Found",

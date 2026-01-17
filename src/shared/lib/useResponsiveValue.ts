@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react";
 
+/** Returns a value based on the current viewport width and breakpoint. */
 const useResponsiveValue = <T>(
   desktopValue: T,
   mobileValue: T,

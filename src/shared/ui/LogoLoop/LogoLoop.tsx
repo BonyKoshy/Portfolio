@@ -49,7 +49,7 @@ const ANIMATION_CONFIG = {
 } as const;
 
 const toCssLength = (value?: number | string): string | undefined =>
-  typeof value === "number" ? `${value}px` : value ?? undefined;
+  typeof value === "number" ? `${value}px` : (value ?? undefined);
 
 const cx = (...parts: Array<string | false | null | undefined>) =>
   parts.filter(Boolean).join(" ");
@@ -214,6 +214,7 @@ const useAnimationLoop = (
   ]);
 };
 
+/** Infinite scrolling loop of logos or components. */
 export const LogoLoop = React.memo<LogoLoopProps>(
   ({
     logos,
@@ -326,7 +327,7 @@ export const LogoLoop = React.memo<LogoLoopProps>(
           "--logoloop-gap": `${gap}px`,
           "--logoloop-logoHeight": `${logoHeight}px`,
           ...(fadeOutColor && { "--logoloop-fadeColor": fadeOutColor }),
-        } as React.CSSProperties),
+        }) as React.CSSProperties,
       [gap, logoHeight, fadeOutColor]
     );
 
@@ -412,8 +413,8 @@ export const LogoLoop = React.memo<LogoLoopProps>(
         );
 
         const itemAriaLabel = isNodeItem
-          ? (item as { ariaLabel?: string }).ariaLabel ?? item.title
-          : (item as { alt?: string }).alt ?? item.title;
+          ? ((item as { ariaLabel?: string }).ariaLabel ?? item.title)
+          : ((item as { alt?: string }).alt ?? item.title);
 
         const inner = item.href ? (
           <a
@@ -475,7 +476,7 @@ export const LogoLoop = React.memo<LogoLoopProps>(
           ? toCssLength(width) === "100%"
             ? undefined
             : toCssLength(width)
-          : toCssLength(width) ?? "100%",
+          : (toCssLength(width) ?? "100%"),
         ...cssVariables,
         ...style,
       }),

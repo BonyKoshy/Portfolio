@@ -8,20 +8,24 @@ interface Props {
 
 interface State {
   hasError: boolean;
-  error?: Error;
+  error: Error | null;
+  errorInfo: React.ErrorInfo | null;
 }
 
+/** Catches JS errors anywhere in the child component tree and displays a fallback UI. */
 export class ErrorBoundary extends Component<Props, State> {
-  public override state: State = {
-    hasError: false,
-  };
+  constructor(props: Props) {
+    super(props);
+    this.state = { hasError: false, error: null, errorInfo: null };
+  }
 
   public static getDerivedStateFromError(error: Error): State {
-    return { hasError: true, error };
+    return { hasError: true, error, errorInfo: null };
   }
 
   public override componentDidCatch(error: Error, errorInfo: ErrorInfo) {
     console.error("Uncaught error:", error, errorInfo);
+    this.setState({ error, errorInfo });
   }
 
   private handleReload = () => {
@@ -52,11 +56,12 @@ export class ErrorBoundary extends Component<Props, State> {
               Reload Page
             </PrimaryButton>
 
-            {/* Optional: Show error message in development only, or if you prefer generic */}
-            {process.env.NODE_ENV === "development" && this.state.error && (
-              <pre className="mt-4 p-4 bg-black/5 dark:bg-white/5 rounded-lg text-xs text-left overflow-auto w-full max-h-32 font-mono text-red-400">
+            {import.meta.env.DEV && this.state.error && (
+              <details className="whitespace-pre-wrap text-sm font-mono bg-red-950/30 p-4 rounded text-red-200 overflow-auto max-h-64">
                 {this.state.error.toString()}
-              </pre>
+                <br />
+                {this.state.errorInfo?.componentStack}
+              </details>
             )}
           </div>
         </div>

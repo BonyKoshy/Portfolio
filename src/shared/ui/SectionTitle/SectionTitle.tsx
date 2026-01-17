@@ -5,6 +5,7 @@ interface SectionTitleProps {
   title: string;
 }
 
+/** Renders a section title with variable proximity font effect. */
 const SectionTitle: React.FC<SectionTitleProps> = ({ title }) => {
   const containerRef = useRef<HTMLDivElement>(null);
 

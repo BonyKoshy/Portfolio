@@ -91,6 +91,7 @@ const getGradientDirection = (position: string): string => {
   return directions[position] || "to bottom";
 };
 
+/** Creates a smooth gradient blur effect overlay. */
 const GradualBlur: React.FC<GradualBlurProps> = (props) => {
   const containerRef = useRef<HTMLDivElement>(null);
   const [isHovered, setIsHovered] = useState(false);
@@ -127,7 +128,6 @@ const GradualBlur: React.FC<GradualBlurProps> = (props) => {
         blurValue = 0.0625 * (progress * config.divCount + 1) * currentStrength;
       }
 
-      // Calculate Gradient Stops using Native Math (Replaced mathjs)
       const p1 = Math.round((increment * i - increment) * 10) / 10;
       const p2 = Math.round(increment * i * 10) / 10;
       const p3 = Math.round((increment * i + increment) * 10) / 10;
@@ -160,7 +160,7 @@ const GradualBlur: React.FC<GradualBlurProps> = (props) => {
 
     const baseStyle: CSSProperties = {
       position: isPageTarget ? "fixed" : "absolute",
-      pointerEvents: "none", // Allow clicks to pass through by default
+      pointerEvents: "none",
       zIndex: isPageTarget ? config.zIndex + 100 : config.zIndex,
       ...config.style,
     };

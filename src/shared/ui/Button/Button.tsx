@@ -34,13 +34,15 @@ const buttonVariants = cva(
 );
 
 interface ButtonProps
-  extends React.ButtonHTMLAttributes<HTMLButtonElement>,
+  extends
+    React.ButtonHTMLAttributes<HTMLButtonElement>,
     VariantProps<typeof buttonVariants> {
   icon?: React.ReactNode;
   iconPosition?: "left" | "right" | "down";
   asChild?: boolean;
 }
 
+/** Flexible Button component supporting multiple variants, sizes, and icons. */
 const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
   (
     {
@@ -55,17 +57,17 @@ const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
     },
     ref
   ) => {
-    // Logic to force no size for underline variant to behave as text link
+    // Sets size to 'none' for underline variant to handle text-like spacing.
     const effectiveSize = variant === "underline" ? "none" : size;
 
     const iconTransformClass =
       iconPosition === "left"
         ? "group-hover:-translate-x-1"
         : iconPosition === "right"
-        ? "group-hover:translate-x-1"
-        : iconPosition === "down"
-        ? "group-hover:translate-y-1"
-        : "";
+          ? "group-hover:translate-x-1"
+          : iconPosition === "down"
+            ? "group-hover:translate-y-1"
+            : "";
 
     const Comp = asChild ? Slot : "button";
 

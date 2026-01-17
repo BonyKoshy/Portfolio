@@ -2,7 +2,7 @@ import { techLogos } from "../model/techStack";
 import { SiReact } from "react-icons/si";
 import { FaCode } from "react-icons/fa6";
 
-// Helper to get tech icon
+/** Retrieves the appropriate React icon for a given technology name. */
 export const getTechIcon = (techName: string) => {
   const normalizedTech = techName.toLowerCase();
 
@@ -17,7 +17,6 @@ export const getTechIcon = (techName: string) => {
   )
     return <FaCode />;
 
-  // Find matching logo using strict word boundaries
   const logo = techLogos.find((l) => {
     const title = l.title.toLowerCase();
     const escapedTitle = title.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");

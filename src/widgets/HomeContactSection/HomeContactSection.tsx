@@ -8,6 +8,7 @@ import { homeContent } from "@/shared/config/content";
 import { Tooltip } from "@/shared/ui/Tooltip";
 import { CompanyTooltipCard } from "@/entities/profile/ui/CompanyTooltipCard";
 
+/** Renders the contact section on the home page with copy-to-clipboard functionality. */
 export const HomeContactSection = () => {
   const email = homeContent.contact.email;
   const [copied, setCopied] = useState(false);
@@ -20,12 +21,9 @@ export const HomeContactSection = () => {
 
   return (
     <section className="relative w-full py-24 px-6 flex flex-col items-center justify-center overflow-hidden">
-      {/* 1. Background Glow (Subtle) */}
       <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[60%] h-[60%] bg-primary/5 blur-[120px] rounded-full pointer-events-none" />
 
-      {/* 2. The Hook (ScrollFloat Title) */}
       <div className="relative z-10 text-center mb-6">
-        {/* Mobile View (<425px) - Split Text */}
         <div className="block min-[476px]:hidden">
           <ScrollFloat
             animationDuration={1}
@@ -47,7 +45,6 @@ export const HomeContactSection = () => {
           </ScrollFloat>
         </div>
 
-        {/* Desktop View (>=425px) - Single Line */}
         <div className="hidden min-[476px]:block">
           <ScrollFloat
             animationDuration={1}
@@ -60,7 +57,6 @@ export const HomeContactSection = () => {
         </div>
       </div>
 
-      {/* 3. Subtext (Non-Freelance Context) */}
       <div className="relative z-10 text-lg md:text-xl text-fg-secondary max-w-2xl text-center leading-relaxed mb-10">
         Locked in for{" "}
         <Tooltip
@@ -71,6 +67,7 @@ export const HomeContactSection = () => {
           <SecondaryButton
             className="font-medium text-fg-primary px-0 h-auto"
             onClick={(e) => e.preventDefault()}
+            tabIndex={0}
           >
             Accenture
           </SecondaryButton>
@@ -79,9 +76,7 @@ export const HomeContactSection = () => {
         bleeding-edge UI, optimize some render cycles, or just say hi.
       </div>
 
-      {/* 4. Action Buttons */}
       <div className="relative z-10 flex flex-col sm:flex-row items-center gap-4 w-full sm:w-auto">
-        {/* Primary Action: Copy Email */}
         <button
           onClick={handleCopy}
           className={cn(
@@ -104,7 +99,6 @@ export const HomeContactSection = () => {
           )}
         </button>
 
-        {/* Secondary Action: Go to Full Contact Page */}
         <Link to="/contact" className="w-full sm:w-auto">
           <SecondaryButton
             className="w-full justify-center h-full py-4 text-base"

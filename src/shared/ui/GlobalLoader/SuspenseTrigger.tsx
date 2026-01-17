@@ -1,6 +1,7 @@
 import { useEffect } from "react";
 import { useLoading } from "@/shared/lib/context/LoadingContext";
 
+/** Invisible component that triggers the global loading state on mount. */
 export const SuspenseTrigger = () => {
   const { setIsLoading } = useLoading();
 
@@ -9,6 +10,5 @@ export const SuspenseTrigger = () => {
     return () => setIsLoading(false);
   }, [setIsLoading]);
 
-  // Render nothing, just trigger state
   return null;
 };

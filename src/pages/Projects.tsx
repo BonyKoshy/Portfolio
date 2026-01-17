@@ -3,6 +3,7 @@ import { useProjects } from "@/entities/project/model/useProjects";
 import { PrimaryButton, SecondaryButton } from "@/shared/ui/Button";
 import { Meta } from "@/shared/ui/Meta/Meta";
 import { ProjectDetailsSheet } from "@/entities/project/ui/ProjectDetailsSheet";
+import { homeContent } from "@/shared/config/content";
 
 const Projects = () => {
   const { projects } = useProjects();
@@ -12,28 +13,24 @@ const Projects = () => {
         title="Projects of Bony"
         description="Explore my portfolio of projects, including web applications, desktop utilities, and system architecture experiments."
       />
-      {/* Header Section */}
       <div className="flex flex-col gap-4 mb-16">
-        {/* Title with Icon */}
         <div className="flex items-center gap-3">
           <Briefcase className="w-8 h-8 text-text-primary" strokeWidth={1.5} />
-          <h1 className="text-4xl font-bold text-text-primary m-0">Projects</h1>
+          <h1 className="text-4xl font-bold text-text-primary m-0">
+            {homeContent.projects.title}
+          </h1>
         </div>
-        {/* Subtitle */}
         <p className="text-lg text-text-secondary font-medium m-0 max-w-2xl">
-          A showcase of my technical journey, featuring web applications,
-          desktop utilities, and system architecture experiments.
+          {homeContent.projects.subtitle}
         </p>
       </div>
 
-      {/* Projects List - Vertical Stack of Horizontal Cards */}
       <div className="flex flex-col gap-12">
         {projects.map((project) => (
           <div
             key={project.title}
             className="group flex flex-col md:flex-row gap-8 bg-bg-paper border border-border-default rounded-2xl overflow-hidden hover:border-text-secondary transition-colors duration-300 p-6"
           >
-            {/* Image Section (Left) */}
             <div className="w-full md:w-5/12 lg:w-4/12 shrink-0">
               <div className="rounded-xl overflow-hidden aspect-video w-full bg-bg-subtle border border-border-subtle shadow-sm relative group-hover:shadow-md transition-shadow duration-300">
                 <img
@@ -44,7 +41,6 @@ const Projects = () => {
               </div>
             </div>
 
-            {/* Details Section (Right) */}
             <div className="flex flex-col grow gap-4">
               <div className="flex items-center gap-2 mb-1">
                 <span className="text-sm font-semibold text-primary">
@@ -64,7 +60,6 @@ const Projects = () => {
                 {project.content.description}
               </p>
 
-              {/* Tech Stack Chips (All) */}
               <div className="flex flex-wrap gap-2 mt-2">
                 {project.content.tech.map((tech) => (
                   <span
@@ -76,10 +71,7 @@ const Projects = () => {
                 ))}
               </div>
 
-              {/* Actions */}
               <div className="mt-auto pt-6 flex flex-wrap gap-4">
-                {/* Live Link */}
-                {/* Action Button: Install (if available) > Live Demo (if available) */}
                 {project.content.installCommand && project.githubLink ? (
                   <a
                     href={`${project.githubLink}/releases`}
@@ -112,9 +104,6 @@ const Projects = () => {
                   </a>
                 ) : null}
 
-                {/* Removed Source Code button from here, kept in Side Sheet */}
-
-                {/* Read More (Side Sheet) */}
                 <ProjectDetailsSheet project={project}>
                   <SecondaryButton
                     withHoverAnimation={false}

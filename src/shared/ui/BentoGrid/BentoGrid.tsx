@@ -13,19 +13,14 @@ interface BentoGridProps extends ComponentPropsWithoutRef<"div"> {
   children: ReactNode;
 }
 
+/** Wrapper for the Bento Grid layout. */
 export const BentoGrid = ({
   children,
   className,
   ...props
 }: BentoGridProps) => {
   return (
-    <div
-      className={cn(
-        "grid w-full gap-4", // Removed hardcoded cols/rows
-        className
-      )}
-      {...props}
-    >
+    <div className={cn("grid w-full gap-4", className)} {...props}>
       {children}
     </div>
   );
@@ -47,6 +42,7 @@ interface BentoCardProps {
   rel?: string;
 }
 
+/** Individual interactive card within the Bento Grid with spotlight effects. */
 export const BentoCard = ({
   name,
   className,
@@ -103,10 +99,8 @@ export const BentoCard = ({
 
   const content = (
     <>
-      {/* Background layer with pointer-events-none to prevent blocking interactions */}
       <div className="absolute inset-0 pointer-events-none">{background}</div>
 
-      {/* Spotlight Overlay */}
       <div
         className="pointer-events-none absolute inset-0 transition-opacity duration-500 ease-in-out"
         style={{
@@ -123,7 +117,6 @@ export const BentoCard = ({
             : "gap-2"
         )}
       >
-        {/* Content Section */}
         <div
           className={cn(
             "flex flex-col gap-2",
@@ -145,22 +138,19 @@ export const BentoCard = ({
           <p
             className={cn(
               "max-w-lg text-sm text-fg-secondary leading-relaxed",
-              "pr-12 pointer-fine:md:pr-0" // Padding always present on touch, removed only for desktop mouse
+              "pr-12 pointer-fine:md:pr-0"
             )}
           >
             {description}
           </p>
         </div>
 
-        {/* Action Area - Mouse Hover Reveal (Hidden on Touch) */}
         <div
           className={cn(
             "hidden pointer-fine:md:flex transform-gpu transition-all duration-500 ease-in-out",
-            "pointer-coarse:hidden", // Explicitly hide on touch
-            // Standard Bottom Layout: Reveal by expanding in flow
+            "pointer-coarse:hidden",
             ctaLayout === "bottom" &&
               "max-h-0 opacity-0 group-hover:max-h-20 group-hover:opacity-100 group-hover:mt-2 overflow-hidden",
-            // Side Layout: Reveal by sliding/fading in from right
             ctaLayout === "side" &&
               "opacity-0 translate-x-4 group-hover:translate-x-0 group-hover:opacity-100 shrink-0"
           )}
@@ -178,7 +168,6 @@ export const BentoCard = ({
         </div>
       </div>
 
-      {/* Permanent Indicator for Touch Devices & Mobile Mouse */}
       <div className="absolute bottom-6 right-6 pointer-coarse:block pointer-fine:md:hidden">
         <div className="flex h-12 w-12 items-center justify-center rounded-full bg-border-default backdrop-blur-sm text-fg-primary">
           {ctaIcon || <FaArrowRight className="h-4 w-4" />}

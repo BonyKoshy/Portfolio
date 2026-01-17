@@ -38,9 +38,9 @@ Unlike traditional portfolios, this application adopts **Feature-Sliced Design (
   - `shared`: Reusable infrastructure code (UI kit, libs).
 - **⚡ Bleeding Edge Performance:** Powered by **Vite 7** using the Rust-based Rolldown bundler principles (future-ready) and **React 19** for concurrent rendering features.
 - **🎨 Modern Styling & Motion:**
-  - **Tailwind CSS 4:**  Zero-runtime, utility-first styling with the new engine.
-  - **Framer Motion:**  Declarative, production-ready animations and micro-interactions.
-  - **Lucide Icons:**  Clean, consistent, and lightweight iconography.
+  - **Tailwind CSS 4:** Zero-runtime, utility-first styling with the new engine.
+  - **Framer Motion:** Declarative, production-ready animations and micro-interactions.
+  - **Lucide Icons:** Clean, consistent, and lightweight iconography.
 - **♿ Headless Accessibility:** Built on **Radix UI** primitives and **React Helmet Async** to ensure semantic structure, keyboard navigation, and SEO optimization.
 - **🌗 Smart Theming:** A persistent, system-aware dark mode implementation avoiding FOUC (Flash of Unstyled Content).
 
@@ -58,12 +58,14 @@ Follow these steps to set up the project locally.
 ### Installation
 
 1. **Clone the repository:**
+
    ```bash
    git clone https://github.com/BonyKoshy/Portfolio.git
    cd Portfolio
    ```
 
 2. **Install dependencies:**
+
    ```bash
    npm install
    ```

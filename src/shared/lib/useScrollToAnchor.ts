@@ -1,35 +1,73 @@
+import { useEffect, useCallback } from "react";
 import { useNavigate, useLocation } from "react-router-dom";
-import { useEffect } from "react";
 
-export const useScrollToAnchor = () => {
+/** Hook to handle smooth scrolling to anchor links with an offset. */
+export const useScrollToAnchor = (offset = 80) => {
   const navigate = useNavigate();
   const location = useLocation();
 
-  // Handle initial scroll on page load/navigation if hash is present
+  const scrollTo = useCallback(
+    (path: string, anchorId: string) => {
+      if (location.pathname !== path) {
+        navigate(`${path}#${anchorId}`);
+      } else {
+        const element = document.getElementById(anchorId);
+        if (element) {
+          const elementPosition =
+            element.getBoundingClientRect().top + window.scrollY;
+          const offsetPosition = elementPosition - offset;
+
+          window.scrollTo({
+            top: offsetPosition,
+            behavior: "smooth",
+          });
+
+          // Optionally update URL
+          // window.history.pushState(null, "", `#${anchorId}`);
+        }
+      }
+    },
+    [location.pathname, navigate, offset]
+  );
+
   useEffect(() => {
-    if (location.hash) {
-      const id = location.hash.substring(1);
-      const element = document.getElementById(id);
+    // Handles initial hash scroll on page load.
+    if (window.location.hash) {
+      const targetId = window.location.hash.slice(1);
+      const element = document.getElementById(targetId);
       if (element) {
-        // Small timeout to ensure rendering is complete
         setTimeout(() => {
-          element.scrollIntoView({ behavior: "smooth" });
+          const elementPosition =
+            element.getBoundingClientRect().top + window.scrollY;
+          const offsetPosition = elementPosition - offset;
+
+          window.scrollTo({
+            top: offsetPosition,
+            behavior: "smooth",
+          });
         }, 100);
       }
     }
-  }, [location.hash, location.pathname]);
 
-  const scrollTo = (path: string, elementId?: string) => {
-    if (location.pathname !== path) {
-      navigate(path + (elementId ? `#${elementId}` : ""));
-    } else if (elementId) {
-      document
-        .getElementById(elementId)
-        ?.scrollIntoView({ behavior: "smooth" });
-    } else {
-      window.scrollTo({ top: 0, behavior: "smooth" });
-    }
-  };
+    // Handles subsequent hash changes.
+    const handleHashChange = () => {
+      const targetId = window.location.hash.slice(1);
+      const element = document.getElementById(targetId);
+      if (element) {
+        const elementPosition =
+          element.getBoundingClientRect().top + window.scrollY;
+        const offsetPosition = elementPosition - offset;
+
+        window.scrollTo({
+          top: offsetPosition,
+          behavior: "smooth",
+        });
+      }
+    };
+
+    window.addEventListener("hashchange", handleHashChange);
+    return () => window.removeEventListener("hashchange", handleHashChange);
+  }, [offset]);
 
   return scrollTo;
 };

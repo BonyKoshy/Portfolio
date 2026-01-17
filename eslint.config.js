@@ -4,7 +4,9 @@ import reactHooks from "eslint-plugin-react-hooks";
 import reactRefresh from "eslint-plugin-react-refresh";
 import tseslint from "typescript-eslint";
 import boundaries from "eslint-plugin-boundaries";
+import eslintConfigPrettier from "eslint-config-prettier";
 
+/** ESLint configuration for type-checking and enforcing coding standards/boundaries. */
 export default tseslint.config(
   { ignores: ["dist", "node_modules", "dist-electron", "release"] },
   {
@@ -86,5 +88,6 @@ export default tseslint.config(
         { type: "shared", pattern: "src/shared" },
       ],
     },
-  }
+  },
+  eslintConfigPrettier
 );

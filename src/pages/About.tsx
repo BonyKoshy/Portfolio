@@ -1,5 +1,6 @@
 import { Meta } from "@/shared/ui/Meta/Meta";
 
+/** Renders the About page with biography information. */
 const About = () => {
   return (
     <div className="min-h-screen pt-20 px-6 max-w-7xl mx-auto">

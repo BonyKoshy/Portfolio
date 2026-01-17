@@ -84,8 +84,8 @@ const features = [
         <LogoLoop
           logos={techLogos}
           speed={40}
-          logoHeight={45} // Scaled down for mobile
-          gap={30} // Reduced gap for mobile
+          logoHeight={45}
+          gap={30}
           scaleOnHover
           renderItem={(item: LogoItem) => {
             if ("node" in item) {
@@ -152,6 +152,7 @@ const features = [
   },
 ];
 
+/** Renders a grid of bento cards highlighting key features and links. */
 export function HomeBentoSection() {
   return (
     <BentoGrid className="grid-cols-1 grid-rows-10 md:grid-cols-6 md:grid-rows-4 h-auto md:min-h-175 md:h-[calc(100vh-12rem)] md:max-h-225 gap-4">

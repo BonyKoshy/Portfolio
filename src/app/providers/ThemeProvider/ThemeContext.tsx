@@ -13,13 +13,13 @@ export const ThemeContext = createContext<ThemeContextValues | undefined>(
   undefined
 );
 
+/** Provides global theme state and toggling functionality (light/dark model). */
 export const ThemeProvider = ({ children }: { children: ReactNode }) => {
   const [theme, setTheme] = useState<Theme>(() => {
-    // 1. Check Local Storage first (Manual override)
+    // Checks localStorage for saved preference or falls back to system settings.
     const saved = localStorage.getItem("theme");
     if (saved === "light" || saved === "dark") return saved;
 
-    // 2. Fallback to System Preference
     if (window.matchMedia("(prefers-color-scheme: light)").matches) {
       return "light";
     }
@@ -27,11 +27,10 @@ export const ThemeProvider = ({ children }: { children: ReactNode }) => {
   });
 
   useEffect(() => {
-    // 3. Apply the class to the HTML tag
+    // Updates the HTML class attribute and saves the new theme to localStorage.
     const root = window.document.documentElement;
     root.setAttribute("data-theme", theme);
 
-    // 4. Save to Local Storage
     localStorage.setItem("theme", theme);
   }, [theme]);
 

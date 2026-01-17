@@ -4,12 +4,14 @@ import { ChevronDownIcon } from "lucide-react";
 
 import { cn } from "@/shared/lib/utils";
 
+/** Uncontrolled Accordion root component from Radix UI. */
 function Accordion({
   ...props
 }: React.ComponentProps<typeof AccordionPrimitive.Root>) {
   return <AccordionPrimitive.Root data-slot="accordion" {...props} />;
 }
 
+/** Individual item within the Accordion. */
 function AccordionItem({
   className,
   ...props
@@ -23,6 +25,7 @@ function AccordionItem({
   );
 }
 
+/** Clickable header that toggles the accordion content. */
 function AccordionTrigger({
   className,
   children,
@@ -45,6 +48,7 @@ function AccordionTrigger({
   );
 }
 
+/** Collapsible content section of the accordion item. */
 function AccordionContent({
   className,
   children,

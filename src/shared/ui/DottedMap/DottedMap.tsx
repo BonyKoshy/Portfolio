@@ -15,14 +15,13 @@ interface DottedMapProps {
   markerColor?: string;
 }
 
+/** Renders an interactive SVG dotted map visualization. */
 const DottedMap: React.FC<DottedMapProps> = ({
   markers = [],
   className,
   dotColor,
-  markerColor = "var(--primary)", // Default primary for marker
+  markerColor = "var(--primary)",
 }) => {
-  // context removed as it was unused
-
   const svgMap = useMemo(() => {
     // Input validation for colors to prevent XSS
     const isSafeColor = (color?: string) => !color || !/[<>"']/.test(color);
@@ -32,10 +31,8 @@ const DottedMap: React.FC<DottedMapProps> = ({
       : "var(--primary)";
     const safeDotColor = isSafeColor(dotColor) ? dotColor : undefined;
 
-    // Create map instance
     const map = new DottedMapLib({ height: 60, grid: "diagonal" });
 
-    // Add markers
     markers.forEach((marker) => {
       map.addPin({
         lat: marker.lat,
@@ -44,10 +41,9 @@ const DottedMap: React.FC<DottedMapProps> = ({
       });
     });
 
-    // Determine colors based on theme if not provided
-    const dots = safeDotColor || "var(--fg-secondary)"; // Use semantic secondary (darker) for better contrast
+    // Determines colors based on theme if not provided.
+    const dots = safeDotColor || "var(--fg-secondary)";
 
-    // Generate SVG
     const svgStr = map.getSVG({
       radius: 0.22,
       color: dots,

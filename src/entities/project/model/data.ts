@@ -1,5 +1,6 @@
 import { ProjectCardData } from "./types";
 
+/** Static data list of all portfolio projects. */
 export const projectsData: ProjectCardData[] = [
   {
     title: "2026 Gold Standard Portfolio",

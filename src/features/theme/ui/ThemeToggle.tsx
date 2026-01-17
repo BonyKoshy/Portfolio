@@ -4,6 +4,7 @@ import {
   ThemeContextValues,
 } from "@/app/providers/ThemeProvider";
 
+/** Toggles between light and dark themes with a view transition effect. */
 const ThemeToggle: React.FC = () => {
   const context = useContext(ThemeContext);
 
@@ -15,18 +16,16 @@ const ThemeToggle: React.FC = () => {
   const isChecked = theme === "light";
 
   const handleToggle = (x: number, y: number) => {
-    // 1. Check if the browser supports View Transitions
+    // Check if the browser supports View Transitions.
     if (!document.startViewTransition) {
       toggleTheme();
       return;
     }
 
-    // 2. Perform the Transition
     const transition = document.startViewTransition(() => {
       toggleTheme();
     });
 
-    // 3. Animate the Clip Path (The Ripple)
     transition.ready.then(() => {
       const right = window.innerWidth - x;
       const bottom = window.innerHeight - y;
@@ -81,7 +80,6 @@ const ThemeToggle: React.FC = () => {
           }}
         />
 
-        {/* Icon SVG */}
         <svg
           width={24}
           height={24}

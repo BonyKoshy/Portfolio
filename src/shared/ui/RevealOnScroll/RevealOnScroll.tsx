@@ -11,6 +11,7 @@ interface RevealOnScrollProps {
   duration?: number;
 }
 
+/** Animates its children when they enter the viewport. */
 export const RevealOnScroll = ({
   children,
   width = "fit-content",

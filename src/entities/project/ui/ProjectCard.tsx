@@ -10,6 +10,7 @@ interface ProjectCardProps {
   project: ProjectCardData;
 }
 
+/** Renders a card displaying project preview details. */
 export const ProjectCard = ({ project }: ProjectCardProps) => {
   return (
     <div className="group space-y-6 flex flex-col h-full">
@@ -17,7 +18,6 @@ export const ProjectCard = ({ project }: ProjectCardProps) => {
         to="/projects"
         className="space-y-6 flex flex-col grow no-underline"
       >
-        {/* Image Container */}
         <div className="overflow-hidden rounded-(--radius-card) w-full bg-panel shadow-sm border border-transparent group-hover:border-prelayer-2 transition-colors duration-300">
           <AspectRatio ratio={1.75}>
             <img
@@ -29,7 +29,6 @@ export const ProjectCard = ({ project }: ProjectCardProps) => {
           </AspectRatio>
         </div>
 
-        {/* Content */}
         <div className="flex flex-col gap-4 grow">
           <p className="text-text-primary font-medium m-0">{project.year}</p>
 
@@ -41,7 +40,6 @@ export const ProjectCard = ({ project }: ProjectCardProps) => {
             {project.content.description}
           </p>
 
-          {/* Tech Stack Chips (Top 2 only) */}
           <div className="flex flex-wrap gap-2 mt-1">
             {project.content.tech.slice(0, 3).map((tech) => (
               <span
@@ -55,7 +53,6 @@ export const ProjectCard = ({ project }: ProjectCardProps) => {
         </div>
       </Link>
 
-      {/* Read More Button */}
       <div className="mt-auto pt-2 flex justify-start">
         <ProjectDetailsSheet project={project}>
           <SecondaryButton

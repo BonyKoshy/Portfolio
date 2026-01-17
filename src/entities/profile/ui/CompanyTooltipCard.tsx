@@ -1,6 +1,7 @@
 import { homeContent } from "@/shared/config/content";
 import { SiAccenture } from "react-icons/si";
 
+/** Displays company details in a tooltip card. */
 export const CompanyTooltipCard = () => (
   <div className="relative flex aspect-3/1 w-52.5 flex-row items-center gap-3 rounded-xl border border-border-default bg-bg-surface px-4 shadow-2xl">
     <div className="absolute inset-0 bg-linear-to-r from-purple-500/5 to-transparent" />

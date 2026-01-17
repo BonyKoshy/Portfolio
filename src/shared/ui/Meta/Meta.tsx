@@ -6,6 +6,7 @@ interface MetaProps {
   schema?: Record<string, any>;
 }
 
+/** Manages document head metadata such as Title, Description, and JSON-LD schema. */
 export const Meta = ({ title, description, schema }: MetaProps) => {
   const siteTitle = "Bony Koshy | Portfolio";
   const defaultDescription =
@@ -15,7 +16,7 @@ export const Meta = ({ title, description, schema }: MetaProps) => {
     "@context": "https://schema.org",
     "@type": "Person",
     name: "Bony Koshy",
-    url: "https://bonykoshy.netlify.app", // Replace with actual domain if different
+    url: "https://bonykoshy.netlify.app",
     image: "/profile-image.jpg",
     sameAs: [
       "https://github.com/BonyKoshy",

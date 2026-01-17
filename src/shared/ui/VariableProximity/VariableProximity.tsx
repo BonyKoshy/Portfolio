@@ -64,6 +64,7 @@ interface VariableProximityProps extends React.HTMLAttributes<HTMLSpanElement> {
   falloff?: "linear" | "exponential" | "gaussian";
 }
 
+/** Renders text with variable font settings based on mouse proximity. */
 const VariableProximity = forwardRef<HTMLSpanElement, VariableProximityProps>(
   (props, ref) => {
     const {
@@ -94,7 +95,7 @@ const VariableProximity = forwardRef<HTMLSpanElement, VariableProximityProps>(
               const value = parts[1] || "0";
               return [name.replace(/['"]/g, ""), parseFloat(value)] as [
                 string,
-                number
+                number,
               ];
             })
         );

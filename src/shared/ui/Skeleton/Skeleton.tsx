@@ -1,5 +1,6 @@
-import { cn } from "@/shared/lib/utils"
+import { cn } from "@/shared/lib/utils";
 
+/** Renders a placeholder skeleton for loading states. */
 function Skeleton({ className, ...props }: React.ComponentProps<"div">) {
   return (
     <div
@@ -7,7 +8,7 @@ function Skeleton({ className, ...props }: React.ComponentProps<"div">) {
       className={cn("bg-accent animate-pulse rounded-md", className)}
       {...props}
     />
-  )
+  );
 }
 
-export { Skeleton }
+export { Skeleton };

@@ -10,12 +10,12 @@ interface ScrollFloatProps {
   stagger?: number;
 }
 
+/** Animates text characters with a floating effect on scroll. */
 const ScrollFloat: React.FC<ScrollFloatProps> = ({
   children,
   containerClassName = "",
   textClassName = "",
   animationDuration = 1,
-  // ease = 'back.inOut(2)', // Framer motion uses different easing strings
   stagger = 0.03,
 }) => {
   const splitText = useMemo(() => {
@@ -44,7 +44,7 @@ const ScrollFloat: React.FC<ScrollFloatProps> = ({
       scaleX: 0.7,
       transformOrigin: "50% 0%",
       transition: {
-        duration: 0.8, // Optional: faster exit than entry?
+        duration: 0.8,
         ease: "easeInOut",
       },
     },
@@ -55,7 +55,7 @@ const ScrollFloat: React.FC<ScrollFloatProps> = ({
       scaleX: 1,
       transition: {
         duration: animationDuration,
-        ease: [0.22, 1, 0.36, 1], // Custom cubic bezier similar to back.inOut, or just standard easeOut
+        ease: [0.22, 1, 0.36, 1],
       },
     },
   };

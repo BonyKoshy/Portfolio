@@ -2,7 +2,6 @@ import { defineConfig } from "vite";
 import react from "@vitejs/plugin-react";
 import path from "path";
 import { ViteImageOptimizer } from "vite-plugin-image-optimizer";
-
 /** Configuration for Vite, including plugins for React and Image Optimization. */
 export default defineConfig({
   plugins: [

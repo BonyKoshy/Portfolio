@@ -5,6 +5,7 @@ interface ContainerProps {
   className?: string;
 }
 
+/** Responsive centered container with max-width and padding. */
 const Container = ({ children, className = "" }: ContainerProps) => {
   return (
     <div className={`mx-auto w-full max-w-7xl px-6 ${className}`}>

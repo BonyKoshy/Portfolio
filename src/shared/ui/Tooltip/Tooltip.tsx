@@ -4,6 +4,7 @@ import { createPortal } from "react-dom";
 import { motion, AnimatePresence } from "framer-motion";
 import { cn } from "@/shared/lib/utils";
 
+/** Renders a tooltip popup on hover or focus. */
 export const Tooltip = ({
   content,
   children,
@@ -29,7 +30,6 @@ export const Tooltip = ({
     setIsMounted(true);
   }, []);
 
-  // Check if device supports hover
   const isTouchDevice = () => {
     if (typeof window === "undefined") return false;
     return window.matchMedia("(hover: none)").matches;
@@ -52,17 +52,17 @@ export const Tooltip = ({
     let finalY = y;
 
     if (isKeyboard && containerRef.current) {
-      // Position relative to the trigger element for keyboard focus
+      // Position relative to the trigger element for keyboard focus.
       const rect = containerRef.current.getBoundingClientRect();
       finalX = rect.left + rect.width / 2 - tooltipWidth / 2;
-      finalY = rect.bottom + 12; // Default to bottom
+      finalY = rect.bottom + 12;
     } else {
-      // Mouse positioning
+      // Mouse positioning.
       finalX = x + 12;
       finalY = y + 12;
     }
 
-    // Boundary checks (same as before)
+    // Boundary checks.
     if (finalX + tooltipWidth > viewportWidth) {
       finalX = isKeyboard
         ? viewportWidth - tooltipWidth - 12
@@ -89,7 +89,6 @@ export const Tooltip = ({
     isKeyboard: boolean = false
   ) => {
     if (isKeyboard) {
-      // For keyboard, we pass 0,0 but the calculator will ignore them if isKeyboard is true and use containerRef
       const newPosition = calculatePosition(0, 0, true);
       setPosition(newPosition);
     } else {
@@ -100,7 +99,7 @@ export const Tooltip = ({
   };
 
   const handleMouseEnter = (e: React.MouseEvent<HTMLDivElement>) => {
-    if (isTouchDevice()) return; // Disable on touch devices
+    if (isTouchDevice()) return;
     setIsVisible(true);
     updatePosition(e.clientX, e.clientY);
   };
@@ -123,18 +122,16 @@ export const Tooltip = ({
     setIsVisible(false);
   };
 
-  // Keyboard and ESC logic
+  // Keyboard and ESC logic.
   useEffect(() => {
     const handleKeyDown = (e: KeyboardEvent) => {
       if (isVisible && e.key === "Escape") {
         setIsVisible(false);
-        // Optional: return focus to container? It's likely already focused.
       }
     };
 
-    // Position update for keyboard focus needs to happen after visibility
+    // Position update for keyboard focus needs to happen after visibility.
     if (isVisible && !mouse.x && !mouse.y && containerRef.current) {
-      // Assume keyboard if mouse is 0,0 or we rely on the implementation detail that we don't set mouse on focus
       const newPos = calculatePosition(0, 0, true);
       setPosition(newPos);
     }

@@ -4,7 +4,7 @@ import {
   SiJavascript,
   SiHtml5,
   SiCss3,
-  SiNodedotjs, // Changed from SiNodeDotJs in standard lib
+  SiNodedotjs,
   SiPython,
   SiGit,
   SiGithub,
@@ -28,12 +28,13 @@ import { TbBrandCSharp, TbBrandPowershell } from "react-icons/tb";
 import { DiVisualstudio } from "react-icons/di";
 import { BiLogoVisualStudio } from "react-icons/bi";
 
-// Define logo type
+/** Defines the structure for a technology logo entry. */
 export type TechLogo = {
   node: React.ReactNode;
   title: string;
 };
 
+/** Static list of mapped technology logos. */
 export const techLogos: TechLogo[] = [
   { node: <SiHtml5 />, title: "HTML5" },
   { node: <SiCss3 />, title: "CSS3" },

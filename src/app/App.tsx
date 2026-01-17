@@ -10,7 +10,6 @@ import { LoadingProvider } from "@/shared/lib/context/LoadingContext";
 import { SuspenseTrigger } from "@/shared/ui/GlobalLoader/SuspenseTrigger";
 import { StructuredData } from "@/shared/lib/seo/StructuredData";
 
-// Lazy Load Pages
 const Home = lazy(() => import("@/pages/Home"));
 const About = lazy(() => import("@/pages/About"));
 const Projects = lazy(() => import("@/pages/Projects"));
@@ -19,6 +18,7 @@ const Certificates = lazy(() => import("@/pages/Certificates"));
 const NotFound = lazy(() => import("@/pages/NotFound"));
 const PrivacyPolicy = lazy(() => import("@/pages/PrivacyPolicy"));
 
+/** Root component setting up providers, routing, and global layout. */
 const App = () => {
   return (
     <ThemeProvider>
@@ -34,7 +34,7 @@ const App = () => {
               <Route
                 path="/"
                 element={
-                  <Suspense fallback={null}>
+                  <Suspense fallback={<SuspenseTrigger />}>
                     <Home />
                   </Suspense>
                 }

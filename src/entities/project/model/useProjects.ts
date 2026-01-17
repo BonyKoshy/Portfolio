@@ -1,6 +1,7 @@
 import { projectsData } from "./data";
 import { ProjectCardData } from "./types";
 
+/** Hook to access and filter project data. */
 export const useProjects = () => {
   const getAllProjects = (): ProjectCardData[] => {
     return projectsData;

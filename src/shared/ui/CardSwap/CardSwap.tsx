@@ -28,8 +28,6 @@ export interface CardProps extends React.HTMLAttributes<HTMLElement> {
 }
 
 // Wrapper for the user's Card component
-// Note: We need to forward ref if we were using direct refs, but useAnimate scopes by selector usually.
-// However, the original code used refs. We can use data-index.
 export const Card = React.forwardRef<HTMLElement, CardProps>(
   ({ customClass, as: Component = "div", ...rest }, ref) => (
     <Component
@@ -62,6 +60,7 @@ const makeSlot = (
   zIndex: total - i,
 });
 
+/** 3D card swapping animation component that cycles through children. */
 const CardSwap: React.FC<CardSwapProps> = ({
   width = 500,
   height = 400,
@@ -80,19 +79,16 @@ const CardSwap: React.FC<CardSwapProps> = ({
     [children]
   );
 
-  // Logic state
   const order = useRef<number[]>(
     Array.from({ length: childArr.length }, (_, i) => i)
   );
   const intervalRef = useRef<number>(0);
   const isHovered = useRef(false);
 
-  // Initial placement
   useEffect(() => {
     if (!scope.current) return;
     const total = childArr.length;
 
-    // Set initial styles for all cards
     order.current.forEach((originalIndex, i) => {
       const slot = makeSlot(i, cardDistance, verticalDistance, total);
       const selector = `[data-index='${originalIndex}']`;
@@ -120,7 +116,6 @@ const CardSwap: React.FC<CardSwapProps> = ({
     scope,
   ]);
 
-  // Swap Loop
   useEffect(() => {
     const config =
       easing === "elastic"
@@ -142,7 +137,6 @@ const CardSwap: React.FC<CardSwapProps> = ({
           };
 
     const swap = async () => {
-      // Safety check for array length
       if (order.current.length < 2) return;
       if (pauseOnHover && isHovered.current) return;
 
@@ -154,20 +148,17 @@ const CardSwap: React.FC<CardSwapProps> = ({
 
       const frontSelector = `[data-index='${front}']`;
 
-      // 1. Drop Front Card
-      // We ignore the return promise variable to avoid "unused var" warnings,
-      // but we await it implicitly or let it run.
+      // Drops the front card out of view.
       animate(frontSelector, { y: `calc(-50% + 500px)` } as any, {
         duration: config.durDrop,
         ease: config.ease as any,
       });
 
-      // 2. Promote Overlap - Animate others
       const overlapTime = config.durDrop * (1 - config.promoteOverlap) * 1000;
 
       await new Promise((r) => setTimeout(r, Math.max(0, overlapTime)));
 
-      // Animate Rest
+      // Moves the rest of the cards up the stack.
       rest.forEach((idx, i) => {
         const slot = makeSlot(
           i,
@@ -177,10 +168,8 @@ const CardSwap: React.FC<CardSwapProps> = ({
         );
         const selector = `[data-index='${idx}']`;
 
-        // Z-Index update is instant
         animate(selector, { zIndex: slot.zIndex } as any, { duration: 0 });
 
-        // Staggered move
         animate(
           selector,
           {
@@ -196,7 +185,6 @@ const CardSwap: React.FC<CardSwapProps> = ({
         );
       });
 
-      // 3. Return Front Card
       const backSlot = makeSlot(
         childArr.length - 1,
         cardDistance,
@@ -207,7 +195,7 @@ const CardSwap: React.FC<CardSwapProps> = ({
       const returnDelay = config.durMove * config.returnDelay * 1000;
       await new Promise((r) => setTimeout(r, Math.max(0, returnDelay)));
 
-      // Now animate front card return
+      // Returns the original front card to the back of the stack.
       animate(frontSelector, { zIndex: backSlot.zIndex } as any, {
         duration: 0,
       });
@@ -222,7 +210,6 @@ const CardSwap: React.FC<CardSwapProps> = ({
         { duration: config.durReturn, ease: config.ease as any }
       );
 
-      // Update Order Ref
       order.current = [...rest, front];
     };
 
@@ -250,13 +237,11 @@ const CardSwap: React.FC<CardSwapProps> = ({
       {childArr.map((child, i) =>
         cloneElement(child as React.ReactElement<any>, {
           key: i,
-          "data-index": i, // Uses original index as stable ID
+          "data-index": i,
           onClick: (e: any) => {
             child.props.onClick?.(e);
             onCardClick?.(i);
           },
-          // Ensure Card has stable ref internally if needed, or just standard props
-          // We set style here to ensure consistent sizing
           style: { width: "100%", height: "100%" },
         })
       )}

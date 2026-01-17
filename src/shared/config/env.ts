@@ -22,4 +22,5 @@ if (!_env.success) {
   throw new Error("Invalid environment variables");
 }
 
+/** Centralized environment variable configuration and validation. */
 export const env = _env.data;

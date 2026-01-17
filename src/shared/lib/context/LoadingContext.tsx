@@ -17,6 +17,7 @@ export const LoadingProvider = ({ children }: { children: ReactNode }) => {
   );
 };
 
+/** Hook to access the global loading state. */
 export const useLoading = () => {
   const context = useContext(LoadingContext);
   if (!context) {

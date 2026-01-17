@@ -18,6 +18,7 @@ const HomeContactSection = lazy(() =>
   }))
 );
 
+/** Renders the landing page with hero, bento grid, projects, and contact sections. */
 const Home = () => {
   useEffect(() => {
     const preloadImages = async () => {
@@ -34,13 +35,11 @@ const Home = () => {
           const img = new Image();
           img.src = src;
           img.onload = resolve;
-          img.onerror = resolve; // Continue even if one fails
+          img.onerror = resolve;
         });
       });
 
       await Promise.all(promises);
-
-      // Artificial delay to ensure layout is settled / prevent flash
     };
 
     preloadImages();
@@ -52,7 +51,6 @@ const Home = () => {
       tabIndex={-1}
       className="relative text-text-primary selection:bg-accent selection:text-white"
     >
-      {/* Hero Section */}
       <section
         id="hero"
         className="relative h-screen flex flex-col justify-center"
@@ -60,14 +58,12 @@ const Home = () => {
         <Hero />
       </section>
 
-      {/* Bento Section */}
       <section className="min-h-screen flex flex-col justify-center mx-auto max-w-7xl px-6 w-full py-20 lg:py-0">
         <Suspense fallback={<div className="min-h-screen" />}>
           <HomeBentoSection />
         </Suspense>
       </section>
 
-      {/* Projects Section - Placed under Bento */}
       <section
         id="projects"
         className="min-h-screen flex flex-col justify-center mx-auto max-w-7xl px-6 w-full py-20"
@@ -77,7 +73,6 @@ const Home = () => {
         </Suspense>
       </section>
 
-      {/* Contact Section */}
       <section className="flex flex-col justify-center mx-auto max-w-7xl px-6 w-full pb-20 border-t border-border-default/40">
         <RevealOnScroll width="100%">
           <Suspense fallback={<div className="min-h-[50vh]" />}>
