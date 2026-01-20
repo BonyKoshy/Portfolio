@@ -11,11 +11,13 @@ const Navbar = () => {
   const location = useLocation();
   const scrollTo = useScrollToAnchor();
 
-  const mainPaths = ["/", "/about", "/projects", "/contact"];
   // Normalize path by removing trailing slash
   const normalizedPath =
     location.pathname === "/" ? "/" : location.pathname.replace(/\/$/, "");
-  const isSpecialPage = !mainPaths.includes(normalizedPath);
+
+  // Pages where "Back to Home" button should appear
+  const showBackButtonPages = ["/certificates", "/privacy", "/privacy-policy"];
+  const shouldShowBackButton = showBackButtonPages.includes(normalizedPath);
 
   const menuItems = [
     { label: homeContent.navbar.links.home, href: "/" },
@@ -58,6 +60,7 @@ const Navbar = () => {
             />
           }
           iconPosition="right"
+          withHoverAnimation={false}
           className="opacity-0 focus:opacity-100 pointer-events-none focus:pointer-events-auto transition-all duration-200 -translate-y-[200%] focus:translate-y-0 shadow-xl"
           tabIndex={0}
         >
@@ -67,22 +70,17 @@ const Navbar = () => {
 
       <div className="mx-auto flex h-full max-w-7xl items-center justify-between px-6 pointer-events-auto relative">
         <div className="absolute top-1/2 -translate-y-1/2 left-0 pl-6 z-50 flex items-center gap-4">
-          {isSpecialPage && (
+          {shouldShowBackButton && (
             <PrimaryButton
               asChild
               size="md"
-              icon={
-                <ArrowLeft
-                  size={16}
-                  className="transition-transform duration-300 group-hover:-translate-x-1"
-                />
-              }
+              icon={<ArrowLeft size={16} />}
               iconPosition="left"
             >
               <NavLink
                 to="/"
                 className={
-                  isSpecialPage
+                  shouldShowBackButton
                     ? "opacity-100 transition-opacity duration-300"
                     : ""
                 }

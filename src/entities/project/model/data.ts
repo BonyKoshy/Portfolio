@@ -4,7 +4,7 @@ import { ProjectCardData } from "./types";
 export const projectsData: ProjectCardData[] = [
   {
     title: "2026 Gold Standard Portfolio",
-    category: "System Architecture",
+    category: "Web Architecture",
     year: 2026,
     src: "/projects/proj1.webp",
     githubLink: "https://github.com/BonyKoshy/Portfolio",
@@ -32,7 +32,7 @@ export const projectsData: ProjectCardData[] = [
   },
   {
     title: "Local AI Sentiment Analysis",
-    category: "AI & Hardware",
+    category: "AI Solutions",
     year: 2025,
     src: "/projects/proj2.webp",
     githubLink: "https://github.com/BonyKoshy/sentiment-analysis-project",
@@ -66,7 +66,7 @@ export const projectsData: ProjectCardData[] = [
   },
   {
     title: "Connectly: AI Multilingual Chat",
-    category: "Communication",
+    category: "Web Architecture",
     year: 2025,
     src: "/projects/proj3.webp",
     githubLink: "https://github.com/BonyKoshy/Connectly",
@@ -100,7 +100,7 @@ export const projectsData: ProjectCardData[] = [
   },
   {
     title: "Timeless Library Manager Pro",
-    category: "Systems Programming",
+    category: "Desktop & Systems",
     year: 2024,
     src: "/projects/proj4.webp",
     githubLink:
@@ -136,7 +136,7 @@ export const projectsData: ProjectCardData[] = [
   },
   {
     title: "Downloads Organizer (MAUI)",
-    category: "Desktop Application",
+    category: "Desktop & Systems",
     year: 2024,
     src: "/projects/proj5.webp",
     githubLink: "https://github.com/BonyKoshy/DownloadsFolderOrganizer-MAUI",
@@ -166,7 +166,7 @@ export const projectsData: ProjectCardData[] = [
   },
   {
     title: "Java Enterprise Database",
-    category: "Enterprise Backend",
+    category: "Backend Systems",
     year: 2025,
     src: "/projects/proj6.webp",
     githubLink: "https://github.com/BonyKoshy/java-database-final",
@@ -194,7 +194,7 @@ export const projectsData: ProjectCardData[] = [
   },
   {
     title: "Modern Inventory System",
-    category: "Full Stack App",
+    category: "Backend Systems",
     year: 2024,
     src: "/projects/proj7.webp",
     githubLink: "https://github.com/BonyKoshy/Inventory_Management_System",
@@ -222,7 +222,7 @@ export const projectsData: ProjectCardData[] = [
   },
   {
     title: "Metadata Timeline Generator",
-    category: "Forensics Utility",
+    category: "Desktop & Systems",
     year: 2024,
     src: "/projects/proj8.webp",
     githubLink: "https://github.com/BonyKoshy/metadata-timeline-generator",
@@ -252,7 +252,7 @@ export const projectsData: ProjectCardData[] = [
   },
   {
     title: "Emotion Detection App",
-    category: "NLP Service",
+    category: "AI Solutions",
     year: 2024,
     src: "/projects/proj9.webp",
     githubLink: "https://github.com/BonyKoshy/Emotion-Detector",
@@ -280,7 +280,7 @@ export const projectsData: ProjectCardData[] = [
   },
   {
     title: "Marvel Multiverse Timeline",
-    category: "Web Application",
+    category: "Web Architecture",
     year: 2024,
     src: "/projects/proj10.webp",
     githubLink: "https://github.com/BonyKoshy/Marvel_Multiverse_Timeline",
@@ -308,7 +308,7 @@ export const projectsData: ProjectCardData[] = [
   },
   {
     title: "IBM Coursera Portfolio",
-    category: "Web Development",
+    category: "Web Architecture",
     year: 2023,
     src: "/projects/proj11.webp",
     githubLink: "https://github.com/BonyKoshy/IBM_Bony_Portfolio",
@@ -336,7 +336,7 @@ export const projectsData: ProjectCardData[] = [
   },
   {
     title: "Downloads Organizer (Python)",
-    category: "Legacy Utility",
+    category: "Desktop & Systems",
     year: 2023,
     src: "/projects/proj12.webp",
     githubLink: "https://github.com/BonyKoshy/DownloadsFolderOrganizer",

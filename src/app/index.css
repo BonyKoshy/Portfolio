@@ -44,6 +44,7 @@ html[data-theme="light"] {
   /* UI States */
   --action-hover: #f4f4f5;
   --overlay: rgba(0, 0, 0, 0.4);
+  --focus-ring-color: #000000;
 }
 
 /* Dark Theme Variables */
@@ -71,6 +72,7 @@ html[data-theme="dark"] {
   /* UI States */
   --action-hover: rgba(255, 255, 255, 0.05);
   --overlay: rgba(0, 0, 0, 0.7);
+  --focus-ring-color: #ffffff;
 }
 
 /* 2. Tailwind Configuration (Theme-aware) */
@@ -253,7 +255,7 @@ html[data-theme="dark"] {
   }
 
   :focus-visible {
-    outline: 2px solid var(--primary);
+    outline: 2px solid var(--focus-ring-color);
     outline-offset: 2px;
     border-radius: 4px;
   }

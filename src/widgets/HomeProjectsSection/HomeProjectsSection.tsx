@@ -1,3 +1,4 @@
+import { useState } from "react";
 import { Link } from "react-router-dom";
 import { ArrowRight, Briefcase } from "lucide-react";
 import { SecondaryButton } from "@/shared/ui/Button";
@@ -5,11 +6,16 @@ import { useProjects } from "@/entities/project/model/useProjects";
 import { ProjectCard } from "@/entities/project/ui/ProjectCard";
 import { homeContent } from "@/shared/config/content";
 import { RevealOnScroll } from "@/shared/ui/RevealOnScroll";
+import { ProjectCardData } from "@/entities/project/model/types";
+import { ProjectDetailsSheet } from "@/entities/project/ui/ProjectDetailsSheet";
 
 /** Renders the featured projects section. */
 export const HomeProjectsSection = () => {
   const { getFeaturedProjects } = useProjects();
   const featuredProjects = getFeaturedProjects(2);
+  const [selectedProject, setSelectedProject] =
+    useState<ProjectCardData | null>(null);
+
   return (
     <div className="w-full max-w-7xl mx-auto text-text-primary px-4">
       <RevealOnScroll width="100%">
@@ -45,10 +51,16 @@ export const HomeProjectsSection = () => {
       <div className="grid gap-8 grid-cols-1 md:grid-cols-2 lg:grid-cols-3">
         {featuredProjects.map((project, index) => (
           <RevealOnScroll key={project.title} delay={index * 0.1} width="100%">
-            <ProjectCard project={project} />
+            <ProjectCard project={project} onOpen={setSelectedProject} />
           </RevealOnScroll>
         ))}
       </div>
+
+      <ProjectDetailsSheet
+        project={selectedProject}
+        open={!!selectedProject}
+        onOpenChange={(open) => !open && setSelectedProject(null)}
+      />
     </div>
   );
 };

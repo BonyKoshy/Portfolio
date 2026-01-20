@@ -128,7 +128,7 @@ export const BentoCard = ({
               "origin-left transform-gpu text-fg-primary transition-all duration-300 ease-in-out",
               minimalCTA
                 ? "h-8 w-8"
-                : "h-8 w-8 md:h-12 md:w-12 [@media(hover:hover)]:group-hover:scale-75"
+                : "h-8 w-8 md:h-12 md:w-12 [@media(hover:hover)]:group-hover:scale-75 group-focus-visible:scale-75"
             )}
           />
 
@@ -150,9 +150,9 @@ export const BentoCard = ({
             "hidden pointer-fine:md:flex transform-gpu transition-all duration-500 ease-in-out",
             "pointer-coarse:hidden",
             ctaLayout === "bottom" &&
-              "max-h-0 opacity-0 group-hover:max-h-20 group-hover:opacity-100 group-hover:mt-2 overflow-hidden",
+              "max-h-0 opacity-0 group-hover:max-h-20 group-focus-visible:max-h-20 group-hover:opacity-100 group-focus-visible:opacity-100 group-hover:mt-2 group-focus-visible:mt-2 overflow-hidden",
             ctaLayout === "side" &&
-              "opacity-0 translate-x-4 group-hover:translate-x-0 group-hover:opacity-100 shrink-0"
+              "opacity-0 translate-x-4 group-hover:translate-x-0 group-focus-visible:translate-x-0 group-hover:opacity-100 group-focus-visible:opacity-100 shrink-0"
           )}
         >
           {minimalCTA ? (

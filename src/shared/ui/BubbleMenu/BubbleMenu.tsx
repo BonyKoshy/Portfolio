@@ -1,7 +1,6 @@
 import type { CSSProperties } from "react";
 import { useEffect, useRef, useState } from "react";
 import { motion, AnimatePresence, Variants } from "framer-motion";
-import { GradualBlur } from "@/shared/ui/GradualBlur";
 import { NavLink } from "react-router-dom";
 import { useOutsideClick } from "@/shared/lib/use-outside-click";
 
@@ -10,10 +9,6 @@ type MenuItem = {
   href: string;
   ariaLabel?: string;
   rotation?: number;
-  hoverStyles?: {
-    bgColor?: string;
-    textColor?: string;
-  };
   onClick?: () => void;
 };
 
@@ -22,109 +17,80 @@ export type BubbleMenuProps = {
   className?: string;
   style?: CSSProperties;
   menuAriaLabel?: string;
-  menuBg?: string;
+  menuBg?: string; // Kept for compatibility but unused in favor of semantic CSS
   menuContentColor?: string;
   useFixedPosition?: boolean;
   items?: MenuItem[];
-  animationEase?: string; // Not used directly in framer map, simplified
-  animationDuration?: number;
-  staggerDelay?: number;
 };
 
 const DEFAULT_ITEMS: MenuItem[] = [
-  {
-    label: "home",
-    href: "#",
-    ariaLabel: "Home",
-    rotation: -8,
-    hoverStyles: { bgColor: "var(--primary)", textColor: "var(--primary-fg)" },
-  },
-  {
-    label: "about",
-    href: "#",
-    ariaLabel: "About",
-    rotation: 8,
-    hoverStyles: { bgColor: "var(--primary)", textColor: "var(--primary-fg)" },
-  },
-  {
-    label: "projects",
-    href: "#",
-    ariaLabel: "Documentation",
-    rotation: 8,
-    hoverStyles: { bgColor: "var(--primary)", textColor: "var(--primary-fg)" },
-  },
-  {
-    label: "blog",
-    href: "#",
-    ariaLabel: "Blog",
-    rotation: 8,
-    hoverStyles: { bgColor: "var(--primary)", textColor: "var(--primary-fg)" },
-  },
-  {
-    label: "contact",
-    href: "#",
-    ariaLabel: "Contact",
-    rotation: -8,
-    hoverStyles: { bgColor: "var(--primary)", textColor: "var(--primary-fg)" },
-  },
+  { label: "home", href: "#", rotation: -8 },
+  { label: "about", href: "#", rotation: 8 },
+  { label: "projects", href: "#", rotation: 8 },
+  { label: "blog", href: "#", rotation: 8 },
+  { label: "contact", href: "#", rotation: -8 },
 ];
 
-/** Circular menu that expands with a bubble animation effect. */
+/**
+ * Circular menu with bubble animation.
+ * Refactored for stability, zero-flicker, and "backOut" smoothness.
+ */
 export default function BubbleMenu({
   onMenuClick,
   className,
   style,
   menuAriaLabel = "Toggle menu",
-  menuBg = "var(--bg-surface)",
-  menuContentColor = "var(--fg-primary)",
   useFixedPosition = false,
   items,
-  animationDuration = 0.5,
-  staggerDelay = 0.1,
 }: BubbleMenuProps) {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const listRef = useRef<HTMLUListElement>(null);
   const toggleRef = useRef<HTMLButtonElement>(null);
 
-  useOutsideClick(listRef, (e) => {
-    if (toggleRef.current && toggleRef.current.contains(e.target as Node))
-      return;
-    if (isMenuOpen) handleToggle();
-  });
-
   const menuItems = items?.length ? items : DEFAULT_ITEMS;
 
-  const containerClassName = [
-    "bubble-menu",
-    useFixedPosition ? "fixed" : "absolute",
-    "left-0 right-0 top-0 h-20",
-    "flex items-center justify-end",
-    "gap-4 px-6",
-    "pointer-events-none",
-    "z-[1001]",
-    className,
-  ]
-    .filter(Boolean)
-    .join(" ");
-
+  // Toggle Handler - Simple & Robust
   const handleToggle = () => {
-    const nextState = !isMenuOpen;
-    setIsMenuOpen(nextState);
-    onMenuClick?.(nextState);
+    setIsMenuOpen((prev) => {
+      const next = !prev;
+      onMenuClick?.(next);
+      return next;
+    });
   };
 
+  // Outside Click - Only active when open
+  useOutsideClick(listRef, (e) => {
+    // If not open, do nothing
+    if (!isMenuOpen) return;
+
+    // If clicking toggle button, let handleToggle handle it
+    if (toggleRef.current?.contains(e.target as Node)) return;
+
+    // Otherwise close
+    handleToggle();
+  });
+
+  // Body Scroll Lock
   useEffect(() => {
-    if (isMenuOpen) {
-      document.body.style.overflow = "hidden";
-    } else {
-      document.body.style.overflow = "";
-    }
+    document.body.style.overflow = isMenuOpen ? "hidden" : "";
     return () => {
       document.body.style.overflow = "";
     };
   }, [isMenuOpen]);
 
-  const containerVariants: Variants = {
+  // Framer Motion Variants matches GSAP "back.out(1.5)" feel
+  const overlayVariants: Variants = {
+    hidden: {
+      opacity: 0,
+      transition: { delay: 0.2, duration: 0.2 }, // Wait for bubbles to close before fading overlay
+    },
+    visible: {
+      opacity: 1,
+      transition: { duration: 0.2 },
+    },
+  };
+
+  const listVariants: Variants = {
     hidden: {
       transition: {
         staggerChildren: 0.05,
@@ -133,69 +99,73 @@ export default function BubbleMenu({
     },
     visible: {
       transition: {
-        staggerChildren: staggerDelay,
         delayChildren: 0.1,
+        staggerChildren: 0.1,
       },
     },
   };
 
-  const itemVariants: Variants = {
-    hidden: { scale: 0, opacity: 0 },
+  const bubbleVariants: Variants = {
+    hidden: {
+      scale: 0,
+      opacity: 0,
+      transition: { duration: 0.2, ease: "easeIn" },
+    },
     visible: {
       scale: 1,
       opacity: 1,
       transition: {
         type: "spring",
-        damping: 15,
-        stiffness: 200,
-        duration: animationDuration,
+        stiffness: 300,
+        damping: 20, // Bouncy but controlled
+        mass: 0.8,
       },
     },
   };
 
   const labelVariants: Variants = {
-    hidden: { y: 24, opacity: 0 },
+    hidden: { y: 20, opacity: 0 },
     visible: {
       y: 0,
       opacity: 1,
-      transition: {
-        ease: "easeOut",
-        duration: 0.3,
-      },
+      transition: { delay: 0.1, duration: 0.3 },
     },
   };
+
+  const containerClassName = [
+    "bubble-menu",
+    useFixedPosition ? "fixed" : "absolute",
+    "left-0 right-0 top-0 h-20",
+    "flex items-center justify-end",
+    "gap-4 px-6",
+    "pointer-events-none",
+    "z-[10001]", // Z-Index higher than overlay (9999)
+    className,
+  ]
+    .filter(Boolean)
+    .join(" ");
 
   return (
     <>
       <style>{`
         .bubble-menu .menu-line {
-          transition: transform 0.3s ease, opacity 0.3s ease;
+          transition: transform 0.3s ease, background-color 0.3s ease;
           transform-origin: center;
         }
         .bubble-menu-items .pill-list .pill-col:nth-child(4):nth-last-child(2) {
           margin-left: calc(100% / 6);
         }
-        .bubble-menu-items .pill-list .pill-col:nth-child(4):last-child {
+        .bubble-menu-items .pill-col:nth-child(4):last-child {
           margin-left: calc(100% / 3);
         }
-
         @media (max-width: 1023px) {
-          .bubble-menu-items {
-            padding-top: 120px;
-            align-items: flex-start;
-          }
-          .bubble-menu-items .pill-list {
-            row-gap: 16px;
-          }
-          .bubble-menu-items .pill-list .pill-col {
-            flex: 0 0 100% !important;
-            margin-left: 0 !important;
-            overflow: visible;
-          }
-          .bubble-menu-items .pill-link {
-            font-size: clamp(1.2rem, 3vw, 4rem);
-            padding: clamp(1rem, 2vw, 2rem) 0;
-            min-height: 80px !important;
+          .bubble-menu-items { padding-top: 120px; align-items: flex-start; }
+          .bubble-menu-items .pill-list { row-gap: 16px; }
+          .bubble-menu-items .pill-col { flex: 0 0 100% !important; margin-left: 0 !important; }
+          .bubble-menu-items .pill-link { 
+            font-size: clamp(1.2rem, 3vw, 4rem); 
+            padding: clamp(1rem, 2vw, 2rem) 0; 
+            min-height: 80px !important; 
           }
         }
       `}</style>
@@ -206,39 +176,35 @@ export default function BubbleMenu({
         aria-label="Main navigation"
       >
         <button
-          type="button"
-          className={[
-            "bubble toggle-bubble menu-btn",
-            isMenuOpen ? "open" : "",
-            "inline-flex flex-col items-center justify-center",
-            "rounded-full",
-            "pointer-events-auto",
-            "w-12 h-12 md:w-14 md:h-14",
-            "border-0 cursor-pointer p-0",
-            "will-change-transform",
-          ].join(" ")}
           ref={toggleRef}
+          type="button"
           onClick={handleToggle}
           aria-label={menuAriaLabel}
           aria-pressed={isMenuOpen}
-          style={{ background: "transparent", boxShadow: "none" }}
+          className={[
+            "bubble toggle-bubble menu-btn",
+            "inline-flex flex-col items-center justify-center",
+            "rounded-full w-12 h-12 md:w-14 md:h-14",
+            "pointer-events-auto cursor-pointer border-0 p-0",
+            "transition-transform active:scale-95 touch-manipulation", // Responsive touch
+            "focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2",
+          ].join(" ")}
+          style={{ background: "transparent" }}
         >
           <span
-            className="menu-line block mx-auto rounded-xs"
+            className="menu-line block mx-auto rounded-full bg-fg-primary"
             style={{
               width: 26,
               height: 2,
-              background: menuContentColor,
               transform: isMenuOpen ? "translateY(4px) rotate(45deg)" : "none",
             }}
           />
           <span
-            className="menu-line short block mx-auto rounded-xs"
+            className="menu-line block mx-auto rounded-full bg-fg-primary"
             style={{
               marginTop: "6px",
               width: 26,
               height: 2,
-              background: menuContentColor,
               transform: isMenuOpen
                 ? "translateY(-4px) rotate(-45deg)"
                 : "none",
@@ -247,56 +213,33 @@ export default function BubbleMenu({
         </button>
       </nav>
 
-      <AnimatePresence>
+      <AnimatePresence mode="wait">
         {isMenuOpen && (
           <motion.div
             key="overlay"
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            exit={{ opacity: 0 }}
-            transition={{ duration: 0.2 }}
+            initial="hidden"
+            animate="visible"
+            exit="hidden"
+            variants={overlayVariants}
             className={[
-              "bubble-menu-items",
-              useFixedPosition ? "fixed" : "absolute",
-              "inset-0",
+              "fixed inset-0 z-[9999]",
               "flex items-center justify-center",
+              "bg-black/60",
               "pointer-events-auto",
-              "z-1000",
             ].join(" ")}
             style={{
-              backgroundColor: "var(--overlay)",
+              backdropFilter: "blur(12px)",
+              WebkitBackdropFilter: "blur(12px)", // Safari support
+              willChange: "opacity, backdrop-filter",
             }}
-            aria-hidden={!isMenuOpen}
           >
-            <div className="absolute inset-0 pointer-events-none">
-              <GradualBlur
-                position="top"
-                height="100%"
-                strength={1}
-                opacity={1}
-                zIndex={0}
-                curve="ease-out"
-                target="parent"
-              />
-            </div>
-
             <motion.ul
               ref={listRef}
-              variants={containerVariants}
+              variants={listVariants}
               initial="hidden"
               animate="visible"
               exit="hidden"
-              className={[
-                "pill-list",
-                "relative z-10",
-                "list-none m-0 px-6",
-                "w-full max-w-400 mx-auto",
-                "flex flex-wrap",
-                "gap-x-0 gap-y-1",
-                "pointer-events-auto",
-              ].join(" ")}
-              role="menu"
-              aria-label="Menu links"
+              className="relative z-10 w-full max-w-2xl px-4 flex flex-col items-center gap-y-3 list-none m-0"
             >
               {menuItems.map((item, idx) => {
                 const isDesktop =
@@ -304,79 +247,39 @@ export default function BubbleMenu({
                 const rotation = isDesktop ? (item.rotation ?? 0) : 0;
 
                 return (
-                  <li
-                    key={idx}
-                    role="none"
-                    className={[
-                      "pill-col",
-                      "flex justify-center items-stretch",
-                      "flex-[0_0_calc(100%/3)]",
-                      "box-border",
-                    ].join(" ")}
-                  >
+                  <li key={idx} className="pill-col flex justify-center w-full">
                     <motion.div
-                      variants={itemVariants}
-                      className="w-full h-full flex justify-center"
+                      variants={bubbleVariants}
+                      className="w-full flex justify-center"
                     >
                       <NavLink
                         to={item.href}
-                        aria-label={item.ariaLabel || item.label}
                         onClick={() => {
                           item.onClick?.();
                           handleToggle();
                         }}
                         className={[
-                          "pill-link",
-                          "w-full",
-                          "rounded-[999px]",
-                          "no-underline",
-                          "bg-white",
-                          "dark:bg-(--bg-paper)",
-                          "text-inherit",
-                          "shadow-[0_4px_14px_rgba(0,0,0,0.10)]",
+                          "pill-link w-full rounded-full relative",
                           "flex items-center justify-center",
-                          "relative",
-                          "transition-[background,color] duration-300 ease-in-out",
-                          "box-border",
-                          "whitespace-nowrap overflow-hidden",
+                          "bg-bg-paper text-fg-primary", // Semantic colors
+                          "shadow-lg no-underline box-border overflow-hidden",
+                          "transition-colors duration-200",
                         ].join(" ")}
-                        style={
-                          {
-                            ["--pill-bg"]: menuBg,
-                            ["--pill-color"]: menuContentColor,
-                            ["--hover-bg"]:
-                              item.hoverStyles?.bgColor || "#f3f4f6",
-                            ["--hover-color"]:
-                              item.hoverStyles?.textColor || menuContentColor,
-                            background: "var(--pill-bg)",
-                            color: "var(--pill-color)",
-                            minHeight: "var(--pill-min-h, 160px)",
-                            padding: "clamp(1.5rem, 3vw, 8rem) 0",
-                            fontSize: "clamp(1.5rem, 4vw, 4rem)",
-                            fontWeight: 400,
-                            lineHeight: 0,
-                            willChange: "transform",
-                            height: 10,
-                          } as CSSProperties
-                        }
+                        style={{
+                          minHeight: "80px",
+                          padding: "0 2rem",
+                          fontSize: "2rem",
+                        }}
                       >
                         <motion.span
-                          className="pill-link-inner block w-full h-full absolute inset-0 rounded-[999px]"
+                          className="absolute inset-0 block w-full h-full rounded-full"
                           style={{ transform: `rotate(${rotation}deg)` }}
-                          whileHover={{
-                            scale: 1.06,
-                            rotate: rotation,
-                            backgroundColor: "var(--hover-bg)",
-                            color: "var(--hover-color)",
-                          }}
-                          whileTap={{ scale: 0.94 }}
-                          transition={{ duration: 0.2 }}
+                          whileHover={{ scale: 1.05, rotate: rotation }}
+                          whileTap={{ scale: 0.95 }}
                         />
-
                         <motion.span
                           variants={labelVariants}
-                          className="pill-label inline-block relative z-10 pointers-events-none"
-                          style={{}}
+                          className="relative z-10"
                         >
                           {item.label}
                         </motion.span>

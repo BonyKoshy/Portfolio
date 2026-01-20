@@ -1,7 +1,7 @@
 import React from "react";
 import { cn } from "@/shared/lib/utils";
 import { cva, type VariantProps } from "class-variance-authority";
-import { Slot } from "@radix-ui/react-slot";
+import { Slot, Slottable } from "@radix-ui/react-slot";
 
 const primaryButtonVariants = cva(
   "group inline-flex items-center justify-center font-medium transition-all active:scale-95 focus-visible:ring-2 focus-visible:ring-offset-2 outline-none disabled:opacity-50 gap-2 whitespace-nowrap bg-primary text-primary-fg rounded-full hover:bg-primary-hover",
@@ -55,18 +55,6 @@ const PrimaryButton = React.forwardRef<HTMLButtonElement, PrimaryButtonProps>(
         : "group-hover:translate-x-1"
       : "";
 
-    if (asChild) {
-      return (
-        <Comp
-          ref={ref}
-          className={cn(primaryButtonVariants({ size, className }))}
-          {...props}
-        >
-          {children}
-        </Comp>
-      );
-    }
-
     return (
       <Comp
         ref={ref}
@@ -86,7 +74,7 @@ const PrimaryButton = React.forwardRef<HTMLButtonElement, PrimaryButtonProps>(
         )}
 
         {/* Text */}
-        {!hideText && children}
+        <Slottable>{!hideText && children}</Slottable>
 
         {/* Right Icon */}
         {icon && iconPosition === "right" && (

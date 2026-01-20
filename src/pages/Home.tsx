@@ -1,6 +1,8 @@
-import { useEffect, lazy, Suspense } from "react";
+import { useEffect, lazy, Suspense, useState } from "react";
+import { AnimatePresence, motion } from "framer-motion";
 import { Hero } from "@/widgets/Hero";
 import { RevealOnScroll } from "@/shared/ui/RevealOnScroll";
+import { HomeSkeleton } from "@/widgets/Skeletons/HomeSkeleton";
 
 const HomeBentoSection = lazy(() =>
   import("@/widgets/HomeBentoSection").then((module) => ({
@@ -20,6 +22,8 @@ const HomeContactSection = lazy(() =>
 
 /** Renders the landing page with hero, bento grid, projects, and contact sections. */
 const Home = () => {
+  const [isLoaded, setIsLoaded] = useState(false);
+
   useEffect(() => {
     const preloadImages = async () => {
       const images = [
@@ -40,47 +44,71 @@ const Home = () => {
       });
 
       await Promise.all(promises);
+
+      // Delay slightly for cinematic effect
+      setTimeout(() => {
+        setIsLoaded(true);
+      }, 500);
     };
 
     preloadImages();
   }, []);
 
   return (
-    <main
-      id="main-content"
-      tabIndex={-1}
-      className="relative text-text-primary selection:bg-accent selection:text-white"
-    >
-      <section
-        id="hero"
-        className="relative h-screen flex flex-col justify-center"
+    <>
+      <AnimatePresence mode="wait">
+        {!isLoaded && (
+          <motion.div
+            key="skeleton"
+            exit={{ opacity: 0 }}
+            transition={{ duration: 0.8, ease: "easeInOut" }}
+            className="fixed inset-0 z-[9999] pointer-events-none"
+          >
+            <HomeSkeleton />
+          </motion.div>
+        )}
+      </AnimatePresence>
+
+      <main
+        id="main-content"
+        tabIndex={-1}
+        className="relative text-text-primary selection:bg-accent selection:text-white"
+        style={{
+          opacity: isLoaded ? 1 : 0,
+          transition: "opacity 0.5s ease-in",
+        }}
       >
-        <Hero />
-      </section>
+        <section
+          id="hero"
+          className="relative h-screen flex flex-col justify-center"
+        >
+          <Hero />
+        </section>
 
-      <section className="min-h-screen flex flex-col justify-center mx-auto max-w-7xl px-6 w-full py-20 lg:py-0">
-        <Suspense fallback={<div className="min-h-screen" />}>
-          <HomeBentoSection />
-        </Suspense>
-      </section>
-
-      <section
-        id="projects"
-        className="min-h-screen flex flex-col justify-center mx-auto max-w-7xl px-6 w-full py-20"
-      >
-        <Suspense fallback={<div className="min-h-screen" />}>
-          <HomeProjectsSection />
-        </Suspense>
-      </section>
-
-      <section className="flex flex-col justify-center mx-auto max-w-7xl px-6 w-full pb-20 border-t border-border-default/40">
-        <RevealOnScroll width="100%">
-          <Suspense fallback={<div className="min-h-[50vh]" />}>
-            <HomeContactSection />
+        <section className="min-h-screen flex flex-col justify-center mx-auto max-w-7xl px-6 w-full py-20 lg:py-0">
+          <Suspense fallback={<div className="min-h-screen" />}>
+            <HomeBentoSection />
           </Suspense>
-        </RevealOnScroll>
-      </section>
-    </main>
+        </section>
+
+        <section
+          id="projects"
+          className="min-h-screen flex flex-col justify-center mx-auto max-w-7xl px-6 w-full py-20"
+        >
+          <Suspense fallback={<div className="min-h-screen" />}>
+            <HomeProjectsSection />
+          </Suspense>
+        </section>
+
+        <section className="flex flex-col justify-center mx-auto max-w-7xl px-6 w-full pb-20 border-t border-border-default/40">
+          <RevealOnScroll width="100%">
+            <Suspense fallback={<div className="min-h-[50vh]" />}>
+              <HomeContactSection />
+            </Suspense>
+          </RevealOnScroll>
+        </section>
+      </main>
+    </>
   );
 };
 

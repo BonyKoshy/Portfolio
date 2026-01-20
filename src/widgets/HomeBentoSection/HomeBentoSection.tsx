@@ -27,7 +27,7 @@ const features = [
         src="/profile-image.webp"
         alt="Bony Koshy"
         loading="eager"
-        className="absolute inset-0 h-full w-full object-cover transition-all duration-700 grayscale pointer-coarse:grayscale-0 [@media(hover:hover)]:group-hover:grayscale-0 opacity-40 pointer-coarse:opacity-60 [@media(hover:hover)]:group-hover:opacity-60"
+        className="absolute inset-0 h-full w-full object-cover transition-all duration-700 grayscale pointer-coarse:grayscale-0 [@media(hover:hover)]:group-hover:grayscale-0 group-focus-visible:grayscale-0 opacity-40 pointer-coarse:opacity-60 [@media(hover:hover)]:group-hover:opacity-60 group-focus-visible:opacity-60"
       />
     ),
   },
@@ -46,7 +46,7 @@ const features = [
         {/* Static Accenture Brand color hint */}
         <div className="absolute inset-0 bg-[#A100FF]/2" />
         {/* Animated Gradient on Hover - Increased blending and coverage */}
-        <div className="absolute inset-0 bg-linear-to-br from-[#A100FF]/60 via-[#A100FF]/10 to-transparent opacity-0 transition-opacity duration-500 pointer-coarse:opacity-100 [@media(hover:hover)]:group-hover:opacity-100" />
+        <div className="absolute inset-0 bg-linear-to-br from-[#A100FF]/60 via-[#A100FF]/10 to-transparent opacity-0 transition-opacity duration-500 pointer-coarse:opacity-100 [@media(hover:hover)]:group-hover:opacity-100 group-focus-visible:opacity-100" />
       </div>
     ),
   },
@@ -67,7 +67,7 @@ const features = [
         {/* Static Blue hint */}
         <div className="absolute inset-0 bg-blue-500/2" />
         {/* Animated Gradient on Hover */}
-        <div className="absolute inset-0 bg-linear-to-br from-blue-500/60 via-blue-500/10 to-transparent opacity-0 transition-opacity duration-500 pointer-coarse:opacity-100 [@media(hover:hover)]:group-hover:opacity-100" />
+        <div className="absolute inset-0 bg-linear-to-br from-blue-500/60 via-blue-500/10 to-transparent opacity-0 transition-opacity duration-500 pointer-coarse:opacity-100 [@media(hover:hover)]:group-hover:opacity-100 group-focus-visible:opacity-100" />
       </div>
     ),
   },
@@ -80,7 +80,7 @@ const features = [
     className:
       "row-span-2 row-start-5 md:col-span-4 md:row-span-2 md:col-start-3 md:row-start-1",
     background: (
-      <div className="absolute inset-0 flex items-start pt-12 md:pt-20 justify-center opacity-30 pointer-coarse:opacity-80 [@media(hover:hover)]:group-hover:opacity-80 transition-opacity duration-500">
+      <div className="absolute inset-0 flex items-start pt-12 md:pt-20 justify-center opacity-30 pointer-coarse:opacity-80 [@media(hover:hover)]:group-hover:opacity-80 group-focus-visible:opacity-80 transition-opacity duration-500">
         <LogoLoop
           logos={techLogos}
           speed={40}
@@ -111,7 +111,7 @@ const features = [
       "row-span-2 row-start-7 md:col-span-2 md:row-span-2 md:col-start-3 md:row-start-3",
     background: (
       <div className="absolute inset-0 overflow-hidden pointer-events-none">
-        <div className="absolute top-[-35%] right-[-50%] w-[300%] sm:w-[170%] sm:top-[-25%] sm:right-[-5%] md:w-[300%] md:top-[-35%] md:right-[-50%] lg:w-[170%] lg:top-[-25%] lg:right-[-5%] opacity-50 transition-transform duration-700 ease-out group-hover:scale-105">
+        <div className="absolute top-[-35%] right-[-50%] w-[300%] sm:w-[170%] sm:top-[-25%] sm:right-[-5%] md:w-[300%] md:top-[-35%] md:right-[-50%] lg:w-[170%] lg:top-[-25%] lg:right-[-5%] opacity-50 transition-transform duration-700 ease-out group-hover:scale-105 group-focus-visible:scale-105">
           <DottedMap
             markers={[{ lat: 10.8505, lng: 76.2711, size: 0.6 }]}
             markerColor="#3b82f6"
@@ -129,7 +129,7 @@ const features = [
     className:
       "row-span-2 row-start-9 md:col-span-2 md:row-span-2 md:col-start-5 md:row-start-3",
     background: (
-      <div className="absolute inset-x-0 top-0 p-4 grid grid-cols-2 gap-2 min-[375px]:flex min-[375px]:justify-between md:grid md:grid-cols-2 lg:flex lg:justify-between overflow-hidden opacity-60 transition-opacity duration-300 pointer-coarse:opacity-100 [@media(hover:hover)]:group-hover:opacity-100">
+      <div className="absolute inset-x-0 top-0 p-4 grid grid-cols-2 gap-2 min-[375px]:flex min-[375px]:justify-between md:grid md:grid-cols-2 lg:flex lg:justify-between overflow-hidden opacity-60 transition-opacity duration-300 pointer-coarse:opacity-100 [@media(hover:hover)]:group-hover:opacity-100 group-focus-visible:opacity-100">
         {["aws", "google", "ibm", "microsoft"].map((cert, i) => (
           <div
             key={i}
@@ -141,7 +141,7 @@ const features = [
                 alt={cert}
                 loading="lazy"
                 className={cn(
-                  "w-full h-full object-contain grayscale transition-all duration-300 pointer-coarse:grayscale-0 [@media(hover:hover)]:group-hover:grayscale-0"
+                  "w-full h-full object-contain grayscale transition-all duration-300 pointer-coarse:grayscale-0 [@media(hover:hover)]:group-hover:grayscale-0 group-focus-visible:grayscale-0"
                 )}
               />
             </AspectRatio>

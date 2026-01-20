@@ -138,7 +138,7 @@ export const Tooltip = ({
 
     window.addEventListener("keydown", handleKeyDown);
     return () => window.removeEventListener("keydown", handleKeyDown);
-  }, [isVisible]);
+  }, [isVisible, mouse.x, mouse.y]);
 
   return (
     <div

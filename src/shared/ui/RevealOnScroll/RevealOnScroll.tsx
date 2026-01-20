@@ -21,7 +21,7 @@ export const RevealOnScroll = ({
   duration = 0.5,
 }: RevealOnScrollProps) => {
   const ref = useRef(null);
-  const isInView = useInView(ref, { once: true, margin: "-50px" });
+  const isInView = useInView(ref, { once: true, margin: "-20px" });
   const mainControls = useAnimation();
 
   useEffect(() => {

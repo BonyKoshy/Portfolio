@@ -31,7 +31,7 @@ export interface CardProps extends React.HTMLAttributes<HTMLElement> {
 export const Card = React.forwardRef<HTMLElement, CardProps>(
   ({ customClass, as: Component = "div", ...rest }, ref) => (
     <Component
-      ref={ref as any}
+      ref={ref}
       {...rest}
       className={`absolute top-1/2 left-1/2 rounded-(--radius-card) border border-border-default bg-bg-surface transform-3d backface-hidden ${
         customClass ?? ""
@@ -102,6 +102,7 @@ const CardSwap: React.FC<CardSwapProps> = ({
           rotateX: 0,
           rotateY: 0,
           skewY: skewAmount,
+
           opacity: 1,
         } as any,
         { duration: 0 }
@@ -235,7 +236,7 @@ const CardSwap: React.FC<CardSwapProps> = ({
       onMouseLeave={() => (isHovered.current = false)}
     >
       {childArr.map((child, i) =>
-        cloneElement(child as React.ReactElement<any>, {
+        cloneElement(child, {
           key: i,
           "data-index": i,
           onClick: (e: any) => {

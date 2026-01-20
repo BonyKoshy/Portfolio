@@ -12,9 +12,12 @@ import {
   SiLeetcode,
 } from "react-icons/si";
 import { SecondaryButton } from "@/shared/ui/Button";
-import { Link } from "react-router-dom";
+import { useLocation, Link } from "react-router-dom";
 import { ChevronDown } from "lucide-react";
 import { AnimatePresence, motion } from "framer-motion";
+
+import { useScrollToAnchor } from "@/shared/lib/useScrollToAnchor";
+import { homeContent } from "@/shared/config/content";
 import {
   Accordion,
   AccordionContent,
@@ -22,26 +25,24 @@ import {
   AccordionTrigger,
 } from "@/shared/ui/Accordion/Accordion";
 
-import { homeContent } from "@/shared/config/content";
-
-import { useScrollToAnchor } from "@/shared/lib/useScrollToAnchor";
-
+// Map for dynamic icon rendering
 const SocialIconsMap: Record<string, React.ElementType> = {
-  SiGithub,
-  SiLinkedin,
-  SiX,
-  SiPinterest,
-  SiDribbble,
-  SiBehance,
-  SiDiscord,
-  SiWhatsapp,
-  SiLeetcode,
+  SiGithub: SiGithub,
+  SiLinkedin: SiLinkedin,
+  SiX: SiX,
+  SiPinterest: SiPinterest,
+  SiDribbble: SiDribbble,
+  SiBehance: SiBehance,
+  SiDiscord: SiDiscord,
+  SiWhatsapp: SiWhatsapp,
+  SiLeetcode: SiLeetcode,
 };
 
 /** Renders the global footer with quick links, social icons, and copyright. */
 const Footer = () => {
   const [isOpen, setIsOpen] = useState(false);
   const scrollTo = useScrollToAnchor();
+  const location = useLocation();
 
   const handleHomeClick = (e: React.MouseEvent) => {
     e.preventDefault();
@@ -56,8 +57,26 @@ const Footer = () => {
   const columns = homeContent.footer.columns;
   const columnKeys = ["explore", "work", "profiles", "connect"] as const;
 
+  // Define valid routes where the standard footer margin should appear
+  const validRoutes = [
+    "/",
+    "/about",
+    "/projects",
+    "/contact",
+    "/certificates",
+    "/privacy",
+    "/privacy-policy",
+  ];
+
+  // Normalize path (remove trailing slash for consistency)
+  const pathname = location.pathname.replace(/\/$/, "") || "/";
+
+  // If the current path is NOT in validRoutes, assume it's a 404 page and remove top margin
+  const is404 = !validRoutes.includes(pathname);
+  const marginTopClass = is404 ? "mt-0" : "mt-32";
+
   return (
-    <footer className="mt-32 pb-8">
+    <footer className={`${marginTopClass} pb-8`}>
       <div className="mx-auto max-w-7xl px-6">
         <div className="flex items-center gap-4 mb-8 w-full">
           <div className="h-px bg-border-default flex-1"></div>
@@ -97,7 +116,7 @@ const Footer = () => {
                             </AccordionTrigger>
                             <AccordionContent>
                               <div className="flex flex-col gap-3 pl-2 pt-2">
-                                {column.links.map((link) => (
+                                {column.links.map((link: any) => (
                                   <FooterLink
                                     key={link.label}
                                     link={link}
@@ -115,7 +134,7 @@ const Footer = () => {
                           {column.title}
                         </h3>
                         <div className="flex flex-col gap-3">
-                          {column.links.map((link) => (
+                          {column.links.map((link: any) => (
                             <FooterLink
                               key={link.label}
                               link={link}

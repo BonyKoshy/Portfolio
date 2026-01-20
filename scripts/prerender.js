@@ -24,14 +24,10 @@ const BASE_URL = `http://localhost:${PORT}`;
 /** Prerenders the application by visiting routes with Puppeteer and saving the HTML. */
 async function main() {
   // Spawns the Vite preview server to serve the built app.
-  const server = spawn(
-    "npm",
-    ["run", "preview", "--", "--port", PORT.toString()],
-    {
-      stdio: "inherit",
-      shell: true,
-    }
-  );
+  const server = spawn(`npm run preview -- --port ${PORT}`, {
+    stdio: "inherit",
+    shell: true,
+  });
 
   console.log("Waiting for server...");
   await new Promise((r) => setTimeout(r, 3000));

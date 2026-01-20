@@ -7,9 +7,9 @@ export const homeContent = {
       part2: "the modern web.",
     },
     subtext: {
-      prefix: "I am",
+      prefix: "I am ",
       name: "Bony Koshy",
-      role: "an Incoming Associate at",
+      role: "an Incoming Associate at ",
       company: "Accenture",
       description: ", crafting digital experiences where motion meets logic.",
     },

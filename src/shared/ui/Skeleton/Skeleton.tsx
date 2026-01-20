@@ -1,14 +1,26 @@
-import { cn } from "@/shared/lib/utils";
+import { HTMLAttributes } from "react";
 
-/** Renders a placeholder skeleton for loading states. */
-function Skeleton({ className, ...props }: React.ComponentProps<"div">) {
+interface SkeletonProps extends HTMLAttributes<HTMLDivElement> {
+  className?: string; // Additional classes
+}
+
+/**
+ * Base logic for all skeletons.
+ * Uses a CSS variable-based shimmer background.
+ */
+export const Skeleton = ({ className = "", ...props }: SkeletonProps) => {
   return (
     <div
-      data-slot="skeleton"
-      className={cn("bg-accent animate-pulse rounded-md", className)}
+      className={`
+        relative overflow-hidden rounded-md bg-bg-paper/50
+        before:absolute before:inset-0
+        before:-translate-x-full
+        before:animate-[shimmer_2s_infinite]
+        before:bg-gradient-to-r
+        before:from-transparent before:via-white/10 before:to-transparent
+        ${className}
+      `}
       {...props}
     />
   );
-}
-
-export { Skeleton };
+};

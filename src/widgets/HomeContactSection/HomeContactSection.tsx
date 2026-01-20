@@ -99,19 +99,20 @@ export const HomeContactSection = () => {
           )}
         </button>
 
-        <Link to="/contact" className="w-full sm:w-auto">
-          <SecondaryButton
-            className="w-full justify-center h-full py-4 text-base"
-            tabIndex={-1}
-            aria-hidden="true"
-          >
-            More options
+        <SecondaryButton
+          asChild
+          className="w-full sm:w-auto justify-center h-full py-4 text-base after:hidden"
+        >
+          <Link to="/contact">
+            <span className="relative after:absolute after:left-0 after:bottom-0 after:h-px after:w-full after:origin-left after:scale-x-0 after:bg-current after:transition-transform after:duration-300 group-hover:after:scale-x-100">
+              More options
+            </span>
             <ArrowRight
               size={18}
               className="ml-2 group-hover:translate-x-1 transition-transform"
             />
-          </SecondaryButton>
-        </Link>
+          </Link>
+        </SecondaryButton>
       </div>
     </section>
   );

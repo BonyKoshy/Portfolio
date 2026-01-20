@@ -1,124 +1,100 @@
-import { ArrowRight, Briefcase, Download, ArrowUpRight } from "lucide-react";
+import { useState, useEffect } from "react";
+import { motion, AnimatePresence } from "framer-motion";
+import { Briefcase } from "lucide-react";
+
 import { useProjects } from "@/entities/project/model/useProjects";
-import { PrimaryButton, SecondaryButton } from "@/shared/ui/Button";
+import { ProjectCard } from "@/entities/project/ui/ProjectCard";
 import { Meta } from "@/shared/ui/Meta/Meta";
-import { ProjectDetailsSheet } from "@/entities/project/ui/ProjectDetailsSheet";
 import { homeContent } from "@/shared/config/content";
+import { RevealOnScroll } from "@/shared/ui/RevealOnScroll";
+import { CategoryFilter } from "@/features/project/ui/CategoryFilter";
+
+import { ProjectCardData } from "@/entities/project/model/types";
+import { ProjectDetailsSheet } from "@/entities/project/ui/ProjectDetailsSheet";
+import { ProjectsSkeleton } from "@/widgets/Skeletons/ProjectsSkeleton";
 
 const Projects = () => {
   const { projects } = useProjects();
+  const [selectedCategory, setSelectedCategory] = useState<string | null>(null);
+  const [selectedProject, setSelectedProject] =
+    useState<ProjectCardData | null>(null);
+  const [isLoading, setIsLoading] = useState(true);
+
+  // Simulate loading delay to show skeleton
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      setIsLoading(false);
+    }, 2000);
+    return () => clearTimeout(timer);
+  }, []);
+
+  const filteredProjects = selectedCategory
+    ? projects.filter((p) => p.category === selectedCategory)
+    : projects;
+
+  if (isLoading) {
+    return <ProjectsSkeleton />;
+  }
+
   return (
     <div className="w-full max-w-7xl mx-auto text-text-primary px-4 pt-24 pb-16">
       <Meta
         title="Projects of Bony"
         description="Explore my portfolio of projects, including web applications, desktop utilities, and system architecture experiments."
       />
-      <div className="flex flex-col gap-4 mb-16">
-        <div className="flex items-center gap-3">
-          <Briefcase className="w-8 h-8 text-text-primary" strokeWidth={1.5} />
-          <h1 className="text-4xl font-bold text-text-primary m-0">
-            {homeContent.projects.title}
-          </h1>
-        </div>
-        <p className="text-lg text-text-secondary font-medium m-0 max-w-2xl">
-          {homeContent.projects.subtitle}
-        </p>
-      </div>
 
-      <div className="flex flex-col gap-12">
-        {projects.map((project) => (
-          <div
-            key={project.title}
-            className="group flex flex-col md:flex-row gap-8 bg-bg-paper border border-border-default rounded-2xl overflow-hidden hover:border-text-secondary transition-colors duration-300 p-6"
-          >
-            <div className="w-full md:w-5/12 lg:w-4/12 shrink-0">
-              <div className="rounded-xl overflow-hidden aspect-video w-full bg-bg-subtle border border-border-subtle shadow-sm relative group-hover:shadow-md transition-shadow duration-300">
-                <img
-                  src={project.src}
-                  alt={project.title}
-                  className="w-full h-full object-cover transform sm:group-hover:scale-105 transition-transform duration-700"
-                />
-              </div>
+      <RevealOnScroll width="100%">
+        <div className="flex flex-col gap-8 mb-12 pl-6">
+          <div className="flex flex-col gap-4">
+            <div className="flex items-center gap-3">
+              <Briefcase
+                className="w-8 h-8 text-text-primary"
+                strokeWidth={1.5}
+              />
+              <h1 className="text-4xl font-bold text-text-primary m-0">
+                {homeContent.projects.title}
+              </h1>
             </div>
-
-            <div className="flex flex-col grow gap-4">
-              <div className="flex items-center gap-2 mb-1">
-                <span className="text-sm font-semibold text-primary">
-                  {project.year}
-                </span>
-                <span className="w-1 h-1 rounded-full bg-border-default"></span>
-                <span className="text-sm text-text-secondary">
-                  {project.category}
-                </span>
-              </div>
-
-              <h2 className="text-2xl font-bold text-text-primary m-0 group-hover:text-primary transition-colors duration-200">
-                {project.title}
-              </h2>
-
-              <p className="text-text-secondary leading-relaxed m-0 text-base max-w-3xl">
-                {project.content.description}
-              </p>
-
-              <div className="flex flex-wrap gap-2 mt-2">
-                {project.content.tech.map((tech) => (
-                  <span
-                    key={tech}
-                    className="px-3 py-1 text-xs font-medium text-fg-secondary bg-bg-subtle rounded-full border border-transparent hover:border-border-default transition-colors duration-200"
-                  >
-                    {tech}
-                  </span>
-                ))}
-              </div>
-
-              <div className="mt-auto pt-6 flex flex-wrap gap-4">
-                {project.content.installCommand && project.githubLink ? (
-                  <a
-                    href={`${project.githubLink}/releases`}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                  >
-                    <PrimaryButton
-                      withHoverAnimation={false}
-                      className="text-sm gap-2 h-10 px-6"
-                      icon={<Download size={16} />}
-                      iconPosition="right"
-                    >
-                      Install
-                    </PrimaryButton>
-                  </a>
-                ) : project.liveLink && project.liveLink !== "#" ? (
-                  <a
-                    href={project.liveLink}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                  >
-                    <PrimaryButton
-                      withHoverAnimation={false}
-                      className="text-sm gap-2 h-10 px-6"
-                      icon={<ArrowUpRight size={16} />}
-                      iconPosition="right"
-                    >
-                      Live Demo
-                    </PrimaryButton>
-                  </a>
-                ) : null}
-
-                <ProjectDetailsSheet project={project}>
-                  <SecondaryButton
-                    withHoverAnimation={false}
-                    className="text-sm gap-2 h-10 px-6"
-                    icon={<ArrowRight size={16} />}
-                    iconPosition="right"
-                  >
-                    Read More
-                  </SecondaryButton>
-                </ProjectDetailsSheet>
-              </div>
-            </div>
+            <p className="text-lg text-text-secondary font-medium m-0 max-w-2xl">
+              {homeContent.projects.subtitle}
+            </p>
           </div>
-        ))}
-      </div>
+
+          <CategoryFilter
+            selectedCategory={selectedCategory}
+            onSelectCategory={setSelectedCategory}
+          />
+        </div>
+      </RevealOnScroll>
+
+      <motion.div
+        layout
+        className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-y-16"
+      >
+        <AnimatePresence mode="popLayout" initial={false}>
+          {filteredProjects.map((project) => (
+            <motion.div
+              layout
+              key={project.title}
+              initial={{ opacity: 0, scale: 0.9 }}
+              animate={{ opacity: 1, scale: 1 }}
+              exit={{ opacity: 0, scale: 0.9, transition: { duration: 0.2 } }}
+              transition={{ duration: 0.3 }}
+              className="h-full px-6 border-border-subtle md:border-r md:[&:nth-child(2n)]:border-r-0 lg:[&:nth-child(2n)]:border-r lg:[&:nth-child(3n)]:border-r-0 border-r-0"
+            >
+              <RevealOnScroll width="100%">
+                <ProjectCard project={project} onOpen={setSelectedProject} />
+              </RevealOnScroll>
+            </motion.div>
+          ))}
+        </AnimatePresence>
+      </motion.div>
+
+      <ProjectDetailsSheet
+        project={selectedProject}
+        open={!!selectedProject}
+        onOpenChange={(open) => !open && setSelectedProject(null)}
+      />
     </div>
   );
 };

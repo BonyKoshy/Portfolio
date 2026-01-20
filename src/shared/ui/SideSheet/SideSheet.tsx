@@ -541,10 +541,7 @@ const SideSheetClose = ({
     <button
       onClick={handleClick}
       type="button"
-      className={cn(
-        "transition-opacity hover:opacity-75 focus:outline-hidden",
-        className
-      )}
+      className={cn("transition-opacity hover:opacity-75", className)}
     >
       {children}
     </button>

@@ -3,7 +3,7 @@ import { Helmet } from "react-helmet-async";
 interface MetaProps {
   title?: string;
   description?: string;
-  schema?: Record<string, any>;
+  schema?: Record<string, unknown>;
 }
 
 /** Manages document head metadata such as Title, Description, and JSON-LD schema. */
