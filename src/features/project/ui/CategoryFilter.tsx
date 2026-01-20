@@ -61,7 +61,7 @@ export const CategoryFilter = ({
           <div
             className={cn(
               "relative z-10 flex items-center gap-2",
-              selectedCategory === null ? "!text-white" : ""
+              selectedCategory === null ? "text-white!" : ""
             )}
           >
             <LayoutGrid size={16} />
@@ -108,7 +108,7 @@ export const CategoryFilter = ({
               <div
                 className={cn(
                   "relative z-10 flex items-center gap-2",
-                  isSelected ? "!text-white" : ""
+                  isSelected ? "text-white!" : ""
                 )}
               >
                 <Icon size={16} />

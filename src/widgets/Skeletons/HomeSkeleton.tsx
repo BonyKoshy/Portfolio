@@ -8,7 +8,7 @@ import { Container } from "@/shared/ui/Container";
  */
 export const HomeSkeleton = () => {
   return (
-    <div className="fixed inset-0 z-[9999] min-h-screen w-full bg-bg-default flex flex-col overflow-hidden pointer-events-none">
+    <div className="fixed inset-0 z-9999 min-h-screen w-full bg-bg-default flex flex-col overflow-hidden pointer-events-none">
       {/* Navbar Ghost - Exact Height h-20 (80px) */}
       <div className="absolute top-0 left-0 right-0 z-50 h-20 w-full pointer-events-none">
         <div className="mx-auto flex h-full max-w-7xl items-center justify-between px-6">
@@ -40,9 +40,9 @@ export const HomeSkeleton = () => {
               {/* Headline: "Engineering the fabric of / the modern web." */}
               <div className="mb-6 w-full max-w-5xl space-y-3">
                 {/* Line 1 */}
-                <Skeleton className="h-[4.5rem] lg:h-[5.5rem] w-[85%] rounded-2xl opacity-40" />
+                <Skeleton className="h-18 lg:h-22 w-[85%] rounded-2xl opacity-40" />
                 {/* Line 2 */}
-                <Skeleton className="h-[4.5rem] lg:h-[5.5rem] w-[65%] rounded-2xl opacity-70" />
+                <Skeleton className="h-18 lg:h-22 w-[65%] rounded-2xl opacity-70" />
               </div>
 
               {/* Subtext: "I am Bony Koshy..." */}
@@ -62,11 +62,11 @@ export const HomeSkeleton = () => {
             </div>
 
             {/* Right Content (Visual) - col-span-5 */}
-            <div className="hidden lg:flex lg:col-span-5 relative h-[600px] w-full items-center justify-center pointer-events-none">
+            <div className="hidden lg:flex lg:col-span-5 relative h-150 w-full items-center justify-center pointer-events-none">
               {/* Single Card Placeholder at CardSwap position */}
               {/* Width 500, Height 400 */}
-              <div className="relative w-[500px] h-[400px]">
-                <Skeleton className="w-full h-full rounded-[1.5rem] bg-bg-surface border border-fg-primary/10 shadow-2xl flex flex-col p-10">
+              <div className="relative w-125 h-100">
+                <Skeleton className="w-full h-full rounded-3xl bg-bg-surface border border-fg-primary/10 shadow-2xl flex flex-col p-10">
                   {/* Header Ghost */}
                   <div className="flex justify-between items-start mb-auto">
                     <div className="flex gap-4">

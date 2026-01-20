@@ -62,7 +62,7 @@ const Home = () => {
             key="skeleton"
             exit={{ opacity: 0 }}
             transition={{ duration: 0.8, ease: "easeInOut" }}
-            className="fixed inset-0 z-[9999] pointer-events-none"
+            className="fixed inset-0 z-9999 pointer-events-none"
           >
             <HomeSkeleton />
           </motion.div>

@@ -80,7 +80,7 @@ const Projects = () => {
               animate={{ opacity: 1, scale: 1 }}
               exit={{ opacity: 0, scale: 0.9, transition: { duration: 0.2 } }}
               transition={{ duration: 0.3 }}
-              className="h-full px-6 border-border-subtle md:border-r md:[&:nth-child(2n)]:border-r-0 lg:[&:nth-child(2n)]:border-r lg:[&:nth-child(3n)]:border-r-0 border-r-0"
+              className="h-full px-6 border-border-subtle md:border-r md:nth-[2n]:border-r-0 lg:nth-[2n]:border-r lg:nth-[3n]:border-r-0 border-r-0"
             >
               <RevealOnScroll width="100%">
                 <ProjectCard project={project} onOpen={setSelectedProject} />

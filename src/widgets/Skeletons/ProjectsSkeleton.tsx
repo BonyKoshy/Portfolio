@@ -10,7 +10,7 @@ import { Container } from "@/shared/ui/Container";
  */
 export const ProjectsSkeleton = () => {
   return (
-    <div className="fixed inset-0 z-[9999] min-h-screen w-full bg-bg-default flex flex-col overflow-y-auto overflow-x-hidden pointer-events-none custom-scrollbar">
+    <div className="fixed inset-0 z-9999 min-h-screen w-full bg-bg-default flex flex-col overflow-y-auto overflow-x-hidden pointer-events-none custom-scrollbar">
       {/* Navbar Placeholder (80px height to match main nav) */}
       <div className="h-20 w-full shrink-0" />
 
@@ -40,11 +40,11 @@ export const ProjectsSkeleton = () => {
           {Array.from({ length: 6 }).map((_, idx) => (
             <div
               key={idx}
-              className="h-full px-6 border-border-subtle md:border-r md:[&:nth-child(2n)]:border-r-0 lg:[&:nth-child(2n)]:border-r lg:[&:nth-child(3n)]:border-r-0 border-r-0"
+              className="h-full px-6 border-border-subtle md:border-r md:nth-[2n]:border-r-0 lg:nth-[2n]:border-r lg:nth-[3n]:border-r-0 border-r-0"
             >
               <div className="space-y-6 flex flex-col h-full">
                 {/* Image Aspect Ratio 1.75 */}
-                <div className="w-full aspect-[1.75] rounded-[1.5rem] overflow-hidden">
+                <div className="w-full aspect-[1.75] rounded-3xl overflow-hidden">
                   <Skeleton className="w-full h-full" />
                 </div>
 

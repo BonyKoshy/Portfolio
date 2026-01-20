@@ -1,4 +1,4 @@
-import { Suspense, lazy, useEffect } from "react";
+import { Suspense, lazy } from "react";
 import { Routes, Route } from "react-router-dom";
 import { Navbar } from "@/widgets/Navbar";
 import { Footer } from "@/widgets/Footer";
