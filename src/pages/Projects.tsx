@@ -109,7 +109,7 @@ const Projects = () => {
         {/* Centered Filter Pills (Scrollable on mobile) - Matching Certificates Design */}
         <RevealOnScroll delay={0.2} width="100%">
           <div className="flex justify-center w-full overflow-x-auto pb-2 no-scrollbar">
-            <div className="flex items-center gap-2 p-1.5 bg-black/20 backdrop-blur-xl border border-white/5 rounded-full supports-[backdrop-filter]:bg-black/10">
+            <div className="flex items-center gap-2 p-1.5 bg-black/20 backdrop-blur-xl border border-white/5 rounded-full supports-backdrop-filter:bg-black/10">
               {categories.map((cat) => {
                 const isActive = selectedCategory === cat.id;
                 const showText = !isSmallMobile || isActive;

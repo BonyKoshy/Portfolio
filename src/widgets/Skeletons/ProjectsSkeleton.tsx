@@ -32,7 +32,7 @@ export const ProjectsSkeleton = () => {
             className="h-full px-6 border-border-subtle md:border-r md:nth-[2n]:border-r-0 lg:nth-[2n]:border-r lg:nth-[3n]:border-r-0 border-r-0 flex flex-col space-y-6"
           >
             {/* Project Card Skeleton - Matches ProjectCard.tsx */}
-            <div className="w-full aspect-[1.75] rounded-[24px] overflow-hidden">
+            <div className="w-full aspect-[1.75] rounded-3xl overflow-hidden">
               <Skeleton className="w-full h-full" />
             </div>
 

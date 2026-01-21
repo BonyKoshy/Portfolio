@@ -1,4 +1,4 @@
-export type CertificateCategory = 'software' | 'cloud' | 'ai' | 'security';
+export type CertificateCategory = "software" | "cloud" | "ai" | "security";
 
 export interface SubCertificate {
   title: string;
