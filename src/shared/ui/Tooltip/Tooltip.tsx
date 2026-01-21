@@ -170,7 +170,7 @@ export const Tooltip = ({
                 className={cn(
                   "pointer-events-none fixed z-9999 overflow-hidden",
                   !unstyled &&
-                    "min-w-60 rounded-md border border-transparent bg-white shadow-sm ring-1 shadow-black/5 ring-black/5 dark:bg-neutral-900 dark:shadow-white/10 dark:ring-white/5"
+                    "min-w-60 rounded-md border border-border-default bg-bg-paper shadow-md ring-1 ring-border-subtle text-fg-primary"
                 )}
                 style={{
                   top: position.y,
@@ -181,8 +181,7 @@ export const Tooltip = ({
                   ref={contentRef}
                   className={cn(
                     "relative",
-                    !unstyled &&
-                      "p-2 text-sm text-neutral-600 md:p-4 dark:text-neutral-400"
+                    !unstyled && "p-2 text-sm text-fg-secondary md:p-4"
                   )}
                 >
                   {content}

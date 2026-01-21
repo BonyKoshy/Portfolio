@@ -40,7 +40,7 @@ export const CategoryFilter = ({
         <button
           onClick={() => onSelectCategory(null)}
           className={cn(
-            "group relative flex items-center gap-2 px-4 py-2 rounded-full border transition-all duration-300 overflow-hidden shrink-0",
+            "group relative flex items-center gap-2 px-4 py-2 rounded-full border transition-all duration-300 overflow-hidden shrink-0 shadow-none",
             selectedCategory === null
               ? "border-primary"
               : "bg-bg-subtle text-text-secondary border-transparent hover:border-border-default hover:text-text-primary"
@@ -89,7 +89,7 @@ export const CategoryFilter = ({
               key={category.id}
               onClick={() => onSelectCategory(isSelected ? null : category.id)}
               className={cn(
-                "group relative flex items-center gap-2 px-4 py-2 rounded-full border transition-all duration-300 overflow-hidden shrink-0",
+                "group relative flex items-center gap-2 px-4 py-2 rounded-full border transition-all duration-300 overflow-hidden shrink-0 shadow-none",
                 isSelected
                   ? "border-primary pr-3"
                   : "bg-bg-subtle text-text-secondary border-transparent hover:border-border-default hover:text-text-primary"
