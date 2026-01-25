@@ -2,6 +2,43 @@ import { Certificate } from "./types";
 
 export const certificates: Certificate[] = [
   // ===========================================================================
+  // MASTER SPECIALIZATION: IBM JAVA DEVELOPER
+  // ===========================================================================
+  {
+    id: "ibm-java-professional",
+    thumbnail: "/certs/ibm.webp",
+    isSpecialization: true,
+    issuer: "IBM",
+    title: "IBM Java Developer Professional Certificate",
+    date: "Ongoing",
+    description:
+      "Comprehensive professional track for enterprise Java development, Spring Boot, and Cloud Native deployment.",
+    skills: ["Java EE", "Spring Boot", "Microservices", "JDBC", "Hibernate"],
+    credentialUrl: "#",
+    category: "software",
+    subCertificates: [
+      { title: "Java Programming for Beginners", certId: "ibm-java-beginners" },
+      { title: "Object Oriented Programming in Java", certId: "ibm-oop-java" },
+      {
+        title: "Introduction to HTML, CSS, & JavaScript",
+        certId: "ibm-html-css-js",
+      },
+      {
+        title: "Cloud Native, Microservices, DevOps",
+        certId: "ibm-cloud-native-devops",
+      },
+      {
+        title: "Spring Framework for Java Development",
+        certId: "skillup-spring-framework",
+      },
+      {
+        title: "Java Development with Databases",
+        certId: "skillup-java-databases",
+      },
+      { title: "Java App Development Project", certId: "skillup-java-project" },
+    ],
+  },
+  // ===========================================================================
   // MASTER SPECIALIZATION: GOOGLE IT SUPPORT
   // ===========================================================================
   {
@@ -49,69 +86,18 @@ export const certificates: Certificate[] = [
       },
     ],
   },
-  // --- Google Sub-Courses ---
   {
-    id: "google-tech-support-fundamentals",
+    id: "google-ai-job-search",
     thumbnail: "/certs/google.webp",
     isSpecialization: false,
     issuer: "Google",
-    title: "Technical Support Fundamentals",
-    date: "Aug 30, 2025",
+    title: "Accelerate Your Job Search with AI",
+    date: "Dec 05, 2025",
     description:
-      "Covered the fundamentals of IT support, including computer hardware, the Internet, computer software, troubleshooting, and customer service.",
-    skills: [
-      "Binary Code",
-      "Customer Support",
-      "Linux",
-      "Troubleshooting",
-      "DNS",
-    ],
-    credentialUrl: "https://coursera.org/verify/0RDHEIUBYOV3",
-    category: "security",
-  },
-  {
-    id: "google-bits-bytes-networking",
-    thumbnail: "/certs/google.webp",
-    isSpecialization: false,
-    issuer: "Google",
-    title: "The Bits and Bytes of Computer Networking",
-    date: "Sep 29, 2025",
-    description:
-      "A full overview of computer networking, covering TCP/IP protocols, the five-layer model, and powerful network troubleshooting tools.",
-    skills: ["Network Protocols", "TCP/IP", "Cloud Computing", "IPv4"],
-    credentialUrl: "https://coursera.org/verify/TOVPDC6EK05A",
-    category: "security",
-  },
-  {
-    id: "google-os-power-user",
-    thumbnail: "/certs/google.webp",
-    isSpecialization: false,
-    issuer: "Google",
-    title: "Operating Systems and You: Becoming a Power User",
-    date: "Oct 22, 2025",
-    description:
-      "Learned to navigate Windows and Linux filesystems, manage users and permissions, and configure disk partitions.",
-    skills: ["Linux File Systems", "Windows OS", "CLI", "PowerShell", "Bash"],
-    credentialUrl: "https://coursera.org/verify/83G3DQUE1H7W",
-    category: "security",
-  },
-  {
-    id: "google-sys-admin",
-    thumbnail: "/certs/google.webp",
-    isSpecialization: false,
-    issuer: "Google",
-    title: "System Administration and IT Infrastructure Services",
-    date: "Dec 01, 2025",
-    description:
-      "Focused on maintaining reliable computer systems in multi-user environments, including cloud infrastructure and directory services.",
-    skills: [
-      "Directory Services",
-      "Active Directory",
-      "OpenLDAP",
-      "Backup & Recovery",
-    ],
-    credentialUrl: "https://coursera.org/verify/OYZ03BQCIROV",
-    category: "security",
+      "Learned to leverage AI tools like Gemini to uncover skills, create job search plans, and prepare for interviews.",
+    skills: ["Generative AI", "Prompt Engineering", "Career Development"],
+    credentialUrl: "https://coursera.org/verify/7SR0EYSAF4BK",
+    category: "ai",
   },
   {
     id: "google-it-security",
@@ -132,19 +118,52 @@ export const certificates: Certificate[] = [
     category: "security",
   },
   {
-    id: "google-ai-job-search",
+    id: "google-sys-admin",
     thumbnail: "/certs/google.webp",
     isSpecialization: false,
     issuer: "Google",
-    title: "Accelerate Your Job Search with AI",
-    date: "Dec 05, 2025",
+    title: "System Administration and IT Infrastructure Services",
+    date: "Dec 01, 2025",
     description:
-      "Learned to leverage AI tools like Gemini to uncover skills, create job search plans, and prepare for interviews.",
-    skills: ["Generative AI", "Prompt Engineering", "Career Development"],
-    credentialUrl: "https://coursera.org/verify/7SR0EYSAF4BK",
-    category: "ai",
+      "Focused on maintaining reliable computer systems in multi-user environments, including cloud infrastructure and directory services.",
+    skills: [
+      "Directory Services",
+      "Active Directory",
+      "OpenLDAP",
+      "Backup & Recovery",
+    ],
+    credentialUrl: "https://coursera.org/verify/OYZ03BQCIROV",
+    category: "security",
   },
-
+  // ===========================================================================
+  // AWS CERTIFICATION
+  // ===========================================================================
+  {
+    id: "aws-cloud-technical-essentials",
+    thumbnail: "/certs/aws.webp",
+    isSpecialization: false,
+    issuer: "Amazon Web Services",
+    title: "AWS Cloud Technical Essentials",
+    date: "Nov 29, 2025",
+    description:
+      "Fundamental-level course covering AWS terminology, security measures (IAM), and key compute services like EC2 and Lambda.",
+    skills: ["AWS IAM", "Amazon EC2", "Amazon S3", "Cloud Computing"],
+    credentialUrl: "https://coursera.org/verify/4SO81S20HL66",
+    category: "cloud",
+  },
+  {
+    id: "google-os-power-user",
+    thumbnail: "/certs/google.webp",
+    isSpecialization: false,
+    issuer: "Google",
+    title: "Operating Systems and You: Becoming a Power User",
+    date: "Oct 22, 2025",
+    description:
+      "Learned to navigate Windows and Linux filesystems, manage users and permissions, and configure disk partitions.",
+    skills: ["Linux File Systems", "Windows OS", "CLI", "PowerShell", "Bash"],
+    credentialUrl: "https://coursera.org/verify/83G3DQUE1H7W",
+    category: "security",
+  },
   // ===========================================================================
   // MASTER SPECIALIZATION: IBM SOFTWARE ENGINEERING
   // ===========================================================================
@@ -183,45 +202,18 @@ export const certificates: Certificate[] = [
       },
     ],
   },
-  // --- IBM SE Sub-Courses ---
   {
-    id: "ibm-intro-software-eng",
+    id: "ibm-python-flask",
     thumbnail: "/certs/ibm.webp",
     isSpecialization: false,
     issuer: "IBM",
-    title: "Introduction to Software Engineering",
-    date: "Jul 13, 2025",
+    title: "Developing AI Applications with Python and Flask",
+    date: "Oct 11, 2025",
     description:
-      "Explored the Software Development Lifecycle (SDLC), agile methodologies, and the various roles within software engineering.",
-    skills: ["SDLC", "Agile", "Scrum", "Software Architecture"],
-    credentialUrl: "https://coursera.org/verify/J9F7NY1DFUWU",
-    category: "software",
-  },
-  {
-    id: "ibm-git-github",
-    thumbnail: "/certs/ibm.webp",
-    isSpecialization: false,
-    issuer: "IBM",
-    title: "Getting Started with Git and GitHub",
-    date: "Jul 28, 2025",
-    description:
-      "Learned version control concepts, creating repositories, branching, merging, and performing pull requests.",
-    skills: ["Git", "GitHub", "Version Control", "Pull Requests"],
-    credentialUrl: "https://coursera.org/verify/GTMXEWTSTY0C",
-    category: "software",
-  },
-  {
-    id: "ibm-linux-shell",
-    thumbnail: "/certs/ibm.webp",
-    isSpecialization: false,
-    issuer: "IBM",
-    title: "Hands-on Introduction to Linux Commands and Shell Scripting",
-    date: "Oct 08, 2025",
-    description:
-      "Executed common Linux commands and created shell scripts using BASH to automate tasks.",
-    skills: ["Linux Commands", "Bash Scripting", "Shell Scripting", "Terminal"],
-    credentialUrl: "https://coursera.org/verify/L2F1LG1Q2HK4",
-    category: "software",
+      "Created and deployed Python web applications using the Flask framework and embedded AI features.",
+    skills: ["Flask", "Python", "Web Development", "AI Integration"],
+    credentialUrl: "https://coursera.org/verify/NPCC3SILM930",
+    category: "ai",
   },
   {
     id: "ibm-python-datascience",
@@ -237,120 +229,42 @@ export const certificates: Certificate[] = [
     category: "ai",
   },
   {
-    id: "ibm-python-flask",
+    id: "ibm-linux-shell",
     thumbnail: "/certs/ibm.webp",
     isSpecialization: false,
     issuer: "IBM",
-    title: "Developing AI Applications with Python and Flask",
-    date: "Oct 11, 2025",
+    title: "Hands-on Introduction to Linux Commands and Shell Scripting",
+    date: "Oct 08, 2025",
     description:
-      "Created and deployed Python web applications using the Flask framework and embedded AI features.",
-    skills: ["Flask", "Python", "Web Development", "AI Integration"],
-    credentialUrl: "https://coursera.org/verify/NPCC3SILM930",
-    category: "ai",
-  },
-
-  // ===========================================================================
-  // MASTER SPECIALIZATION: IBM JAVA DEVELOPER
-  // ===========================================================================
-  {
-    id: "ibm-java-professional",
-    thumbnail: "/certs/ibm.webp",
-    isSpecialization: true,
-    issuer: "IBM",
-    title: "IBM Java Developer Professional Certificate",
-    date: "Ongoing",
-    description:
-      "Comprehensive professional track for enterprise Java development, Spring Boot, and Cloud Native deployment.",
-    skills: ["Java EE", "Spring Boot", "Microservices", "JDBC", "Hibernate"],
-    credentialUrl: "#",
-    category: "software",
-    subCertificates: [
-      { title: "Java Programming for Beginners", certId: "ibm-java-beginners" },
-      { title: "Object Oriented Programming in Java", certId: "ibm-oop-java" },
-      {
-        title: "Introduction to HTML, CSS, & JavaScript",
-        certId: "ibm-html-css-js",
-      },
-      {
-        title: "Cloud Native, Microservices, DevOps",
-        certId: "ibm-cloud-native-devops",
-      },
-      {
-        title: "Spring Framework for Java Development",
-        certId: "skillup-spring-framework",
-      },
-      {
-        title: "Java Development with Databases",
-        certId: "skillup-java-databases",
-      },
-      { title: "Java App Development Project", certId: "skillup-java-project" },
-    ],
-  },
-  // --- Java Sub-Courses ---
-  {
-    id: "ibm-java-beginners",
-    thumbnail: "/certs/ibm.webp",
-    isSpecialization: false,
-    issuer: "IBM",
-    title: "Java Programming for Beginners",
-    date: "Jul 22, 2025",
-    description:
-      "Built job-ready Java skills including data types, control flow, and robust exception handling techniques.",
-    skills: ["Java Syntax", "Exception Handling", "JDK Setup", "Debugging"],
-    credentialUrl: "https://coursera.org/verify/VG6MQ523QTXA",
+      "Executed common Linux commands and created shell scripts using BASH to automate tasks.",
+    skills: ["Linux Commands", "Bash Scripting", "Shell Scripting", "Terminal"],
+    credentialUrl: "https://coursera.org/verify/L2F1LG1Q2HK4",
     category: "software",
   },
   {
-    id: "ibm-oop-java",
-    thumbnail: "/certs/ibm.webp",
+    id: "google-bits-bytes-networking",
+    thumbnail: "/certs/google.webp",
     isSpecialization: false,
-    issuer: "IBM",
-    title: "Object Oriented Programming in Java",
-    date: "Aug 12, 2025",
+    issuer: "Google",
+    title: "The Bits and Bytes of Computer Networking",
+    date: "Sep 29, 2025",
     description:
-      "Applied OOP concepts such as inheritance, polymorphism, encapsulation, and abstraction to define classes and objects.",
-    skills: ["OOP", "Inheritance", "Polymorphism", "Java Collections"],
-    credentialUrl: "https://coursera.org/verify/GKDPS4NOX0QX",
-    category: "software",
+      "A full overview of computer networking, covering TCP/IP protocols, the five-layer model, and powerful network troubleshooting tools.",
+    skills: ["Network Protocols", "TCP/IP", "Cloud Computing", "IPv4"],
+    credentialUrl: "https://coursera.org/verify/TOVPDC6EK05A",
+    category: "security",
   },
   {
-    id: "ibm-html-css-js",
-    thumbnail: "/certs/ibm.webp",
-    isSpecialization: false,
-    issuer: "IBM",
-    title: "Introduction to HTML, CSS, & JavaScript",
-    date: "Aug 13, 2025",
-    description:
-      "Developed dynamic and interactive web pages using HTML structure, CSS styling, and JavaScript logic.",
-    skills: ["HTML5", "CSS3", "JavaScript", "Responsive Design"],
-    credentialUrl: "https://coursera.org/verify/A6MKL74YC75F",
-    category: "software",
-  },
-  {
-    id: "ibm-cloud-native-devops",
-    thumbnail: "/certs/ibm.webp",
-    isSpecialization: false,
-    issuer: "IBM",
-    title: "Cloud Native, Microservices, Containers, DevOps",
-    date: "Aug 27, 2025",
-    description:
-      "Learned to build microservices, manage containers with Docker/Kubernetes, and apply Agile/Scrum in DevOps pipelines.",
-    skills: ["Microservices", "Docker", "Kubernetes", "DevOps"],
-    credentialUrl: "https://coursera.org/verify/G6AK17EELULT",
-    category: "cloud",
-  },
-  {
-    id: "skillup-spring-framework",
+    id: "skillup-java-project",
     thumbnail: "/certs/ibm.webp",
     isSpecialization: false,
     issuer: "SkillUp",
-    title: "Spring Framework for Java Development",
-    date: "Sep 01, 2025",
+    title: "Java App Development Project",
+    date: "Sep 12, 2025",
     description:
-      "Built job-ready skills in the Spring Framework ecosystem, including Spring Boot for scalable applications.",
-    skills: ["Spring Framework", "Spring Boot", "RESTful APIs", "Java"],
-    credentialUrl: "https://coursera.org/verify/H4IW5U95X5WY",
+      "Built a functional Java application demonstrating modular code, OOP principles, and persistent data storage via File I/O.",
+    skills: ["File I/O", "Java App Dev", "Exception Handling"],
+    credentialUrl: "https://coursera.org/verify/UTYUAQRG90LN",
     category: "software",
   },
   {
@@ -367,38 +281,169 @@ export const certificates: Certificate[] = [
     category: "software",
   },
   {
-    id: "skillup-java-project",
+    id: "skillup-spring-framework",
     thumbnail: "/certs/ibm.webp",
     isSpecialization: false,
     issuer: "SkillUp",
-    title: "Java App Development Project",
-    date: "Sep 12, 2025",
+    title: "Spring Framework for Java Development",
+    date: "Sep 01, 2025",
     description:
-      "Built a functional Java application demonstrating modular code, OOP principles, and persistent data storage via File I/O.",
-    skills: ["File I/O", "Java App Dev", "Exception Handling"],
-    credentialUrl: "https://coursera.org/verify/UTYUAQRG90LN",
+      "Built job-ready skills in the Spring Framework ecosystem, including Spring Boot for scalable applications.",
+    skills: ["Spring Framework", "Spring Boot", "RESTful APIs", "Java"],
+    credentialUrl: "https://coursera.org/verify/H4IW5U95X5WY",
     category: "software",
   },
-
-  // ===========================================================================
-  // AWS CERTIFICATION
-  // ===========================================================================
   {
-    id: "aws-cloud-technical-essentials",
-    thumbnail: "/certs/aws.webp",
+    id: "google-tech-support-fundamentals",
+    thumbnail: "/certs/google.webp",
     isSpecialization: false,
-    issuer: "Amazon Web Services",
-    title: "AWS Cloud Technical Essentials",
-    date: "Nov 29, 2025",
+    issuer: "Google",
+    title: "Technical Support Fundamentals",
+    date: "Aug 30, 2025",
     description:
-      "Fundamental-level course covering AWS terminology, security measures (IAM), and key compute services like EC2 and Lambda.",
-    skills: ["AWS IAM", "Amazon EC2", "Amazon S3", "Cloud Computing"],
-    credentialUrl: "https://coursera.org/verify/4SO81S20HL66",
+      "Covered the fundamentals of IT support, including computer hardware, the Internet, computer software, troubleshooting, and customer service.",
+    skills: [
+      "Binary Code",
+      "Customer Support",
+      "Linux",
+      "Troubleshooting",
+      "DNS",
+    ],
+    credentialUrl: "https://coursera.org/verify/0RDHEIUBYOV3",
+    category: "security",
+  },
+  {
+    id: "ibm-cloud-native-devops",
+    thumbnail: "/certs/ibm.webp",
+    isSpecialization: false,
+    issuer: "IBM",
+    title: "Cloud Native, Microservices, Containers, DevOps",
+    date: "Aug 27, 2025",
+    description:
+      "Learned to build microservices, manage containers with Docker/Kubernetes, and apply Agile/Scrum in DevOps pipelines.",
+    skills: ["Microservices", "Docker", "Kubernetes", "DevOps"],
+    credentialUrl: "https://coursera.org/verify/G6AK17EELULT",
     category: "cloud",
   },
-
+  {
+    id: "ibm-html-css-js",
+    thumbnail: "/certs/ibm.webp",
+    isSpecialization: false,
+    issuer: "IBM",
+    title: "Introduction to HTML, CSS, & JavaScript",
+    date: "Aug 13, 2025",
+    description:
+      "Developed dynamic and interactive web pages using HTML structure, CSS styling, and JavaScript logic.",
+    skills: ["HTML5", "CSS3", "JavaScript", "Responsive Design"],
+    credentialUrl: "https://coursera.org/verify/A6MKL74YC75F",
+    category: "software",
+  },
+  {
+    id: "ibm-oop-java",
+    thumbnail: "/certs/ibm.webp",
+    isSpecialization: false,
+    issuer: "IBM",
+    title: "Object Oriented Programming in Java",
+    date: "Aug 12, 2025",
+    description:
+      "Applied OOP concepts such as inheritance, polymorphism, encapsulation, and abstraction to define classes and objects.",
+    skills: ["OOP", "Inheritance", "Polymorphism", "Java Collections"],
+    credentialUrl: "https://coursera.org/verify/GKDPS4NOX0QX",
+    category: "software",
+  },
+  {
+    id: "ibm-git-github",
+    thumbnail: "/certs/ibm.webp",
+    isSpecialization: false,
+    issuer: "IBM",
+    title: "Getting Started with Git and GitHub",
+    date: "Jul 28, 2025",
+    description:
+      "Learned version control concepts, creating repositories, branching, merging, and performing pull requests.",
+    skills: ["Git", "GitHub", "Version Control", "Pull Requests"],
+    credentialUrl: "https://coursera.org/verify/GTMXEWTSTY0C",
+    category: "software",
+  },
+  {
+    id: "ibm-java-beginners",
+    thumbnail: "/certs/ibm.webp",
+    isSpecialization: false,
+    issuer: "IBM",
+    title: "Java Programming for Beginners",
+    date: "Jul 22, 2025",
+    description:
+      "Built job-ready Java skills including data types, control flow, and robust exception handling techniques.",
+    skills: ["Java Syntax", "Exception Handling", "JDK Setup", "Debugging"],
+    credentialUrl: "https://coursera.org/verify/VG6MQ523QTXA",
+    category: "software",
+  },
+  {
+    id: "ibm-intro-software-eng",
+    thumbnail: "/certs/ibm.webp",
+    isSpecialization: false,
+    issuer: "IBM",
+    title: "Introduction to Software Engineering",
+    date: "Jul 13, 2025",
+    description:
+      "Explored the Software Development Lifecycle (SDLC), agile methodologies, and the various roles within software engineering.",
+    skills: ["SDLC", "Agile", "Scrum", "Software Architecture"],
+    credentialUrl: "https://coursera.org/verify/J9F7NY1DFUWU",
+    category: "software",
+  },
+  {
+    id: "letsupgrade-git",
+    thumbnail: "/certs/LetsUpgrade.jpg",
+    isSpecialization: false,
+    issuer: "LetsUpgrade",
+    title: "Git & GitHub Bootcamp",
+    date: "Jun 18, 2025",
+    description:
+      "A 2-day bootcamp covering version control basics, branching strategies, and open source contribution.",
+    skills: ["Git", "GitHub", "Version Control", "Collaboration"],
+    credentialUrl: "https://www.letsupgrade.in/verify/LUEGGJUNI125544",
+    category: "software",
+  },
+  {
+    id: "be10x-ai-tools",
+    thumbnail: "/certs/Be10x.png",
+    isSpecialization: false,
+    issuer: "Be10x",
+    title: "AI Tools and ChatGPT Workshop",
+    date: "May 24, 2025",
+    description:
+      "Workshop on leveraging AI for productivity, including creating presentations, analyzing data, and debugging code.",
+    skills: ["ChatGPT", "AI Tools", "Prompt Engineering"],
+    credentialUrl: "/certs/Be10x.png",
+    category: "ai",
+  },
+  {
+    id: "trendup-fullstack",
+    thumbnail: "/certs/VAP.jpeg",
+    isSpecialization: false,
+    issuer: "TrendUp",
+    title: "Full-Stack Development with Python",
+    date: "Dec 20, 2024",
+    description:
+      "A value-added program focusing on end-to-end web application development using Python.",
+    skills: ["Python", "Full-Stack", "Web Architecture"],
+    credentialUrl: "/certs/VAP.pdf",
+    category: "software",
+  },
+  {
+    id: "ethical-byte-workshop",
+    thumbnail: "/certs/BcBuzz.PNG",
+    isSpecialization: false,
+    issuer: "Ethical Byte",
+    title: "Decode Your Target (Workshop)",
+    date: "2024",
+    description:
+      "A workshop on ethical hacking and reconnaissance conducted by the Department of Digital and Cyber Forensic Science.",
+    skills: ["Ethical Hacking", "Reconnaissance", "Cybersecurity"],
+    credentialUrl: "/certs/Ethical Byte.pdf",
+    category: "security",
+  },
   // ===========================================================================
-  // MICROSOFT CERTIFICATIONS (Flat List)
+  // MICROSOFT CERTIFICATIONS
   // ===========================================================================
   {
     id: "microsoft-azure-data-1",
@@ -464,61 +509,5 @@ export const certificates: Certificate[] = [
     skills: ["Power BI", "Power Apps", "Power Automate", "Low-Code"],
     credentialUrl: "/certs/Microsoft Power Platform Fundamentals.pdf",
     category: "cloud",
-  },
-
-  // ===========================================================================
-  // WORKSHOPS & OTHER CERTIFICATES
-  // ===========================================================================
-  {
-    id: "letsupgrade-git",
-    thumbnail: "/certs/LetsUpgrade.jpg",
-    isSpecialization: false,
-    issuer: "LetsUpgrade",
-    title: "Git & GitHub Bootcamp",
-    date: "Jun 18, 2025",
-    description:
-      "A 2-day bootcamp covering version control basics, branching strategies, and open source contribution.",
-    skills: ["Git", "GitHub", "Version Control", "Collaboration"],
-    credentialUrl: "https://www.letsupgrade.in/verify/LUEGGJUNI125544",
-    category: "software",
-  },
-  {
-    id: "be10x-ai-tools",
-    thumbnail: "/certs/Be10x.png",
-    isSpecialization: false,
-    issuer: "Be10x",
-    title: "AI Tools and ChatGPT Workshop",
-    date: "May 24, 2025",
-    description:
-      "Workshop on leveraging AI for productivity, including creating presentations, analyzing data, and debugging code.",
-    skills: ["ChatGPT", "AI Tools", "Prompt Engineering"],
-    credentialUrl: "/certs/Be10x.png",
-    category: "ai",
-  },
-  {
-    id: "trendup-fullstack",
-    thumbnail: "/certs/VAP.jpeg",
-    isSpecialization: false,
-    issuer: "TrendUp",
-    title: "Full-Stack Development with Python",
-    date: "Dec 20, 2024",
-    description:
-      "A value-added program focusing on end-to-end web application development using Python.",
-    skills: ["Python", "Full-Stack", "Web Architecture"],
-    credentialUrl: "/certs/VAP.pdf",
-    category: "software",
-  },
-  {
-    id: "ethical-byte-workshop",
-    thumbnail: "/certs/BcBuzz.PNG", // Using BcBuzz as placeholder or Ethical Byte PDF if thumbnail unavailable
-    isSpecialization: false,
-    issuer: "Ethical Byte",
-    title: "Decode Your Target (Workshop)",
-    date: "2024",
-    description:
-      "A workshop on ethical hacking and reconnaissance conducted by the Department of Digital and Cyber Forensic Science.",
-    skills: ["Ethical Hacking", "Reconnaissance", "Cybersecurity"],
-    credentialUrl: "/certs/Ethical Byte.pdf",
-    category: "security",
   },
 ];
