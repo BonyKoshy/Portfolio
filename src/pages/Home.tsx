@@ -1,6 +1,6 @@
 import { useEffect, lazy, Suspense, useState } from "react";
 import { AnimatePresence, motion } from "framer-motion";
-import { Hero } from "@/widgets/Hero";
+import { HomeHero } from "@/widgets/HomeHero";
 import { RevealOnScroll } from "@/shared/ui/RevealOnScroll";
 import { HomeSkeleton } from "@/widgets/Skeletons/HomeSkeleton";
 
@@ -82,7 +82,7 @@ const Home = () => {
           id="hero"
           className="relative h-screen flex flex-col justify-center"
         >
-          <Hero />
+          <HomeHero />
         </section>
 
         <section className="min-h-screen flex flex-col justify-center mx-auto max-w-7xl px-6 w-full py-20 lg:py-0">

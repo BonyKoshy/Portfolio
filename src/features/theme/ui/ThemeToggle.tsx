@@ -51,7 +51,7 @@ const ThemeToggle: React.FC = () => {
     <div className="inline-block relative">
       <label
         htmlFor="theme-switch"
-        className="group relative grid place-items-center w-10 h-10 bg-bg-surface rounded-full cursor-pointer shadow-[0_0_20px_2px_rgba(0,0,0,0.05)] transition-colors duration-300 z-10 text-fg-primary border border-border-default/50 focus-within:ring-2 focus-within:ring-(--focus-ring-color) focus-within:ring-offset-2"
+        className="group relative grid place-items-center w-10 h-10 bg-bg-surface rounded-full cursor-pointer shadow-[0_0_20px_2px_rgba(0,0,0,0.05)] transition-colors duration-300 z-10 text-fg-primary border border-border-default/50 has-[:focus-visible]:ring-2 has-[:focus-visible]:ring-(--focus-ring-color) has-[:focus-visible]:ring-offset-2"
         aria-label="Toggle Theme"
         onKeyDown={(e) => {
           if (e.key === "Enter" || e.key === " ") {

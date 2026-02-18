@@ -57,7 +57,7 @@ export const ProjectCard = ({ project, onOpen }: ProjectCardProps) => {
         <div className="flex justify-start">
           <SecondaryButton
             variant="default"
-            className="text-sm text-accent hover:text-accent border-b-current h-auto p-0 hover:bg-transparent"
+            className="text-sm text-accent hover:text-accent border-b-current h-auto p-0 hover:bg-transparent cursor-pointer"
             icon={<ArrowRight size={14} />}
             iconPosition="right"
             onClick={() => onOpen(project)}

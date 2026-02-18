@@ -68,7 +68,7 @@ export const CategoryFilter = ({
             <span
               className={cn(
                 "text-sm font-medium",
-                selectedCategory !== null && "max-[425px]:hidden"
+                selectedCategory !== null && "hidden sm:inline"
               )}
             >
               All
@@ -92,7 +92,7 @@ export const CategoryFilter = ({
                 "group relative flex items-center gap-2 px-4 py-2 rounded-full border transition-all duration-300 overflow-hidden shrink-0 shadow-none",
                 isSelected
                   ? "border-primary pr-3"
-                  : "bg-bg-subtle text-text-secondary border-transparent hover:border-border-default hover:text-text-primary"
+                  : "bg-bg-subtle text-text-secondary border-transparent hover:border-border-default hover:text-text-primary active:scale-95"
               )}
             >
               {isSelected && (
@@ -115,7 +115,7 @@ export const CategoryFilter = ({
                 <span
                   className={cn(
                     "text-sm font-medium",
-                    !isSelected && "max-[425px]:hidden"
+                    !isSelected && "hidden sm:inline"
                   )}
                 >
                   {category.label}

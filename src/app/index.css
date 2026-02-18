@@ -8,6 +8,7 @@
   --overlay: rgba(0, 0, 0, 0.4);
   --font-sans: "Poppins", system-ui, sans-serif;
   --font-display: "Poppins", system-ui, sans-serif;
+  --font-sixcaps: "Six Caps", sans-serif;
 
   /* Sync ring color with primary for consistent focus rings */
   --ring: var(--primary);
@@ -79,6 +80,7 @@ html[data-theme="dark"] {
 @theme {
   --font-sans: "Poppins", system-ui, sans-serif;
   --font-display: "Poppins", system-ui, sans-serif;
+  --font-sixcaps: "Six Caps", sans-serif;
 
   /* Map Tailwind classes to our CSS variables */
 
