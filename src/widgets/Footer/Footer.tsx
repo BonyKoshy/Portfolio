@@ -1,5 +1,6 @@
 import { useState } from "react";
 import ThemeToggle from "../../features/theme/ui/ThemeToggle";
+import Logo from "@/shared/ui/Logo/Logo";
 import {
   SiGithub,
   SiLinkedin,
@@ -155,8 +156,8 @@ const Footer = () => {
         </AnimatePresence>
       </div>
 
-      <div className="mx-auto flex max-w-7xl flex-col gap-6 px-6 md:flex-row md:items-center md:justify-between">
-        <div className="flex flex-col items-center gap-4 text-sm text-fg-secondary sm:flex-row md:items-start">
+      <div className="mx-auto flex max-w-7xl flex-col-reverse gap-6 px-6 md:flex-row md:items-center md:justify-between">
+        <div className="flex flex-col items-center gap-4 text-sm text-fg-secondary sm:flex-row md:items-center">
           <span>{homeContent.footer.copyright}</span>
           <span className="hidden h-6 w-px bg-border-default sm:inline-block"></span>
 
@@ -167,6 +168,12 @@ const Footer = () => {
 
         <div className="flex flex-col items-center gap-6 sm:flex-row sm:gap-8">
           <div className="flex items-center gap-4">
+            {/* Logo Section */}
+            <div className="h-10 w-10 flex items-center justify-center rounded-full bg-bg-surface border border-border-default/50 shadow-sm overflow-hidden p-1.5 group cursor-pointer">
+              <Logo className="w-full h-full text-fg-primary" />
+            </div>
+            <span className="h-8 w-px bg-border-default"></span>
+
             <div className="flex gap-4">
               {socialLinks.map((link) => {
                 const Icon = SocialIconsMap[link.icon as string] || SiGithub;

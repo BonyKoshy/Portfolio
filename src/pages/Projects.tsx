@@ -146,28 +146,30 @@ const Projects = () => {
         </RevealOnScroll>
       </div>
 
-      <motion.div
-        layout
-        className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-y-16"
-      >
-        <AnimatePresence mode="popLayout" initial={false}>
-          {filteredProjects.map((project) => (
-            <motion.div
-              layout
-              key={project.title}
-              initial={{ opacity: 0, scale: 0.9 }}
-              animate={{ opacity: 1, scale: 1 }}
-              exit={{ opacity: 0, scale: 0.9, transition: { duration: 0.2 } }}
-              transition={{ duration: 0.3 }}
-              className="h-full px-6 border-border-subtle md:border-r md:nth-[2n]:border-r-0 lg:nth-[2n]:border-r lg:nth-[3n]:border-r-0 border-r-0"
-            >
-              <RevealOnScroll width="100%">
-                <ProjectCard project={project} onOpen={setSelectedProject} />
-              </RevealOnScroll>
-            </motion.div>
-          ))}
-        </AnimatePresence>
-      </motion.div>
+      <div className="min-h-[800px]">
+        <motion.div
+          layout
+          className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-y-16"
+        >
+          <AnimatePresence mode="popLayout" initial={false}>
+            {filteredProjects.map((project) => (
+              <motion.div
+                layout
+                key={project.title}
+                initial={{ opacity: 0, scale: 0.9 }}
+                animate={{ opacity: 1, scale: 1 }}
+                exit={{ opacity: 0, scale: 0.9, transition: { duration: 0.2 } }}
+                transition={{ duration: 0.3 }}
+                className="h-full px-6 border-border-subtle md:border-r md:nth-[2n]:border-r-0 lg:nth-[2n]:border-r lg:nth-[3n]:border-r-0 border-r-0"
+              >
+                <RevealOnScroll width="100%">
+                  <ProjectCard project={project} onOpen={setSelectedProject} />
+                </RevealOnScroll>
+              </motion.div>
+            ))}
+          </AnimatePresence>
+        </motion.div>
+      </div>
 
       <ProjectDetailsSheet
         project={selectedProject}

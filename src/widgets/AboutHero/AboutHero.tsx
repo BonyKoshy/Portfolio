@@ -12,6 +12,7 @@ import { CompanyTooltipCard } from "@/entities/profile/ui/CompanyTooltipCard";
 import CardSwap, { Card } from "@/shared/ui/CardSwap";
 import { SiPython, SiReact, SiTypescript, SiTailwindcss } from "react-icons/si";
 import { FaLayerGroup, FaFolderOpen } from "react-icons/fa6";
+import BlurText from "@/shared/ui/BlurText/BlurText";
 
 import { useScrollToAnchor } from "@/shared/lib/useScrollToAnchor";
 import StatsCount from "@/shared/ui/StatsCount/StatsCount";
@@ -178,16 +179,29 @@ const AboutHero = ({ isLoaded = true }: { isLoaded?: boolean }) => {
 
       <Container className="relative z-10 h-full flex flex-col justify-center">
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center h-full">
-          <div className="flex flex-col items-start w-full lg:col-span-7 justify-center pt-10 lg:pt-32 order-2 lg:order-none">
+          <div className="flex flex-col items-start w-full lg:col-span-7 justify-center pt-10 lg:pt-32">
             <div className="mb-6 flex items-center gap-3">
               <span className="text-sm font-semibold uppercase tracking-widest text-white flex items-center gap-2">
                 WHO AM I? 👋
               </span>
             </div>
 
-            <h1 className="mb-6 w-full max-w-5xl text-4xl leading-[1.1] tracking-tight sm:text-6xl lg:text-7xl font-bold text-fg-primary">
-              Pixel Perfectionist. Logic Obsessed.
-            </h1>
+            <div className="mb-6 w-full max-w-5xl text-4xl leading-[1.1] tracking-tight sm:text-6xl lg:text-7xl font-bold text-fg-primary flex flex-col gap-2">
+              <BlurText
+                text="Pixel Perfectionist."
+                delay={50}
+                animateBy="words"
+                direction="bottom"
+                className="inline-block"
+              />
+              <BlurText
+                text="Logic Obsessed."
+                delay={200}
+                animateBy="words"
+                direction="bottom"
+                className="inline-block"
+              />
+            </div>
 
             <div className="mb-8 max-w-2xl text-base leading-relaxed text-fg-secondary sm:text-lg md:text-xl relative z-30">
               {homeContent.hero.subtext.prefix}
@@ -226,7 +240,7 @@ const AboutHero = ({ isLoaded = true }: { isLoaded?: boolean }) => {
                 stats={[
                   { value: 10, suffix: "+", label: "Projects Built" },
                   { value: 15, suffix: "+", label: "Certifications" },
-                  { value: 15, suffix: "+", label: "Technologies" },
+                  { value: 20, suffix: "+", label: "Technologies" },
                 ]}
                 showDividers={true}
                 className="px-0 py-4 sm:py-8"
@@ -235,7 +249,7 @@ const AboutHero = ({ isLoaded = true }: { isLoaded?: boolean }) => {
             </div>
           </div>
 
-          <div className="flex lg:flex lg:col-span-5 relative h-[400px] lg:h-150 w-full items-center justify-center pointer-events-none order-1 lg:order-none">
+          <div className="hidden lg:flex lg:col-span-5 relative h-[400px] lg:h-150 w-full items-center justify-center pointer-events-none lg:-mt-24 xl:mt-0">
             <div className="pointer-events-auto origin-center">
               <CardSwap
                 cardDistance={30}

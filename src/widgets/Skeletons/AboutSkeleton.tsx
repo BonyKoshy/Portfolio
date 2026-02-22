@@ -33,63 +33,46 @@ export const AboutSkeleton = () => {
         <Container className="relative z-10">
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
             {/* Left Content (Text) - col-span-7 */}
-            <div className="flex flex-col items-start w-full lg:col-span-7">
-              {/* Eyebrow Pill: "CREATIVE DEVELOPER" */}
-              <Skeleton className="mb-6 h-8 w-44 rounded-full border border-fg-primary/10 bg-fg-primary/5" />
+            <div className="flex flex-col items-start w-full lg:col-span-7 justify-center pt-10 lg:pt-32">
+              {/* Eyebrow: "WHO AM I? 👋" */}
+              <Skeleton className="mb-6 h-6 w-32 rounded-md bg-fg-primary/20" />
 
-              {/* Headline: "Engineering the fabric of / the modern web." */}
-              <div className="mb-6 w-full max-w-5xl space-y-3">
+              {/* Headline: "Pixel Perfectionist. / Logic Obsessed." */}
+              <div className="mb-6 w-full max-w-5xl space-y-4">
                 {/* Line 1 */}
-                <Skeleton className="h-18 lg:h-22 w-[85%] rounded-2xl opacity-40" />
+                <Skeleton className="h-14 sm:h-20 lg:h-24 w-[350px] sm:w-[500px] rounded-2xl opacity-40" />
                 {/* Line 2 */}
-                <Skeleton className="h-18 lg:h-22 w-[65%] rounded-2xl opacity-70" />
+                <Skeleton className="h-14 sm:h-20 lg:h-24 w-[300px] sm:w-[450px] rounded-2xl opacity-70" />
               </div>
 
-              {/* Subtext: "I am Bony Koshy..." */}
+              {/* Subtext */}
               <div className="mb-8 w-full max-w-2xl space-y-3 pt-2">
                 <Skeleton className="h-5 w-[90%] rounded-md opacity-30" />
-                <Skeleton className="h-5 w-[60%] rounded-md opacity-30" />
+                <Skeleton className="h-5 w-[80%] rounded-md opacity-30" />
+                <Skeleton className="h-5 w-[40%] rounded-md opacity-30" />
               </div>
 
-              {/* CTA Buttons */}
-              <div className="flex w-full flex-col gap-4 sm:w-auto sm:flex-row sm:items-center sm:gap-8 pt-2">
-                {/* Primary Button */}
-                <Skeleton className="h-12 w-full sm:w-48 rounded-full bg-fg-primary/10" />
-
-                {/* Secondary Button */}
-                <Skeleton className="h-6 w-24 rounded-md bg-transparent" />
+              {/* Stats Count Skeleton */}
+              <div className="w-full max-w-2xl flex gap-12 sm:gap-16 py-4 sm:py-8 border-t border-dashed border-fg-primary/10 mt-2">
+                {[1, 2, 3].map((i) => (
+                  <div key={i} className="flex flex-col gap-2">
+                    <Skeleton className="h-10 w-16 rounded-lg opacity-50" />
+                    <Skeleton className="h-4 w-24 rounded-md opacity-30" />
+                  </div>
+                ))}
               </div>
             </div>
 
             {/* Right Content (Visual) - col-span-5 */}
-            <div className="hidden lg:flex lg:col-span-5 relative h-150 w-full items-center justify-center pointer-events-none">
-              {/* Single Card Placeholder at CardSwap position */}
-              {/* Width 500, Height 400 */}
-              <div className="relative w-125 h-100">
-                <Skeleton className="w-full h-full rounded-3xl bg-bg-surface border border-fg-primary/10 shadow-2xl flex flex-col p-10">
-                  {/* Header Ghost */}
-                  <div className="flex justify-between items-start mb-auto">
-                    <div className="flex gap-4">
-                      <Skeleton className="w-12 h-12 rounded-xl bg-fg-primary/10" />
-                      <div className="space-y-2">
-                        <Skeleton className="w-24 h-3 rounded-full opacity-20" />
-                        <Skeleton className="w-32 h-4 rounded-full opacity-40" />
-                      </div>
-                    </div>
-                    <Skeleton className="w-10 h-10 rounded-full opacity-10" />
-                  </div>
-
-                  {/* Content Ghost */}
-                  <div className="space-y-4">
-                    <Skeleton className="w-3/4 h-10 rounded-lg opacity-60" />
-                    <Skeleton className="w-1/2 h-8 rounded-lg opacity-40" />
-
-                    {/* Icons */}
-                    <div className="flex gap-6 mt-6 pt-4">
-                      <Skeleton className="w-8 h-8 rounded-lg opacity-10" />
-                      <Skeleton className="w-8 h-8 rounded-lg opacity-10" />
-                      <Skeleton className="w-8 h-8 rounded-lg opacity-10" />
-                    </div>
+            <div className="hidden lg:flex lg:col-span-5 relative h-150 w-full items-center justify-center pointer-events-none lg:-mt-24 xl:mt-0">
+              {/* Single Card Placeholder matching CardSwap dimensions */}
+              <div className="relative w-[300px] h-[240px] sm:w-[400px] sm:h-[320px] lg:w-[500px] lg:h-[400px]">
+                <Skeleton className="w-full h-full rounded-none lg:rounded-none bg-bg-surface border border-fg-primary/10 shadow-2xl flex flex-col p-8 justify-end relative overflow-hidden">
+                  {/* Profile Card Look */}
+                  <div className="absolute inset-0 bg-black/20" />
+                  <div className="relative z-10 space-y-2">
+                    <Skeleton className="w-48 h-8 rounded-lg opacity-80" />
+                    <Skeleton className="w-32 h-5 rounded-lg opacity-60" />
                   </div>
                 </Skeleton>
               </div>
