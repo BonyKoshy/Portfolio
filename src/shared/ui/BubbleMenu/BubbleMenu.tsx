@@ -3,6 +3,8 @@ import { useEffect, useRef, useState } from "react";
 import { motion, AnimatePresence, Variants } from "framer-motion";
 import { NavLink } from "react-router-dom";
 import { useOutsideClick } from "@/shared/lib/use-outside-click";
+import { useBreakpoint } from "@/shared/lib/useBreakpoint";
+import { BREAKPOINTS } from "@/shared/lib/breakpoints";
 
 type MenuItem = {
   label: string;
@@ -46,6 +48,9 @@ export default function BubbleMenu({
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const listRef = useRef<HTMLUListElement>(null);
   const toggleRef = useRef<HTMLButtonElement>(null);
+
+  // Reactive desktop detection — lg = 1024px (tablet landscape)
+  const isDesktop = useBreakpoint("above", "lg");
 
   const menuItems = items?.length ? items : DEFAULT_ITEMS;
 
@@ -158,7 +163,7 @@ export default function BubbleMenu({
         .bubble-menu-items .pill-col:nth-child(4):last-child {
           margin-left: calc(100% / 3);
         }
-        @media (max-width: 1023px) {
+        @media (max-width: ${BREAKPOINTS.lg - 1}px) {
           .bubble-menu-items { padding-top: 120px; align-items: flex-start; }
           .bubble-menu-items .pill-list { row-gap: 16px; }
           .bubble-menu-items .pill-col { flex: 0 0 100% !important; margin-left: 0 !important; }
@@ -242,8 +247,6 @@ export default function BubbleMenu({
               className="relative z-10 w-full max-w-2xl px-4 flex flex-col items-center gap-y-3 list-none m-0"
             >
               {menuItems.map((item, idx) => {
-                const isDesktop =
-                  typeof window !== "undefined" && window.innerWidth >= 1024;
                 const rotation = isDesktop ? (item.rotation ?? 0) : 0;
 
                 return (

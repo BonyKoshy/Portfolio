@@ -21,7 +21,7 @@ const features = [
     description: homeContent.bento.profile.description,
     href: "/about",
     cta: homeContent.bento.profile.cta,
-    className: "row-span-2 md:col-span-2 md:row-span-2",
+    className: "row-span-2 sm:col-span-2 sm:row-span-2",
     background: (
       <img
         src="/profile-image.webp"
@@ -39,7 +39,7 @@ const features = [
     cta: homeContent.bento.accenture.cta,
     minimalCTA: true,
     ctaLayout: "side" as const,
-    className: "row-start-3 md:col-span-2 md:row-start-3",
+    className: "row-start-3 sm:col-span-2 sm:row-start-3",
 
     background: (
       <div className="absolute inset-0 pointer-events-none">
@@ -60,7 +60,7 @@ const features = [
     minimalCTA: true,
     ctaLayout: "side" as const,
 
-    className: "row-start-4 md:col-span-2 md:row-start-4",
+    className: "row-start-4 sm:col-span-2 sm:row-start-4",
 
     background: (
       <div className="absolute inset-0 pointer-events-none">
@@ -78,7 +78,7 @@ const features = [
     href: "/about#skills",
     cta: homeContent.bento.skills.cta,
     className:
-      "row-span-2 row-start-5 md:col-span-4 md:row-span-2 md:col-start-3 md:row-start-1",
+      "row-span-2 row-start-5 sm:col-span-4 sm:row-span-2 sm:col-start-3 sm:row-start-1",
     background: (
       <div className="absolute inset-0 flex items-start pt-12 md:pt-20 justify-center opacity-30 pointer-coarse:opacity-80 [@media(hover:hover)]:group-hover:opacity-80 group-focus-visible:opacity-80 transition-opacity duration-500">
         <LogoLoop
@@ -108,7 +108,7 @@ const features = [
     href: "/about",
     cta: homeContent.bento.languages.cta,
     className:
-      "row-span-2 row-start-7 md:col-span-2 md:row-span-2 md:col-start-3 md:row-start-3",
+      "row-span-2 row-start-7 sm:col-span-2 sm:row-span-2 sm:col-start-3 sm:row-start-3",
     background: (
       <div className="absolute inset-0 overflow-hidden pointer-events-none">
         <div className="absolute top-[-35%] right-[-50%] w-[300%] sm:w-[170%] sm:top-[-25%] sm:right-[-5%] md:w-[300%] md:top-[-35%] md:right-[-50%] lg:w-[170%] lg:top-[-25%] lg:right-[-5%] opacity-50 transition-transform duration-700 ease-out group-hover:scale-105 group-focus-visible:scale-105">
@@ -127,9 +127,9 @@ const features = [
     href: "/certificates",
     cta: homeContent.bento.certificates.cta,
     className:
-      "row-span-2 row-start-9 md:col-span-2 md:row-span-2 md:col-start-5 md:row-start-3",
+      "row-span-2 row-start-9 sm:col-span-2 sm:row-span-2 sm:col-start-5 sm:row-start-3",
     background: (
-      <div className="absolute inset-x-0 top-0 p-4 grid grid-cols-2 gap-2 min-[375px]:flex min-[375px]:justify-between md:grid md:grid-cols-2 lg:flex lg:justify-between overflow-hidden opacity-60 transition-opacity duration-300 pointer-coarse:opacity-100 [@media(hover:hover)]:group-hover:opacity-100 group-focus-visible:opacity-100">
+      <div className="absolute inset-x-0 top-0 p-4 grid grid-cols-2 gap-2 xs:flex xs:justify-between sm:grid sm:grid-cols-2 lg:flex lg:justify-between overflow-hidden opacity-60 transition-opacity duration-300 pointer-coarse:opacity-100 [@media(hover:hover)]:group-hover:opacity-100 group-focus-visible:opacity-100">
         {["aws", "google", "ibm", "microsoft"].map((cert, i) => (
           <div
             key={i}
@@ -155,7 +155,7 @@ const features = [
 /** Renders a grid of bento cards highlighting key features and links. */
 export function HomeBentoSection() {
   return (
-    <BentoGrid className="grid-cols-1 grid-rows-10 md:grid-cols-6 md:grid-rows-4 h-auto md:min-h-175 md:h-[calc(100vh-12rem)] md:max-h-225 gap-4">
+    <BentoGrid className="grid-cols-1 grid-rows-10 sm:grid-cols-6 sm:grid-rows-4 h-auto sm:min-h-175 sm:h-[calc(100vh-12rem)] sm:max-h-225 gap-4">
       {features.map((feature, idx) => (
         <BentoCard key={idx} {...feature} />
       ))}

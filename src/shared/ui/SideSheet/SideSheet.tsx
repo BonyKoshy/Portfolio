@@ -20,6 +20,7 @@ import {
   HTMLMotionProps,
 } from "framer-motion";
 import { cn } from "@/shared/lib/utils";
+import { BREAKPOINTS } from "@/shared/lib/breakpoints";
 
 type SheetSide = "left" | "right";
 
@@ -229,11 +230,13 @@ const SideSheetContent = ({
     if (typeof window !== "undefined") {
       const vw = window.innerWidth;
 
-      let calculatedWidth;
-      if (vw <= 640) {
-        calculatedWidth = vw * 0.9;
-      } else if (vw <= 1024) {
-        calculatedWidth = vw * 0.7;
+      let calculatedWidth: number;
+      if (vw <= BREAKPOINTS.sm) {
+        // ≤ 768px — phone landscape or smaller → near-full width
+        calculatedWidth = vw * 0.92;
+      } else if (vw <= BREAKPOINTS.lg) {
+        // ≤ 1024px — tablet portrait/landscape → 75% width
+        calculatedWidth = vw * 0.75;
       } else {
         if (width.includes("px")) {
           calculatedWidth = parseInt(width);

@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import { useBreakpoint } from "@/shared/lib/useBreakpoint";
 import ShinyText from "@/shared/ui/ShinyText/ShinyText";
 import { ParallaxScroll } from "@/shared/ui/ParallaxScroll";
 import { CertificateSideSheet } from "@/entities/certificate/ui/CertificateSideSheet";
@@ -17,23 +18,7 @@ import {
 import { cn } from "@/shared/lib/utils";
 import { CertificateCategory } from "@/entities/certificate/model/types";
 
-// Hook to detect mobile view
-const useIsMobile = () => {
-  const [isMobile, setIsMobile] = React.useState(false);
-  const [isSmallMobile, setIsSmallMobile] = React.useState(false);
 
-  React.useEffect(() => {
-    const checkMobile = () => {
-      setIsMobile(window.innerWidth < 768);
-      setIsSmallMobile(window.innerWidth < 425);
-    };
-    checkMobile();
-    window.addEventListener("resize", checkMobile);
-    return () => window.removeEventListener("resize", checkMobile);
-  }, []);
-
-  return { isMobile, isSmallMobile };
-};
 
 const Certificates = () => {
   const [selectedCert, setSelectedCert] = useState<Certificate | null>(null);
@@ -41,7 +26,9 @@ const Certificates = () => {
     CertificateCategory | "all"
   >("all");
   const [isLoading, setIsLoading] = useState(true);
-  const { isMobile, isSmallMobile } = useIsMobile();
+  // sm = 768 (phone landscape), xs = 480 (phone portrait)
+  const isMobile     = useBreakpoint("below", "sm");  // < 768
+  const isSmallPhone = useBreakpoint("below", "xs");  // < 480
 
   // Simulate loading
   useEffect(() => {
@@ -122,7 +109,7 @@ const Certificates = () => {
                 const isActive = activeCategory === cat.id;
                 // On small mobile: if active, show Icon + Text. If inactive, show Only Icon.
                 // On larger screens: always show Icon + Text.
-                const showText = !isSmallMobile || isActive;
+                const showText = !isSmallPhone || isActive;
 
                 return (
                   <button
@@ -140,7 +127,7 @@ const Certificates = () => {
                       <span
                         className={cn(
                           "text-sm",
-                          isSmallMobile && isActive
+                          isSmallPhone && isActive
                             ? "animate-in fade-in slide-in-from-left-2 duration-200"
                             : ""
                         )}

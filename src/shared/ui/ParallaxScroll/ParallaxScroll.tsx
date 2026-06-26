@@ -2,7 +2,7 @@
 
 import { useScroll, useTransform, motion } from "motion/react";
 import { cn } from "@/shared/lib/utils";
-import { useEffect, useState } from "react";
+import { useBreakpoint } from "@/shared/lib/useBreakpoint";
 
 interface ParallaxItem {
   id: string;
@@ -17,22 +17,9 @@ export const ParallaxScroll = ({
   className?: string;
 }) => {
   const { scrollYProgress } = useScroll();
-  const [columns, setColumns] = useState(3);
-
-  useEffect(() => {
-    const handleResize = () => {
-      if (window.innerWidth < 1024) {
-        // Top of 'md' range / start of 'lg'
-        setColumns(2);
-      } else {
-        setColumns(3);
-      }
-    };
-
-    handleResize(); // Init
-    window.addEventListener("resize", handleResize);
-    return () => window.removeEventListener("resize", handleResize);
-  }, []);
+  // lg = 1024px (tablet landscape) — 3 cols above, 2 cols below
+  const isAboveLg = useBreakpoint("above", "lg");
+  const columns = isAboveLg ? 3 : 2;
 
   const translateFirst = useTransform(scrollYProgress, [0, 1], [0, -200]);
   const translateSecond = useTransform(scrollYProgress, [0, 1], [0, 200]);

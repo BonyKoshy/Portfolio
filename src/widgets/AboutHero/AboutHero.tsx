@@ -16,28 +16,19 @@ import BlurText from "@/shared/ui/BlurText/BlurText";
 
 import { useScrollToAnchor } from "@/shared/lib/useScrollToAnchor";
 import StatsCount from "@/shared/ui/StatsCount/StatsCount";
-import { useEffect, useState } from "react";
+import { useBreakpoint } from "@/shared/lib/useBreakpoint";
 
 /** Renders the About Hero section including the 3D CardSwap interactivity. */
 const AboutHero = ({ isLoaded = true }: { isLoaded?: boolean }) => {
   const scrollTo = useScrollToAnchor();
-  const [cardSize, setCardSize] = useState({ width: 500, height: 400 });
-
-  useEffect(() => {
-    const handleResize = () => {
-      if (window.innerWidth < 640) {
-        setCardSize({ width: 300, height: 240 });
-      } else if (window.innerWidth < 1024) {
-        setCardSize({ width: 400, height: 320 });
-      } else {
-        setCardSize({ width: 500, height: 400 });
-      }
-    };
-
-    handleResize();
-    window.addEventListener("resize", handleResize);
-    return () => window.removeEventListener("resize", handleResize);
-  }, []);
+  // Reactive card sizing via standardised breakpoints (xs=480, lg=1024)
+  const isBelowXs = useBreakpoint("below", "xs"); // < 480 — phone portrait
+  const isBelowLg = useBreakpoint("below", "lg"); // < 1024 — below tablet landscape
+  const cardSize = isBelowXs
+    ? { width: 300, height: 240 }
+    : isBelowLg
+    ? { width: 400, height: 320 }
+    : { width: 500, height: 400 };
 
   const cards = [
     <Card

@@ -1,10 +1,16 @@
 import { useState, useEffect } from "react";
+import { BREAKPOINTS } from "./breakpoints";
+
+/**
+ * @deprecated Use `useBreakpoint` from `@/shared/lib/useBreakpoint` instead.
+ * This hook is kept for backwards compatibility only.
+ */
 
 /** Returns a value based on the current viewport width and breakpoint. */
 const useResponsiveValue = <T>(
   desktopValue: T,
   mobileValue: T,
-  breakpoint = 768
+  breakpoint = BREAKPOINTS.sm // 768 — phone landscape
 ): T => {
   const [value, setValue] = useState<T>(
     typeof window !== "undefined" && window.innerWidth > breakpoint

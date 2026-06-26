@@ -1,4 +1,5 @@
 import { useState, useEffect } from "react";
+import { useBreakpoint } from "@/shared/lib/useBreakpoint";
 import { motion, AnimatePresence } from "framer-motion";
 import { LayoutGrid, Brain, Globe, Monitor, Database } from "lucide-react";
 
@@ -14,23 +15,7 @@ import { ProjectCardData } from "@/entities/project/model/types";
 import { ProjectDetailsSheet } from "@/entities/project/ui/ProjectDetailsSheet";
 import { ProjectsSkeleton } from "@/widgets/Skeletons/ProjectsSkeleton";
 
-// Hook to detect mobile view
-const useIsMobile = () => {
-  const [isMobile, setIsMobile] = useState(false);
-  const [isSmallMobile, setIsSmallMobile] = useState(false);
 
-  useEffect(() => {
-    const checkMobile = () => {
-      setIsMobile(window.innerWidth < 768);
-      setIsSmallMobile(window.innerWidth < 425);
-    };
-    checkMobile();
-    window.addEventListener("resize", checkMobile);
-    return () => window.removeEventListener("resize", checkMobile);
-  }, []);
-
-  return { isMobile, isSmallMobile };
-};
 
 const Projects = () => {
   const { projects } = useProjects();
@@ -40,7 +25,8 @@ const Projects = () => {
   const [selectedProject, setSelectedProject] =
     useState<ProjectCardData | null>(null);
   const [isLoading, setIsLoading] = useState(true);
-  const { isSmallMobile } = useIsMobile();
+  // xs = 480 (phone portrait) — collapses filter pill labels below this width
+  const isSmallPhone = useBreakpoint("below", "xs"); // < 480
 
   // Simulate loading delay to show skeleton
   useEffect(() => {
@@ -112,7 +98,7 @@ const Projects = () => {
             <div className="flex items-center gap-2 p-1.5 bg-black/20 backdrop-blur-xl border border-white/5 rounded-full supports-backdrop-filter:bg-black/10">
               {categories.map((cat) => {
                 const isActive = selectedCategory === cat.id;
-                const showText = !isSmallMobile || isActive;
+                const showText = !isSmallPhone || isActive;
 
                 return (
                   <button
@@ -130,7 +116,7 @@ const Projects = () => {
                       <span
                         className={cn(
                           "text-sm",
-                          isSmallMobile && isActive
+                          isSmallPhone && isActive
                             ? "animate-in fade-in slide-in-from-left-2 duration-200"
                             : ""
                         )}
@@ -149,7 +135,7 @@ const Projects = () => {
       <div className="min-h-[800px]">
         <motion.div
           layout
-          className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-y-16"
+          className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-y-16"
         >
           <AnimatePresence mode="popLayout" initial={false}>
             {filteredProjects.map((project) => (
@@ -160,7 +146,7 @@ const Projects = () => {
                 animate={{ opacity: 1, scale: 1 }}
                 exit={{ opacity: 0, scale: 0.9, transition: { duration: 0.2 } }}
                 transition={{ duration: 0.3 }}
-                className="h-full px-6 border-border-subtle md:border-r md:nth-[2n]:border-r-0 lg:nth-[2n]:border-r lg:nth-[3n]:border-r-0 border-r-0"
+                className="h-full px-6 border-border-subtle sm:border-r sm:nth-[2n]:border-r-0 lg:nth-[2n]:border-r lg:nth-[3n]:border-r-0 border-r-0"
               >
                 <RevealOnScroll width="100%">
                   <ProjectCard project={project} onOpen={setSelectedProject} />

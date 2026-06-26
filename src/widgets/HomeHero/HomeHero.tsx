@@ -38,24 +38,24 @@ const HomeHero = () => {
 
         {/* Main Title */}
         <div className="w-full text-center relative z-10 mb-6">
-          {/* Mobile Title (< 820px) */}
-          <h1 className="block min-[820px]:hidden font-sixcaps font-normal uppercase tracking-wide leading-[0.9] text-transparent bg-clip-text bg-gradient-to-b from-fg-primary via-fg-primary via-50% to-transparent select-none cursor-default text-[72vw] sm:text-[60vw]">
+          {/* Mobile Title (< 768px — phone portrait/landscape) */}
+          <h1 className="block sm:hidden font-sixcaps font-normal uppercase tracking-wide leading-[0.9] text-transparent bg-clip-text bg-gradient-to-b from-fg-primary via-fg-primary via-50% to-transparent select-none cursor-default text-[72vw] xs:text-[60vw]">
             BONY
           </h1>
 
-          {/* Tablet/Laptop Title (820px - 1280px) */}
-          <h1 className="hidden min-[820px]:block xl:hidden font-sixcaps font-normal uppercase tracking-wide leading-[0.9] text-transparent bg-clip-text bg-gradient-to-b from-fg-primary via-fg-primary via-50% to-transparent select-none cursor-default text-[22vw]">
+          {/* Tablet Title (768px – 1023px — tablet portrait/landscape) */}
+          <h1 className="hidden sm:block lg:hidden font-sixcaps font-normal uppercase tracking-wide leading-[0.9] text-transparent bg-clip-text bg-gradient-to-b from-fg-primary via-fg-primary via-50% to-transparent select-none cursor-default text-[22vw]">
             BONYKOSHY
           </h1>
 
-          {/* Desktop Title (>= 1280px) */}
-          <h1 className="hidden xl:block font-sixcaps font-normal uppercase tracking-wide leading-[0.9] text-transparent bg-clip-text bg-gradient-to-b from-fg-primary via-fg-primary via-50% to-transparent select-none cursor-default text-[30rem]">
+          {/* Desktop Title (≥ 1024px — laptop, desktop, wide, 4K) */}
+          <h1 className="hidden lg:block font-sixcaps font-normal uppercase tracking-wide leading-[0.9] text-transparent bg-clip-text bg-gradient-to-b from-fg-primary via-fg-primary via-50% to-transparent select-none cursor-default text-[18vw] xl:text-[20vw] xxl:text-[22vw] uhd:text-[20vw]">
             BONY KOSHY
           </h1>
         </div>
 
         {/* Description */}
-        <div className="mb-8 w-full max-w-2xl text-base leading-relaxed text-fg-secondary sm:text-lg md:text-xl text-center relative z-20">
+        <div className="mb-8 w-full max-w-2xl text-base leading-relaxed text-fg-secondary sm:text-lg lg:text-xl text-center relative z-20">
           <p className="mb-2">Engineering the fabric of the modern web.</p>
           <p>
             A Versatile Developer and incoming{" "}
@@ -73,8 +73,8 @@ const HomeHero = () => {
         </div>
 
         {/* CTA Buttons */}
-        <div className="flex w-full flex-col gap-4 sm:w-auto sm:flex-row sm:items-center sm:gap-8 justify-center relative z-20">
-          <PrimaryButton asChild size="lg" className="w-full sm:w-auto">
+        <div className="flex w-full flex-col gap-4 xs:w-auto xs:flex-row xs:items-center xs:gap-8 justify-center relative z-20">
+          <PrimaryButton asChild size="lg" className="w-full xs:w-auto">
             <Link to="/projects">
               View Selected Work
               <span className="shrink-0 transition-transform duration-300 group-hover:translate-x-1 motion-reduce:transition-none">
@@ -87,6 +87,7 @@ const HomeHero = () => {
             <Link to="/contact">Contact Me</Link>
           </SecondaryButton>
         </div>
+
       </Container>
     </section>
   );

@@ -1,24 +1,15 @@
-import React, { useRef } from "react";
-import VariableProximity from "../VariableProximity/VariableProximity";
+import React from "react";
 
 interface SectionTitleProps {
   title: string;
 }
 
-/** Renders a section title with variable proximity font effect. */
+/** Renders a section title. */
 const SectionTitle: React.FC<SectionTitleProps> = ({ title }) => {
-  const containerRef = useRef<HTMLDivElement>(null);
-
   return (
-    <div className="w-full mb-8" ref={containerRef}>
+    <div className="w-full mb-8">
       <h2 className="font-sans text-[clamp(1.2rem,3vw,1.5rem)] text-primary m-0 font-semibold uppercase tracking-[1.5px]">
-        <VariableProximity
-          label={title}
-          fromFontVariationSettings="'wght' 300, 'opsz' 12"
-          toFontVariationSettings="'wght' 900, 'opsz' 48"
-          containerRef={containerRef}
-          radius={200}
-        />
+        {title}
       </h2>
     </div>
   );

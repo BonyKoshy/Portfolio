@@ -78,6 +78,24 @@ html[data-theme="dark"] {
 
 /* 2. Tailwind Configuration (Theme-aware) */
 @theme {
+  /* ─── Breakpoint System ─────────────────────────────────────────────────────
+   *  Mirrors src/shared/lib/breakpoints.ts exactly.
+   *  xs  (480px)  — Phone portrait
+   *  sm  (768px)  — Phone landscape
+   *  md  (834px)  — Tablet portrait
+   *  lg  (1024px) — Tablet landscape / small laptop
+   *  xl  (1440px) — Laptop / desktop
+   *  xxl (1600px) — Wide desktop
+   *  uhd (2560px) — 4K / Ultra HD
+   * ─────────────────────────────────────────────────────────────────────────── */
+  --breakpoint-xs: 480px;
+  --breakpoint-sm: 768px;
+  --breakpoint-md: 834px;
+  --breakpoint-lg: 1024px;
+  --breakpoint-xl: 1440px;
+  --breakpoint-xxl: 1600px;
+  --breakpoint-uhd: 2560px;
+
   --font-sans: "Poppins", system-ui, sans-serif;
   --font-display: "Poppins", system-ui, sans-serif;
   --font-sixcaps: "Six Caps", sans-serif;

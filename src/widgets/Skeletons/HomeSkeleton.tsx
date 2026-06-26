@@ -49,9 +49,9 @@ export const HomeSkeleton = () => {
           </div>
 
           {/* CTA Buttons Ghost - Centered */}
-          <div className="flex w-full flex-col gap-4 sm:w-auto sm:flex-row sm:items-center sm:gap-8 justify-center relative z-20">
-            <Skeleton className="h-14 w-full sm:w-48 rounded-md bg-fg-primary/10" />
-            <Skeleton className="h-14 w-full sm:w-32 rounded-md bg-transparent border border-fg-primary/10" />
+          <div className="flex w-full flex-col gap-4 xs:w-auto xs:flex-row xs:items-center xs:gap-8 justify-center relative z-20">
+            <Skeleton className="h-14 w-full xs:w-48 rounded-md bg-fg-primary/10" />
+            <Skeleton className="h-14 w-full xs:w-32 rounded-md bg-transparent border border-fg-primary/10" />
           </div>
         </Container>
       </section>

@@ -2,7 +2,13 @@ import { Meta } from "@/shared/ui/Meta/Meta";
 import { AboutHero } from "@/widgets/AboutHero";
 import { AboutSkeleton } from "@/widgets/Skeletons/AboutSkeleton";
 import { AnimatePresence, motion } from "framer-motion";
-import { useEffect, useState } from "react";
+import { useEffect, useState, lazy, Suspense } from "react";
+
+const AboutBentoSection = lazy(() =>
+  import("@/widgets/AboutBentoSection").then((module) => ({
+    default: module.AboutBentoSection,
+  }))
+);
 
 /** Renders the About page with biography information. */
 const About = () => {
@@ -30,7 +36,9 @@ const About = () => {
           </motion.div>
         )}
       </AnimatePresence>
-      <div
+      <main
+        id="main-content"
+        tabIndex={-1}
         className="min-h-screen"
         style={{
           opacity: isLoaded ? 1 : 0,
@@ -42,7 +50,16 @@ const About = () => {
           description="Learn more about Bony Koshy, a Full-Stack Developer with experience in system architecture, AI, and modern web development."
         />
         <AboutHero isLoaded={isLoaded} />
-      </div>
+
+        <section
+          id="skills"
+          className="min-h-[80vh] flex flex-col justify-center mx-auto max-w-7xl px-6 w-full py-20 lg:py-0"
+        >
+          <Suspense fallback={<div className="min-h-[50vh]" />}>
+            <AboutBentoSection />
+          </Suspense>
+        </section>
+      </main>
     </>
   );
 };
