@@ -173,7 +173,7 @@ export const homeContent = {
     {
       label: "LinkedIn",
       href: "https://linkedin.com/in/bonykoshy",
-      icon: "SiLinkedin",
+      icon: "FaLinkedin",
     },
     { label: "X (Twitter)", href: "https://x.com/Bony_Koshy", icon: "SiX" },
     {

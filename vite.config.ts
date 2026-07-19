@@ -7,6 +7,7 @@ import { ViteImageOptimizer } from "vite-plugin-image-optimizer";
 export default defineConfig({
   plugins: [
     react({
+      // @ts-expect-error - babel is a valid option for @vitejs/plugin-react
       babel: {
         plugins: [["babel-plugin-react-compiler", {}]],
       },
@@ -26,18 +27,15 @@ export default defineConfig({
   build: {
     rollupOptions: {
       output: {
-        manualChunks: {
-          vendor: ["react", "react-dom", "react-router-dom", "framer-motion"],
-          ui: [
-            "@radix-ui/react-accordion",
-            "@radix-ui/react-aspect-ratio",
-            "@radix-ui/react-context-menu",
-            "@radix-ui/react-hover-card",
-            "@radix-ui/react-slot",
-            "@radix-ui/react-tooltip",
-            "lucide-react",
-            "react-icons",
-          ],
+        manualChunks(id) {
+          if (id.includes("node_modules")) {
+            if (id.includes("react") || id.includes("framer-motion")) {
+              return "vendor";
+            }
+            if (id.includes("@radix-ui") || id.includes("lucide-react") || id.includes("react-icons")) {
+              return "ui";
+            }
+          }
         },
       },
     },

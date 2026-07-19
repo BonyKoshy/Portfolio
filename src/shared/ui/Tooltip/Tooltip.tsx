@@ -24,7 +24,7 @@ export const Tooltip = ({
     y: 0,
   });
   const contentRef = useRef<HTMLDivElement>(null);
-  const containerRef = useRef<HTMLDivElement>(null);
+  const containerRef = useRef<HTMLSpanElement>(null);
 
   useEffect(() => {
     setIsMounted(true);
@@ -65,7 +65,7 @@ export const Tooltip = ({
     // Boundary checks.
     if (finalX + tooltipWidth > viewportWidth) {
       finalX = isKeyboard
-        ? viewportWidth - tooltipWidth - 12
+         ? viewportWidth - tooltipWidth - 12
         : x - tooltipWidth - 12;
     }
     if (finalX < 12) {
@@ -98,7 +98,7 @@ export const Tooltip = ({
     }
   };
 
-  const handleMouseEnter = (e: React.MouseEvent<HTMLDivElement>) => {
+  const handleMouseEnter = (e: React.MouseEvent<HTMLElement>) => {
     if (isTouchDevice()) return;
     setIsVisible(true);
     updatePosition(e.clientX, e.clientY);
@@ -108,7 +108,7 @@ export const Tooltip = ({
     setIsVisible(false);
   };
 
-  const handleMouseMove = (e: React.MouseEvent<HTMLDivElement>) => {
+  const handleMouseMove = (e: React.MouseEvent<HTMLElement>) => {
     if (!isVisible || isTouchDevice()) return;
     updatePosition(e.clientX, e.clientY);
   };
@@ -141,7 +141,7 @@ export const Tooltip = ({
   }, [isVisible, mouse.x, mouse.y]);
 
   return (
-    <div
+    <span
       ref={containerRef}
       className={cn("relative inline-block", containerClassName)}
       onMouseEnter={handleMouseEnter}
@@ -191,6 +191,6 @@ export const Tooltip = ({
           </AnimatePresence>,
           document.body
         )}
-    </div>
+    </span>
   );
 };

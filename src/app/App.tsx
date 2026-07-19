@@ -7,7 +7,11 @@ import { ThemeProvider } from "./providers/ThemeProvider";
 import ScrollToTop from "@/shared/lib/ScrollToTop";
 import { StructuredData } from "@/shared/lib/seo/StructuredData";
 import { HomeSkeleton } from "@/widgets/Skeletons/HomeSkeleton";
+import TargetCursor from "@/shared/ui/TargetCursor/TargetCursor";
+import { PageLoader } from "@/widgets/PageLoader";
 
+const DevIndex = lazy(() => import("@/pages/DevIndex"));
+const HomeV2 = lazy(() => import("@/pages/HomeV2"));
 const Home = lazy(() => import("@/pages/Home"));
 const About = lazy(() => import("@/pages/About"));
 const Projects = lazy(() => import("@/pages/Projects"));
@@ -20,8 +24,15 @@ const PrivacyPolicy = lazy(() => import("@/pages/PrivacyPolicy"));
 const App = () => {
   return (
     <ThemeProvider>
+      <PageLoader />
+      <TargetCursor 
+        spinDuration={2}
+        hideDefaultCursor={true}
+        parallaxOn={true}
+        targetSelector=".cursor-target"
+      />
       <ScrollToTop />
-      <div className="min-h-screen bg-background text-text-primary transition-colors duration-300 flex flex-col">
+      <div className="min-h-screen bg-bg-default text-fg-primary flex flex-col">
         <StructuredData />
         <Navbar />
 
@@ -30,8 +41,35 @@ const App = () => {
             <Route
               path="/"
               element={
+                <Suspense fallback={<div className="min-h-screen" />}>
+                  <DevIndex />
+                </Suspense>
+              }
+            />
+
+            <Route
+              path="/dev"
+              element={
+                <Suspense fallback={<div className="min-h-screen" />}>
+                  <DevIndex />
+                </Suspense>
+              }
+            />
+
+            <Route
+              path="/old-home"
+              element={
                 <Suspense fallback={<HomeSkeleton />}>
                   <Home />
+                </Suspense>
+              }
+            />
+
+            <Route
+              path="/homev2"
+              element={
+                <Suspense fallback={<div className="min-h-screen" />}>
+                  <HomeV2 />
                 </Suspense>
               }
             />

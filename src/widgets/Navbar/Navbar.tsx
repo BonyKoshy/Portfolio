@@ -1,138 +1,215 @@
-import { NavLink, useLocation } from "react-router-dom";
-import { GradualBlur } from "@/shared/ui/GradualBlur";
-import { BubbleMenu } from "@/shared/ui/BubbleMenu";
-import { PrimaryButton } from "@/shared/ui/Button";
-import { ArrowDown, ArrowLeft } from "lucide-react";
-import { homeContent } from "@/shared/config/content";
-import { useScrollToAnchor } from "@/shared/lib/useScrollToAnchor";
+import { useState } from "react";
+import { Link, useLocation, useNavigate } from "react-router-dom";
+import { Menu, X, Terminal, ArrowLeft } from "lucide-react";
+import { AnimatePresence, motion } from "framer-motion";
+import CardNav from "@/shared/ui/CardNav/CardNav";
+import TerminalUI from "./TerminalUI";
 
-/** Renders the responsive navigation bar. */
 const Navbar = () => {
+  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+  const [isTerminalOpen, setIsTerminalOpen] = useState(false);
   const location = useLocation();
-  const scrollTo = useScrollToAnchor();
+  const navigate = useNavigate();
 
-  // Normalize path by removing trailing slash
-  const normalizedPath =
-    location.pathname === "/" ? "/" : location.pathname.replace(/\/$/, "");
+  const isHomePage = ["/", "/dev", "/old-home", "/homev2"].includes(
+    location.pathname
+  );
 
-  // Pages where "Back to Home" button should appear
-  const showBackButtonPages = ["/certificates", "/privacy", "/privacy-policy"];
-  const shouldShowBackButton = showBackButtonPages.includes(normalizedPath);
-
-  const menuItems = [
-    { label: homeContent.navbar.links.home, href: "/" },
-    { label: homeContent.navbar.links.about, href: "/about" },
-    { label: homeContent.navbar.links.projects, href: "/projects" },
-    { label: homeContent.navbar.cta, href: "/contact" },
-  ];
-
-  const handleSkipToMain = () => {
-    scrollTo("/", "main-content");
-    setTimeout(() => {
-      const mainContent = document.getElementById("main-content");
-      if (mainContent) {
-        mainContent.focus({ preventScroll: true });
-      }
-    }, 100);
+  const getPathLabel = (path: string) => {
+    if (path === "/certificates") return "[ /CERTIFICATION ]";
+    return `[ ${path.toUpperCase()} ]`;
   };
 
+  const toggleMobileMenu = () => {
+    if (isTerminalOpen) setIsTerminalOpen(false);
+    setIsMobileMenuOpen(!isMobileMenuOpen);
+  };
+
+  const toggleTerminal = () => {
+    if (isMobileMenuOpen) setIsMobileMenuOpen(false);
+    setIsTerminalOpen(!isTerminalOpen);
+  };
+
+  const navLinks = [
+    { name: "[ /EXPERTISE ]", path: "/expertise" },
+    { name: "[ /CAPABILITIES ]", path: "/capabilities" },
+    { name: "[ /EXPERIENCE ]", path: "/experience" },
+    { name: "[ /PROJECTS ]", path: "/projects" },
+    { name: "[ /CONTACT ]", path: "/contact" },
+  ];
+
   return (
-    <nav className="fixed top-0 left-0 right-0 z-50 h-20 w-full pointer-events-none">
-      <div className="absolute inset-0 -z-10">
-        <GradualBlur
-          position="top"
-          height="4rem"
-          strength={1}
-          opacity={1}
-          curve="ease-out"
-          target="parent"
-        />
-      </div>
+    <>
+      {/* Non-blur solid/tinted backdrop */}
+      <AnimatePresence>
+        {(isTerminalOpen || isMobileMenuOpen) && (
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            transition={{ duration: 0.3 }}
+            onClick={() => {
+              setIsTerminalOpen(false);
+              setIsMobileMenuOpen(false);
+            }}
+            className="fixed inset-0 z-40 bg-bg-default/90"
+          />
+        )}
+      </AnimatePresence>
 
-      <div className="fixed top-4 left-4 z-100 pointer-events-auto">
-        <PrimaryButton
-          size="md"
-          onClick={handleSkipToMain}
-          icon={
-            <ArrowDown
-              size={16}
-              className="transition-transform duration-300 group-hover:translate-y-1"
-            />
-          }
-          iconPosition="right"
-          withHoverAnimation={false}
-          className="opacity-0 focus:opacity-100 pointer-events-none focus:pointer-events-auto transition-all duration-200 -translate-y-[200%] focus:translate-y-0 shadow-xl"
-          tabIndex={0}
-        >
-          {homeContent.navbar.skipToMain}
-        </PrimaryButton>
-      </div>
+      {/* Spacer to prevent content from jumping under the fixed navbar */}
+      <div className="h-24 w-full shrink-0" />
 
-      <div className="mx-auto flex h-full max-w-7xl items-center justify-between px-6 pointer-events-auto relative">
-        <div className="absolute top-1/2 -translate-y-1/2 left-0 pl-6 z-50 flex items-center gap-4">
-          {shouldShowBackButton && (
-            <PrimaryButton
-              asChild
-              size="md"
-              icon={<ArrowLeft size={16} />}
-              iconPosition="left"
-            >
-              <NavLink
-                to="/"
-                className={
-                  shouldShowBackButton
-                    ? "opacity-100 transition-opacity duration-300"
-                    : ""
-                }
+      {/* The Floating Dynamic Island */}
+      <nav
+        className="fixed top-4 left-1/2 -translate-x-1/2 z-50 w-[94%] max-w-6xl bg-bg-default/95 backdrop-blur-xl border border-border-default rounded-2xl overflow-hidden flex flex-col"
+        style={{ fontFamily: '"Inter", sans-serif' }}
+      >
+        <div className="w-full px-4 md:px-6 lg:px-8">
+          <div className="relative flex items-center justify-between h-16 w-full">
+            {/* Left Column: Brand Logo (Desktop Home) OR Menu (Mobile Home) OR Back Button (Subpages) */}
+            <div className="flex items-center z-10">
+              {isHomePage ? (
+                <>
+                  {/* Mobile Menu Icon */}
+                  <button
+                    onClick={toggleMobileMenu}
+                    className="lg:hidden text-fg-secondary hover:text-fg-primary focus:outline-none transition-colors cursor-target p-1"
+                    aria-label="Toggle mobile menu"
+                  >
+                    {isMobileMenuOpen ? <X size={24} /> : <Menu size={24} />}
+                  </button>
+                  {/* Desktop Logo */}
+                  <Link
+                    to="/"
+                    onClick={() => {
+                      setIsMobileMenuOpen(false);
+                      setIsTerminalOpen(false);
+                    }}
+                    className="hidden lg:block text-fg-primary text-3xl tracking-wide hover:text-fg-primary transition-colors cursor-target"
+                    style={{ fontFamily: '"Anton", sans-serif' }}
+                  >
+                    BK
+                  </Link>
+                </>
+              ) : (
+                <button
+                  onClick={() => navigate("/")}
+                  className="text-fg-secondary hover:text-fg-primary focus:outline-none transition-colors cursor-target p-1 flex items-center gap-1.5 group"
+                  aria-label="Back to home"
+                >
+                  <ArrowLeft
+                    size={20}
+                    className="transition-transform group-hover:-translate-x-1 text-primary"
+                  />
+                  <span className="hidden sm:inline-block text-[10px] tracking-wider font-mono uppercase text-fg-secondary group-hover:text-fg-primary transition-colors">
+                    [ Back ]
+                  </span>
+                </button>
+              )}
+            </div>
+
+            {/* Center Column: Menu Links (Desktop Home) OR Brand Logo (Mobile Home) OR Path Title (Subpages) */}
+            <div className="absolute left-1/2 -translate-x-1/2 flex items-center justify-center whitespace-nowrap z-0">
+              {isHomePage ? (
+                <>
+                  {/* Mobile Logo */}
+                  <Link
+                    to="/"
+                    onClick={() => {
+                      setIsMobileMenuOpen(false);
+                      setIsTerminalOpen(false);
+                    }}
+                    className="lg:hidden text-fg-primary text-3xl tracking-wide hover:text-fg-primary transition-colors cursor-target"
+                    style={{ fontFamily: '"Anton", sans-serif' }}
+                  >
+                    BK
+                  </Link>
+                  {/* Desktop Menu Links */}
+                  <div className="hidden lg:flex items-center gap-6 lg:gap-8">
+                    {navLinks.map((link) => (
+                      <Link
+                        key={link.name}
+                        to={link.path}
+                        className="text-fg-secondary text-[10px] lg:text-[11px] tracking-wider hover:text-fg-primary transition-colors cursor-target"
+                        style={{ fontFamily: '"JetBrains Mono", monospace' }}
+                      >
+                        {link.name}
+                      </Link>
+                    ))}
+                  </div>
+                </>
+              ) : (
+                <span className="text-fg-primary text-[11px] sm:text-xs uppercase tracking-widest block font-mono">
+                  {getPathLabel(location.pathname)}
+                </span>
+              )}
+            </div>
+
+            {/* Right Column: Terminal Button (Always visible) */}
+            <div className="flex items-center gap-2 z-10">
+              <button
+                onClick={toggleTerminal}
+                className={`flex items-center gap-2 cursor-target px-3 py-1.5 rounded-full transition-colors ${isTerminalOpen ? "bg-bg-surface text-primary" : "hover:bg-bg-surface"}`}
               >
-                {homeContent.navbar.backToHome}
-              </NavLink>
-            </PrimaryButton>
-          )}
+                <Terminal size={18} className="text-primary" />
+                <span
+                  className="hidden sm:inline-block text-fg-primary text-[10px] sm:text-xs uppercase tracking-widest"
+                  style={{ fontFamily: '"JetBrains Mono", monospace' }}
+                >
+                  Terminal
+                </span>
+              </button>
+            </div>
+          </div>
         </div>
 
-        <div className="hidden items-center gap-8 lg:flex ml-auto">
-          {menuItems.map((item) => (
-            <NavLink
-              key={item.label}
-              to={item.href}
-              onClick={(e) => {
-                if (item.href === "/") {
-                  e.preventDefault();
-                  scrollTo("/", "hero");
-                }
-              }}
-              className={({ isActive }) => `
-                    relative text-sm font-medium transition-colors hover:text-primary
-                    ${isActive ? "text-primary" : "text-fg-tertiary"}
-                    /* Active Indicator */
-                    after:absolute after:left-0 after:-bottom-1 after:h-px after:w-full 
-                    after:bg-primary after:transition-transform after:duration-300
-                    ${isActive ? "after:scale-x-100" : "after:scale-x-0"}
-                `}
-            >
-              {item.label}
-            </NavLink>
-          ))}
-        </div>
-
-        <div className="lg:hidden ml-auto">
-          <BubbleMenu
+        {/* Mobile Menu Dropdown Panel */}
+        <div className="lg:hidden w-full px-2">
+          <CardNav
+            isOpen={isMobileMenuOpen}
+            onClose={() => setIsMobileMenuOpen(false)}
             items={[
               {
-                label: homeContent.navbar.links.home,
-                href: "/",
-                onClick: () => scrollTo("/", "hero"),
+                label: "sys_logs//",
+                bgColor: "var(--bg-default)",
+                textColor: "var(--fg-primary)",
+                links: [
+                  { label: "Core Expertise", href: "/expertise" },
+                  { label: "Capabilities", href: "/capabilities" },
+                  { label: "Experience", href: "/experience" },
+                ],
               },
-              { label: homeContent.navbar.links.about, href: "/about" },
-              { label: homeContent.navbar.links.projects, href: "/projects" },
-              { label: homeContent.navbar.cta, href: "/contact" },
+              {
+                label: "deployments//",
+                bgColor: "var(--bg-paper)",
+                textColor: "var(--fg-primary)",
+                links: [
+                  { label: "Projects Grid", href: "/projects" },
+                  { label: "GitHub Repos", href: "https://github.com" },
+                ],
+              },
+              {
+                label: "network//",
+                bgColor: "var(--bg-surface)",
+                textColor: "var(--fg-primary)",
+                links: [
+                  { label: "Contact Form", href: "/contact" },
+                  { label: "LinkedIn", href: "https://linkedin.com" },
+                  { label: "Download Resume", href: "/resume.pdf" },
+                ],
+              },
             ]}
-            useFixedPosition={true}
           />
         </div>
-      </div>
-    </nav>
+
+        {/* Terminal Takeover UI */}
+        <TerminalUI
+          isOpen={isTerminalOpen}
+          onClose={() => setIsTerminalOpen(false)}
+        />
+      </nav>
+    </>
   );
 };
 

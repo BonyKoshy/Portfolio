@@ -5,7 +5,7 @@ export type Theme = "light" | "dark";
 
 export interface ThemeContextValues {
   theme: Theme;
-  toggleTheme: () => void;
+  toggleTheme: (forceTheme?: Theme) => void;
 }
 
 // eslint-disable-next-line react-refresh/only-export-components
@@ -13,10 +13,9 @@ export const ThemeContext = createContext<ThemeContextValues | undefined>(
   undefined
 );
 
-/** Provides global theme state and toggling functionality (light/dark model). */
+/** Provides global theme state (instant light/dark switch). */
 export const ThemeProvider = ({ children }: { children: ReactNode }) => {
   const [theme, setTheme] = useState<Theme>(() => {
-    // Checks localStorage for saved preference or falls back to system settings.
     const saved = localStorage.getItem("theme");
     if (saved === "light" || saved === "dark") return saved;
 
@@ -27,16 +26,17 @@ export const ThemeProvider = ({ children }: { children: ReactNode }) => {
   });
 
   useEffect(() => {
-    // Updates the HTML class attribute and saves the new theme to localStorage.
     const root = window.document.documentElement;
     root.setAttribute("data-theme", theme);
-
     localStorage.setItem("theme", theme);
   }, [theme]);
 
-  const toggleTheme = () => {
+  const toggleTheme = (forceTheme?: Theme) => {
+    const nextTheme = forceTheme || (theme === "light" ? "dark" : "light");
+    if (nextTheme === theme) return;
+
     flushSync(() => {
-      setTheme((prev) => (prev === "light" ? "dark" : "light"));
+      setTheme(nextTheme);
     });
   };
 

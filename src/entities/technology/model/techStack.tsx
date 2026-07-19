@@ -3,7 +3,7 @@ import {
   SiReact,
   SiJavascript,
   SiHtml5,
-  SiCss3,
+  SiCss,
   SiNodedotjs,
   SiPython,
   SiGit,
@@ -37,7 +37,7 @@ export type TechLogo = {
 /** Static list of mapped technology logos. */
 export const techLogos: TechLogo[] = [
   { node: <SiHtml5 />, title: "HTML5" },
-  { node: <SiCss3 />, title: "CSS3" },
+  { node: <SiCss />, title: "CSS3" },
   { node: <SiJavascript />, title: "JavaScript" },
   { node: <SiTypescript />, title: "TypeScript" },
   { node: <SiReact />, title: "React.js" },

@@ -13,11 +13,11 @@ import { ProjectCardData } from "../model/types";
 import {
   ArrowUpRight,
   Download,
-  Github,
   X,
   ChevronLeft,
   ChevronRight,
 } from "lucide-react";
+import { SiGithub } from "react-icons/si";
 import { PrimaryButton, SecondaryButton } from "@/shared/ui/Button";
 import { AspectRatio } from "@/shared/ui/AspectRatio/AspectRatio";
 import { AnimatePresence, motion } from "framer-motion";
@@ -270,7 +270,7 @@ export const ProjectDetailsSheet = ({
                     withHoverAnimation={false}
                     variant="ghost"
                     className="w-full h-11 text-sm border border-border-default hover:bg-bg-subtle hover:text-text-primary px-6"
-                    icon={<Github size={18} />}
+                    icon={<SiGithub size={18} />}
                     iconPosition="right"
                   >
                     <a
