@@ -1,9 +1,4 @@
-import {
-  Code2,
-  Wrench,
-  Compass,
-  LucideIcon,
-} from "lucide-react";
+import { Code2, Wrench, Compass, LucideIcon } from "lucide-react";
 import { BentoGrid } from "@/shared/ui/BentoGrid";
 import { DomainRings } from "@/shared/ui/DomainRings";
 import { ToolkitCards } from "@/shared/ui/ToolkitCards";
@@ -18,11 +13,17 @@ interface SkillCardProps {
   visualClassName?: string;
 }
 
-/** 
- * A structured card for the About section where content and 
+/**
+ * A structured card for the About section where content and
  * visualization are separate parts of the layout flow.
  */
-function SkillCard({ name, Icon, className, children, visualClassName }: SkillCardProps) {
+function SkillCard({
+  name,
+  Icon,
+  className,
+  children,
+  visualClassName,
+}: SkillCardProps) {
   return (
     <div
       className={cn(
@@ -44,7 +45,12 @@ function SkillCard({ name, Icon, className, children, visualClassName }: SkillCa
       </div>
 
       {/* Visualization Section - Flex-1 with strict containment */}
-      <div className={cn("relative flex-1 w-full min-h-0 overflow-hidden", visualClassName)}>
+      <div
+        className={cn(
+          "relative flex-1 w-full min-h-0 overflow-hidden",
+          visualClassName
+        )}
+      >
         {children}
       </div>
     </div>
@@ -58,7 +64,8 @@ function SkillCard({ name, Icon, className, children, visualClassName }: SkillCa
  * Optimized to fit a single screen height on desktops and tablets.
  */
 export function AboutBentoSection() {
-  const emptyCardClasses = "bg-bg-paper border border-border-default rounded-[var(--radius-card)]";
+  const emptyCardClasses =
+    "bg-bg-paper border border-border-default rounded-[var(--radius-card)]";
 
   return (
     <BentoGrid
@@ -88,10 +95,20 @@ export function AboutBentoSection() {
       </SkillCard>
 
       {/* Card 3: Empty Placeholder (Top Right) */}
-      <div className={cn(emptyCardClasses, "col-span-1 sm:col-span-2 sm:row-span-2 h-[300px] sm:h-full")} />
+      <div
+        className={cn(
+          emptyCardClasses,
+          "col-span-1 sm:col-span-2 sm:row-span-2 h-[300px] sm:h-full"
+        )}
+      />
 
       {/* Card 4: Empty Placeholder (Bottom Left) */}
-      <div className={cn(emptyCardClasses, "col-span-1 sm:col-span-3 sm:row-span-2 h-[300px] sm:h-full")} />
+      <div
+        className={cn(
+          emptyCardClasses,
+          "col-span-1 sm:col-span-3 sm:row-span-2 h-[300px] sm:h-full"
+        )}
+      />
 
       {/* Card 5: Domain Focus */}
       <SkillCard

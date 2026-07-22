@@ -1,11 +1,23 @@
-import { useState, useContext } from "react";
-import { ThemeContext, ThemeContextValues } from "@/app/providers/ThemeProvider";
+import { useState, useContext, useRef } from "react";
+import {
+  ThemeContext,
+  ThemeContextValues,
+} from "@/app/providers/ThemeProvider";
 import { Link, useLocation } from "react-router-dom";
 import { AnimatePresence, motion } from "framer-motion";
 import { FiGithub, FiLinkedin, FiMail, FiFileText } from "react-icons/fi";
 import { ChevronDown } from "lucide-react";
+import { useThemeTransition } from "@/shared/hooks/useThemeTransition";
 
-const SlideText = ({ text, staggerDelay = 0.03, staggerDuration = 0.4 }: { text: string, staggerDelay?: number, staggerDuration?: number }) => {
+const SlideText = ({
+  text,
+  staggerDelay = 0.03,
+  staggerDuration = 0.4,
+}: {
+  text: string;
+  staggerDelay?: number;
+  staggerDuration?: number;
+}) => {
   return (
     <span className="inline-flex overflow-hidden relative">
       {text.split("").map((char, i) => (
@@ -30,6 +42,8 @@ const SlideText = ({ text, staggerDelay = 0.03, staggerDuration = 0.4 }: { text:
 const Footer = () => {
   const [isExpanded, setIsExpanded] = useState(false);
   const context = useContext(ThemeContext);
+  const buttonRef = useRef<HTMLButtonElement>(null);
+  const startTransition = useThemeTransition({ variant: "square" });
 
   if (!context) {
     throw new Error("Footer must be used within a ThemeProvider");
@@ -39,20 +53,29 @@ const Footer = () => {
   const location = useLocation();
 
   const handleThemeToggle = () => {
-    toggleTheme();
+    startTransition(buttonRef.current, theme === "dark", () => {
+      toggleTheme();
+    });
   };
 
   // Define valid routes where the standard footer margin should appear
   const validRoutes = [
-    "/", "/about", "/projects", "/contact",
-    "/certificates", "/privacy", "/privacy-policy",
+    "/",
+    "/about",
+    "/projects",
+    "/contact",
+    "/certificates",
+    "/privacy",
+    "/privacy-policy",
   ];
   const pathname = location.pathname.replace(/\/$/, "") || "/";
   const is404 = !validRoutes.includes(pathname);
   const marginTopClass = is404 ? "mt-0" : "mt-32";
 
   return (
-    <footer className={`w-[94%] max-w-6xl mx-auto bg-bg-default font-mono flex flex-col ${marginTopClass}`}>
+    <footer
+      className={`w-[94%] max-w-6xl mx-auto bg-bg-default font-mono flex flex-col ${marginTopClass}`}
+    >
       {/* Part A: The Expandable Separator */}
       <div className="flex items-center gap-4 mb-4 w-full">
         <div className="h-px bg-border-default flex-1"></div>
@@ -82,16 +105,34 @@ const Footer = () => {
             className="overflow-hidden"
           >
             <div className="flex flex-wrap justify-center gap-6 md:gap-12 py-6 text-sm">
-              <a href="https://github.com" target="_blank" rel="noreferrer" className="flex items-center gap-2 text-fg-secondary hover:text-fg-primary transition-colors cursor-target">
+              <a
+                href="https://github.com"
+                target="_blank"
+                rel="noreferrer"
+                className="flex items-center gap-2 text-fg-secondary hover:text-fg-primary transition-colors cursor-target"
+              >
                 <FiGithub size={14} /> [ GITHUB ]
               </a>
-              <a href="https://linkedin.com" target="_blank" rel="noreferrer" className="flex items-center gap-2 text-fg-secondary hover:text-fg-primary transition-colors cursor-target">
+              <a
+                href="https://linkedin.com"
+                target="_blank"
+                rel="noreferrer"
+                className="flex items-center gap-2 text-fg-secondary hover:text-fg-primary transition-colors cursor-target"
+              >
                 <FiLinkedin size={14} /> [ LINKEDIN ]
               </a>
-              <a href="mailto:contact@example.com" className="flex items-center gap-2 text-fg-secondary hover:text-fg-primary transition-colors cursor-target">
+              <a
+                href="mailto:contact@example.com"
+                className="flex items-center gap-2 text-fg-secondary hover:text-fg-primary transition-colors cursor-target"
+              >
                 <FiMail size={14} /> [ EMAIL ]
               </a>
-              <a href="/resume.pdf" target="_blank" rel="noreferrer" className="flex items-center gap-2 text-fg-secondary hover:text-fg-primary transition-colors cursor-target">
+              <a
+                href="/resume.pdf"
+                target="_blank"
+                rel="noreferrer"
+                className="flex items-center gap-2 text-fg-secondary hover:text-fg-primary transition-colors cursor-target"
+              >
                 <FiFileText size={14} /> [ RESUME.PDF ]
               </a>
             </div>
@@ -103,7 +144,9 @@ const Footer = () => {
       <div className="w-full pt-6 pb-8 flex flex-col md:flex-row justify-between items-center gap-4">
         {/* Left Side (Identity) */}
         <div className="flex items-center gap-4">
-          <span className="text-xs text-fg-tertiary">SYS_BK // BONY KOSHY © {new Date().getFullYear() || '2026'}</span>
+          <span className="text-xs text-fg-tertiary">
+            SYS_BK // BONY KOSHY © {new Date().getFullYear() || "2026"}
+          </span>
           <div className="flex items-center gap-2">
             <span className="text-fg-secondary text-xs">STATUS: ONLINE</span>
             <div className="relative flex h-2 w-2">
@@ -115,22 +158,30 @@ const Footer = () => {
 
         {/* Right Side (Legal & Theme) */}
         <div className="flex items-center gap-6">
-          <Link to="/privacy" className="text-xs text-fg-tertiary hover:text-fg-secondary cursor-target transition-colors focus:outline-none">
+          <Link
+            to="/privacy"
+            className="text-xs text-fg-tertiary hover:text-fg-secondary cursor-target transition-colors focus:outline-none"
+          >
             [ PRIVACY.TXT ]
           </Link>
 
-          <button 
+          <button
+            ref={buttonRef}
             onClick={handleThemeToggle}
             className="group relative flex items-center text-xs text-fg-tertiary hover:text-fg-secondary cursor-target transition-colors focus:outline-none"
           >
             <span>[ THEME:&nbsp;</span>
             <div className="w-[38px] flex justify-start">
-               <SlideText text={theme.toUpperCase()} staggerDelay={0.03} staggerDuration={0.4} />
+              <SlideText
+                text={theme.toUpperCase()}
+                staggerDelay={0.03}
+                staggerDuration={0.4}
+              />
             </div>
             <span>]</span>
 
             {/* Tooltip */}
-            {theme === 'dark' && (
+            {theme === "dark" && (
               <div className="absolute bottom-full right-0 mb-2 bg-bg-surface text-fg-primary text-[10px] px-2 py-1 rounded-sm opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none border border-border-default whitespace-nowrap shadow-xl">
                 WARNING: Flashbang imminent.
               </div>

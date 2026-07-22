@@ -25,7 +25,7 @@ const App = () => {
   return (
     <ThemeProvider>
       <PageLoader />
-      <TargetCursor 
+      <TargetCursor
         spinDuration={2}
         hideDefaultCursor={true}
         parallaxOn={true}

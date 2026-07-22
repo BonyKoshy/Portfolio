@@ -1,8 +1,8 @@
-import React, { useLayoutEffect, useRef, useEffect } from 'react';
-import { gsap } from 'gsap';
-import { ArrowUpRight } from 'lucide-react';
-import { Link } from 'react-router-dom';
-import './CardNav.css';
+import React, { useLayoutEffect, useRef, useEffect } from "react";
+import { gsap } from "gsap";
+import { ArrowUpRight } from "lucide-react";
+import { Link } from "react-router-dom";
+import "./CardNav.css";
 
 interface CardNavItem {
   label: string;
@@ -30,18 +30,22 @@ const CardNav: React.FC<CardNavProps> = ({ isOpen, items, onClose }) => {
     const navEl = navRef.current;
     if (!navEl) return;
 
-    gsap.set(navEl, { height: 0, overflow: 'hidden' });
+    gsap.set(navEl, { height: 0, overflow: "hidden" });
     gsap.set(cardsRef.current, { y: 50, opacity: 0 });
 
     const tl = gsap.timeline({ paused: true });
 
     tl.to(navEl, {
-      height: 'auto',
+      height: "auto",
       duration: 0.4,
-      ease: 'power3.out'
+      ease: "power3.out",
     });
 
-    tl.to(cardsRef.current, { y: 0, opacity: 1, duration: 0.4, ease: 'power3.out', stagger: 0.08 }, '-=0.2');
+    tl.to(
+      cardsRef.current,
+      { y: 0, opacity: 1, duration: 0.4, ease: "power3.out", stagger: 0.08 },
+      "-=0.2"
+    );
 
     tlRef.current = tl;
 
@@ -60,7 +64,7 @@ const CardNav: React.FC<CardNavProps> = ({ isOpen, items, onClose }) => {
   }, [isOpen]);
 
   return (
-    <div ref={navRef} className={`card-nav ${isOpen ? 'open' : ''}`}>
+    <div ref={navRef} className={`card-nav ${isOpen ? "open" : ""}`}>
       <div className="card-nav-content" aria-hidden={!isOpen}>
         {items.map((item, idx) => (
           <div
@@ -69,7 +73,12 @@ const CardNav: React.FC<CardNavProps> = ({ isOpen, items, onClose }) => {
             ref={setCardRef(idx)}
             style={{ backgroundColor: item.bgColor, color: item.textColor }}
           >
-            <div className="nav-card-label" style={{ fontFamily: '"JetBrains Mono", monospace' }}>{item.label}</div>
+            <div
+              className="nav-card-label"
+              style={{ fontFamily: '"JetBrains Mono", monospace' }}
+            >
+              {item.label}
+            </div>
             <div className="nav-card-links">
               {item.links.map((lnk) => (
                 <Link

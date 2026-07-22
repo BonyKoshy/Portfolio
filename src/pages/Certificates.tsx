@@ -18,8 +18,6 @@ import {
 import { cn } from "@/shared/lib/utils";
 import { CertificateCategory } from "@/entities/certificate/model/types";
 
-
-
 const Certificates = () => {
   const [selectedCert, setSelectedCert] = useState<Certificate | null>(null);
   const [activeCategory, setActiveCategory] = useState<
@@ -27,8 +25,8 @@ const Certificates = () => {
   >("all");
   const [isLoading, setIsLoading] = useState(true);
   // sm = 768 (phone landscape), xs = 480 (phone portrait)
-  const isMobile     = useBreakpoint("below", "sm");  // < 768
-  const isSmallPhone = useBreakpoint("below", "xs");  // < 480
+  const isMobile = useBreakpoint("below", "sm"); // < 768
+  const isSmallPhone = useBreakpoint("below", "xs"); // < 480
 
   // Simulate loading
   useEffect(() => {

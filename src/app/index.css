@@ -99,6 +99,8 @@ html[data-theme="dark"] {
 
   --font-sans: "Inter", system-ui, sans-serif;
   --font-display: "Anton", sans-serif;
+  --font-anton: "Anton", sans-serif;
+  --font-jetbrains-mono: "JetBrains Mono", monospace;
 
   /* Global Sharp Radius Overrides (Brutalist / Data-center aesthetic) */
   --radius-none: 0px;
@@ -273,3 +275,13 @@ html[data-theme="dark"] {
   }
 }
 
+::view-transition-old(root),
+::view-transition-new(root) {
+  animation: none;
+  mix-blend-mode: normal;
+}
+
+/* Scoped to AnimatedThemeToggler — the toggler sets the data-attribute and the variable only during a theme toggle. */
+html[data-magicui-theme-vt="active"]::view-transition-group(root) {
+  animation-duration: var(--magicui-theme-toggle-vt-duration);
+}

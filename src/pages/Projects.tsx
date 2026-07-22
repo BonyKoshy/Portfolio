@@ -15,8 +15,6 @@ import { ProjectCardData } from "@/entities/project/model/types";
 import { ProjectDetailsSheet } from "@/entities/project/ui/ProjectDetailsSheet";
 import { ProjectsSkeleton } from "@/widgets/Skeletons/ProjectsSkeleton";
 
-
-
 const Projects = () => {
   const { projects } = useProjects();
   const [selectedCategory, setSelectedCategory] = useState<string | "all">(

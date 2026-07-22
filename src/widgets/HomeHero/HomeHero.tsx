@@ -87,7 +87,6 @@ const HomeHero = () => {
             <Link to="/contact">Contact Me</Link>
           </SecondaryButton>
         </div>
-
       </Container>
     </section>
   );

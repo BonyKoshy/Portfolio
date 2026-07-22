@@ -337,7 +337,7 @@ const SideSheetContent = ({
   const handleDragEnd = useCallback(
     (_event: MouseEvent | TouchEvent | PointerEvent, info: PanInfo) => {
       const threshold = sheetWidth * closeThreshold;
-      let shouldClose = false;
+      let shouldClose: boolean;
 
       if (side === "left") {
         shouldClose = info.offset.x < -threshold || info.velocity.x < -800;

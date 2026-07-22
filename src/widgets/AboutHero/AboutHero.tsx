@@ -27,8 +27,8 @@ const AboutHero = ({ isLoaded = true }: { isLoaded?: boolean }) => {
   const cardSize = isBelowXs
     ? { width: 300, height: 240 }
     : isBelowLg
-    ? { width: 400, height: 320 }
-    : { width: 500, height: 400 };
+      ? { width: 400, height: 320 }
+      : { width: 500, height: 400 };
 
   const cards = [
     <Card

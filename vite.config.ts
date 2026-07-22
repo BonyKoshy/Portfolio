@@ -32,7 +32,11 @@ export default defineConfig({
             if (id.includes("react") || id.includes("framer-motion")) {
               return "vendor";
             }
-            if (id.includes("@radix-ui") || id.includes("lucide-react") || id.includes("react-icons")) {
+            if (
+              id.includes("@radix-ui") ||
+              id.includes("lucide-react") ||
+              id.includes("react-icons")
+            ) {
               return "ui";
             }
           }

@@ -29,15 +29,10 @@ export function ArchetypeRadar({ className }: ArchetypeRadarProps) {
   return (
     <div className={cn("w-full h-full min-h-[200px]", className)}>
       <ResponsiveContainer width="100%" height="100%">
-        <RadarChart 
-          cx="50%" 
-          cy="50%" 
-          outerRadius="65%" 
-          data={data}
-        >
+        <RadarChart cx="50%" cy="50%" outerRadius="65%" data={data}>
           {/* Subtle background web mapping to border color */}
           <PolarGrid stroke="var(--border-default)" />
-          
+
           {/* Outer text labels adapting to foreground theme */}
           <PolarAngleAxis
             dataKey="subject"

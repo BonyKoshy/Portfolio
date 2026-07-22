@@ -23,7 +23,11 @@ type Between = "between";
  * const isTablet = useBreakpoint("between", "md", "lg");
  */
 function buildQuery(mode: AboveBelow, key: BreakpointKey): string;
-function buildQuery(mode: Between, lower: BreakpointKey, upper: BreakpointKey): string;
+function buildQuery(
+  mode: Between,
+  lower: BreakpointKey,
+  upper: BreakpointKey
+): string;
 function buildQuery(
   mode: AboveBelow | Between,
   key: BreakpointKey,
@@ -40,7 +44,11 @@ function buildQuery(
 }
 
 export function useBreakpoint(mode: AboveBelow, key: BreakpointKey): boolean;
-export function useBreakpoint(mode: Between, lower: BreakpointKey, upper: BreakpointKey): boolean;
+export function useBreakpoint(
+  mode: Between,
+  lower: BreakpointKey,
+  upper: BreakpointKey
+): boolean;
 export function useBreakpoint(
   mode: AboveBelow | Between,
   key: BreakpointKey,

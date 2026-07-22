@@ -48,8 +48,8 @@ export const Tooltip = ({
     const tooltipWidth = tooltip.offsetWidth;
     const tooltipHeight = tooltip.offsetHeight;
 
-    let finalX = x;
-    let finalY = y;
+    let finalX: number;
+    let finalY: number;
 
     if (isKeyboard && containerRef.current) {
       // Position relative to the trigger element for keyboard focus.
@@ -65,7 +65,7 @@ export const Tooltip = ({
     // Boundary checks.
     if (finalX + tooltipWidth > viewportWidth) {
       finalX = isKeyboard
-         ? viewportWidth - tooltipWidth - 12
+        ? viewportWidth - tooltipWidth - 12
         : x - tooltipWidth - 12;
     }
     if (finalX < 12) {

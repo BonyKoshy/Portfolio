@@ -1,16 +1,6 @@
-import React, {
-  useEffect,
-  useState,
-  type ReactNode,
-} from "react";
+import React, { useEffect, useState, type ReactNode } from "react";
 import { motion, AnimatePresence } from "motion/react";
-import {
-  Cpu,
-  MessageSquare,
-  TestTube2,
-  Globe,
-  FileText,
-} from "lucide-react";
+import { Cpu, MessageSquare, TestTube2, Globe, FileText } from "lucide-react";
 import { cn } from "@/shared/lib/utils";
 
 // ─── Types ────────────────────────────────────────────────────────────────────
@@ -87,7 +77,10 @@ interface ToolkitCardsProps {
 }
 
 /** Infinitely cycling motion cards for specialized toolkit items. */
-export function ToolkitCards({ interval = 1400, className }: ToolkitCardsProps) {
+export function ToolkitCards({
+  interval = 1400,
+  className,
+}: ToolkitCardsProps) {
   const [cards, setCards] = useState([0, 1, 2, 3, 4]);
   const [nextId, setNextId] = useState(5);
 
@@ -114,7 +107,8 @@ export function ToolkitCards({ interval = 1400, className }: ToolkitCardsProps) 
         <AnimatePresence initial={false} mode="popLayout">
           {cards.map((cardId, i) => {
             const isCenter = i === 2;
-            const item = toolkitItems[cardId % toolkitItems.length] ?? toolkitItems[0]!;
+            const item =
+              toolkitItems[cardId % toolkitItems.length] ?? toolkitItems[0]!;
 
             return (
               <motion.div
@@ -153,13 +147,9 @@ export function ToolkitCards({ interval = 1400, className }: ToolkitCardsProps) 
                 <div
                   className={cn(
                     "flex shrink-0 items-center justify-center w-9 h-9 rounded-xl",
-                    isCenter
-                      ? "bg-white/20 text-white"
-                      : "text-fg-primary"
+                    isCenter ? "bg-white/20 text-white" : "text-fg-primary"
                   )}
-                  style={
-                    !isCenter ? { color: item.color } : undefined
-                  }
+                  style={!isCenter ? { color: item.color } : undefined}
                 >
                   {item.icon}
                 </div>
