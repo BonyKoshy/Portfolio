@@ -30,7 +30,7 @@ const buildKeyframes = (
   keys.forEach((k) => {
     // Cast to any to bypass complex union type checks for mixed string/number animations
     const initial = from[k];
-     
+
     const stepValues = steps.map((s) => s[k] ?? initial) as any[];
     keyframes[k] = [initial, ...stepValues];
   });
@@ -122,7 +122,7 @@ const BlurText: React.FC<BlurTextProps> = ({
             initial={safeFrom}
             animate={inView ? animateKeyframes : safeFrom}
             transition={spanTransition}
-             
+
             onAnimationComplete={
               index === elements.length - 1
                 ? (onAnimationComplete as any)

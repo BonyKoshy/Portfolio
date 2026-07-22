@@ -8,7 +8,6 @@ export interface ThemeContextValues {
   toggleTheme: (forceTheme?: Theme) => void;
 }
 
- 
 export const ThemeContext = createContext<ThemeContextValues | undefined>(
   undefined
 );

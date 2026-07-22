@@ -172,7 +172,6 @@ const TextType = ({
     }
 
     return () => clearTimeout(timeout);
-     
   }, [
     currentCharIndex,
     displayedText,
