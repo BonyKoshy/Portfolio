@@ -32,7 +32,9 @@ async function main() {
   console.log("Waiting for server...");
   await new Promise((r) => setTimeout(r, 3000));
 
-  const browser = await puppeteer.launch();
+  const browser = await puppeteer.launch({
+    args: ["--no-sandbox", "--disable-setuid-sandbox"],
+  });
 
   for (const route of ROUTES) {
     try {
