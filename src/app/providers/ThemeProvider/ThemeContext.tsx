@@ -8,7 +8,7 @@ export interface ThemeContextValues {
   toggleTheme: (forceTheme?: Theme) => void;
 }
 
-// eslint-disable-next-line react-refresh/only-export-components
+ 
 export const ThemeContext = createContext<ThemeContextValues | undefined>(
   undefined
 );
