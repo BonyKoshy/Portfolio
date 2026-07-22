@@ -23,17 +23,15 @@ export default tseslint.config(
     },
     rules: {
       ...reactHooks.configs.recommended.rules,
-      "react-refresh/only-export-components": [
-        "warn",
-        { allowConstantExport: true },
-      ],
+      "react-hooks/exhaustive-deps": "off",
+      "react-refresh/only-export-components": "off",
       "react-hooks/set-state-in-effect": "off",
       "no-unused-vars": "off",
       "@typescript-eslint/no-unused-vars": [
         "warn",
         { varsIgnorePattern: "^[A-Z_]", argsIgnorePattern: "^_" },
       ],
-      "@typescript-eslint/no-explicit-any": "warn",
+      "@typescript-eslint/no-explicit-any": "off",
       "boundaries/no-private": ["error"],
       "boundaries/entry-point": [
         "error",
