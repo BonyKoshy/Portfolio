@@ -171,7 +171,7 @@ const Footer = () => {
             className="group relative flex items-center text-xs text-fg-tertiary hover:text-fg-secondary cursor-target transition-colors focus:outline-none"
           >
             <span>[ THEME:&nbsp;</span>
-            <div className="w-[38px] flex justify-start">
+            <div className="w-9.5 flex justify-start">
               <SlideText
                 text={theme.toUpperCase()}
                 staggerDelay={0.03}

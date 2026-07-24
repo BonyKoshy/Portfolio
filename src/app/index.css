@@ -6,8 +6,8 @@
 :root {
   /* Shared Defaults & Constants */
   --overlay: rgba(0, 0, 0, 0.4);
-  --font-sans: "Inter", system-ui, sans-serif;
-  --font-display: "Anton", sans-serif;
+  --font-sans: "Archivo Black", sans-serif;
+  --font-display: "Archivo Black", sans-serif;
 
   /* Sync ring color with primary for consistent focus rings */
   --ring: var(--primary);
@@ -97,8 +97,8 @@ html[data-theme="dark"] {
   --breakpoint-xxl: 1600px;
   --breakpoint-uhd: 2560px;
 
-  --font-sans: "Inter", system-ui, sans-serif;
-  --font-display: "Anton", sans-serif;
+  --font-sans: "Archivo Black", sans-serif;
+  --font-display: "Archivo Black", sans-serif;
   --font-anton: "Anton", sans-serif;
   --font-jetbrains-mono: "JetBrains Mono", monospace;
 

@@ -5,6 +5,9 @@ import { ViteImageOptimizer } from "vite-plugin-image-optimizer";
 
 /** Configuration for Vite, including plugins for React and Image Optimization. */
 export default defineConfig({
+  server: {
+    host: "0.0.0.0",
+  },
   plugins: [
     react({
       // @ts-expect-error - babel is a valid option for @vitejs/plugin-react

@@ -45,12 +45,32 @@ const Navbar = () => {
   }, [isMobileMenuOpen]);
 
   const navLinks = [
-    { name: "[ /EXPERTISE ]", path: "/expertise" },
-    { name: "[ /CAPABILITIES ]", path: "/capabilities" },
-    { name: "[ /EXPERIENCE ]", path: "/experience" },
-    { name: "[ /PROJECTS ]", path: "/projects" },
-    { name: "[ /CONTACT ]", path: "/contact" },
+    { name: "[ /EXPERTISE ]", path: "/expertise", id: "expertise" },
+    { name: "[ /CAPABILITIES ]", path: "/capabilities", id: "capabilities" },
+    { name: "[ /EXPERIENCE ]", path: "/experience", id: "experience" },
+    { name: "[ /PROJECTS ]", path: "/projects", id: "projects" },
+    { name: "[ /CONTACT ]", path: "/contact", id: "contact" },
   ];
+
+  const handleNavClick = (link: { name: string; path: string; id: string }, e: React.MouseEvent) => {
+    setIsMobileMenuOpen(false);
+    setIsTerminalOpen(false);
+
+    if (isHomePage && link.id) {
+      const targetElement = document.getElementById(link.id);
+      if (targetElement) {
+        e.preventDefault();
+        const navbarHeight = 100; // Account for floating navbar height & padding
+        const elementPosition = targetElement.getBoundingClientRect().top;
+        const offsetPosition = elementPosition + window.pageYOffset - navbarHeight;
+
+        window.scrollTo({
+          top: offsetPosition,
+          behavior: "smooth",
+        });
+      }
+    }
+  };
 
   return (
     <>
@@ -76,7 +96,7 @@ const Navbar = () => {
 
       {/* The Floating Dynamic Island */}
       <nav
-        className="fixed top-4 left-1/2 -translate-x-1/2 z-50 w-[94%] max-w-6xl bg-bg-default/95 backdrop-blur-xl border border-border-default rounded-2xl overflow-hidden flex flex-col"
+        className="fixed top-4 left-1/2 -translate-x-1/2 z-50 w-[94%] max-w-6xl bg-bg-default/95 backdrop-blur-xl border border-border-default rounded-sm overflow-hidden flex flex-col"
         style={{ fontFamily: '"Inter", sans-serif' }}
       >
         <div className="w-full px-4 md:px-6 lg:px-8">
@@ -100,8 +120,7 @@ const Navbar = () => {
                       setIsMobileMenuOpen(false);
                       setIsTerminalOpen(false);
                     }}
-                    className="hidden lg:block text-fg-primary text-3xl tracking-wide hover:text-fg-primary transition-colors cursor-target"
-                    style={{ fontFamily: '"Anton", sans-serif' }}
+                    className="hidden lg:block text-fg-primary text-3xl font-anton tracking-wide hover:text-fg-primary transition-colors cursor-target"
                   >
                     BK
                   </Link>
@@ -134,8 +153,7 @@ const Navbar = () => {
                       setIsMobileMenuOpen(false);
                       setIsTerminalOpen(false);
                     }}
-                    className="lg:hidden text-fg-primary text-3xl tracking-wide hover:text-fg-primary transition-colors cursor-target"
-                    style={{ fontFamily: '"Anton", sans-serif' }}
+                    className="lg:hidden text-fg-primary text-3xl font-anton tracking-wide hover:text-fg-primary transition-colors cursor-target"
                   >
                     BK
                   </Link>
@@ -145,6 +163,7 @@ const Navbar = () => {
                       <Link
                         key={link.name}
                         to={link.path}
+                        onClick={(e) => handleNavClick(link, e)}
                         className="text-fg-secondary text-[10px] lg:text-[11px] tracking-wider hover:text-fg-primary transition-colors cursor-target"
                         style={{ fontFamily: '"JetBrains Mono", monospace' }}
                       >

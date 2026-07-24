@@ -130,7 +130,7 @@ const Projects = () => {
         </RevealOnScroll>
       </div>
 
-      <div className="min-h-[800px]">
+      <div className="min-h-200">
         <motion.div
           layout
           className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-y-16"
