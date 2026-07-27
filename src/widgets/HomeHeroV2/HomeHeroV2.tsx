@@ -4,17 +4,24 @@ import { Link } from "react-router-dom";
 import { FiGithub, FiLinkedin } from "react-icons/fi";
 import { FaXTwitter } from "react-icons/fa6";
 import { FileText, Mail } from "lucide-react";
-import { ThemeContext, ThemeContextValues } from "@/app/providers/ThemeProvider";
+import {
+  ThemeContext,
+  ThemeContextValues,
+} from "@/app/providers/ThemeProvider";
 
 export function HomeHeroV2() {
   const [isImageOpen, setIsImageOpen] = useState(false);
   const themeContext = useContext(ThemeContext) as ThemeContextValues | null;
   const currentTheme = themeContext?.theme || "dark";
-  const profileImageSrc = currentTheme === "light" ? "/lightdp.png" : "/darkdp.png";
+  const profileImageSrc =
+    currentTheme === "light" ? "/lightdp.png" : "/darkdp.png";
 
   return (
     <>
-      <section id="hero" className="relative w-[94%] max-w-6xl mx-auto flex flex-col items-center justify-start pt-0 pb-8 sm:pb-12 scroll-mt-24 md:scroll-mt-28">
+      <section
+        id="hero"
+        className="relative w-[94%] max-w-6xl mx-auto flex flex-col items-center justify-start pt-0 pb-8 sm:pb-12 scroll-mt-24 md:scroll-mt-28"
+      >
         <motion.div
           initial={{ opacity: 0, y: 15 }}
           animate={{ opacity: 1, y: 0 }}
@@ -185,7 +192,11 @@ export function HomeHeroV2() {
                   alt="Bony Koshy"
                   layoutId="profile-image"
                   className="w-full h-full object-cover object-top"
-                  transition={{ type: "tween", ease: "easeInOut", duration: 0.3 }}
+                  transition={{
+                    type: "tween",
+                    ease: "easeInOut",
+                    duration: 0.3,
+                  }}
                 />
               </motion.div>
             </div>

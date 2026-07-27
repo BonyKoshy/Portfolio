@@ -29,7 +29,9 @@ export function TableOfContents({
       (entries) => {
         entries.forEach((entry) => {
           if (entry.isIntersecting) {
-            const index = items.findIndex((item) => item.id === entry.target.id);
+            const index = items.findIndex(
+              (item) => item.id === entry.target.id
+            );
             if (index !== -1) {
               setActiveIndex(index);
             }
@@ -85,8 +87,8 @@ export function TableOfContents({
                   isHovered || isCurrent
                     ? "var(--color-fg-primary, #ffffff)"
                     : isTravelled
-                    ? "var(--color-fg-secondary, #888888)"
-                    : "var(--color-border-default, #333333)",
+                      ? "var(--color-fg-secondary, #888888)"
+                      : "var(--color-border-default, #333333)",
                 opacity: isHovered || isCurrent ? 1 : isTravelled ? 0.7 : 0.3,
               }}
               transition={{ type: "spring", stiffness: 400, damping: 25 }}

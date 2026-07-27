@@ -143,7 +143,8 @@ function TelemetryScanner() {
                 key={`${item.name}-${i}`}
                 className={cn(
                   "w-32.5 h-40 shrink-0 flex items-center justify-center transition-all duration-500",
-                  Math.abs(i - MID_INDEX) <= 1 || (isSliding && i === MID_INDEX + 2)
+                  Math.abs(i - MID_INDEX) <= 1 ||
+                    (isSliding && i === MID_INDEX + 2)
                     ? "flex"
                     : "hidden sm:flex"
                 )}
@@ -196,7 +197,10 @@ function TelemetryScanner() {
 
 export function Capabilities() {
   return (
-    <div id="capabilities" className="w-full flex flex-col scroll-mt-24 md:scroll-mt-28">
+    <div
+      id="capabilities"
+      className="w-full flex flex-col scroll-mt-24 md:scroll-mt-28"
+    >
       <h2 className="font-sans text-4xl md:text-6xl lg:text-7xl font-bold uppercase tracking-[-0.06em] text-fg-primary mb-4 sm:mb-6">
         Capabilities
       </h2>

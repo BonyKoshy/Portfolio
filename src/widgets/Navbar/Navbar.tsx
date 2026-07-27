@@ -52,7 +52,10 @@ const Navbar = () => {
     { name: "[ /CONTACT ]", path: "/contact", id: "contact" },
   ];
 
-  const handleNavClick = (link: { name: string; path: string; id: string }, e: React.MouseEvent) => {
+  const handleNavClick = (
+    link: { name: string; path: string; id: string },
+    e: React.MouseEvent
+  ) => {
     setIsMobileMenuOpen(false);
     setIsTerminalOpen(false);
 
@@ -62,7 +65,8 @@ const Navbar = () => {
         e.preventDefault();
         const navbarHeight = 100; // Account for floating navbar height & padding
         const elementPosition = targetElement.getBoundingClientRect().top;
-        const offsetPosition = elementPosition + window.pageYOffset - navbarHeight;
+        const offsetPosition =
+          elementPosition + window.pageYOffset - navbarHeight;
 
         window.scrollTo({
           top: offsetPosition,
