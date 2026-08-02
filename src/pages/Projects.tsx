@@ -1,165 +1,132 @@
 import { useState, useEffect } from "react";
-import { useBreakpoint } from "@/shared/lib/useBreakpoint";
-import { motion, AnimatePresence } from "framer-motion";
-import { LayoutGrid, Brain, Globe, Monitor, Database } from "lucide-react";
-
-import { useProjects } from "@/entities/project/model/useProjects";
-import { ProjectCard } from "@/entities/project/ui/ProjectCard";
+import { useLocation } from "react-router-dom";
 import { Meta } from "@/shared/ui/Meta/Meta";
-import { homeContent } from "@/shared/config/content";
-import { RevealOnScroll } from "@/shared/ui/RevealOnScroll/RevealOnScroll"; // Fixed import path
-import ShinyText from "@/shared/ui/ShinyText/ShinyText";
-import { cn } from "@/shared/lib/utils";
+import { TableOfContents, TOCItem } from "@/shared/ui/TableOfContents";
+import { projectsData } from "@/entities/project/model/data";
+import { ProjectAccordion } from "@/widgets/ProjectArchive/ProjectAccordion";
 
-import { ProjectCardData } from "@/entities/project/model/types";
-import { ProjectDetailsSheet } from "@/entities/project/ui/ProjectDetailsSheet";
-import { ProjectsSkeleton } from "@/widgets/Skeletons/ProjectsSkeleton";
+const PROJECT_TOC_ITEMS: TOCItem[] = projectsData.map((project, idx) => ({
+  id: project.id,
+  label: `${String(idx + 1).padStart(2, "0")} // ${project.title.toUpperCase()}`,
+}));
 
 const Projects = () => {
-  const { projects } = useProjects();
-  const [selectedCategory, setSelectedCategory] = useState<string | "all">(
-    "all"
-  );
-  const [selectedProject, setSelectedProject] =
-    useState<ProjectCardData | null>(null);
-  const [isLoading, setIsLoading] = useState(true);
-  // xs = 480 (phone portrait) — collapses filter pill labels below this width
-  const isSmallPhone = useBreakpoint("below", "xs"); // < 480
+  const location = useLocation();
+  const [openProjects, setOpenProjects] = useState<Record<string, boolean>>({});
 
-  // Simulate loading delay to show skeleton
+  // Determine initial open states (Desktop: all open, Tablet: 1st open, Mobile: all closed)
   useEffect(() => {
-    const timer = setTimeout(() => {
-      setIsLoading(false);
-    }, 2000);
-    return () => clearTimeout(timer);
+    const width = window.innerWidth;
+    const initial: Record<string, boolean> = {};
+
+    if (width >= 1024) {
+      // Desktop: All 10 projects open by default
+      projectsData.forEach((p) => {
+        initial[p.id] = true;
+      });
+    } else if (width >= 768) {
+      // Tablet: 1st project only open by default
+      if (projectsData[0]) {
+        initial[projectsData[0].id] = true;
+      }
+    }
+
+    // Ensure target hash project is open if present
+    const targetHash = location.hash.replace("#", "");
+    if (targetHash) {
+      initial[targetHash] = true;
+    }
+
+    setOpenProjects(initial);
   }, []);
 
-  const filteredProjects =
-    selectedCategory === "all"
-      ? projects
-      : projects.filter((p) => p.category === selectedCategory);
+  // Smooth scroll to targeted project when location hash is present
+  useEffect(() => {
+    const targetHash = location.hash.replace("#", "");
+    if (!targetHash) return;
 
-  const categories = [
-    { id: "all", label: "All", icon: <LayoutGrid className="w-4 h-4" /> },
-    {
-      id: "AI Solutions",
-      label: "AI Solutions",
-      icon: <Brain className="w-4 h-4" />,
-    },
-    {
-      id: "Web Architecture",
-      label: "Web Apps",
-      icon: <Globe className="w-4 h-4" />,
-    },
-    {
-      id: "Desktop & Systems",
-      label: "Desktop & Systems",
-      icon: <Monitor className="w-4 h-4" />,
-    },
-    {
-      id: "Backend Systems",
-      label: "Backend",
-      icon: <Database className="w-4 h-4" />,
-    },
-  ];
+    setOpenProjects((prev) => ({
+      ...prev,
+      [targetHash]: true,
+    }));
 
-  if (isLoading) {
-    return <ProjectsSkeleton />;
-  }
+    const timer = setTimeout(() => {
+      const el = document.getElementById(targetHash);
+      if (el) {
+        const navbarHeight = 100; // Account for floating navbar
+        const elementPosition = el.getBoundingClientRect().top;
+        const offsetPosition =
+          elementPosition + window.pageYOffset - navbarHeight;
+        window.scrollTo({
+          top: offsetPosition,
+          behavior: "smooth",
+        });
+      }
+    }, 150);
+
+    return () => clearTimeout(timer);
+  }, [location.hash]);
+
+  const toggleProject = (id: string) => {
+    setOpenProjects((prev) => ({
+      ...prev,
+      [id]: !prev[id],
+    }));
+  };
 
   return (
-    <div className="w-full max-w-7xl mx-auto text-text-primary px-4 pt-24 pb-16">
+    <div className="w-[94%] max-w-6xl mx-auto text-fg-primary pt-6 pb-16 relative">
       <Meta
-        title="Projects of Bony"
+        title="Engineering Works // Projects"
         description="Explore my portfolio of projects, including web applications, desktop utilities, and system architecture experiments."
       />
 
-      <div className="flex flex-col items-center text-center mb-12 space-y-6">
-        <RevealOnScroll>
-          {/* Title matching Certificates page */}
-          <ShinyText
-            text={homeContent.projects.title}
-            className="text-4xl sm:text-6xl md:text-8xl font-thin tracking-tight uppercase"
-          />
-        </RevealOnScroll>
-
-        <RevealOnScroll delay={0.1}>
-          {/* Description matching Certificates page style */}
-          <p className="max-w-xl mx-auto text-muted-foreground text-lg font-light leading-relaxed">
-            {homeContent.projects.subtitle}
-          </p>
-        </RevealOnScroll>
-
-        {/* Centered Filter Pills (Scrollable on mobile) - Matching Certificates Design */}
-        <RevealOnScroll delay={0.2} width="100%">
-          <div className="flex justify-center w-full overflow-x-auto pb-2 no-scrollbar">
-            <div className="flex items-center gap-2 p-1.5 bg-black/20 backdrop-blur-xl border border-white/5 rounded-full supports-backdrop-filter:bg-black/10">
-              {categories.map((cat) => {
-                const isActive = selectedCategory === cat.id;
-                const showText = !isSmallPhone || isActive;
-
-                return (
-                  <button
-                    key={cat.id}
-                    onClick={() => setSelectedCategory(cat.id)}
-                    className={cn(
-                      "flex items-center gap-2 rounded-full transition-all duration-300 ease-out whitespace-nowrap",
-                      isActive
-                        ? "bg-primary text-primary-foreground shadow-lg shadow-primary/25 px-5 py-2.5 font-medium"
-                        : "hover:bg-white/5 text-muted-foreground hover:text-foreground px-3 py-2.5"
-                    )}
-                  >
-                    {cat.icon}
-                    {showText && (
-                      <span
-                        className={cn(
-                          "text-sm",
-                          isSmallPhone && isActive
-                            ? "animate-in fade-in slide-in-from-left-2 duration-200"
-                            : ""
-                        )}
-                      >
-                        {cat.label}
-                      </span>
-                    )}
-                  </button>
-                );
-              })}
-            </div>
-          </div>
-        </RevealOnScroll>
-      </div>
-
-      <div className="min-h-200">
-        <motion.div
-          layout
-          className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-y-16"
-        >
-          <AnimatePresence mode="popLayout" initial={false}>
-            {filteredProjects.map((project) => (
-              <motion.div
-                layout
-                key={project.title}
-                initial={{ opacity: 0, scale: 0.9 }}
-                animate={{ opacity: 1, scale: 1 }}
-                exit={{ opacity: 0, scale: 0.9, transition: { duration: 0.2 } }}
-                transition={{ duration: 0.3 }}
-                className="h-full px-6 border-border-subtle sm:border-r sm:nth-[2n]:border-r-0 lg:nth-[2n]:border-r lg:nth-[3n]:border-r-0 border-r-0"
-              >
-                <RevealOnScroll width="100%">
-                  <ProjectCard project={project} onOpen={setSelectedProject} />
-                </RevealOnScroll>
-              </motion.div>
-            ))}
-          </AnimatePresence>
-        </motion.div>
-      </div>
-
-      <ProjectDetailsSheet
-        project={selectedProject}
-        open={!!selectedProject}
-        onOpenChange={(open) => !open && setSelectedProject(null)}
+      {/* Floating Far-Left Table of Contents */}
+      <TableOfContents
+        items={PROJECT_TOC_ITEMS}
+        className="fixed left-3 top-1/2 -translate-y-1/2 z-40 hidden lg:flex"
       />
+
+      {/* Accordions List (Used for all screen sizes) */}
+      <div className="flex flex-col w-full">
+        {projectsData.map((project, idx) => {
+          const isBeforeClient = idx === 5; // After Project 06 (between 6 and 7)
+          const isBeforeLearning = idx === 7; // After Project 08 (between 8 and 9)
+          const isLast = idx === projectsData.length - 1;
+
+          return (
+            <div key={project.id} className="w-full">
+              <ProjectAccordion
+                index={idx}
+                project={project}
+                isOpen={!!openProjects[project.id]}
+                onToggle={() => toggleProject(project.id)}
+                isLast={isLast || isBeforeClient || isBeforeLearning}
+              />
+
+              {/* SECTION SEPARATOR: CLIENT PROJECTS (Between 6 and 7) */}
+              {isBeforeClient && (
+                <div className="relative w-full max-w-4xl ml-auto flex items-center justify-center py-12 md:py-16">
+                  <div className="w-full h-px bg-border-default/60" />
+                  <span className="absolute bg-bg-default px-3 font-jetbrains-mono text-[10px] text-fg-tertiary tracking-[0.2em] uppercase">
+                    [ CLIENT PROJECTS ]
+                  </span>
+                </div>
+              )}
+
+              {/* SECTION SEPARATOR: LEARNING (Between 8 and 9) */}
+              {isBeforeLearning && (
+                <div className="relative w-full max-w-4xl ml-auto flex items-center justify-center py-12 md:py-16">
+                  <div className="w-full h-px bg-border-default/60" />
+                  <span className="absolute bg-bg-default px-3 font-jetbrains-mono text-[10px] text-fg-tertiary tracking-[0.2em] uppercase">
+                    [ LEARNING ]
+                  </span>
+                </div>
+              )}
+            </div>
+          );
+        })}
+      </div>
     </div>
   );
 };

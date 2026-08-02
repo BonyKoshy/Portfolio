@@ -1,0 +1,100 @@
+.line-sidebar {
+  --accent-color: #ffffff;
+  --text-color: #888888;
+  --marker-color: #444444;
+  --marker-length: 28px;
+  --marker-gap: 10px;
+  --max-shift: 10px;
+  --item-gap: 16px;
+  --font-size: 0.8rem;
+  --smoothing: 100ms;
+
+  position: relative;
+  display: flex;
+  justify-content: flex-start;
+}
+
+.line-sidebar--markers {
+  padding-left: calc(var(--marker-length) + var(--marker-gap));
+}
+
+.line-sidebar__list {
+  list-style: none;
+  margin: 0;
+  padding: 0.5rem 0;
+  display: flex;
+  flex-direction: column;
+  gap: var(--item-gap);
+}
+
+.line-sidebar__item {
+  position: relative;
+  cursor: pointer;
+}
+
+.line-sidebar__item::before {
+  content: "";
+  position: absolute;
+  inset: -4px -32px;
+}
+
+.line-sidebar__label {
+  position: relative;
+  display: inline-flex;
+  align-items: baseline;
+  font-size: var(--font-size);
+  line-height: 1.2;
+  white-space: nowrap;
+  color: color-mix(
+    in srgb,
+    var(--accent-color) var(--effect-pct, 0%),
+    var(--text-color)
+  );
+  transform: translateX(calc(var(--effect, 0) * var(--max-shift)));
+  opacity: 1;
+}
+
+.line-sidebar__index {
+  font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+  margin-right: 0.5rem;
+  font-size: 0.85em;
+  opacity: calc(0.5 + var(--effect, 0) * 0.5);
+}
+
+.line-sidebar__marker {
+  position: absolute;
+  top: 50%;
+  left: calc(-1 * var(--marker-length) - var(--marker-gap));
+  height: 1px;
+  width: var(--marker-length);
+  background-color: color-mix(
+    in srgb,
+    var(--accent-color) var(--effect-pct, 0%),
+    var(--marker-color)
+  );
+  transform-origin: left center;
+  transform: translateY(-50%) scaleX(calc(0.7 + var(--effect, 0) * 0.5));
+  opacity: calc(0.4 + var(--effect, 0) * 0.6);
+}
+
+.line-sidebar__item--header {
+  pointer-events: none;
+  margin-top: calc(var(--item-gap) * 1.5);
+  margin-bottom: calc(var(--item-gap) * -0.25);
+}
+
+.line-sidebar__item--header:first-child {
+  margin-top: 0;
+}
+
+.line-sidebar__item--header .line-sidebar__label {
+  transform: translateX(
+    calc(-1 * var(--marker-length) - var(--marker-gap))
+  ) !important;
+  font-family: "JetBrains Mono", ui-monospace, SFMono-Regular, Menlo, monospace;
+  font-size: 0.75rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--text-color);
+  opacity: 0.6;
+}

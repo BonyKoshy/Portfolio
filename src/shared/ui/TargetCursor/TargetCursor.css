@@ -55,3 +55,12 @@
   border-right: none;
   border-top: none;
 }
+
+/* Suppress native OS cursor on fine-pointer (desktop) devices so custom TargetCursor is the sole cursor */
+@media (pointer: fine) {
+  *,
+  *::before,
+  *::after {
+    cursor: none !important;
+  }
+}

@@ -1,6 +1,5 @@
 import { useState, useContext } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { Link } from "react-router-dom";
 import { FiGithub, FiLinkedin } from "react-icons/fi";
 import { FaXTwitter } from "react-icons/fa6";
 import { FileText, Mail } from "lucide-react";
@@ -20,7 +19,7 @@ export function HomeHeroV2() {
     <>
       <section
         id="hero"
-        className="relative w-[94%] max-w-6xl mx-auto flex flex-col items-center justify-start pt-0 pb-8 sm:pb-12 scroll-mt-24 md:scroll-mt-28"
+        className="relative w-[94%] max-w-6xl mx-auto flex flex-col items-center justify-start pt-0 scroll-mt-24 md:scroll-mt-28"
       >
         <motion.div
           initial={{ opacity: 0, y: 15 }}
@@ -142,9 +141,24 @@ export function HomeHeroV2() {
             <span className="text-primary font-jetbrains-mono">&gt;</span>
           </a>
 
-          {/* 7. Contact (Interactive; size matches tiles 1, 2, 3 in vertical layout) */}
-          <Link
-            to="/contact"
+          {/* 7. Contact (Interactive; smooth scroll to #contact) */}
+          <a
+            href="#contact"
+            onClick={(e) => {
+              const targetElement = document.getElementById("contact");
+              if (targetElement) {
+                e.preventDefault();
+                const navbarHeight = 100;
+                const elementPosition =
+                  targetElement.getBoundingClientRect().top;
+                const offsetPosition =
+                  elementPosition + window.pageYOffset - navbarHeight;
+                window.scrollTo({
+                  top: offsetPosition,
+                  behavior: "smooth",
+                });
+              }
+            }}
             className="col-start-2 row-start-5 lg:col-start-6 lg:row-start-2 aspect-3/1 lg:aspect-auto h-full w-full border border-border-default px-3 lg:p-4 rounded-sm bg-bg-default flex items-center justify-between text-fg-secondary hover:border-fg-primary hover:text-fg-primary hover:bg-bg-surface transition-none cursor-pointer cursor-target font-jetbrains-mono text-xs sm:text-sm group"
           >
             <div className="flex items-center gap-2">
@@ -154,7 +168,7 @@ export function HomeHeroV2() {
               </span>
             </div>
             <span className="text-primary font-jetbrains-mono">&gt;</span>
-          </Link>
+          </a>
         </div>
       </section>
 

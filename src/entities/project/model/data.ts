@@ -1,367 +1,304 @@
-import { ProjectCardData } from "./types";
+import { ProjectArchiveData } from "./types";
 
-/** Static data list of all portfolio projects. */
-export const projectsData: ProjectCardData[] = [
+/** Static data list of all portfolio projects for the Engineering Archive. */
+export const projectsData: ProjectArchiveData[] = [
   {
-    title: "2026 Gold Standard Portfolio",
-    category: "Web Architecture",
-    year: 2026,
-    src: "/projects/proj1.webp",
-    githubLink: "https://github.com/BonyKoshy/Portfolio",
-    liveLink: "https://bonykoshy.netlify.app/",
-    linkType: "link",
-    content: {
-      imageSrc: "/projects/proj1.webp",
-      description:
-        "A flagship engineering project showcasing 2026 web standards and enterprise-grade directory structures.",
-      tech: ["React 19", "Vite 7", "FSD", "GSAP", "Framer Motion", "PWA"],
-      role: "Lead Architect",
-      problem:
-        "Traditional portfolios are often monolithic and hard to maintain as new features are added.",
-      solution:
-        "Implemented Feature-Sliced Design (FSD) to decouple business logic from UI, ensuring 100% modularity.",
-      features: [
-        "Feature-Sliced Architecture for modular scale",
-        "Next-gen React 19 concurrent rendering",
-        "High-performance GSAP scroll orchestration",
-        "Offline-first PWA with Workbox",
-      ],
-      challenges:
-        "Maintaining performance while handling heavy SVG filter animations and complex state transitions in React 19.",
-    },
-  },
-  {
-    title: "Local AI Sentiment Analysis",
-    category: "AI Solutions",
+    id: "connectly",
+    title: "Connectly",
+    subtitle: "AI Multilingual Chat Architecture",
+    tags: ["WebSockets", "AI", "Real-time"],
     year: 2025,
-    src: "/projects/proj2.webp",
-    githubLink: "https://github.com/BonyKoshy/sentiment-analysis-project",
-    liveLink: "#",
-    linkType: "github",
-    content: {
-      imageSrc: "/projects/proj2.webp",
-      description:
-        "Privacy-first sentiment analysis engine optimized for local Intel NPU hardware.",
-      tech: [
-        "Python",
-        "Intel OpenVINO",
-        "Optimum Intel",
-        "Hugging Face",
-        "Flask",
-      ],
-      role: "AI Engineer",
-      problem:
-        "Cloud AI inference is slow and poses major data privacy risks for sensitive text data.",
-      solution:
-        "Optimized a DistilBERT model using Intel OpenVINO for native execution on NPUs, achieving millisecond latency locally.",
-      features: [
-        "100% On-device AI inference",
-        "Intel NPU hardware acceleration",
-        "Static Shape optimization for NPU drivers",
-        "RESTful API for local integrations",
-      ],
-      challenges:
-        "Ensuring stable inference on NPU drivers by implementing strict padding and static shape management for the model input.",
-    },
+    status: "Production",
+    heroImage: "/projects/proj3.webp",
+    overview:
+      "A real-time communication platform engineered with live AI translation powered by WebSockets. The system intercepts message streams and injects localized translations seamlessly, allowing global teams to communicate without language friction.",
+    highlights: [
+      "Bidirectional WebSocket messaging layer",
+      "Live AI-powered text translation in the event loop",
+      "Secure auth with SHA256 hashing",
+      "Persistent message history via SQLite",
+    ],
+    techStack: ["Python", "Flask-SocketIO", "Deep Translator API", "SQLite"],
+    role: "Full Stack Developer",
+    gallery: ["/projects/proj3.webp"],
+    links: [
+      {
+        label: "Repository",
+        url: "https://github.com/BonyKoshy/Connectly",
+        type: "github",
+      },
+    ],
   },
   {
-    title: "Connectly: AI Multilingual Chat",
-    category: "Web Architecture",
-    year: 2025,
-    src: "/projects/proj3.webp",
-    githubLink: "https://github.com/BonyKoshy/Connectly",
-    liveLink: "#",
-    linkType: "github",
-    content: {
-      imageSrc: "/projects/proj3.webp",
-      description:
-        "Real-time communication platform with live AI translation powered by WebSockets.",
-      tech: [
-        "Python",
-        "Flask-SocketIO",
-        "Deep Translator API",
-        "SQLite",
-        "Bootstrap",
-      ],
-      role: "Full Stack Developer",
-      problem:
-        "Global teams face friction when communicating in real-time across language barriers.",
-      solution:
-        "Integrated a translation event-loop into the WebSocket stream to provide instant message localization.",
-      features: [
-        "Bidirectional WebSocket messaging",
-        "Live AI-powered text translation",
-        "Secure auth with SHA256 hashing",
-        "Persistent message history via SQLite",
-      ],
-      challenges:
-        "Minimizing latency between the socket message receipt and the external translation API response.",
-    },
-  },
-  {
-    title: "Timeless Library Manager Pro",
-    category: "Desktop & Systems",
+    id: "emotion-detector",
+    title: "Emotion Detector",
+    subtitle: "Granular Sentiment Analysis Engine",
+    tags: ["NLP", "Machine Learning", "IBM Watson"],
     year: 2024,
-    src: "/projects/proj4.webp",
-    githubLink:
-      "https://github.com/BonyKoshy/timeless_library_management_system",
-    liveLink: "#",
-    linkType: "github",
-    content: {
-      imageSrc: "/projects/proj4.webp",
-      screenshots: [
-        "/projects/proj4.webp", // Main image
-        "/projects/proj6.webp", // Additional screenshot
-        "/projects/proj5.webp", // Additional screenshot
-      ],
-      description:
-        "Extreme-portability system built in ANSI C, running on hardware from the 90s to today.",
-      tech: ["ANSI C (C89)", "Binary Databases", "Cross-Platform API", "RBAC"],
-      role: "Systems Programmer",
-      problem:
-        "Modern library software is too heavy for legacy hardware still in use in many sectors.",
-      solution:
-        "Engineered a low-level 'System Abstraction Layer' to handle memory and files natively across MS-DOS and modern OS.",
-      features: [
-        "Encrypted binary database (.DAT) storage",
-        "Strict ANSI C89 compliance",
-        "Custom Role-Based Access Control (RBAC)",
-        "Zero-dependency binary execution",
-      ],
-      challenges:
-        "Implementing modern security features like timeout logic without standard high-level libraries.",
-      installCommand:
-        "https://github.com/BonyKoshy/timeless_library_management_system/releases",
-    },
+    status: "Archived",
+    heroImage: "/projects/proj9.webp",
+    overview:
+      "An AI application utilizing IBM Watson NLP to perform granular emotional sentiment analysis. Standard sentiment analysis often misses nuanced emotional data. This system detects distinct emotional vectors including Joy, Sadness, Anger, Fear, and Disgust.",
+    highlights: [
+      "Granular five-point emotion detection",
+      "Responsive AJAX-based web interface",
+      "Full unit test coverage with Unittest",
+      "Robust timeout handling for external APIs",
+    ],
+    techStack: ["Python", "Flask", "IBM Watson NLP", "Unittest"],
+    role: "AI Integration Lead",
+    gallery: ["/projects/proj9.webp"],
+    links: [
+      {
+        label: "Repository",
+        url: "https://github.com/BonyKoshy/Emotion-Detector",
+        type: "github",
+      },
+    ],
   },
   {
-    title: "Downloads Organizer (MAUI)",
-    category: "Desktop & Systems",
+    id: "maui-file-organizer",
+    title: "MAUI File Organizer",
+    subtitle: "High-Performance Windows Utility",
+    tags: [".NET MAUI", "Desktop", "Fluent Design"],
     year: 2024,
-    src: "/projects/proj5.webp",
-    githubLink: "https://github.com/BonyKoshy/DownloadsFolderOrganizer-MAUI",
-    liveLink: "#",
-    linkType: "github",
-    content: {
-      imageSrc: "/projects/proj5.webp",
-      description:
-        "High-performance .NET MAUI utility for automated Windows file system organization.",
-      tech: [".NET MAUI", "C#", ".NET 8", "Fluent Design", "XAML"],
-      role: "Desktop Lead",
-      problem:
-        "Cluttered downloads folders decrease productivity and make file recovery difficult.",
-      solution:
-        "Built a native desktop tool with an extension-based sorting engine and a one-click 'Undo' state manager.",
-      features: [
-        "Smart automated file categorization",
-        "Robust Undo system for error recovery",
-        "Native Windows Fluent Design UI",
-        "Real-time file system monitoring",
-      ],
-      challenges:
-        "Managing thread-safe I/O operations to prevent UI freezing during large folder movements.",
-      installCommand:
-        "https://github.com/BonyKoshy/DownloadsFolderOrganizer-MAUI/releases",
-    },
+    status: "Production",
+    heroImage: "/projects/proj5.webp",
+    overview:
+      "A high-performance .NET MAUI utility designed for automated Windows file system organization. It solves digital clutter by categorizing files instantly while maintaining a reliable 'Undo' state engine to prevent accidental data displacement.",
+    highlights: [
+      "Smart automated file categorization engine",
+      "Robust one-click Undo system for error recovery",
+      "Native Windows Fluent Design UI implementation",
+      "Thread-safe I/O operations preventing UI freezes",
+    ],
+    techStack: [".NET MAUI", "C#", ".NET 8", "XAML"],
+    role: "Desktop Lead",
+    gallery: ["/projects/proj5.webp"],
+    links: [
+      {
+        label: "Repository",
+        url: "https://github.com/BonyKoshy/DownloadsFolderOrganizer-MAUI",
+        type: "github",
+      },
+      {
+        label: "Download .exe",
+        url: "https://github.com/BonyKoshy/DownloadsFolderOrganizer-MAUI/releases",
+        type: "download",
+      },
+    ],
   },
   {
-    title: "Java Enterprise Database",
-    category: "Backend Systems",
-    year: 2025,
-    src: "/projects/proj6.webp",
-    githubLink: "https://github.com/BonyKoshy/java-database-final",
-    liveLink: "#",
-    linkType: "github",
-    content: {
-      imageSrc: "/projects/proj6.webp",
-      description:
-        "Enterprise backend featuring a hybrid database architecture for data scalability.",
-      tech: ["Java 17", "Spring Boot 3.4", "JPA", "MySQL", "MongoDB"],
-      role: "Backend Engineer",
-      problem:
-        "Managing structured relational data and unstructured user reviews in a single DB causes performance bottlenecks.",
-      solution:
-        "Architected a dual-persistence layer using MySQL for inventory and MongoDB for high-frequency review data.",
-      features: [
-        "Spring Boot 3.4 micro-service architecture",
-        "Hybrid SQL/NoSQL data persistence",
-        "Global exception handling layer",
-        "Fully documented REST API endpoints",
-      ],
-      challenges:
-        "Ensuring ACID compliance across hybrid data sources during complex purchase transactions.",
-    },
-  },
-  {
-    title: "Modern Inventory System",
-    category: "Backend Systems",
+    id: "timeless-library",
+    title: "Timeless Library Management System",
+    subtitle: "Extreme-Portability ANSI C Software",
+    tags: ["C89", "Systems Programming", "Legacy Hardware"],
     year: 2024,
-    src: "/projects/proj7.webp",
-    githubLink: "https://github.com/BonyKoshy/Inventory_Management_System",
-    liveLink: "#",
-    linkType: "github",
-    content: {
-      imageSrc: "/projects/proj7.webp",
-      description:
-        "POS-ready inventory manager with Material 3 design and automated reporting.",
-      tech: ["Python", "Flask", "SQLite", "ReportLab", "Material Design"],
-      role: "Full Stack Lead",
-      problem:
-        "Small retail businesses lack affordable, fast-sorting inventory and billing tools.",
-      solution:
-        "Developed a lightweight Flask app with integrated PDF generation for instant business reporting.",
-      features: [
-        "Real-time stock tracking dashboard",
-        "Material 3 responsive UI components",
-        "Automated PDF report generation",
-        "Dynamic search-to-bill interface",
-      ],
-      challenges:
-        "Optimizing the front-end billing search to remain fast as the product database grows.",
-    },
+    status: "Production",
+    heroImage: "/projects/proj4.webp",
+    overview:
+      "An extreme-portability system built purely in ANSI C (C89), capable of running natively on hardware ranging from the 90s to modern architectures. It uses a low-level System Abstraction Layer for memory and file management without modern dependencies.",
+    highlights: [
+      "Encrypted binary database (.DAT) storage",
+      "Strict ANSI C89 compliance",
+      "Custom Role-Based Access Control (RBAC)",
+      "Zero-dependency binary execution",
+    ],
+    techStack: ["ANSI C", "Binary DB", "Custom Auth API"],
+    role: "Systems Programmer",
+    gallery: [
+      "/projects/proj4.webp",
+      "/projects/proj6.webp",
+      "/projects/proj5.webp",
+    ],
+    links: [
+      {
+        label: "Repository",
+        url: "https://github.com/BonyKoshy/timeless_library_management_system",
+        type: "github",
+      },
+      {
+        label: "Download Binary",
+        url: "https://github.com/BonyKoshy/timeless_library_management_system/releases",
+        type: "download",
+      },
+    ],
   },
   {
+    id: "downloads-organizer",
+    title: "Downloads Folder Organizer",
+    subtitle: "Automated File Categorization Script",
+    tags: ["Python", "Automation", "GUI"],
+    year: 2023,
+    status: "Archived",
+    heroImage: "/projects/proj12.webp",
+    overview:
+      "A utility tool built in Python for automated file categorization and folder cleanup. It provides a lightweight Tkinter GUI wrapped as a standalone executable to quickly group messy download folders into structured archives.",
+    highlights: [
+      "Smart extension-based auto-sorting logic",
+      "Operation Undo support by tracking path states",
+      "Lightweight Tkinter desktop interface",
+      "Portable standalone Windows executable distribution",
+    ],
+    techStack: ["Python", "Tkinter", "OS Library", "File I/O"],
+    role: "Lead Developer",
+    gallery: ["/projects/proj12.webp"],
+    links: [
+      {
+        label: "Repository",
+        url: "https://github.com/BonyKoshy/DownloadsFolderOrganizer",
+        type: "github",
+      },
+      {
+        label: "Download .exe",
+        url: "https://github.com/BonyKoshy/DownloadsFolderOrganizer/releases",
+        type: "download",
+      },
+    ],
+  },
+  {
+    id: "marvel-timeline",
+    title: "Marvel Timeline",
+    subtitle: "Interactive Cinematic Universe Map",
+    tags: ["Frontend", "DOM Manipulation", "Vanilla JS"],
+    year: 2024,
+    status: "Production",
+    heroImage: "/projects/proj10.webp",
+    overview:
+      "An immersive media dashboard mapping the Marvel Cinematic Universe with dynamic filters and AI-generated synopses. The timeline uses high-performance vanilla JavaScript DOM manipulation to render a vast media library without frameworks.",
+    highlights: [
+      "True chronological timeline mapping and sorting",
+      "AI-generated synopses for media entries",
+      "Responsive Marvel-inspired UI architecture",
+      "Dynamic category filtering system",
+    ],
+    techStack: ["HTML5", "Tailwind CSS", "Vanilla JS", "Netlify"],
+    role: "Frontend Engineer",
+    gallery: ["/projects/proj10.webp"],
+    links: [
+      {
+        label: "Repository",
+        url: "https://github.com/BonyKoshy/Marvel_Multiverse_Timeline",
+        type: "github",
+      },
+      {
+        label: "Live Demo",
+        url: "https://marvelmultiversetimeline.netlify.app/",
+        type: "live",
+      },
+    ],
+  },
+  {
+    id: "metadata-timeline",
     title: "Metadata Timeline Generator",
-    category: "Desktop & Systems",
+    subtitle: "Digital Forensics Visualization",
+    tags: ["Forensics", "Python", "Data Viz"],
     year: 2024,
-    src: "/projects/proj8.webp",
-    githubLink: "https://github.com/BonyKoshy/metadata-timeline-generator",
-    liveLink: "#",
-    linkType: "github",
-    content: {
-      imageSrc: "/projects/proj8.webp",
-      description:
-        "Forensic analysis tool that visualizes hidden file history and temporal sequences.",
-      tech: ["Python", "Flask", "SQLite", "JavaScript", "Digital Forensics"],
-      role: "Security Tool Dev",
-      problem:
-        "Determining file history during digital investigations is time-consuming when done manually.",
-      solution:
-        "Engineered a recursive analyzer that extracts file metadata and charts it onto an interactive chronological timeline.",
-      features: [
-        "Recursive bulk folder metadata analysis",
-        "Interactive chronological event timeline",
-        "File-type distribution visual analytics",
-        "Exportable forensic data reports",
-      ],
-      challenges:
-        "Standardizing inconsistent timestamp formats across multiple operating systems and file extensions.",
-      installCommand:
-        "https://github.com/BonyKoshy/metadata-timeline-generator/releases",
-    },
+    status: "Production",
+    heroImage: "/projects/proj8.webp",
+    overview:
+      "A forensic analysis tool that visualizes hidden file history and temporal sequences. It engineers a recursive analyzer that extracts file metadata and charts it onto an interactive chronological timeline for rapid investigation.",
+    highlights: [
+      "Recursive bulk folder metadata analysis",
+      "Interactive chronological event timeline generation",
+      "File-type distribution visual analytics",
+      "Standardization of inconsistent OS timestamp formats",
+    ],
+    techStack: ["Python", "Flask", "SQLite", "JavaScript"],
+    role: "Security Tool Dev",
+    gallery: ["/projects/proj8.webp"],
+    links: [
+      {
+        label: "Repository",
+        url: "https://github.com/BonyKoshy/metadata-timeline-generator",
+        type: "github",
+      },
+      {
+        label: "Download Tool",
+        url: "https://github.com/BonyKoshy/metadata-timeline-generator/releases",
+        type: "download",
+      },
+    ],
   },
   {
-    title: "Emotion Detection App",
-    category: "AI Solutions",
+    id: "inventory-system",
+    title: "Inventory Management System",
+    subtitle: "POS-Ready Reporting Dashboard",
+    tags: ["Backend", "Material Design", "PDF Gen"],
     year: 2024,
-    src: "/projects/proj9.webp",
-    githubLink: "https://github.com/BonyKoshy/Emotion-Detector",
-    liveLink: "#",
-    linkType: "github",
-    content: {
-      imageSrc: "/projects/proj9.webp",
-      description:
-        "AI application utilizing IBM Watson NLP to perform granular emotional sentiment analysis.",
-      tech: ["Python", "Flask", "IBM Watson NLP", "Unit Testing"],
-      role: "AI Integration Lead",
-      problem:
-        "Standard sentiment analysis only detects positive/negative tones, missing nuanced emotional data.",
-      solution:
-        "Connected a Flask backend to IBM's advanced NLP libraries to detect Joy, Sadness, Anger, Fear, and Disgust.",
-      features: [
-        "Granular five-point emotion detection",
-        "Responsive AJAX-based web interface",
-        "Full unit test coverage with Unittest",
-        "Clean JSON-based API response",
-      ],
-      challenges:
-        "Handling external API timeouts gracefully to ensure a smooth user experience.",
-    },
+    status: "Archived",
+    heroImage: "/projects/proj7.webp",
+    overview:
+      "A POS-ready inventory manager built with Flask, integrating Material 3 design principles and automated PDF reporting. It optimizes front-end billing searches to remain incredibly fast as the underlying product database grows.",
+    highlights: [
+      "Real-time stock tracking dashboard",
+      "Material 3 responsive UI components",
+      "Automated PDF report generation via ReportLab",
+      "Dynamic search-to-bill interface",
+    ],
+    techStack: ["Python", "Flask", "SQLite", "ReportLab"],
+    role: "Full Stack Lead",
+    gallery: ["/projects/proj7.webp"],
+    links: [
+      {
+        label: "Repository",
+        url: "https://github.com/BonyKoshy/Inventory_Management_System",
+        type: "github",
+      },
+    ],
   },
   {
-    title: "Marvel Multiverse Timeline",
-    category: "Web Architecture",
-    year: 2024,
-    src: "/projects/proj10.webp",
-    githubLink: "https://github.com/BonyKoshy/Marvel_Multiverse_Timeline",
-    liveLink: "https://marvelmultiversetimeline.netlify.app/",
-    linkType: "link",
-    content: {
-      imageSrc: "/projects/proj10.webp",
-      description:
-        "Immersive media dashboard mapping the MCU with dynamic filters and AI synopses.",
-      tech: ["HTML5", "Tailwind CSS", "JavaScript", "Netlify"],
-      role: "Frontend Engineer",
-      problem:
-        "The MCU's timeline is vast and confusing for fans trying to follow chronological order.",
-      solution:
-        "Created an interactive timeline using vanilla JavaScript that allows users to sort and filter movies by Phase and timeline events.",
-      features: [
-        "True chronological timeline mapping",
-        "AI-generated synopses for media entries",
-        "Responsive Marvel-inspired UI",
-        "Dynamic category sorting system",
-      ],
-      challenges:
-        "Optimizing DOM performance for a large media library without using a modern framework.",
-    },
+    id: "space-impact",
+    title: "Space Impact: Automated",
+    subtitle: "Computer Vision Game Automation",
+    tags: ["Computer Vision", "Automation", "OpenCV"],
+    year: 2025,
+    status: "Beta",
+    heroImage: "/projects/proj1.webp",
+    overview:
+      "An automated bot designed to play the classic Space Impact game using computer vision and real-time screen capture. The system processes video frames to detect enemies and projectiles, issuing simulated keyboard commands with millisecond latency.",
+    highlights: [
+      "Real-time object detection and tracking",
+      "Low-latency screen capture loop",
+      "Heuristic decision engine for movement",
+      "Automated keyboard event simulation",
+    ],
+    techStack: ["Python", "OpenCV", "PyAutoGUI", "Numpy"],
+    role: "Automation Engineer",
+    gallery: ["/projects/proj1.webp"],
+    links: [
+      {
+        label: "Repository",
+        url: "#",
+        type: "github",
+      },
+    ],
   },
   {
-    title: "IBM Coursera Portfolio",
-    category: "Web Architecture",
-    year: 2023,
-    src: "/projects/proj11.webp",
-    githubLink: "https://github.com/BonyKoshy/IBM_Bony_Portfolio",
-    liveLink: "https://bonykoshy.github.io/IBM_Bony_Portfolio/",
-    linkType: "link",
-    content: {
-      imageSrc: "/projects/proj11.webp",
-      description:
-        "Foundational responsive portfolio demonstrating core web technology mastery.",
-      tech: ["HTML5", "CSS3", "JavaScript", "GitHub Pages"],
-      role: "Web Developer",
-      problem:
-        "Building a responsive, high-quality portfolio from scratch without frameworks.",
-      solution:
-        "Utilized semantic HTML and modern CSS flexbox/grid systems to build a fast, light-weight site with dynamic form handling.",
-      features: [
-        "Fully responsive mobile-to-desktop layout",
-        "Interactive recommendation form",
-        "Dynamic DOM manipulation with JavaScript",
-        "Polished, professional UI design",
-      ],
-      challenges:
-        "Ensuring cross-browser compatibility for custom CSS animations and layout grids.",
-    },
-  },
-  {
-    title: "Downloads Organizer (Python)",
-    category: "Desktop & Systems",
-    year: 2023,
-    src: "/projects/proj12.webp",
-    githubLink: "https://github.com/BonyKoshy/DownloadsFolderOrganizer",
-    liveLink: "#",
-    linkType: "github",
-    content: {
-      imageSrc: "/projects/proj12.webp",
-      description:
-        "Utility tool for automated file categorization and folder cleanup.",
-      tech: ["Python", "Tkinter", "OS Library", "File I/O"],
-      role: "Lead Developer",
-      problem:
-        "Messy download folders lead to digital fatigue and wasted time searching for files.",
-      solution:
-        "Developed a standalone Python script with a GUI to quickly group files into Images, Docs, and Archives.",
-      features: [
-        "Smart extension-based auto-sorting",
-        "Operation Undo support",
-        "Lightweight Tkinter desktop interface",
-        "Portable standalone Windows .exe",
-      ],
-      challenges:
-        "Implementing a stable 'Undo' mechanism by tracking file path states during movement.",
-      installCommand:
-        "https://github.com/BonyKoshy/DownloadsFolderOrganizer/releases",
-    },
+    id: "openvino-sentiment",
+    title: "OpenVINO Sentiment API",
+    subtitle: "Local AI Inference on NPU",
+    tags: ["Intel OpenVINO", "NPU", "AI"],
+    year: 2025,
+    status: "Production",
+    heroImage: "/projects/proj2.webp",
+    overview:
+      "A privacy-first sentiment analysis engine optimized for local Intel NPU hardware. It avoids cloud inference by utilizing an optimized DistilBERT model running natively on NPU, achieving millisecond latency locally.",
+    highlights: [
+      "100% On-device AI inference",
+      "Intel NPU hardware acceleration integration",
+      "Static Shape optimization for stable NPU drivers",
+      "RESTful API for local client integrations",
+    ],
+    techStack: ["Python", "Intel OpenVINO", "Optimum", "Flask"],
+    role: "AI Engineer",
+    gallery: ["/projects/proj2.webp"],
+    links: [
+      {
+        label: "Repository",
+        url: "https://github.com/BonyKoshy/sentiment-analysis-project",
+        type: "github",
+      },
+    ],
   },
 ];

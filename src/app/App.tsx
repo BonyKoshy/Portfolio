@@ -1,5 +1,5 @@
 import { Suspense, lazy } from "react";
-import { Routes, Route } from "react-router-dom";
+import { Routes, Route, useLocation } from "react-router-dom";
 import { Navbar } from "@/widgets/Navbar";
 import { Footer } from "@/widgets/Footer";
 
@@ -22,6 +22,9 @@ const PrivacyPolicy = lazy(() => import("@/pages/PrivacyPolicy"));
 
 /** Root component setting up providers, routing, and global layout. */
 const App = () => {
+  const location = useLocation();
+  const isCertificatesPage = location.pathname === "/certificates";
+
   return (
     <ThemeProvider>
       <PageLoader />
@@ -130,7 +133,7 @@ const App = () => {
           </Routes>
         </div>
 
-        <Footer />
+        {!isCertificatesPage && <Footer />}
       </div>
     </ThemeProvider>
   );

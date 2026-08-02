@@ -205,6 +205,17 @@ html[data-theme="dark"] {
     }
   }
 
+  @keyframes marquee {
+    0% {
+      transform: translateX(0%);
+    }
+    100% {
+      transform: translateX(-50%);
+    }
+  }
+
+  --animate-marquee: marquee 35s linear infinite;
+
   /* Spacing */
   --spacing-30: 7.5rem;
   --spacing-38: 9.5rem;
@@ -258,6 +269,7 @@ html[data-theme="dark"] {
   /* Custom Scrollbar */
   ::-webkit-scrollbar {
     width: 6px;
+    height: 6px;
   }
   ::-webkit-scrollbar-track {
     background: transparent;
@@ -272,6 +284,14 @@ html[data-theme="dark"] {
 
   html[data-theme="dark"] .cursor-invert {
     filter: invert(1);
+  }
+  /* Hide scrollbar utility */
+  .hide-scrollbar {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+  }
+  .hide-scrollbar::-webkit-scrollbar {
+    display: none;
   }
 }
 

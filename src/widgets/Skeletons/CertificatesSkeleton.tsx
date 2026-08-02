@@ -2,7 +2,7 @@ import { Skeleton } from "@/shared/ui/Skeleton/Skeleton";
 
 export const CertificatesSkeleton = () => {
   return (
-    <div className="min-h-screen bg-transparent pt-24 pb-20 container mx-auto px-4 sm:px-6">
+    <div className="min-h-screen bg-transparent pt-2 sm:pt-4 pb-4 container mx-auto px-4 sm:px-6">
       {/* Header Skeleton */}
       <div className="flex flex-col items-center text-center mb-12 space-y-6">
         {/* Title */}
@@ -25,7 +25,7 @@ export const CertificatesSkeleton = () => {
       </div>
 
       {/* Grid Content Skeleton */}
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-1">
         {[1, 2, 3, 4, 5, 6].map((i) => (
           <div
             key={i}

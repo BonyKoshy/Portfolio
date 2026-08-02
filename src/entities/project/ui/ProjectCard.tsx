@@ -1,12 +1,12 @@
 import { ArrowRight } from "lucide-react";
 import { SecondaryButton } from "@/shared/ui/Button";
-import { ProjectCardData } from "../model/types";
+import { ProjectArchiveData } from "../model/types";
 import { homeContent } from "@/shared/config/content";
 import { AspectRatio } from "@/shared/ui/AspectRatio/AspectRatio";
 
 interface ProjectCardProps {
-  project: ProjectCardData;
-  onOpen: (project: ProjectCardData) => void;
+  project: ProjectArchiveData;
+  onOpen: (project: ProjectArchiveData) => void;
 }
 
 /** Renders a card displaying project preview details. */
@@ -20,10 +20,10 @@ export const ProjectCard = ({ project, onOpen }: ProjectCardProps) => {
         >
           <AspectRatio ratio={1.75}>
             <img
-              src={project.src}
+              src={project.heroImage}
               alt={project.title}
               loading="lazy"
-              className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
+              className="w-full h-full object-cover"
             />
           </AspectRatio>
         </div>
@@ -32,19 +32,19 @@ export const ProjectCard = ({ project, onOpen }: ProjectCardProps) => {
           <p className="text-text-primary font-medium m-0">{project.year}</p>
 
           <h4
-            className="font-sans text-xl font-bold leading-tight text-text-primary m-0 cursor-pointer hover:text-accent transition-colors"
+            className="font-sans text-xl font-normal leading-tight text-text-primary m-0 cursor-pointer hover:text-accent transition-colors"
             onClick={() => onOpen(project)}
           >
             {project.title}
           </h4>
 
           <p className="text-sm text-text-secondary leading-relaxed line-clamp-3 m-0">
-            {project.content.description}
+            {project.overview}
           </p>
         </div>
 
         <div className="flex flex-wrap gap-2 mt-1">
-          {project.content.tech.slice(0, 3).map((tech) => (
+          {project.techStack.slice(0, 3).map((tech: string) => (
             <span
               key={tech}
               className="px-3 py-1 text-xs font-medium text-fg-secondary bg-bg-subtle rounded-full"

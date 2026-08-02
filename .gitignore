@@ -64,3 +64,24 @@ coverage/
 # Cloud Platform Metadata
 .netlify/
 .vercel/
+
+# Scratch & Prototyping Artifacts
+scratch_*
+*.diff
+check_lucide.js
+
+# Legacy Pages & Deprecated Components (Pending Deletion/Nuke)
+src/pages/Home.tsx
+src/pages/About.tsx
+src/pages/Contact.tsx
+src/pages/DevIndex.tsx
+src/widgets/HomeHero/
+src/widgets/HomeBentoSection/
+src/widgets/HomeProjectsSection/
+src/widgets/HomeContactSection/
+src/widgets/AboutHero/
+src/widgets/AboutBentoSection/
+src/widgets/Skeletons/HomeSkeleton.tsx
+src/widgets/Skeletons/AboutSkeleton.tsx
+src/shared/ui/ArchetypeRadar/
+src/shared/ui/DottedMap/

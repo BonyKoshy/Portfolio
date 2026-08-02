@@ -11,7 +11,7 @@ const PrivacyPolicy: React.FC = () => {
       />
       <div id="main-content" className="max-w-3xl mx-auto font-jetbrains-mono">
         <div className="animate-in fade-in duration-700 slide-in-from-bottom-8">
-          <h1 className="text-4xl md:text-5xl font-bold mb-2 text-fg-primary tracking-tight font-sans uppercase">
+          <h1 className="text-4xl md:text-5xl font-normal mb-2 text-fg-primary tracking-tight font-sans uppercase">
             Privacy Policy
           </h1>
           <p className="text-fg-tertiary mb-10 text-xs sm:text-sm uppercase tracking-widest font-medium border-b border-border-default pb-6 inline-block w-full">
@@ -26,7 +26,7 @@ const PrivacyPolicy: React.FC = () => {
               agree to the practices outlined below.
             </p>
 
-            <h2 className="text-xl md:text-2xl font-bold mb-4 text-fg-primary mt-10 font-sans uppercase tracking-tight">
+            <h2 className="text-xl md:text-2xl font-normal mb-4 text-fg-primary mt-10 font-sans uppercase tracking-tight">
               Information Collected
             </h2>
 
@@ -40,7 +40,7 @@ const PrivacyPolicy: React.FC = () => {
               <li>Your message content</li>
             </ul>
 
-            <h2 className="text-xl md:text-2xl font-bold mb-4 text-fg-primary mt-10 font-sans uppercase tracking-tight">
+            <h2 className="text-xl md:text-2xl font-normal mb-4 text-fg-primary mt-10 font-sans uppercase tracking-tight">
               Use of Information
             </h2>
             <p className="mb-8 text-fg-secondary">
@@ -49,7 +49,7 @@ const PrivacyPolicy: React.FC = () => {
               marketing, newsletters, or promotional purposes.
             </p>
 
-            <h2 className="text-xl md:text-2xl font-bold mb-4 text-fg-primary mt-10 font-sans uppercase tracking-tight">
+            <h2 className="text-xl md:text-2xl font-normal mb-4 text-fg-primary mt-10 font-sans uppercase tracking-tight">
               Data Sharing & Disclosure
             </h2>
             <p className="mb-8 text-fg-secondary">
@@ -59,7 +59,7 @@ const PrivacyPolicy: React.FC = () => {
               necessary to deliver form functionality.
             </p>
 
-            <h2 className="text-xl md:text-2xl font-bold mb-4 text-fg-primary mt-10 font-sans uppercase tracking-tight">
+            <h2 className="text-xl md:text-2xl font-normal mb-4 text-fg-primary mt-10 font-sans uppercase tracking-tight">
               Data Security
             </h2>
             <p className="mb-8 text-fg-secondary">
@@ -69,7 +69,7 @@ const PrivacyPolicy: React.FC = () => {
               or storage is completely secure.
             </p>
 
-            <h2 className="text-xl md:text-2xl font-bold mb-4 text-fg-primary mt-10 font-sans uppercase tracking-tight">
+            <h2 className="text-xl md:text-2xl font-normal mb-4 text-fg-primary mt-10 font-sans uppercase tracking-tight">
               Data Retention & Your Rights
             </h2>
             <p className="mb-4 text-fg-secondary">
@@ -81,7 +81,7 @@ const PrivacyPolicy: React.FC = () => {
               <a href="mailto:bonykoshy@gmail.com">bonykoshy@gmail.com</a>
             </p>
 
-            <h2 className="text-xl md:text-2xl font-bold mb-4 text-fg-primary mt-10 font-sans uppercase tracking-tight">
+            <h2 className="text-xl md:text-2xl font-normal mb-4 text-fg-primary mt-10 font-sans uppercase tracking-tight">
               Updates to This Policy
             </h2>
             <p className="mb-8 text-fg-secondary">
@@ -90,7 +90,7 @@ const PrivacyPolicy: React.FC = () => {
               indicate the latest version.
             </p>
 
-            <h2 className="text-xl md:text-2xl font-bold mb-4 text-fg-primary mt-10 font-sans uppercase tracking-tight">
+            <h2 className="text-xl md:text-2xl font-normal mb-4 text-fg-primary mt-10 font-sans uppercase tracking-tight">
               Contact
             </h2>
             <p className="mb-2 text-fg-secondary">

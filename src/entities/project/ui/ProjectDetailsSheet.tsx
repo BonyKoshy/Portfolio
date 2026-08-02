@@ -9,7 +9,7 @@ import {
   SideSheetFooter,
   SideSheetClose,
 } from "@/shared/ui/SideSheet";
-import { ProjectCardData } from "../model/types";
+import { ProjectArchiveData } from "../model/types";
 import {
   ArrowUpRight,
   Download,
@@ -24,7 +24,7 @@ import { AnimatePresence, motion } from "framer-motion";
 import { cn } from "@/shared/lib/utils";
 
 interface ProjectDetailsSheetProps {
-  project: ProjectCardData | null;
+  project: ProjectArchiveData | null;
   children?: React.ReactNode;
   width?: string;
   className?: string;
@@ -44,10 +44,10 @@ export const ProjectDetailsSheet = ({
 
   // Default images to empty array if project is null to avoid crash during render if open changes before project
   const images =
-    project?.content.screenshots && project.content.screenshots.length > 0
-      ? project.content.screenshots
+    project?.gallery && project.gallery.length > 0
+      ? project.gallery
       : project
-        ? [project.src]
+        ? [project.heroImage]
         : [];
 
   const nextSlide = (e: React.MouseEvent) => {
@@ -80,18 +80,18 @@ export const ProjectDetailsSheet = ({
                 <div className="flex items-center gap-3 text-sm text-text-secondary">
                   <span>{project.year}</span>
                   <span className="w-1 h-1 rounded-full bg-border-default" />
-                  <span>{project.category}</span>
+                  <span>{project.tags?.[0] || project.status}</span>
                 </div>
                 <SideSheetTitle className="text-3xl font-bold tracking-tight text-text-primary">
                   {project.title}
                 </SideSheetTitle>
               </div>
               <SideSheetDescription className="text-base leading-relaxed text-text-secondary max-w-xl">
-                {project.content.description}
+                {project.overview}
               </SideSheetDescription>
 
               <div className="flex flex-wrap gap-2 pt-2">
-                {project.content.tech.map((tech) => (
+                {project.techStack.map((tech) => (
                   <span
                     key={tech}
                     className="px-3 py-1 text-xs font-medium text-fg-secondary bg-bg-subtle rounded-full border border-transparent"
@@ -162,53 +162,29 @@ export const ProjectDetailsSheet = ({
               </div>
 
               <div className="grid grid-cols-1 gap-8">
-                {project.content.role && (
+                {project.role && (
                   <div className="space-y-3">
                     <h4 className="text-sm font-semibold text-text-primary uppercase tracking-wider flex items-center gap-2">
                       <span className="w-1 h-4 bg-primary rounded-full"></span>
                       My Role
                     </h4>
                     <p className="text-text-secondary leading-relaxed pl-3 border-l border-border-subtle ml-0.5">
-                      {project.content.role}
+                      {project.role}
                     </p>
                   </div>
                 )}
 
-                {project.content.problem && (
+                {project.highlights && (
                   <div className="space-y-3">
                     <h4 className="text-sm font-semibold text-text-primary uppercase tracking-wider flex items-center gap-2">
                       <span className="w-1 h-4 bg-primary rounded-full"></span>
-                      The Problem
-                    </h4>
-                    <p className="text-text-secondary leading-relaxed pl-3 border-l border-border-subtle ml-0.5">
-                      {project.content.problem}
-                    </p>
-                  </div>
-                )}
-
-                {project.content.solution && (
-                  <div className="space-y-3">
-                    <h4 className="text-sm font-semibold text-text-primary uppercase tracking-wider flex items-center gap-2">
-                      <span className="w-1 h-4 bg-primary rounded-full"></span>
-                      The Solution
-                    </h4>
-                    <p className="text-text-secondary leading-relaxed pl-3 border-l border-border-subtle ml-0.5">
-                      {project.content.solution}
-                    </p>
-                  </div>
-                )}
-
-                {project.content.features && (
-                  <div className="space-y-3">
-                    <h4 className="text-sm font-semibold text-text-primary uppercase tracking-wider flex items-center gap-2">
-                      <span className="w-1 h-4 bg-primary rounded-full"></span>
-                      Key Features
+                      Key Highlights
                     </h4>
                     <ul className="grid grid-cols-1 sm:grid-cols-2 gap-3 pl-3">
-                      {project.content.features.map((feature, idx) => (
+                      {project.highlights.map((feature, idx) => (
                         <li
                           key={idx}
-                          className="flex items-start gap-2 text-text-secondary text-sm"
+                          className="flex items-start gap-2 font-jetbrains-mono text-text-secondary text-xs sm:text-sm"
                         >
                           <span className="mt-1.5 w-1.5 h-1.5 rounded-full bg-border-default shrink-0" />
                           <span>{feature}</span>
@@ -222,7 +198,7 @@ export const ProjectDetailsSheet = ({
 
             <SideSheetFooter className="absolute bottom-0 left-0 right-0 p-6 bg-bg-paper/80 backdrop-blur-xl border-t border-border-default flex flex-col sm:flex-row gap-4 sm:justify-between items-center z-40">
               <div className="w-full sm:w-auto flex-1">
-                {project.content.installCommand ? (
+                {project.links.find((l) => l.type === "download") ? (
                   <PrimaryButton
                     asChild
                     withHoverAnimation={false}
@@ -232,9 +208,8 @@ export const ProjectDetailsSheet = ({
                   >
                     <a
                       href={
-                        project.githubLink
-                          ? `${project.githubLink}/releases`
-                          : "#"
+                        project.links.find((l) => l.type === "download")?.url ||
+                        "#"
                       }
                       target="_blank"
                       rel="noopener noreferrer"
@@ -243,7 +218,7 @@ export const ProjectDetailsSheet = ({
                       Install
                     </a>
                   </PrimaryButton>
-                ) : project.liveLink && project.liveLink !== "#" ? (
+                ) : project.links.find((l) => l.type === "live") ? (
                   <PrimaryButton
                     asChild
                     withHoverAnimation={false}
@@ -252,7 +227,9 @@ export const ProjectDetailsSheet = ({
                     iconPosition="right"
                   >
                     <a
-                      href={project.liveLink}
+                      href={
+                        project.links.find((l) => l.type === "live")?.url || "#"
+                      }
                       target="_blank"
                       rel="noopener noreferrer"
                       className="w-full flex items-center justify-center"
@@ -263,7 +240,7 @@ export const ProjectDetailsSheet = ({
                 ) : null}
               </div>
 
-              {project.githubLink && (
+              {project.links.find((l) => l.type === "github") && (
                 <div className="w-full sm:w-auto">
                   <SecondaryButton
                     asChild
@@ -274,7 +251,10 @@ export const ProjectDetailsSheet = ({
                     iconPosition="right"
                   >
                     <a
-                      href={project.githubLink}
+                      href={
+                        project.links.find((l) => l.type === "github")?.url ||
+                        "#"
+                      }
                       target="_blank"
                       rel="noopener noreferrer"
                       className="w-full flex items-center justify-center"

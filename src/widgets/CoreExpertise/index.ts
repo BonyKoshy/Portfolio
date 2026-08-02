@@ -1,1 +1,0 @@
-export { CoreExpertise } from "./CoreExpertise";

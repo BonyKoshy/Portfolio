@@ -6,7 +6,7 @@ import { useProjects } from "@/entities/project/model/useProjects";
 import { ProjectCard } from "@/entities/project/ui/ProjectCard";
 import { homeContent } from "@/shared/config/content";
 import { RevealOnScroll } from "@/shared/ui/RevealOnScroll";
-import { ProjectCardData } from "@/entities/project/model/types";
+import { ProjectArchiveData } from "@/entities/project/model/types";
 import { ProjectDetailsSheet } from "@/entities/project/ui/ProjectDetailsSheet";
 
 /** Renders the featured projects section. */
@@ -14,7 +14,7 @@ export const HomeProjectsSection = () => {
   const { getFeaturedProjects } = useProjects();
   const featuredProjects = getFeaturedProjects(2);
   const [selectedProject, setSelectedProject] =
-    useState<ProjectCardData | null>(null);
+    useState<ProjectArchiveData | null>(null);
 
   return (
     <div className="w-full max-w-7xl mx-auto text-text-primary px-4">

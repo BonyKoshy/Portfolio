@@ -64,7 +64,6 @@ const Footer = () => {
     "/about",
     "/projects",
     "/contact",
-    "/certificates",
     "/privacy",
     "/privacy-policy",
   ];

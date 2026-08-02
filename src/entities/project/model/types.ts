@@ -1,24 +1,20 @@
-/** Data structure representing a single project entry. */
-export interface ProjectCardData {
+/** Data structure representing a single project entry in the Engineering Archive. */
+export interface ProjectArchiveData {
+  id: string; // Unique ID for scrolling/anchoring
   title: string;
-  category: string;
+  subtitle: string;
+  tags: string[]; // Minimal tags for the header (e.g. ['AI', 'Python'])
   year: number;
-  src: string;
-  githubLink: string;
-  liveLink: string;
-  linkType: string;
-  content: {
-    imageSrc: string;
-    description: string;
-    tech: string[];
-    role?: string;
-    problem?: string;
-    solution?: string;
-    features?: string[];
-    challenges?: string;
-    installCommand?: string;
-    screenshots?: string[];
-  };
-  srcs?: string[];
-  key?: string;
+  status: string; // e.g. "Production", "Archived", "Beta"
+  heroImage: string;
+  overview: string; // 1 paragraph description
+  highlights: string[]; // Minimal list of key features/challenges
+  techStack: string[]; // Minimal pills (no icons)
+  role: string; // Transparent text styling
+  gallery?: string[]; // 2-5 screenshots for the carousel
+  links: {
+    label: string;
+    url: string;
+    type: "github" | "live" | "download";
+  }[];
 }

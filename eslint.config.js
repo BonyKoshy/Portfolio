@@ -32,43 +32,33 @@ export default tseslint.config(
         { varsIgnorePattern: "^[A-Z_]", argsIgnorePattern: "^_" },
       ],
       "@typescript-eslint/no-explicit-any": "off",
-      "boundaries/no-private": ["error"],
-      "boundaries/entry-point": [
-        "error",
-        {
-          rules: [
-            { target: "shared", allow: "*.(ts|tsx)" },
-            { target: "app", allow: "index.css" },
-          ],
-        },
-      ],
-      "boundaries/element-types": [
+      "boundaries/dependencies": [
         "error",
         {
           default: "allow",
           rules: [
             {
-              from: "shared",
+              from: ["shared"],
               disallow: ["app", "pages", "widgets", "features", "entities"],
               message: "Shared layer cannot import from higher layers.",
             },
             {
-              from: "entities",
+              from: ["entities"],
               disallow: ["app", "pages", "widgets", "features"],
               message: "Entities layer cannot import from higher layers.",
             },
             {
-              from: "features",
+              from: ["features"],
               disallow: ["app", "pages", "widgets"],
               message: "Features layer cannot import from higher layers.",
             },
             {
-              from: "widgets",
+              from: ["widgets"],
               disallow: ["app", "pages"],
               message: "Widgets layer cannot import from higher layers.",
             },
             {
-              from: "pages",
+              from: ["pages"],
               disallow: ["app"],
               message: "Pages layer cannot import from App layer.",
             },

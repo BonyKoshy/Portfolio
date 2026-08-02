@@ -40,7 +40,7 @@ const AboutHero = ({ isLoaded = true }: { isLoaded?: boolean }) => {
         <img
           src="/profile-image.webp"
           alt="Bony Koshy"
-          className="w-full h-full object-cover opacity-90 group-hover:opacity-100 transition-opacity duration-500 scale-100 group-hover:scale-105 transition-transform duration-700"
+          className="w-full h-full object-cover opacity-90 group-hover:opacity-100 transition-opacity duration-500"
         />
         <div className="absolute inset-0 bg-linear-to-t from-black/80 via-transparent to-transparent opacity-60" />
       </div>

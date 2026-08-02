@@ -1,17 +1,17 @@
 import { projectsData } from "./data";
-import { ProjectCardData } from "./types";
+import { ProjectArchiveData } from "./types";
 
 /** Hook to access and filter project data. */
 export const useProjects = () => {
-  const getAllProjects = (): ProjectCardData[] => {
+  const getAllProjects = (): ProjectArchiveData[] => {
     return projectsData;
   };
 
-  const getFeaturedProjects = (limit: number = 2): ProjectCardData[] => {
+  const getFeaturedProjects = (limit: number = 2): ProjectArchiveData[] => {
     return projectsData.slice(0, limit);
   };
 
-  const getProjectByTitle = (title: string): ProjectCardData | undefined => {
+  const getProjectByTitle = (title: string): ProjectArchiveData | undefined => {
     return projectsData.find((p) => p.title === title);
   };
 

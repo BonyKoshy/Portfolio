@@ -1,12 +1,11 @@
 import React, {
-  useLayoutEffect,
   useRef,
   useEffect,
   useState,
   ReactNode,
   useContext,
 } from "react";
-import { gsap } from "gsap";
+import { motion, AnimatePresence } from "framer-motion";
 import { Terminal as TerminalIcon } from "lucide-react";
 import {
   ThemeContext,
@@ -148,9 +147,7 @@ const SequentialList = ({ items, isLatest, isTyping, onComplete }: any) => {
 };
 
 const TerminalUI: React.FC<TerminalUIProps> = ({ isOpen, onClose }) => {
-  const containerRef = useRef<HTMLDivElement>(null);
   const contentRef = useRef<HTMLDivElement>(null);
-  const tlRef = useRef<gsap.core.Timeline | null>(null);
 
   const [isTyping, setIsTyping] = useState(false);
 
@@ -196,33 +193,8 @@ Type 'help' to see available commands.`}
     </pre>
   );
 
-  // GSAP Height Animation
-  useLayoutEffect(() => {
-    const container = containerRef.current;
-    if (!container) return;
-
-    gsap.set(container, { height: 0, opacity: 0, overflow: "hidden" });
-
-    const tl = gsap.timeline({ paused: true });
-
-    // Animate height to fill 90vh minus the 64px top bar
-    tl.to(container, {
-      height: "calc(90vh - 64px)",
-      opacity: 1,
-      duration: 0.5,
-      ease: "power3.inOut",
-    });
-
-    tlRef.current = tl;
-
-    return () => {
-      tl.kill();
-    };
-  }, []);
-
   // Open/Close state sync
   useEffect(() => {
-    if (!tlRef.current) return;
     if (isOpen) {
       // Reset history and input when terminal is opened
       setHistory([
@@ -232,12 +204,10 @@ Type 'help' to see available commands.`}
         },
       ]);
       setInput("");
-      tlRef.current.play();
 
       // Focus input
       setTimeout(() => inputRef.current?.focus(), 100);
     } else {
-      tlRef.current.reverse();
       setIsTyping(false);
     }
   }, [isOpen]);
@@ -565,87 +535,96 @@ Type 'help' to see available commands.`}
     : undefined;
 
   return (
-    <div
-      ref={containerRef}
-      className="w-full bg-bg-default border-t border-border-default flex flex-col font-mono"
-      onClick={handleContainerClick}
-    >
-      {/* Terminal Header */}
-      <div className="flex items-center justify-between px-4 py-2 bg-bg-surface border-b border-border-subtle shrink-0">
-        <div className="flex items-center gap-2">
-          <TerminalIcon size={14} className="text-primary" />
-          <span className="text-[10px] text-fg-secondary uppercase tracking-widest">
-            System.Terminal
-          </span>
-        </div>
-        <button
-          onClick={onClose}
-          className="text-fg-tertiary hover:text-fg-primary transition-colors cursor-target focus:outline-none text-xs"
+    <AnimatePresence>
+      {isOpen && (
+        <motion.div
+          initial={{ height: 0, opacity: 0 }}
+          animate={{ height: "calc(90vh - 64px)", opacity: 1 }}
+          exit={{ height: 0, opacity: 0 }}
+          transition={{ duration: 0.5, ease: [0.645, 0.045, 0.355, 1] }}
+          className="w-full bg-bg-default border-t border-border-default flex flex-col font-mono overflow-hidden"
+          onClick={handleContainerClick}
         >
-          [ EXIT ]
-        </button>
-      </div>
+          {/* Terminal Header */}
+          <div className="flex items-center justify-between px-4 py-2 bg-bg-surface border-b border-border-subtle shrink-0">
+            <div className="flex items-center gap-2">
+              <TerminalIcon size={14} className="text-primary" />
+              <span className="text-[10px] text-fg-secondary uppercase tracking-widest">
+                System.Terminal
+              </span>
+            </div>
+            <button
+              onClick={onClose}
+              className="text-fg-tertiary hover:text-fg-primary transition-colors cursor-target focus:outline-none text-xs"
+            >
+              [ EXIT ]
+            </button>
+          </div>
 
-      {/* Terminal Content */}
-      <div
-        ref={contentRef}
-        className="flex-1 p-4 overflow-y-auto flex flex-col gap-2 cursor-text"
-      >
-        <div className="space-y-1 text-sm sm:text-base">
-          {history.map((entry, i) => (
-            <div key={i} className="flex flex-col gap-1">
-              {entry.command && (
-                <div className="flex items-start gap-2">
-                  <span className="text-primary shrink-0">guest@sys_bk:~$</span>
-                  <span className="text-fg-primary break-all">
-                    {entry.command}
-                  </span>
-                </div>
-              )}
-              {entry.renderOutput && (
-                <div className="text-fg-secondary whitespace-pre-wrap">
-                  {entry.renderOutput(
-                    isTyping,
-                    setIsTyping,
-                    i === history.length - 1
+          {/* Terminal Content */}
+          <div
+            ref={contentRef}
+            className="flex-1 p-4 overflow-y-auto flex flex-col gap-2 cursor-text"
+          >
+            <div className="space-y-1 text-sm sm:text-base">
+              {history.map((entry, i) => (
+                <div key={i} className="flex flex-col gap-1">
+                  {entry.command && (
+                    <div className="flex items-start gap-2">
+                      <span className="text-primary shrink-0">
+                        guest@sys_bk:~$
+                      </span>
+                      <span className="text-fg-primary break-all">
+                        {entry.command}
+                      </span>
+                    </div>
+                  )}
+                  {entry.renderOutput && (
+                    <div className="text-fg-secondary whitespace-pre-wrap">
+                      {entry.renderOutput(
+                        isTyping,
+                        setIsTyping,
+                        i === history.length - 1
+                      )}
+                    </div>
                   )}
                 </div>
-              )}
+              ))}
             </div>
-          ))}
-        </div>
 
-        {/* Active Input Line */}
-        {!isTyping && (
-          <div className="flex items-center gap-2 mt-1 text-sm sm:text-base">
-            <span className="text-primary shrink-0">guest@sys_bk:~$</span>
+            {/* Active Input Line */}
+            {!isTyping && (
+              <div className="flex items-center gap-2 mt-1 text-sm sm:text-base">
+                <span className="text-primary shrink-0">guest@sys_bk:~$</span>
 
-            <div className="relative flex-1 flex items-center min-h-[24px]">
-              {/* Ghost Text Overlay */}
-              {suggestion && input && (
-                <div className="absolute inset-0 flex items-center pointer-events-none whitespace-pre text-fg-tertiary">
-                  <span className="text-transparent">{input}</span>
-                  <span>{suggestion.slice(input.length)}</span>
+                <div className="relative flex-1 flex items-center min-h-[24px]">
+                  {/* Ghost Text Overlay */}
+                  {suggestion && input && (
+                    <div className="absolute inset-0 flex items-center pointer-events-none whitespace-pre text-fg-tertiary">
+                      <span className="text-transparent">{input}</span>
+                      <span>{suggestion.slice(input.length)}</span>
+                    </div>
+                  )}
+
+                  {/* Native Input */}
+                  <input
+                    ref={inputRef}
+                    type="text"
+                    value={input}
+                    onChange={(e) => setInput(e.target.value)}
+                    onKeyDown={handleKeyDown}
+                    className="relative z-10 flex-1 bg-transparent border-none outline-none text-fg-primary cursor-text p-0 focus:ring-0 w-full h-full caret-primary"
+                    spellCheck="false"
+                    autoComplete="off"
+                  />
                 </div>
-              )}
-
-              {/* Native Input */}
-              <input
-                ref={inputRef}
-                type="text"
-                value={input}
-                onChange={(e) => setInput(e.target.value)}
-                onKeyDown={handleKeyDown}
-                className="relative z-10 flex-1 bg-transparent border-none outline-none text-fg-primary cursor-text p-0 focus:ring-0 w-full h-full caret-primary"
-                spellCheck="false"
-                autoComplete="off"
-              />
-            </div>
+              </div>
+            )}
+            <div ref={bottomRef} className="h-4 shrink-0" />
           </div>
-        )}
-        <div ref={bottomRef} className="h-4 shrink-0" />
-      </div>
-    </div>
+        </motion.div>
+      )}
+    </AnimatePresence>
   );
 };
 
