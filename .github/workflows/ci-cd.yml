@@ -151,6 +151,15 @@ jobs:
           name: portfolio-dist-build
           path: dist
 
+      - name: 🔑 Validate Netlify Secrets
+        run: |
+          if [ -z "${{ secrets.NETLIFY_AUTH_TOKEN }}" ] || [ -z "${{ secrets.NETLIFY_SITE_ID }}" ]; then
+            echo "❌ CRITICAL ERROR: NETLIFY_AUTH_TOKEN or NETLIFY_SITE_ID secrets are missing!"
+            echo "👉 Please add NETLIFY_AUTH_TOKEN and NETLIFY_SITE_ID in GitHub Repository Settings -> Secrets and variables -> Actions."
+            exit 1
+          fi
+          echo "✅ Netlify credentials verified."
+
       - name: 🚀 Deploy Production Build to Netlify
         uses: nwtgck/actions-netlify@v3.0
         with:
