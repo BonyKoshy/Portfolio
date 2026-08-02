@@ -1,1 +1,0 @@
-export { AboutBentoSection } from "./AboutBentoSection";

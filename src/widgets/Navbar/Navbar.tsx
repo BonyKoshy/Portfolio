@@ -14,9 +14,7 @@ const Navbar = () => {
   const location = useLocation();
   const navigate = useNavigate();
 
-  const isHomePage = ["/", "/dev", "/old-home", "/homev2"].includes(
-    location.pathname
-  );
+  const isHomePage = location.pathname === "/";
   const isProjectsPage = location.pathname === "/projects";
 
   const getPathLabel = (path: string) => {

@@ -1,115 +1,91 @@
-import { useEffect, lazy, Suspense, useState } from "react";
-import { AnimatePresence, motion } from "framer-motion";
-import { HomeHero } from "@/widgets/HomeHero";
-import { RevealOnScroll } from "@/shared/ui/RevealOnScroll";
-import { HomeSkeleton } from "@/widgets/Skeletons/HomeSkeleton";
+import { HomeHeroV2 } from "@/widgets/HomeHeroV2";
+import { Expertise } from "@/widgets/Expertise";
+import { Credentials } from "@/widgets/Credentials";
+import { Experience } from "@/widgets/Experience";
+import { HomeProjectsV2 } from "@/widgets/HomeProjectsV2";
+import { HomeContactV2 } from "@/widgets/HomeContactV2";
+import { TableOfContents, TOCItem } from "@/shared/ui/TableOfContents";
 
-const HomeBentoSection = lazy(() =>
-  import("@/widgets/HomeBentoSection").then((module) => ({
-    default: module.HomeBentoSection,
-  }))
-);
-const HomeProjectsSection = lazy(() =>
-  import("@/widgets/HomeProjectsSection").then((module) => ({
-    default: module.HomeProjectsSection,
-  }))
-);
-const HomeContactSection = lazy(() =>
-  import("@/widgets/HomeContactSection/HomeContactSection").then((module) => ({
-    default: module.HomeContactSection,
-  }))
-);
+const HOME_TOC_ITEMS: TOCItem[] = [
+  { id: "hero", label: "01 // OVERVIEW" },
+  { id: "expertise", label: "02 // EXPERTISE" },
+  { id: "credentials", label: "03 // CREDENTIALS" },
+  { id: "experience", label: "04 // EXPERIENCE" },
+  { id: "projects", label: "05 // PROJECTS" },
+  { id: "contact", label: "06 // CONTACT" },
+];
 
-/** Renders the landing page with hero, bento grid, projects, and contact sections. */
-const Home = () => {
-  const [isLoaded, setIsLoaded] = useState(false);
-
-  useEffect(() => {
-    const preloadImages = async () => {
-      const images = [
-        "/profile-image.webp",
-        "/certs/aws.webp",
-        "/certs/google.webp",
-        "/certs/ibm.webp",
-        "/certs/microsoft.webp",
-      ];
-
-      const promises = images.map((src) => {
-        return new Promise((resolve) => {
-          const img = new Image();
-          img.src = src;
-          img.onload = resolve;
-          img.onerror = resolve;
-        });
-      });
-
-      await Promise.all(promises);
-
-      // Delay slightly for cinematic effect
-      setTimeout(() => {
-        setIsLoaded(true);
-      }, 500);
-    };
-
-    preloadImages();
-  }, []);
-
+export default function Home() {
   return (
-    <>
-      <AnimatePresence mode="wait">
-        {!isLoaded && (
-          <motion.div
-            key="skeleton"
-            exit={{ opacity: 0 }}
-            transition={{ duration: 0.8, ease: "easeInOut" }}
-            className="fixed inset-0 z-9999 pointer-events-none"
-          >
-            <HomeSkeleton />
-          </motion.div>
-        )}
-      </AnimatePresence>
+    <div className="relative min-h-screen w-full bg-bg-default text-fg-primary overflow-x-hidden flex flex-col justify-start pt-0 md:pt-4 lg:pt-8 pb-24 md:pb-32">
+      {/* Floating Far-Left Table of Contents (Large Screens Only) */}
+      <TableOfContents
+        items={HOME_TOC_ITEMS}
+        showLabels={false}
+        className="fixed left-3 top-1/2 -translate-y-1/2 z-40 hidden lg:flex"
+      />
 
-      <main
-        id="main-content"
-        tabIndex={-1}
-        className="relative text-text-primary selection:bg-accent selection:text-white"
-        style={{
-          opacity: isLoaded ? 1 : 0,
-          transition: "opacity 0.5s ease-in",
-        }}
-      >
-        <section
-          id="hero"
-          className="relative h-screen flex flex-col justify-center"
-        >
-          <HomeHero />
-        </section>
+      <HomeHeroV2 />
 
-        <section className="min-h-screen flex flex-col justify-center mx-auto max-w-7xl px-6 w-full py-20 lg:py-0">
-          <Suspense fallback={<div className="min-h-screen" />}>
-            <HomeBentoSection />
-          </Suspense>
-        </section>
+      {/* 0. SUBTLE SECTION SEPARATOR WITH TINY [ SECTION 02 ] BADGE */}
+      <div className="relative w-[94%] max-w-6xl mx-auto flex items-center justify-center py-12 md:py-16">
+        <div className="w-full h-px bg-border-default/60" />
+        <span className="absolute bg-bg-default px-3 font-jetbrains-mono text-[10px] text-fg-tertiary tracking-[0.2em] uppercase">
+          [ SECTION 02 ]
+        </span>
+      </div>
 
-        <section
-          id="projects"
-          className="min-h-screen flex flex-col justify-center mx-auto max-w-7xl px-6 w-full py-20"
-        >
-          <Suspense fallback={<div className="min-h-screen" />}>
-            <HomeProjectsSection />
-          </Suspense>
-        </section>
+      <div className="w-[94%] max-w-6xl mx-auto flex flex-col">
+        <Expertise />
+      </div>
 
-        <section className="flex flex-col justify-center mx-auto max-w-7xl px-6 w-full pb-20 border-t border-border-default/40">
-          <RevealOnScroll width="100%">
-            <Suspense fallback={<div className="min-h-[50vh]" />}>
-              <HomeContactSection />
-            </Suspense>
-          </RevealOnScroll>
-        </section>
-      </main>
-    </>
+      {/* 0. SUBTLE SECTION SEPARATOR WITH TINY [ SECTION 03 ] BADGE */}
+      <div className="relative w-[94%] max-w-6xl mx-auto flex items-center justify-center py-12 md:py-16">
+        <div className="w-full h-px bg-border-default/60" />
+        <span className="absolute bg-bg-default px-3 font-jetbrains-mono text-[10px] text-fg-tertiary tracking-[0.2em] uppercase">
+          [ SECTION 03 ]
+        </span>
+      </div>
+
+      <div className="w-[94%] max-w-6xl mx-auto flex flex-col">
+        <Credentials />
+      </div>
+
+      {/* 0. SUBTLE SECTION SEPARATOR WITH TINY [ SECTION 04 ] BADGE */}
+      <div className="relative w-[94%] max-w-6xl mx-auto flex items-center justify-center py-12 md:py-16">
+        <div className="w-full h-px bg-border-default/60" />
+        <span className="absolute bg-bg-default px-3 font-jetbrains-mono text-[10px] text-fg-tertiary tracking-[0.2em] uppercase">
+          [ SECTION 04 ]
+        </span>
+      </div>
+
+      <div className="w-[94%] max-w-6xl mx-auto flex flex-col">
+        <Experience />
+      </div>
+
+      {/* 0. SUBTLE SECTION SEPARATOR WITH TINY [ SECTION 05 ] BADGE */}
+      <div className="relative w-[94%] max-w-6xl mx-auto flex items-center justify-center py-12 md:py-16">
+        <div className="w-full h-px bg-border-default/60" />
+        <span className="absolute bg-bg-default px-3 font-jetbrains-mono text-[10px] text-fg-tertiary tracking-[0.2em] uppercase">
+          [ SECTION 05 ]
+        </span>
+      </div>
+
+      <div className="w-[94%] max-w-6xl mx-auto flex flex-col">
+        <HomeProjectsV2 />
+      </div>
+
+      {/* 0. SUBTLE SECTION SEPARATOR WITH TINY [ SECTION 06 ] BADGE */}
+      <div className="relative w-[94%] max-w-6xl mx-auto flex items-center justify-center py-12 md:py-16">
+        <div className="w-full h-px bg-border-default/60" />
+        <span className="absolute bg-bg-default px-3 font-jetbrains-mono text-[10px] text-fg-tertiary tracking-[0.2em] uppercase">
+          [ SECTION 06 ]
+        </span>
+      </div>
+
+      <div className="w-[94%] max-w-6xl mx-auto flex flex-col pt-8">
+        <HomeContactV2 />
+      </div>
+    </div>
   );
-};
-
-export default Home;
+}
