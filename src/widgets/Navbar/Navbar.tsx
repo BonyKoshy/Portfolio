@@ -77,6 +77,30 @@ const Navbar = () => {
     }
   };
 
+  const handleCardNavClick = (href: string, e: React.MouseEvent) => {
+    setIsMobileMenuOpen(false);
+    setIsTerminalOpen(false);
+
+    if (href.includes("#")) {
+      const targetId = href.split("#")[1];
+      if (isHomePage && targetId) {
+        const targetElement = document.getElementById(targetId);
+        if (targetElement) {
+          e.preventDefault();
+          const navbarHeight = 100;
+          const elementPosition = targetElement.getBoundingClientRect().top;
+          const offsetPosition =
+            elementPosition + window.pageYOffset - navbarHeight;
+
+          window.scrollTo({
+            top: offsetPosition,
+            behavior: "smooth",
+          });
+        }
+      }
+    }
+  };
+
   return (
     <>
       {/* Non-blur solid/tinted backdrop */}
@@ -231,12 +255,14 @@ const Navbar = () => {
               <CardNav
                 isOpen={isMobileMenuOpen}
                 onClose={() => setIsMobileMenuOpen(false)}
+                onLinkClick={handleCardNavClick}
                 items={[
                   {
-                    label: "sys_logs//",
+                    label: "01 // SECTIONS",
                     bgColor: "var(--bg-default)",
                     textColor: "var(--fg-primary)",
                     links: [
+                      { label: "Overview", href: "/#hero" },
                       { label: "Expertise", href: "/#expertise" },
                       { label: "Credentials", href: "/#credentials" },
                       { label: "Experience", href: "/#experience" },
@@ -245,25 +271,28 @@ const Navbar = () => {
                     ],
                   },
                   {
-                    label: "deployments//",
+                    label: "02 // PAGES",
                     bgColor: "var(--bg-paper)",
                     textColor: "var(--fg-primary)",
                     links: [
-                      { label: "Certifications", href: "/certifications" },
-                      {
-                        label: "GitHub Repos",
-                        href: "https://github.com/BonyKoshy",
-                      },
+                      { label: "Projects Archive", href: "/projects" },
+                      { label: "Verified Credentials", href: "/certificates" },
+                      { label: "Privacy Policy", href: "/privacy" },
                     ],
                   },
                   {
-                    label: "network//",
+                    label: "03 // NETWORK",
                     bgColor: "var(--bg-surface)",
                     textColor: "var(--fg-primary)",
                     links: [
-                      { label: "Contact Form", href: "/contact" },
-                      { label: "LinkedIn", href: "https://linkedin.com" },
-                      { label: "Download Resume", href: "/resume.pdf" },
+                      {
+                        label: "GitHub Profile",
+                        href: "https://github.com/BonyKoshy",
+                      },
+                      {
+                        label: "LinkedIn Profile",
+                        href: "https://linkedin.com/in/bonykoshy",
+                      },
                     ],
                   },
                 ]}

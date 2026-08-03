@@ -4,7 +4,7 @@ import { ArrowUpRight } from "lucide-react";
 import { Link } from "react-router-dom";
 import "./CardNav.css";
 
-interface CardNavItem {
+export interface CardNavItem {
   label: string;
   bgColor: string;
   textColor: string;
@@ -15,6 +15,7 @@ interface CardNavProps {
   isOpen: boolean;
   items: CardNavItem[];
   onClose: () => void;
+  onLinkClick?: (href: string, e: React.MouseEvent) => void;
 }
 
 const containerVariants: Variants = {
@@ -53,7 +54,19 @@ const cardVariants: Variants = {
   },
 };
 
-const CardNav: React.FC<CardNavProps> = ({ isOpen, items, onClose }) => {
+const CardNav: React.FC<CardNavProps> = ({
+  isOpen,
+  items,
+  onClose,
+  onLinkClick,
+}) => {
+  const handleLinkClick = (href: string, e: React.MouseEvent) => {
+    onClose();
+    if (onLinkClick) {
+      onLinkClick(href, e);
+    }
+  };
+
   return (
     <AnimatePresence>
       {isOpen && (
@@ -73,24 +86,53 @@ const CardNav: React.FC<CardNavProps> = ({ isOpen, items, onClose }) => {
                 style={{ backgroundColor: item.bgColor, color: item.textColor }}
               >
                 <div
-                  className="nav-card-label"
+                  className="nav-card-label text-xs uppercase tracking-widest font-mono text-fg-tertiary"
                   style={{ fontFamily: '"JetBrains Mono", monospace' }}
                 >
                   {item.label}
                 </div>
                 <div className="nav-card-links">
-                  {item.links.map((lnk) => (
-                    <Link
-                      key={lnk.label}
-                      to={lnk.href}
-                      className="nav-card-link"
-                      onClick={onClose}
-                      style={{ fontFamily: '"JetBrains Mono", monospace' }}
-                    >
-                      <ArrowUpRight className="nav-card-link-icon" size={16} />
-                      {lnk.label}
-                    </Link>
-                  ))}
+                  {item.links.map((lnk) => {
+                    const isExternal =
+                      lnk.href.startsWith("http://") ||
+                      lnk.href.startsWith("https://");
+
+                    if (isExternal) {
+                      return (
+                        <a
+                          key={lnk.label}
+                          href={lnk.href}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="nav-card-link text-sm font-jetbrains-mono hover:text-primary transition-colors"
+                          onClick={onClose}
+                          style={{ fontFamily: '"JetBrains Mono", monospace' }}
+                        >
+                          <ArrowUpRight
+                            className="nav-card-link-icon"
+                            size={16}
+                          />
+                          {lnk.label}
+                        </a>
+                      );
+                    }
+
+                    return (
+                      <Link
+                        key={lnk.label}
+                        to={lnk.href}
+                        className="nav-card-link text-sm font-jetbrains-mono hover:text-primary transition-colors"
+                        onClick={(e) => handleLinkClick(lnk.href, e)}
+                        style={{ fontFamily: '"JetBrains Mono", monospace' }}
+                      >
+                        <ArrowUpRight
+                          className="nav-card-link-icon"
+                          size={16}
+                        />
+                        {lnk.label}
+                      </Link>
+                    );
+                  })}
                 </div>
               </motion.div>
             ))}
