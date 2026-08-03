@@ -9,35 +9,7 @@ import { FiGithub, FiLinkedin, FiMail, FiFileText } from "react-icons/fi";
 import { ChevronDown } from "lucide-react";
 import { useThemeTransition } from "@/shared/hooks/useThemeTransition";
 
-const SlideText = ({
-  text,
-  staggerDelay = 0.03,
-  staggerDuration = 0.4,
-}: {
-  text: string;
-  staggerDelay?: number;
-  staggerDuration?: number;
-}) => {
-  return (
-    <span className="inline-flex overflow-hidden relative">
-      {text.split("").map((char, i) => (
-        <motion.span
-          key={`${char}-${i}-${text}`}
-          initial={{ y: "100%" }}
-          animate={{ y: 0 }}
-          transition={{
-            duration: staggerDuration,
-            delay: i * staggerDelay,
-            ease: [0.33, 1, 0.68, 1],
-          }}
-          className="inline-block whitespace-pre"
-        >
-          {char}
-        </motion.span>
-      ))}
-    </span>
-  );
-};
+import { SlideText } from "@/shared/ui/SlideText";
 
 const Footer = () => {
   const [isExpanded, setIsExpanded] = useState(false);
@@ -69,7 +41,7 @@ const Footer = () => {
   ];
   const pathname = location.pathname.replace(/\/$/, "") || "/";
   const is404 = !validRoutes.includes(pathname);
-  const marginTopClass = is404 ? "mt-0" : "mt-32";
+  const marginTopClass = is404 ? "mt-0" : "mt-12 md:mt-16";
 
   return (
     <footer

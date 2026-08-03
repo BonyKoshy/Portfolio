@@ -2,6 +2,7 @@ import { useRef, useState } from "react";
 import { motion, useInView } from "framer-motion";
 import { ArrowUpRight, Send, CheckCircle2, Quote } from "lucide-react";
 import GlobeWireframe from "@/components/ui/globe-wireframe";
+import { SlideText } from "@/shared/ui/SlideText";
 
 export function HomeContactV2() {
   const containerRef = useRef<HTMLDivElement>(null);
@@ -242,15 +243,17 @@ export function HomeContactV2() {
               disabled={isSubmitting || isSuccess}
               className="w-full border border-border-default bg-bg-default text-fg-primary rounded-sm p-4 sm:p-5 font-jetbrains-mono text-sm tracking-widest uppercase transition-all duration-300 hover:border-primary hover:text-primary active:border-primary active:text-primary lg:hover:bg-primary/5 active:bg-primary/10 flex items-center justify-between group cursor-target disabled:opacity-70 disabled:cursor-not-allowed"
             >
-              <span>
-                {isSubmitting
-                  ? "SENDING..."
-                  : isSuccess
-                    ? "MESSAGE SENT"
-                    : submitError
-                      ? "ERROR SENDING"
-                      : "SEND MESSAGE"}
-              </span>
+              <SlideText
+                text={
+                  isSubmitting
+                    ? "SENDING..."
+                    : isSuccess
+                      ? "MESSAGE SENT"
+                      : submitError
+                        ? "ERROR SENDING"
+                        : "SEND MESSAGE"
+                }
+              />
               {isSuccess ? (
                 <CheckCircle2 className="w-4 h-4 sm:w-5 sm:h-5 text-green-500" />
               ) : (

@@ -225,7 +225,7 @@ const MobileLayout = () => {
         </div>
 
         {/* Vertical Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-1 w-full">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-4 sm:gap-6 md:gap-8 w-full">
           {certificates.map((cert) => (
             <div key={cert.id} className="w-full">
               <CertCard cert={cert} />

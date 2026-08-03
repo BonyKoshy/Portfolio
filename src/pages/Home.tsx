@@ -17,7 +17,7 @@ const HOME_TOC_ITEMS: TOCItem[] = [
 
 export default function Home() {
   return (
-    <div className="relative min-h-screen w-full bg-bg-default text-fg-primary overflow-x-hidden flex flex-col justify-start pt-0 md:pt-4 lg:pt-8 pb-24 md:pb-32">
+    <div className="relative min-h-screen w-full bg-bg-default text-fg-primary overflow-x-hidden flex flex-col justify-start pt-0 md:pt-4 lg:pt-8 pb-4 md:pb-6">
       {/* Floating Far-Left Table of Contents (Large Screens Only) */}
       <TableOfContents
         items={HOME_TOC_ITEMS}

@@ -74,75 +74,78 @@ export function HomeProjectsV2() {
               to={project.link}
               className="group/card relative w-full border border-border-default bg-bg-default rounded-sm overflow-hidden cursor-target transition-all duration-300 hover:border-fg-primary group-hover/grid:opacity-40 hover:!opacity-100"
             >
-              {/* MOBILE: Stacked layout */}
-              <div className="flex flex-col lg:hidden p-5 sm:p-6 gap-5">
-                {/* Padded Screenshot (16:9 ratio) - Image First */}
-                <div className="w-full p-2 bg-bg-surface/50 border border-border-default/60 rounded-sm">
-                  <div className="w-full aspect-[16/9] bg-bg-surface border border-border-default/40 rounded-xs overflow-hidden">
-                    <img
-                      src={project.image}
-                      alt={project.title}
-                      className="w-full h-full object-cover object-center opacity-80 transition-opacity duration-500 ease-out group-hover/card:opacity-100"
-                    />
+              {/* MOBILE / VERTICAL: Stacked layout with edge-to-edge top image */}
+              <div className="flex flex-col lg:hidden w-full">
+                {/* Full-width Image spanning end-to-end at starting of card */}
+                <div className="w-full aspect-[16/9] bg-bg-surface border-b border-border-default/60 overflow-hidden">
+                  <img
+                    src={project.image}
+                    alt={project.title}
+                    className="w-full h-full object-cover object-center opacity-85 transition-opacity duration-500 ease-out group-hover/card:opacity-100"
+                  />
+                </div>
+
+                {/* Card Content with Padding */}
+                <div className="flex flex-col p-5 sm:p-6 gap-5">
+                  {/* Number Row */}
+                  <div className="flex items-start justify-between">
+                    <div className="flex flex-col gap-1">
+                      <span className="font-sans text-3xl sm:text-4xl font-normal text-fg-primary group-hover/card:text-primary transition-colors leading-none">
+                        {project.number}
+                      </span>
+                      <span className="font-jetbrains-mono text-[9px] text-fg-tertiary uppercase tracking-widest">
+                        [ {project.status} ]
+                      </span>
+                    </div>
                   </div>
-                </div>
 
-                {/* Number Row */}
-                <div className="flex items-start justify-between">
-                  <div className="flex flex-col gap-1">
-                    <span className="font-sans text-3xl sm:text-4xl font-normal text-fg-primary group-hover/card:text-primary transition-colors leading-none">
-                      {project.number}
-                    </span>
-                    <span className="font-jetbrains-mono text-[9px] text-fg-tertiary uppercase tracking-widest">
-                      [ {project.status} ]
-                    </span>
+                  {/* Title + Description */}
+                  <div className="flex flex-col gap-2">
+                    <h3 className="font-sans text-lg sm:text-xl font-normal uppercase tracking-wide text-fg-primary">
+                      {project.title}
+                    </h3>
+                    <p className="font-jetbrains-mono text-[11px] sm:text-[12px] text-fg-secondary/80 leading-relaxed">
+                      {project.description}
+                    </p>
                   </div>
-                </div>
 
-                {/* Title + Description (No icon) */}
-                <div className="flex flex-col gap-2">
-                  <h3 className="font-sans text-lg sm:text-xl font-normal uppercase tracking-wide text-fg-primary">
-                    {project.title}
-                  </h3>
-                  <p className="font-jetbrains-mono text-[11px] sm:text-[12px] text-fg-secondary/80 leading-relaxed">
-                    {project.description}
-                  </p>
-                </div>
-
-                {/* Tech Stack */}
-                <div className="flex flex-col gap-2">
-                  <span className="font-jetbrains-mono text-[9px] text-fg-tertiary uppercase tracking-[0.2em] font-bold">
-                    Tech Stack
-                  </span>
-                  <div className="flex flex-wrap items-center gap-x-3 gap-y-1.5">
-                    {project.tech.map((t, i) => {
-                      const TechIcon = t.icon;
-                      return (
-                        <span
-                          key={t.name}
-                          className="inline-flex items-center gap-1.5"
-                        >
-                          {TechIcon && (
-                            <TechIcon className="w-3 h-3 text-fg-tertiary shrink-0" />
-                          )}
-                          <span className="font-jetbrains-mono text-[10px] text-fg-secondary uppercase tracking-wider">
-                            {t.name}
+                  {/* Tech Stack */}
+                  <div className="flex flex-col gap-2">
+                    <span className="font-jetbrains-mono text-[9px] text-fg-tertiary uppercase tracking-[0.2em] font-bold">
+                      Tech Stack
+                    </span>
+                    <div className="flex flex-wrap items-center gap-x-3 gap-y-1.5">
+                      {project.tech.map((t, i) => {
+                        const TechIcon = t.icon;
+                        return (
+                          <span
+                            key={t.name}
+                            className="inline-flex items-center gap-1.5"
+                          >
+                            {TechIcon && (
+                              <TechIcon className="w-3 h-3 text-fg-tertiary shrink-0" />
+                            )}
+                            <span className="font-jetbrains-mono text-[10px] text-fg-secondary uppercase tracking-wider">
+                              {t.name}
+                            </span>
+                            {i < project.tech.length - 1 && (
+                              <span className="text-fg-tertiary/40 ml-1">
+                                ·
+                              </span>
+                            )}
                           </span>
-                          {i < project.tech.length - 1 && (
-                            <span className="text-fg-tertiary/40 ml-1">·</span>
-                          )}
-                        </span>
-                      );
-                    })}
+                        );
+                      })}
+                    </div>
                   </div>
-                </div>
 
-                {/* Bottom Meta + Bottom Right Arrow */}
-                <div className="flex items-center justify-between pt-3 border-t border-border-default/40">
-                  <span className="font-jetbrains-mono text-[9px] text-fg-tertiary uppercase tracking-widest">
-                    ■ {project.projectId}
-                  </span>
-                  <ArrowRight className="w-4 h-4 text-fg-tertiary group-hover/card:text-primary transition-colors shrink-0" />
+                  {/* Bottom Meta + Arrow */}
+                  <div className="flex items-center justify-between pt-3 border-t border-border-default/40">
+                    <span className="font-jetbrains-mono text-[9px] text-fg-tertiary uppercase tracking-widest">
+                      ■ {project.projectId}
+                    </span>
+                    <ArrowRight className="w-4 h-4 text-fg-tertiary group-hover/card:text-primary transition-colors shrink-0" />
+                  </div>
                 </div>
               </div>
 
