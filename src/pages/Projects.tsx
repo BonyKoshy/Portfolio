@@ -1,9 +1,9 @@
 import { useState, useEffect } from "react";
 import { useLocation } from "react-router-dom";
-import { Meta } from "@/shared/ui/Meta/Meta";
-import { TableOfContents, TOCItem } from "@/shared/ui/TableOfContents";
-import { projectsData } from "@/entities/project/model/data";
-import { ProjectAccordion } from "@/widgets/ProjectArchive/ProjectAccordion";
+import { Meta } from "@/components/ui/Meta";
+import { TableOfContents, TOCItem } from "@/components/ui/TableOfContents";
+import { projectsData } from "@/lib/projectData";
+import { ProjectAccordion } from "@/components/sections/ProjectAccordion";
 
 const PROJECT_TOC_ITEMS: TOCItem[] = projectsData.map((project, idx) => ({
   id: project.id,

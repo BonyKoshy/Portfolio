@@ -1,10 +1,10 @@
-import { HomeHero } from "@/widgets/HomeHero";
-import { Expertise } from "@/widgets/Expertise";
-import { Credentials } from "@/widgets/Credentials";
-import { Experience } from "@/widgets/Experience";
-import { HomeProjects } from "@/widgets/HomeProjects";
-import { HomeContact } from "@/widgets/HomeContact";
-import { TableOfContents, TOCItem } from "@/shared/ui/TableOfContents";
+import { HomeHero } from "@/components/sections/HomeHero";
+import { Expertise } from "@/components/sections/Expertise";
+import { Credentials } from "@/components/sections/Credentials";
+import { Experience } from "@/components/sections/Experience";
+import { HomeProjects } from "@/components/sections/HomeProjects";
+import { HomeContact } from "@/components/sections/HomeContact";
+import { TableOfContents, TOCItem } from "@/components/ui/TableOfContents";
 
 const HOME_TOC_ITEMS: TOCItem[] = [
   { id: "hero", label: "01 // OVERVIEW" },

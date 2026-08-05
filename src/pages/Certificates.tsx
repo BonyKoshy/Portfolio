@@ -1,8 +1,8 @@
 import { useState, useEffect, useRef, useCallback } from "react";
 import { CheckCircle2, ArrowUpRight } from "lucide-react";
-import { certificates } from "@/entities/certificate/model/data";
-import { useBreakpoint } from "@/shared/lib/useBreakpoint";
-import { Footer } from "@/widgets/Footer";
+import { certificates } from "@/lib/certificateData";
+import { useBreakpoint } from "@/lib/useBreakpoint";
+import Footer from "@/components/layout/Footer";
 
 // ----------------------------------------------------------------------
 // Reusable Card Component
@@ -167,7 +167,7 @@ const DesktopLayout = () => {
         <span className="font-jetbrains-mono text-sm text-primary font-bold tracking-widest uppercase">
           03 // VERIFIED CREDENTIALS
         </span>
-        <h2 className="font-sans text-5xl md:text-6xl lg:text-7xl font-normal uppercase tracking-[-0.04em] -ml-[0.05em] text-fg-primary">
+        <h2 className="font-sans text-5xl md:text-6xl lg:text-7xl font-normal uppercase tracking-[-0.04em] ml-[-0.05em] text-fg-primary">
           CREDENTIALS
         </h2>
       </div>
@@ -176,12 +176,12 @@ const DesktopLayout = () => {
       <div className="relative flex-1 w-[94%] max-w-6xl mx-auto overflow-hidden">
         {/* Edge Fades */}
         <div
-          className={`pointer-events-none absolute inset-y-0 left-0 w-20 bg-gradient-to-r from-bg-default to-transparent z-10 transition-opacity duration-300 ${
+          className={`pointer-events-none absolute inset-y-0 left-0 w-20 bg-linear-to-r from-bg-default to-transparent z-10 transition-opacity duration-300 ${
             showLeftFade ? "opacity-100" : "opacity-0"
           }`}
         />
         <div
-          className={`pointer-events-none absolute inset-y-0 right-0 w-20 bg-gradient-to-l from-bg-default to-transparent z-10 transition-opacity duration-300 ${
+          className={`pointer-events-none absolute inset-y-0 right-0 w-20 bg-linear-to-l from-bg-default to-transparent z-10 transition-opacity duration-300 ${
             showRightFade ? "opacity-100" : "opacity-0"
           }`}
         />
@@ -219,7 +219,7 @@ const MobileLayout = () => {
           <span className="font-jetbrains-mono text-xs sm:text-sm text-primary font-bold tracking-widest uppercase">
             03 // VERIFIED CREDENTIALS
           </span>
-          <h2 className="font-sans text-4xl sm:text-5xl md:text-6xl font-normal uppercase tracking-[-0.04em] -ml-[0.05em] text-fg-primary">
+          <h2 className="font-sans text-4xl sm:text-5xl md:text-6xl font-normal uppercase tracking-[-0.04em] ml-[-0.05em] text-fg-primary">
             CREDENTIALS
           </h2>
         </div>

@@ -1,5 +1,5 @@
 import React from "react";
-import { Meta } from "@/shared/ui/Meta/Meta";
+import { Meta } from "@/components/ui/Meta";
 
 /** Renders the Privacy Policy legal document. */
 const PrivacyPolicy: React.FC = () => {
