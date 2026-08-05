@@ -151,7 +151,7 @@ export default function GlobeWireframe({
   variant = "wireframe",
   scale = 1,
   backgroundColor,
-  markerColor = "var(--primary)",
+  markerColor = "var(--accent-primary)",
   markerLocation,
 }: GlobeWireframeProps) {
   const svgRef = useRef<SVGSVGElement>(null);

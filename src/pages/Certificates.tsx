@@ -21,12 +21,12 @@ const CertCard = ({ cert }: { cert: any }) => (
     {/* Content */}
     <div className="flex flex-col p-4 sm:p-5 flex-1">
       <div className="flex items-center justify-between mb-3">
-        <span className="font-jetbrains-mono text-[10px] sm:text-[11px] font-bold text-fg-tertiary tracking-widest uppercase">
+        <span className="font-jetbrains-mono text-xs sm:text-xs font-bold text-fg-muted tracking-widest uppercase">
           {cert.issuer}
         </span>
-        <div className="flex items-center gap-1.5 text-green-500">
+        <div className="flex items-center gap-1.5 text-status-success">
           <CheckCircle2 className="w-3 h-3 sm:w-3.5 sm:h-3.5" />
-          <span className="font-jetbrains-mono text-[9px] sm:text-[10px] tracking-widest uppercase font-semibold">
+          <span className="font-jetbrains-mono text-xs sm:text-xs tracking-widest uppercase font-semibold">
             VERIFIED
           </span>
         </div>
@@ -36,24 +36,24 @@ const CertCard = ({ cert }: { cert: any }) => (
         {cert.title}
       </h3>
 
-      <div className="font-jetbrains-mono text-[9px] sm:text-[10px] text-fg-secondary/90 leading-relaxed mb-5">
+      <div className="font-jetbrains-mono text-xs sm:text-xs text-fg-muted leading-relaxed mb-5">
         {cert.description}
       </div>
 
       {/* Footer with Separator */}
       <div className="mt-auto flex flex-col pt-4 border-t border-border-default gap-4">
         <div className="flex items-center justify-between">
-          <span className="font-jetbrains-mono text-[10px] sm:text-[11px] text-fg-secondary/70 uppercase tracking-widest">
+          <span className="font-jetbrains-mono text-xs sm:text-xs text-fg-muted uppercase tracking-widest">
             {cert.date === "Ongoing" ? "ACTIVE" : cert.date}
           </span>
           <a
             href={cert.credentialUrl}
             target="_blank"
             rel="noopener noreferrer"
-            className="flex items-center text-fg-secondary hover:text-fg-primary transition-colors font-jetbrains-mono text-[10px] uppercase tracking-widest font-semibold group cursor-target"
+            className="flex items-center text-fg-secondary hover:text-fg-primary transition-colors font-jetbrains-mono text-xs uppercase tracking-widest font-semibold group cursor-target"
           >
             [ VIEW CREDENTIAL{" "}
-            <ArrowUpRight className="w-3 h-3 sm:w-3.5 sm:h-3.5 text-primary ml-1 mr-1" />{" "}
+            <ArrowUpRight className="w-3 h-3 sm:w-3.5 sm:h-3.5 text-accent-primary ml-1 mr-1" />{" "}
             ]
           </a>
         </div>
@@ -164,7 +164,7 @@ const DesktopLayout = () => {
     <div className="h-[calc(100vh-6rem)] flex flex-col overflow-hidden bg-bg-default">
       {/* STATIC: Header */}
       <div className="w-[94%] max-w-6xl mx-auto flex flex-col gap-2 pt-4 pb-6 shrink-0">
-        <span className="font-jetbrains-mono text-sm text-primary font-bold tracking-widest uppercase">
+        <span className="font-jetbrains-mono text-sm text-accent-primary font-bold tracking-widest uppercase">
           03 // VERIFIED CREDENTIALS
         </span>
         <h2 className="font-sans text-5xl md:text-6xl lg:text-7xl font-normal uppercase tracking-[-0.04em] ml-[-0.05em] text-fg-primary">
@@ -216,7 +216,7 @@ const MobileLayout = () => {
       <div className="w-[94%] md:max-w-4xl lg:max-w-6xl mx-auto flex flex-col shrink-0">
         {/* Header */}
         <div className="flex flex-col gap-2 w-full mb-10">
-          <span className="font-jetbrains-mono text-xs sm:text-sm text-primary font-bold tracking-widest uppercase">
+          <span className="font-jetbrains-mono text-xs sm:text-sm text-accent-primary font-bold tracking-widest uppercase">
             03 // VERIFIED CREDENTIALS
           </span>
           <h2 className="font-sans text-4xl sm:text-5xl md:text-6xl font-normal uppercase tracking-[-0.04em] ml-[-0.05em] text-fg-primary">

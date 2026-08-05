@@ -107,8 +107,8 @@ const Projects = () => {
               {/* SECTION SEPARATOR: CLIENT PROJECTS (Between 6 and 7) */}
               {isBeforeClient && (
                 <div className="relative w-full max-w-4xl ml-auto flex items-center justify-center py-12 md:py-16">
-                  <div className="w-full h-px bg-border-default/60" />
-                  <span className="absolute bg-bg-default px-3 font-jetbrains-mono text-[10px] text-fg-tertiary tracking-[0.2em] uppercase">
+                  <div className="w-full h-px bg-divider" />
+                  <span className="absolute bg-bg-default px-3 font-jetbrains-mono text-xs text-fg-muted tracking-[0.2em] uppercase">
                     [ CLIENT PROJECTS ]
                   </span>
                 </div>
@@ -117,8 +117,8 @@ const Projects = () => {
               {/* SECTION SEPARATOR: LEARNING (Between 8 and 9) */}
               {isBeforeLearning && (
                 <div className="relative w-full max-w-4xl ml-auto flex items-center justify-center py-12 md:py-16">
-                  <div className="w-full h-px bg-border-default/60" />
-                  <span className="absolute bg-bg-default px-3 font-jetbrains-mono text-[10px] text-fg-tertiary tracking-[0.2em] uppercase">
+                  <div className="w-full h-px bg-divider" />
+                  <span className="absolute bg-bg-default px-3 font-jetbrains-mono text-xs text-fg-muted tracking-[0.2em] uppercase">
                     [ LEARNING ]
                   </span>
                 </div>

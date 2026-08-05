@@ -29,8 +29,8 @@ export default function Home() {
 
       {/* 0. SUBTLE SECTION SEPARATOR WITH TINY [ SECTION 02 ] BADGE */}
       <div className="relative w-[94%] max-w-6xl mx-auto flex items-center justify-center py-12 md:py-16">
-        <div className="w-full h-px bg-border-default/60" />
-        <span className="absolute bg-bg-default px-3 font-jetbrains-mono text-[10px] text-fg-tertiary tracking-[0.2em] uppercase">
+        <div className="w-full h-px bg-divider" />
+        <span className="absolute bg-bg-default px-3 font-jetbrains-mono text-xs text-fg-muted tracking-[0.2em] uppercase">
           [ SECTION 02 ]
         </span>
       </div>
@@ -41,8 +41,8 @@ export default function Home() {
 
       {/* 0. SUBTLE SECTION SEPARATOR WITH TINY [ SECTION 03 ] BADGE */}
       <div className="relative w-[94%] max-w-6xl mx-auto flex items-center justify-center py-12 md:py-16">
-        <div className="w-full h-px bg-border-default/60" />
-        <span className="absolute bg-bg-default px-3 font-jetbrains-mono text-[10px] text-fg-tertiary tracking-[0.2em] uppercase">
+        <div className="w-full h-px bg-divider" />
+        <span className="absolute bg-bg-default px-3 font-jetbrains-mono text-xs text-fg-muted tracking-[0.2em] uppercase">
           [ SECTION 03 ]
         </span>
       </div>
@@ -53,8 +53,8 @@ export default function Home() {
 
       {/* 0. SUBTLE SECTION SEPARATOR WITH TINY [ SECTION 04 ] BADGE */}
       <div className="relative w-[94%] max-w-6xl mx-auto flex items-center justify-center py-12 md:py-16">
-        <div className="w-full h-px bg-border-default/60" />
-        <span className="absolute bg-bg-default px-3 font-jetbrains-mono text-[10px] text-fg-tertiary tracking-[0.2em] uppercase">
+        <div className="w-full h-px bg-divider" />
+        <span className="absolute bg-bg-default px-3 font-jetbrains-mono text-xs text-fg-muted tracking-[0.2em] uppercase">
           [ SECTION 04 ]
         </span>
       </div>
@@ -65,8 +65,8 @@ export default function Home() {
 
       {/* 0. SUBTLE SECTION SEPARATOR WITH TINY [ SECTION 05 ] BADGE */}
       <div className="relative w-[94%] max-w-6xl mx-auto flex items-center justify-center py-12 md:py-16">
-        <div className="w-full h-px bg-border-default/60" />
-        <span className="absolute bg-bg-default px-3 font-jetbrains-mono text-[10px] text-fg-tertiary tracking-[0.2em] uppercase">
+        <div className="w-full h-px bg-divider" />
+        <span className="absolute bg-bg-default px-3 font-jetbrains-mono text-xs text-fg-muted tracking-[0.2em] uppercase">
           [ SECTION 05 ]
         </span>
       </div>
@@ -77,8 +77,8 @@ export default function Home() {
 
       {/* 0. SUBTLE SECTION SEPARATOR WITH TINY [ SECTION 06 ] BADGE */}
       <div className="relative w-[94%] max-w-6xl mx-auto flex items-center justify-center py-12 md:py-16">
-        <div className="w-full h-px bg-border-default/60" />
-        <span className="absolute bg-bg-default px-3 font-jetbrains-mono text-[10px] text-fg-tertiary tracking-[0.2em] uppercase">
+        <div className="w-full h-px bg-divider" />
+        <span className="absolute bg-bg-default px-3 font-jetbrains-mono text-xs text-fg-muted tracking-[0.2em] uppercase">
           [ SECTION 06 ]
         </span>
       </div>

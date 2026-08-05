@@ -11,7 +11,7 @@ const secondaryButtonVariants = cva(
         default:
           "relative text-fg-secondary hover:text-fg-primary after:absolute after:left-0 after:bottom-0 after:h-px after:w-full after:origin-left after:scale-x-0 after:bg-current after:transition-transform after:duration-300 hover:after:scale-x-100 p-0",
         ghost:
-          "text-fg-secondary rounded-full hover:text-fg-primary hover:bg-action-hover p-2", // Optional, if needed for some contexts
+          "text-fg-secondary rounded-full hover:text-fg-primary hover:bg-selection p-2", // Optional, if needed for some contexts
       },
     },
     defaultVariants: {

@@ -57,7 +57,7 @@ export function HomeProjects() {
     >
       {/* 1. SECTION HEADER */}
       <div className="flex flex-col gap-2 w-full mb-8 sm:mb-10">
-        <span className="font-jetbrains-mono text-xs sm:text-sm text-primary font-bold tracking-widest uppercase">
+        <span className="font-jetbrains-mono text-xs sm:text-sm text-accent-primary font-bold tracking-widest uppercase">
           05 // ENGINEERING WORK
         </span>
         <h2 className="font-sans text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-normal uppercase tracking-[-0.04em] ml-[-0.05em] text-fg-primary">
@@ -77,7 +77,7 @@ export function HomeProjects() {
               {/* MOBILE / VERTICAL: Stacked layout with edge-to-edge top image */}
               <div className="flex flex-col lg:hidden w-full">
                 {/* Full-width Image spanning end-to-end at starting of card */}
-                <div className="w-full aspect-video bg-bg-surface border-b border-border-default/60 overflow-hidden">
+                <div className="w-full aspect-video bg-bg-surface border-b border-border-subtle overflow-hidden">
                   <img
                     src={project.image}
                     alt={project.title}
@@ -90,10 +90,10 @@ export function HomeProjects() {
                   {/* Number Row */}
                   <div className="flex items-start justify-between">
                     <div className="flex flex-col gap-1">
-                      <span className="font-sans text-3xl sm:text-4xl font-normal text-fg-primary group-hover/card:text-primary transition-colors leading-none">
+                      <span className="font-sans text-3xl sm:text-4xl font-normal text-fg-primary group-hover/card:text-accent-primary transition-colors leading-none">
                         {project.number}
                       </span>
-                      <span className="font-jetbrains-mono text-[9px] text-fg-tertiary uppercase tracking-widest">
+                      <span className="font-jetbrains-mono text-xs text-fg-muted uppercase tracking-widest">
                         [ {project.status} ]
                       </span>
                     </div>
@@ -104,14 +104,14 @@ export function HomeProjects() {
                     <h3 className="font-sans text-lg sm:text-xl font-normal uppercase tracking-wide text-fg-primary">
                       {project.title}
                     </h3>
-                    <p className="font-jetbrains-mono text-[11px] sm:text-[12px] text-fg-secondary/80 leading-relaxed">
+                    <p className="font-jetbrains-mono text-xs sm:text-[12px] text-fg-muted leading-relaxed">
                       {project.description}
                     </p>
                   </div>
 
                   {/* Tech Stack */}
                   <div className="flex flex-col gap-2">
-                    <span className="font-jetbrains-mono text-[9px] text-fg-tertiary uppercase tracking-[0.2em] font-bold">
+                    <span className="font-jetbrains-mono text-xs text-fg-muted uppercase tracking-[0.2em] font-bold">
                       Tech Stack
                     </span>
                     <div className="flex flex-wrap items-center gap-x-3 gap-y-1.5">
@@ -123,15 +123,13 @@ export function HomeProjects() {
                             className="inline-flex items-center gap-1.5"
                           >
                             {TechIcon && (
-                              <TechIcon className="w-3 h-3 text-fg-tertiary shrink-0" />
+                              <TechIcon className="w-3 h-3 text-fg-muted shrink-0" />
                             )}
-                            <span className="font-jetbrains-mono text-[10px] text-fg-secondary uppercase tracking-wider">
+                            <span className="font-jetbrains-mono text-xs text-fg-secondary uppercase tracking-wider">
                               {t.name}
                             </span>
                             {i < project.tech.length - 1 && (
-                              <span className="text-fg-tertiary/40 ml-1">
-                                ·
-                              </span>
+                              <span className="text-fg-muted/40 ml-1">·</span>
                             )}
                           </span>
                         );
@@ -140,11 +138,11 @@ export function HomeProjects() {
                   </div>
 
                   {/* Bottom Meta + Arrow */}
-                  <div className="flex items-center justify-between pt-3 border-t border-border-default/40">
-                    <span className="font-jetbrains-mono text-[9px] text-fg-tertiary uppercase tracking-widest">
+                  <div className="flex items-center justify-between pt-3 border-t border-border-subtle">
+                    <span className="font-jetbrains-mono text-xs text-fg-muted uppercase tracking-widest">
                       ■ {project.projectId}
                     </span>
-                    <ArrowRight className="w-4 h-4 text-fg-tertiary group-hover/card:text-primary transition-colors shrink-0" />
+                    <ArrowRight className="w-4 h-4 text-fg-muted group-hover/card:text-accent-primary transition-colors shrink-0" />
                   </div>
                 </div>
               </div>
@@ -154,26 +152,26 @@ export function HomeProjects() {
                 {/* Column 1: Number on top end, ■ PRJ & [ Completed ] on bottom end */}
                 <div className="w-30 xl:w-35 shrink-0 flex flex-col justify-between items-center text-center p-6">
                   <div className="flex flex-col items-center">
-                    <span className="font-sans text-4xl xl:text-5xl font-normal text-fg-primary group-hover/card:text-primary transition-colors leading-none">
+                    <span className="font-sans text-4xl xl:text-5xl font-normal text-fg-primary group-hover/card:text-accent-primary transition-colors leading-none">
                       {project.number}
                     </span>
                   </div>
                   <div className="flex flex-col items-center gap-1 mt-auto">
-                    <span className="font-jetbrains-mono text-[9px] text-fg-tertiary uppercase tracking-widest whitespace-nowrap">
+                    <span className="font-jetbrains-mono text-xs text-fg-muted uppercase tracking-widest whitespace-nowrap">
                       ■ {project.projectId}
                     </span>
-                    <span className="font-jetbrains-mono text-[9px] text-fg-tertiary uppercase tracking-widest whitespace-nowrap">
+                    <span className="font-jetbrains-mono text-xs text-fg-muted uppercase tracking-widest whitespace-nowrap">
                       [ {project.status} ]
                     </span>
                   </div>
                 </div>
 
                 {/* Vertical Separator 1 (inset) */}
-                <div className="w-px bg-border-default/60 my-4 xl:my-5 shrink-0" />
+                <div className="w-px bg-divider my-4 xl:my-5 shrink-0" />
 
                 {/* Column 2: Inset Screenshot (16:9 ratio) with Padding */}
                 <div className="w-65 xl:w-75 shrink-0 p-3.5 xl:p-4 flex items-center justify-center">
-                  <div className="w-full aspect-video bg-bg-surface border border-border-default/60 rounded-sm overflow-hidden relative">
+                  <div className="w-full aspect-video bg-bg-surface border border-border-subtle rounded-sm overflow-hidden relative">
                     <img
                       src={project.image}
                       alt={project.title}
@@ -183,7 +181,7 @@ export function HomeProjects() {
                 </div>
 
                 {/* Vertical Separator 2 (inset) */}
-                <div className="w-px bg-border-default/60 my-4 xl:my-5 shrink-0" />
+                <div className="w-px bg-divider my-4 xl:my-5 shrink-0" />
 
                 {/* Column 3: Title, Description, and Bottom Horizontal Tech Stack */}
                 <div className="flex-1 p-6 xl:p-8 flex flex-col justify-between">
@@ -191,13 +189,13 @@ export function HomeProjects() {
                     <h3 className="font-sans text-xl xl:text-2xl font-normal uppercase tracking-wide text-fg-primary">
                       {project.title}
                     </h3>
-                    <p className="font-jetbrains-mono text-[11px] xl:text-[12px] text-fg-secondary/80 leading-relaxed">
+                    <p className="font-jetbrains-mono text-xs xl:text-[12px] text-fg-muted leading-relaxed">
                       {project.description}
                     </p>
                   </div>
 
                   {/* Horizontal Tech Stack at bottom end of Column 3 */}
-                  <div className="flex items-center gap-x-3 gap-y-1.5 flex-wrap pt-4 border-t border-border-default/40 mt-auto">
+                  <div className="flex items-center gap-x-3 gap-y-1.5 flex-wrap pt-4 border-t border-border-subtle mt-auto">
                     {project.tech.map((t, i) => {
                       const TechIcon = t.icon;
                       return (
@@ -206,13 +204,13 @@ export function HomeProjects() {
                           className="inline-flex items-center gap-1.5"
                         >
                           {TechIcon && (
-                            <TechIcon className="w-3 h-3 text-fg-tertiary shrink-0" />
+                            <TechIcon className="w-3 h-3 text-fg-muted shrink-0" />
                           )}
-                          <span className="font-jetbrains-mono text-[10px] text-fg-secondary uppercase tracking-wider">
+                          <span className="font-jetbrains-mono text-xs text-fg-secondary uppercase tracking-wider">
                             {t.name}
                           </span>
                           {i < project.tech.length - 1 && (
-                            <span className="text-fg-tertiary/40 ml-1">·</span>
+                            <span className="text-fg-muted/40 ml-1">·</span>
                           )}
                         </span>
                       );
@@ -221,11 +219,11 @@ export function HomeProjects() {
                 </div>
 
                 {/* Vertical Separator 3 (inset) */}
-                <div className="w-px bg-border-default/60 my-4 xl:my-5 shrink-0" />
+                <div className="w-px bg-divider my-4 xl:my-5 shrink-0" />
 
                 {/* Column 4: Centered Arrow (accent on hover) */}
                 <div className="w-12 xl:w-14 shrink-0 flex items-center justify-center">
-                  <ArrowRight className="w-4 h-4 text-fg-tertiary group-hover/card:text-primary transition-colors shrink-0" />
+                  <ArrowRight className="w-4 h-4 text-fg-muted group-hover/card:text-accent-primary transition-colors shrink-0" />
                 </div>
               </div>
             </Link>
@@ -237,10 +235,10 @@ export function HomeProjects() {
       <div className="w-full flex justify-end mt-4 sm:mt-5">
         <Link
           to="/projects"
-          className="flex items-center text-fg-secondary hover:text-fg-primary transition-colors cursor-pointer cursor-target font-jetbrains-mono text-[10px] lg:text-[11px] font-semibold tracking-wider uppercase group px-2 py-1"
+          className="flex items-center text-fg-secondary hover:text-fg-primary transition-colors cursor-pointer cursor-target font-jetbrains-mono text-xs lg:text-xs font-semibold tracking-wider uppercase group px-2 py-1"
         >
           [ BROWSE PROJECT ARCHIVE{" "}
-          <span className="text-primary font-jetbrains-mono ml-1 mr-1">
+          <span className="text-accent-primary font-jetbrains-mono ml-1 mr-1">
             &gt;
           </span>{" "}
           ]

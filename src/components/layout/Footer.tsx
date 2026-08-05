@@ -54,7 +54,7 @@ const Footer = () => {
         <div className="h-px bg-border-default flex-1"></div>
         <button
           onClick={() => setIsExpanded(!isExpanded)}
-          className="flex items-center gap-2 text-[10px] lg:text-[11px] uppercase tracking-wider text-fg-secondary hover:text-fg-primary transition-colors cursor-target focus:outline-none"
+          className="flex items-center gap-2 text-xs lg:text-xs uppercase tracking-wider text-fg-secondary hover:text-fg-primary transition-colors cursor-target focus:outline-none"
           style={{ fontFamily: '"JetBrains Mono", monospace' }}
         >
           [ /QUICK LINKS ]
@@ -117,14 +117,14 @@ const Footer = () => {
       <div className="w-full pt-6 pb-8 flex flex-col md:flex-row justify-between items-center gap-4">
         {/* Left Side (Identity) */}
         <div className="flex items-center gap-4">
-          <span className="text-xs text-fg-tertiary">
+          <span className="text-xs text-fg-muted">
             SYS_BK // BONY KOSHY © {new Date().getFullYear() || "2026"}
           </span>
           <div className="flex items-center gap-2">
             <span className="text-fg-secondary text-xs">STATUS: ONLINE</span>
             <div className="relative flex h-2 w-2">
-              <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-primary opacity-75"></span>
-              <span className="relative inline-flex rounded-full h-2 w-2 bg-primary"></span>
+              <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-accent-primary opacity-75"></span>
+              <span className="relative inline-flex rounded-full h-2 w-2 bg-accent-primary"></span>
             </div>
           </div>
         </div>
@@ -133,7 +133,7 @@ const Footer = () => {
         <div className="flex items-center gap-6">
           <Link
             to="/privacy"
-            className="text-xs text-fg-tertiary hover:text-fg-secondary cursor-target transition-colors focus:outline-none"
+            className="text-xs text-fg-muted hover:text-fg-secondary cursor-target transition-colors focus:outline-none"
           >
             [ PRIVACY.TXT ]
           </Link>
@@ -144,7 +144,7 @@ const Footer = () => {
                 <button
                   ref={buttonRef}
                   onClick={handleThemeToggle}
-                  className="group relative flex items-center text-xs text-fg-tertiary hover:text-fg-secondary cursor-target transition-colors focus:outline-none"
+                  className="group relative flex items-center text-xs text-fg-muted hover:text-fg-secondary cursor-target transition-colors focus:outline-none"
                 >
                   <span>[ THEME:&nbsp;</span>
                   <div className="w-9.5 flex justify-start">
@@ -165,7 +165,7 @@ const Footer = () => {
             <button
               ref={buttonRef}
               onClick={handleThemeToggle}
-              className="group relative flex items-center text-xs text-fg-tertiary hover:text-fg-secondary cursor-target transition-colors focus:outline-none"
+              className="group relative flex items-center text-xs text-fg-muted hover:text-fg-secondary cursor-target transition-colors focus:outline-none"
             >
               <span>[ THEME:&nbsp;</span>
               <div className="w-9.5 flex justify-start">

@@ -107,8 +107,8 @@ export function TableOfContents({
                 width: isHovered ? 24 : isCurrent ? 20 : 14,
                 backgroundColor:
                   isHovered || isCurrent
-                    ? "var(--color-fg-primary, #ffffff)"
-                    : "var(--color-fg-secondary, #888888)",
+                    ? "var(--color-fg-primary, var(--accent-primary))"
+                    : "var(--color-fg-secondary, var(--fg-muted))",
                 opacity: isHovered || isCurrent ? 1 : 0.6,
               }}
               transition={{ type: "spring", stiffness: 400, damping: 25 }}
@@ -118,10 +118,10 @@ export function TableOfContents({
             {showLabels && (
               <span
                 className={cn(
-                  "font-jetbrains-mono text-[10px] uppercase tracking-wider transition-colors whitespace-nowrap ml-2",
+                  "font-jetbrains-mono text-xs uppercase tracking-wider transition-colors whitespace-nowrap ml-2",
                   isCurrent || isHovered
                     ? "text-fg-primary font-semibold"
-                    : "text-fg-tertiary/70 group-hover:text-fg-secondary"
+                    : "text-fg-muted/70 group-hover:text-fg-secondary"
                 )}
               >
                 <span>{indexText}</span>

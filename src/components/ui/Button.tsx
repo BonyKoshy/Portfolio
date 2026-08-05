@@ -9,11 +9,11 @@ const buttonVariants = cva(
     variants: {
       variant: {
         primary:
-          "bg-primary text-primary-fg rounded-full hover:bg-primary-hover",
+          "bg-accent-primary text-accent-fg rounded-full hover:bg-accent-hover",
         underline:
           "relative text-fg-secondary hover:text-fg-primary after:absolute after:left-0 after:-bottom-1 after:h-px after:w-full after:origin-left after:scale-x-0 after:bg-current after:transition-transform after:duration-300 hover:after:scale-x-100 p-0",
         ghost:
-          "text-fg-secondary rounded-full hover:text-fg-primary hover:bg-action-hover",
+          "text-fg-secondary rounded-full hover:text-fg-primary hover:bg-selection",
         outline:
           "border border-input bg-background rounded-full hover:bg-accent hover:text-accent-foreground", // Added for Calendar compatibility if needed, though mostly ghost used
       },

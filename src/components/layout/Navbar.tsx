@@ -66,19 +66,21 @@ const Navbar = () => {
     setIsTerminalOpen(false);
 
     if (isHomePage && link.id) {
-      const targetElement = document.getElementById(link.id);
-      if (targetElement) {
-        e.preventDefault();
-        const navbarHeight = 100; // Account for floating navbar height & padding
-        const elementPosition = targetElement.getBoundingClientRect().top;
-        const offsetPosition =
-          elementPosition + window.pageYOffset - navbarHeight;
+      e.preventDefault();
+      setTimeout(() => {
+        const targetElement = document.getElementById(link.id);
+        if (targetElement) {
+          const navbarHeight = 100; // Account for floating navbar height & padding
+          const elementPosition = targetElement.getBoundingClientRect().top;
+          const offsetPosition =
+            elementPosition + window.pageYOffset - navbarHeight;
 
-        window.scrollTo({
-          top: offsetPosition,
-          behavior: "smooth",
-        });
-      }
+          window.scrollTo({
+            top: offsetPosition,
+            behavior: "smooth",
+          });
+        }
+      }, 50);
     }
   };
 
@@ -96,7 +98,7 @@ const Navbar = () => {
               setIsTerminalOpen(false);
               setIsMobileMenuOpen(false);
             }}
-            className="fixed inset-0 z-40 bg-bg-default/90"
+            className="fixed inset-0 z-40 bg-bg-overlay"
           />
         )}
       </AnimatePresence>
@@ -109,7 +111,7 @@ const Navbar = () => {
         <div className="w-[94%] max-w-6xl mx-auto flex justify-end">
           <nav
             className={cn(
-              "pointer-events-auto bg-bg-default/95 backdrop-blur-xl border border-border-default rounded-sm overflow-hidden flex flex-col transition-all duration-300",
+              "pointer-events-auto bg-bg-overlay backdrop-blur-xl border border-border-default rounded-sm overflow-hidden flex flex-col transition-all duration-300",
               isProjectsPage ? "w-full max-w-4xl" : "w-full max-w-6xl"
             )}
             style={{ fontFamily: '"Inter", sans-serif' }}
@@ -154,9 +156,9 @@ const Navbar = () => {
                     >
                       <ArrowLeft
                         size={20}
-                        className="transition-transform group-hover:-translate-x-1 text-primary"
+                        className="transition-transform group-hover:-translate-x-1 text-accent-primary"
                       />
-                      <span className="hidden sm:inline-block text-[10px] tracking-wider font-mono uppercase text-fg-secondary group-hover:text-fg-primary transition-colors">
+                      <span className="hidden sm:inline-block text-xs tracking-wider font-mono uppercase text-fg-secondary group-hover:text-fg-primary transition-colors">
                         [ Back ]
                       </span>
                     </button>
@@ -187,7 +189,7 @@ const Navbar = () => {
                             key={link.name}
                             to={link.path}
                             onClick={(e) => handleNavClick(link, e)}
-                            className="text-fg-secondary text-[10px] lg:text-[11px] tracking-wider hover:text-fg-primary transition-colors cursor-target"
+                            className="text-fg-secondary text-xs lg:text-xs tracking-wider hover:text-fg-primary transition-colors cursor-target"
                             style={{
                               fontFamily: '"JetBrains Mono", monospace',
                             }}
@@ -198,7 +200,7 @@ const Navbar = () => {
                       </div>
                     </>
                   ) : (
-                    <span className="text-fg-primary text-[11px] sm:text-xs uppercase tracking-widest block font-mono">
+                    <span className="text-fg-primary text-xs sm:text-xs uppercase tracking-widest block font-mono">
                       {getPathLabel(location.pathname)}
                     </span>
                   )}
@@ -210,11 +212,11 @@ const Navbar = () => {
                     <TooltipTrigger asChild>
                       <button
                         onClick={toggleTerminal}
-                        className={`flex items-center gap-2 cursor-target px-3 py-1.5 rounded-full transition-colors ${isTerminalOpen ? "bg-bg-surface text-primary" : "hover:bg-bg-surface"}`}
+                        className={`flex items-center gap-2 cursor-target px-3 py-1.5 rounded-full transition-colors ${isTerminalOpen ? "bg-bg-surface text-accent-primary" : "hover:bg-bg-surface"}`}
                       >
-                        <Terminal size={18} className="text-primary" />
+                        <Terminal size={18} className="text-accent-primary" />
                         <span
-                          className="hidden sm:inline-block text-fg-primary text-[10px] sm:text-xs uppercase tracking-widest"
+                          className="hidden sm:inline-block text-fg-primary text-xs sm:text-xs uppercase tracking-widest"
                           style={{ fontFamily: '"JetBrains Mono", monospace' }}
                         >
                           Terminal
@@ -236,24 +238,30 @@ const Navbar = () => {
               <CardNav
                 isOpen={isMobileMenuOpen}
                 onClose={() => setIsMobileMenuOpen(false)}
+                onLinkClick={(href, e) => {
+                  const id = href.startsWith("/#")
+                    ? href.replace("/#", "")
+                    : "";
+                  handleNavClick({ name: "", path: href, id }, e);
+                }}
                 items={[
                   {
                     label: "sys_logs//",
                     bgColor: "var(--bg-default)",
                     textColor: "var(--fg-primary)",
                     links: [
+                      { label: "Overview", href: "/#hero" },
                       { label: "Expertise", href: "/#expertise" },
-                      { label: "Credentials", href: "/#credentials" },
                       { label: "Experience", href: "/#experience" },
                     ],
                   },
                   {
                     label: "deployments//",
-                    bgColor: "var(--bg-paper)",
+                    bgColor: "var(--bg-elevated)",
                     textColor: "var(--fg-primary)",
                     links: [
-                      { label: "Projects", href: "/projects" },
-                      { label: "Certificates", href: "/certificates" },
+                      { label: "Projects", href: "/#projects" },
+                      { label: "Credentials", href: "/#credentials" },
                       {
                         label: "GitHub Repos",
                         href: "https://github.com/BonyKoshy",

@@ -9,72 +9,101 @@
   --font-sans: "Archivo Black", sans-serif;
   --font-display: "Archivo Black", sans-serif;
 
-  /* Sync ring color with primary for consistent focus rings */
-  --ring: var(--primary);
-
   /* Fallback values (handled by data-theme overrides below) */
-  --bg-default: #ffffff;
-  --fg-primary: #18181b;
-  --radius-card: 2px; /* Consistent sharp card radius */
-  --radius-button: 2px; /* Sharp pill shape */
+  --radius-card: 2px;
+  --radius-button: 2px;
 }
 
-/* Light Theme Variables (Clean Room) */
+@theme {
+  /* ─── BASE GRAYS (ZINC) ──────────────────────────────────────────────── */
+  --gray-50: #fafafa;
+  --gray-100: #f4f4f5;
+  --gray-200: #e4e4e7;
+  --gray-300: #d4d4d8;
+  --gray-400: #a1a1aa;
+  --gray-500: #71717a;
+  --gray-600: #52525b;
+  --gray-700: #3f3f46;
+  --gray-800: #27272a;
+  --gray-900: #18181b;
+  --gray-950: #09090b;
+
+  /* ─── BRAND ACCENT ───────────────────────────────────────────────────── */
+  --accent-base: #6e56cf; /* Premium Editorial Indigo */
+  --accent-light: #8b7cde; /* Legible Dark Mode Text */
+  --accent-dark: #5746af; /* Hover state Light Mode */
+}
+
+/* Light Theme Variables */
 html[data-theme="light"] {
   /* Backgrounds */
-  --bg-default: #fafafa;
-  --bg-paper: #ffffff;
-  --bg-surface: #e4e4e7;
-  --bg-subtle: #f4f4f5;
-  --bg-tertiary: #d4d4d8;
-
-  /* Text / Foreground */
-  --fg-primary: #18181b;
-  --fg-secondary: #71717a;
-  --fg-tertiary: #a1a1aa;
+  --bg-default: var(--gray-50);
+  --bg-surface: var(--gray-100);
+  --bg-elevated: #ffffff;
+  --bg-overlay: rgba(250, 250, 250, 0.95);
 
   /* Borders */
-  --border-default: #e4e4e7;
-  --border-subtle: #d4d4d8;
+  --border-default: var(--gray-200);
+  --border-strong: var(--gray-300);
+  --border-subtle: var(--gray-200);
+  --divider: var(--gray-200);
 
-  /* Action / Brand */
-  --primary: #7c3aed;
-  --primary-fg: #ffffff;
-  --primary-hover: #6d28d9;
+  /* Typography */
+  --fg-primary: var(--gray-950);
+  --fg-secondary: var(--gray-600);
+  --fg-muted: var(--gray-500);
+
+  /* Interactive / Brand */
+  --accent-primary: var(--accent-base);
+  --accent-hover: var(--accent-dark);
+  --accent-fg: #ffffff;
+  --accent-glow: rgba(110, 86, 207, 0.15);
+
+  /* Status */
+  --status-success: #059669;
+  --status-warning: #f59e0b;
+  --status-danger: #ef4444;
 
   /* UI States */
-  --action-hover: rgba(124, 58, 237, 0.1);
-  --overlay: rgba(255, 255, 255, 0.8);
-  --focus-ring-color: #7c3aed;
+  --selection: rgba(110, 86, 207, 0.15);
+  --focus-ring: var(--accent-base);
+  --ring: var(--accent-base);
 }
 
-/* Dark Theme Variables (Cold Aisle) */
+/* Dark Theme Variables */
 html[data-theme="dark"] {
   /* Backgrounds */
-  --bg-default: #09090b;
-  --bg-paper: #18181b;
-  --bg-surface: #27272a;
-  --bg-subtle: #1f1f22;
-  --bg-tertiary: #3f3f46;
-
-  /* Text / Foreground */
-  --fg-primary: #fafafa;
-  --fg-secondary: #a1a1aa;
-  --fg-tertiary: #71717a;
+  --bg-default: var(--gray-950);
+  --bg-surface: var(--gray-900);
+  --bg-elevated: var(--gray-800);
+  --bg-overlay: rgba(9, 9, 11, 0.95);
 
   /* Borders */
-  --border-default: #27272a;
-  --border-subtle: #3f3f46;
+  --border-default: var(--gray-800);
+  --border-strong: var(--gray-700);
+  --border-subtle: var(--gray-800);
+  --divider: var(--gray-800);
 
-  /* Action / Brand */
-  --primary: #7c3aed;
-  --primary-fg: #ffffff;
-  --primary-hover: #8b5cf6;
+  /* Typography */
+  --fg-primary: var(--gray-50);
+  --fg-secondary: var(--gray-300);
+  --fg-muted: var(--gray-400);
+
+  /* Interactive / Brand */
+  --accent-primary: var(--accent-light);
+  --accent-hover: var(--accent-base);
+  --accent-fg: #ffffff;
+  --accent-glow: rgba(139, 124, 222, 0.15);
+
+  /* Status */
+  --status-success: #10b981;
+  --status-warning: #f59e0b;
+  --status-danger: #ef4444;
 
   /* UI States */
-  --action-hover: rgba(124, 58, 237, 0.1);
-  --overlay: rgba(0, 0, 0, 0.8);
-  --focus-ring-color: #7c3aed;
+  --selection: rgba(139, 124, 222, 0.25);
+  --focus-ring: var(--accent-light);
+  --ring: var(--accent-light);
 }
 
 /* 2. Tailwind Configuration (Theme-aware) */
@@ -116,23 +145,29 @@ html[data-theme="dark"] {
   /* Map Tailwind classes to our CSS variables */
 
   --color-bg-default: var(--bg-default);
-  --color-bg-paper: var(--bg-paper);
   --color-bg-surface: var(--bg-surface);
-  --color-bg-subtle: var(--bg-subtle);
-  --color-bg-tertiary: var(--bg-tertiary);
+  --color-bg-elevated: var(--bg-elevated);
+  --color-bg-overlay: var(--bg-overlay);
 
   --color-fg-primary: var(--fg-primary);
   --color-fg-secondary: var(--fg-secondary);
-  --color-fg-tertiary: var(--fg-tertiary);
+  --color-fg-muted: var(--fg-muted);
 
   --color-border-default: var(--border-default);
+  --color-border-strong: var(--border-strong);
   --color-border-subtle: var(--border-subtle);
+  --color-divider: var(--divider);
 
-  --color-primary: var(--primary);
-  --color-primary-fg: var(--primary-fg);
-  --color-primary-hover: var(--primary-hover);
+  --color-accent-primary: var(--accent-primary);
+  --color-accent-hover: var(--accent-hover);
+  --color-accent-fg: var(--accent-fg);
+  --color-accent-glow: var(--accent-glow);
 
-  --color-action-hover: var(--action-hover);
+  --color-status-success: var(--status-success);
+  --color-status-warning: var(--status-warning);
+  --color-status-danger: var(--status-danger);
+
+  --color-selection: var(--selection);
 
   /* Animations (Preserved from your original file) */
 

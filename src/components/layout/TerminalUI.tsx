@@ -178,7 +178,7 @@ const TerminalUI: React.FC<TerminalUIProps> = ({ isOpen, onClose }) => {
   };
 
   const bootSequence = (
-    <pre className="text-fg-tertiary text-[10px] sm:text-xs leading-none font-mono">
+    <pre className="text-fg-muted text-xs sm:text-xs leading-none font-mono">
       {`   _____ __  __ _____      ____   __ __
   / ___/ \\ \\/ // ___/     / __ ) / //_/
   \\__ \\   \\  / \\__ \\     / __  |/ ,<   
@@ -545,14 +545,14 @@ Type 'help' to see available commands.`}
           {/* Terminal Header */}
           <div className="flex items-center justify-between px-4 py-2 bg-bg-surface border-b border-border-subtle shrink-0">
             <div className="flex items-center gap-2">
-              <TerminalIcon size={14} className="text-primary" />
-              <span className="text-[10px] text-fg-secondary uppercase tracking-widest">
+              <TerminalIcon size={14} className="text-accent-primary" />
+              <span className="text-xs text-fg-secondary uppercase tracking-widest">
                 System.Terminal
               </span>
             </div>
             <button
               onClick={onClose}
-              className="text-fg-tertiary hover:text-fg-primary transition-colors cursor-target focus:outline-none text-xs"
+              className="text-fg-muted hover:text-fg-primary transition-colors cursor-target focus:outline-none text-xs"
             >
               [ EXIT ]
             </button>
@@ -568,7 +568,7 @@ Type 'help' to see available commands.`}
                 <div key={i} className="flex flex-col gap-1">
                   {entry.command && (
                     <div className="flex items-start gap-2">
-                      <span className="text-primary shrink-0">
+                      <span className="text-accent-primary shrink-0">
                         guest@sys_bk:~$
                       </span>
                       <span className="text-fg-primary break-all">
@@ -592,12 +592,14 @@ Type 'help' to see available commands.`}
             {/* Active Input Line */}
             {!isTyping && (
               <div className="flex items-center gap-2 mt-1 text-sm sm:text-base">
-                <span className="text-primary shrink-0">guest@sys_bk:~$</span>
+                <span className="text-accent-primary shrink-0">
+                  guest@sys_bk:~$
+                </span>
 
                 <div className="relative flex-1 flex items-center min-h-6">
                   {/* Ghost Text Overlay */}
                   {suggestion && input && (
-                    <div className="absolute inset-0 flex items-center pointer-events-none whitespace-pre text-fg-tertiary">
+                    <div className="absolute inset-0 flex items-center pointer-events-none whitespace-pre text-fg-muted">
                       <span className="text-transparent">{input}</span>
                       <span>{suggestion.slice(input.length)}</span>
                     </div>

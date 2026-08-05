@@ -99,7 +99,7 @@ export function HomeContact() {
     >
       {/* 1. SECTION HEADER */}
       <div className="flex flex-col gap-2 w-full mb-12 sm:mb-16">
-        <span className="font-jetbrains-mono text-xs sm:text-sm text-primary font-bold tracking-widest uppercase">
+        <span className="font-jetbrains-mono text-xs sm:text-sm text-accent-primary font-bold tracking-widest uppercase">
           06 // GET IN TOUCH
         </span>
         <div className="flex flex-col md:flex-row md:items-end justify-between gap-4 md:gap-8">
@@ -108,11 +108,11 @@ export function HomeContact() {
           </h2>
           <a
             href="mailto:bonykoshy@gmail.com"
-            className="group flex items-center gap-2 font-jetbrains-mono text-sm sm:text-base text-fg-primary hover:text-primary transition-colors duration-300 pb-1 md:pb-2"
+            className="group flex items-center gap-2 font-jetbrains-mono text-sm sm:text-base text-fg-primary hover:text-accent-primary transition-colors duration-300 pb-1 md:pb-2"
           >
             <span className="relative inline-block">
               bonykoshy@gmail.com
-              <span className="absolute left-0 bottom-0 w-full h-px bg-primary scale-x-0 origin-right transition-transform duration-300 group-hover:scale-x-100 group-hover:origin-left" />
+              <span className="absolute left-0 bottom-0 w-full h-px bg-accent-primary scale-x-0 origin-right transition-transform duration-300 group-hover:scale-x-100 group-hover:origin-left" />
             </span>
             <ArrowUpRight className="w-5 h-5 transition-transform duration-300 group-hover:-translate-y-1 group-hover:translate-x-1" />
           </a>
@@ -135,9 +135,9 @@ export function HomeContact() {
             {/* Top Middle Quote with Small Inline Quote Icons */}
             <div className="w-full flex items-center justify-center pt-4 z-10 text-center px-4">
               <p className="font-jetbrains-mono text-xs xl:text-sm text-fg-secondary uppercase tracking-widest leading-relaxed max-w-85 text-center">
-                <Quote className="w-2.5 h-2.5 text-primary fill-primary inline-block align-top -mt-0.5 mr-1 rotate-180 opacity-80" />
+                <Quote className="w-2.5 h-2.5 text-accent-primary fill-primary inline-block align-top -mt-0.5 mr-1 rotate-180 opacity-80" />
                 Local roots. Global systems. Endless learning.
-                <Quote className="w-2.5 h-2.5 text-primary fill-primary inline-block align-top -mt-0.5 ml-1 opacity-80" />
+                <Quote className="w-2.5 h-2.5 text-accent-primary fill-primary inline-block align-top -mt-0.5 ml-1 opacity-80" />
               </p>
             </div>
 
@@ -151,12 +151,12 @@ export function HomeContact() {
                 scale={1.112}
                 className="w-full h-full"
                 variant="solid"
-                countryFillColor="var(--bg-tertiary, #3f3f46)"
-                backgroundColor="var(--bg-default, #09090b)"
-                strokeColor="var(--bg-default, #09090b)"
-                graticuleColor="var(--border-subtle, #3f3f46)"
-                sphereOutlineColor="var(--fg-tertiary, #71717a)"
-                markerColor="var(--primary)"
+                countryFillColor="none"
+                backgroundColor="var(--bg-default)"
+                strokeColor="var(--fg-muted)"
+                graticuleColor="var(--fg-muted)"
+                sphereOutlineColor="var(--fg-secondary)"
+                markerColor="var(--accent-primary)"
               />
             </div>
           </motion.div>
@@ -182,7 +182,7 @@ export function HomeContact() {
               />
             </p>
 
-            <div className="w-full border border-border-default bg-bg-default rounded-sm p-4 sm:p-5 transition-colors duration-300 focus-within:border-primary group relative">
+            <div className="w-full border border-border-default bg-bg-default rounded-sm p-4 sm:p-5 transition-colors duration-300 focus-within:border-accent-primary group relative">
               <input
                 type="text"
                 name="name"
@@ -191,17 +191,17 @@ export function HomeContact() {
                 onChange={(e) =>
                   setFormData({ ...formData, name: e.target.value })
                 }
-                className="w-full bg-transparent outline-none font-jetbrains-mono text-sm text-fg-primary placeholder:text-fg-tertiary transition-colors"
+                className="w-full bg-transparent outline-none font-jetbrains-mono text-sm text-fg-primary placeholder:text-fg-muted transition-colors"
                 required
               />
               {errors.name && (
-                <span className="absolute right-4 top-1/2 -translate-y-1/2 text-[10px] text-red-500 font-jetbrains-mono uppercase tracking-wider">
+                <span className="absolute right-4 top-1/2 -translate-y-1/2 text-xs text-red-500 font-jetbrains-mono uppercase tracking-wider">
                   {errors.name}
                 </span>
               )}
             </div>
 
-            <div className="w-full border border-border-default bg-bg-default rounded-sm p-4 sm:p-5 transition-colors duration-300 focus-within:border-primary group relative">
+            <div className="w-full border border-border-default bg-bg-default rounded-sm p-4 sm:p-5 transition-colors duration-300 focus-within:border-accent-primary group relative">
               <input
                 type="email"
                 name="email"
@@ -210,17 +210,17 @@ export function HomeContact() {
                 onChange={(e) =>
                   setFormData({ ...formData, email: e.target.value })
                 }
-                className="w-full bg-transparent outline-none font-jetbrains-mono text-sm text-fg-primary placeholder:text-fg-tertiary transition-colors"
+                className="w-full bg-transparent outline-none font-jetbrains-mono text-sm text-fg-primary placeholder:text-fg-muted transition-colors"
                 required
               />
               {errors.email && (
-                <span className="absolute right-4 top-1/2 -translate-y-1/2 text-[10px] text-red-500 font-jetbrains-mono uppercase tracking-wider">
+                <span className="absolute right-4 top-1/2 -translate-y-1/2 text-xs text-red-500 font-jetbrains-mono uppercase tracking-wider">
                   {errors.email}
                 </span>
               )}
             </div>
 
-            <div className="w-full border border-border-default bg-bg-default rounded-sm p-4 sm:p-5 transition-colors duration-300 focus-within:border-primary group grow relative">
+            <div className="w-full border border-border-default bg-bg-default rounded-sm p-4 sm:p-5 transition-colors duration-300 focus-within:border-accent-primary group grow relative">
               <textarea
                 name="message"
                 placeholder="Message"
@@ -228,11 +228,11 @@ export function HomeContact() {
                 onChange={(e) =>
                   setFormData({ ...formData, message: e.target.value })
                 }
-                className="w-full h-32 lg:h-full min-h-30 bg-transparent outline-none font-jetbrains-mono text-sm text-fg-primary placeholder:text-fg-tertiary resize-none transition-colors"
+                className="w-full h-32 lg:h-full min-h-30 bg-transparent outline-none font-jetbrains-mono text-sm text-fg-primary placeholder:text-fg-muted resize-none transition-colors"
                 required
               />
               {errors.message && (
-                <span className="absolute right-4 bottom-4 text-[10px] text-red-500 font-jetbrains-mono uppercase tracking-wider">
+                <span className="absolute right-4 bottom-4 text-xs text-red-500 font-jetbrains-mono uppercase tracking-wider">
                   {errors.message}
                 </span>
               )}
@@ -241,7 +241,7 @@ export function HomeContact() {
             <button
               type="submit"
               disabled={isSubmitting || isSuccess}
-              className="w-full border border-border-default bg-bg-default text-fg-primary rounded-sm p-4 sm:p-5 font-jetbrains-mono text-sm tracking-widest uppercase transition-all duration-300 hover:border-primary hover:text-primary active:border-primary active:text-primary lg:hover:bg-primary/5 active:bg-primary/10 flex items-center justify-between group cursor-target disabled:opacity-70 disabled:cursor-not-allowed"
+              className="w-full border border-border-default bg-bg-default text-fg-primary rounded-sm p-4 sm:p-5 font-jetbrains-mono text-sm tracking-widest uppercase transition-all duration-300 hover:border-accent-primary hover:text-accent-primary active:border-accent-primary active:text-accent-primary lg:hover:bg-accent-glow active:bg-accent-primary/10 flex items-center justify-between group cursor-target disabled:opacity-70 disabled:cursor-not-allowed"
             >
               <SlideText
                 text={
@@ -255,7 +255,7 @@ export function HomeContact() {
                 }
               />
               {isSuccess ? (
-                <CheckCircle2 className="w-4 h-4 sm:w-5 sm:h-5 text-green-500" />
+                <CheckCircle2 className="w-4 h-4 sm:w-5 sm:h-5 text-status-success" />
               ) : (
                 <Send
                   className={`w-4 h-4 sm:w-5 sm:h-5 transition-transform duration-300 ${!isSubmitting && "group-hover:-translate-y-1 group-hover:translate-x-1"}`}

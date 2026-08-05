@@ -64,7 +64,7 @@ export function Credentials() {
               exit={{ opacity: 0 }}
               transition={{ duration: 0.3 }}
               onClick={() => setActive(null)}
-              className="absolute inset-0 bg-bg-default/90 cursor-zoom-out pointer-events-auto"
+              className="absolute inset-0 bg-bg-overlay cursor-zoom-out pointer-events-auto"
             />
 
             {/* Inner Content bounds matching page container */}
@@ -75,7 +75,7 @@ export function Credentials() {
               <div className="w-full max-w-125 flex flex-col items-end gap-2 pointer-events-auto">
                 <button
                   onClick={() => setActive(null)}
-                  className="text-fg-tertiary hover:text-fg-primary transition-colors cursor-target focus:outline-none text-[10px] tracking-widest uppercase font-jetbrains-mono"
+                  className="text-fg-muted hover:text-fg-primary transition-colors cursor-target focus:outline-none text-xs tracking-widest uppercase font-jetbrains-mono"
                 >
                   [ EXIT ]
                 </button>
@@ -97,12 +97,12 @@ export function Credentials() {
                   {/* Modal Content */}
                   <div className="flex flex-col p-6 sm:p-8">
                     <div className="flex items-center justify-between mb-4">
-                      <span className="font-jetbrains-mono text-[11px] font-bold text-fg-tertiary tracking-widest uppercase">
+                      <span className="font-jetbrains-mono text-xs font-bold text-fg-muted tracking-widest uppercase">
                         {active.issuer}
                       </span>
-                      <div className="flex items-center gap-1.5 text-green-500">
+                      <div className="flex items-center gap-1.5 text-status-success">
                         <CheckCircle2 className="w-3.5 h-3.5" />
-                        <span className="font-jetbrains-mono text-[10px] tracking-widest uppercase font-semibold">
+                        <span className="font-jetbrains-mono text-xs tracking-widest uppercase font-semibold">
                           VERIFIED
                         </span>
                       </div>
@@ -119,13 +119,13 @@ export function Credentials() {
                       initial={{ opacity: 0 }}
                       animate={{ opacity: 1 }}
                       exit={{ opacity: 0 }}
-                      className="font-jetbrains-mono text-[13px] sm:text-sm text-fg-secondary/90 leading-relaxed mb-8"
+                      className="font-jetbrains-mono text-[13px] sm:text-sm text-fg-muted leading-relaxed mb-8"
                     >
                       {active.description}
                     </motion.div>
 
                     <div className="flex items-center justify-between mt-auto">
-                      <span className="font-jetbrains-mono text-[11px] text-fg-secondary/70 uppercase tracking-widest">
+                      <span className="font-jetbrains-mono text-xs text-fg-muted uppercase tracking-widest">
                         {active.date === "Ongoing" ? "ACTIVE" : active.date}
                       </span>
                       <motion.a
@@ -136,10 +136,10 @@ export function Credentials() {
                         href={active.credentialUrl}
                         target="_blank"
                         rel="noopener noreferrer"
-                        className="flex items-center text-fg-secondary hover:text-fg-primary transition-colors font-jetbrains-mono text-[10px] sm:text-xs uppercase tracking-widest font-semibold group cursor-target"
+                        className="flex items-center text-fg-secondary hover:text-fg-primary transition-colors font-jetbrains-mono text-xs sm:text-xs uppercase tracking-widest font-semibold group cursor-target"
                       >
                         [ VIEW CREDENTIAL{" "}
-                        <ArrowUpRight className="w-3.5 h-3.5 text-primary ml-1 mr-1" />{" "}
+                        <ArrowUpRight className="w-3.5 h-3.5 text-accent-primary ml-1 mr-1" />{" "}
                         ]
                       </motion.a>
                     </div>
@@ -157,7 +157,7 @@ export function Credentials() {
       >
         {/* 1. SECTION HEADER */}
         <div className="flex flex-col gap-2 w-full mb-8 sm:mb-10">
-          <span className="font-jetbrains-mono text-xs sm:text-sm text-primary font-bold tracking-widest uppercase">
+          <span className="font-jetbrains-mono text-xs sm:text-sm text-accent-primary font-bold tracking-widest uppercase">
             03 // VERIFIED CREDENTIALS
           </span>
           <h2 className="font-sans text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-normal uppercase tracking-[-0.04em] ml-[-0.05em] text-fg-primary">
@@ -176,7 +176,7 @@ export function Credentials() {
             >
               {/* Top Row: Issuer */}
               <div className="flex items-center justify-between mb-8 sm:mb-10">
-                <span className="font-jetbrains-mono text-[10px] sm:text-[11px] font-bold text-fg-tertiary group-hover/card:text-fg-primary transition-colors tracking-widest uppercase">
+                <span className="font-jetbrains-mono text-xs sm:text-xs font-bold text-fg-muted group-hover/card:text-fg-primary transition-colors tracking-widest uppercase">
                   {cert.issuer}
                 </span>
               </div>
@@ -193,17 +193,17 @@ export function Credentials() {
 
               {/* Top Right Hover Icon */}
               <div className="absolute top-5 right-5 sm:top-6 sm:right-6">
-                <ArrowUpRight className="w-4 h-4 text-primary md:text-fg-tertiary md:group-hover/card:text-primary transition-colors" />
+                <ArrowUpRight className="w-4 h-4 text-accent-primary md:text-fg-muted md:group-hover/card:text-accent-primary transition-colors" />
               </div>
 
               {/* Bottom Row: Date / Verification */}
-              <div className="flex items-center justify-between pt-5 border-t border-border-default/60 mt-auto">
-                <span className="font-jetbrains-mono text-[10px] sm:text-[11px] text-fg-secondary/70 uppercase tracking-widest">
+              <div className="flex items-center justify-between pt-5 border-t border-border-subtle mt-auto">
+                <span className="font-jetbrains-mono text-xs sm:text-xs text-fg-muted uppercase tracking-widest">
                   {cert.date === "Ongoing" ? "ACTIVE" : cert.date}
                 </span>
-                <div className="flex items-center gap-1.5 text-green-500/80 group-hover/card:text-green-500 transition-colors">
+                <div className="flex items-center gap-1.5 text-status-success group-hover/card:text-status-success transition-colors">
                   <CheckCircle2 className="w-3.5 h-3.5" />
-                  <span className="font-jetbrains-mono text-[10px] tracking-widest uppercase font-semibold">
+                  <span className="font-jetbrains-mono text-xs tracking-widest uppercase font-semibold">
                     VERIFIED
                   </span>
                 </div>
@@ -216,10 +216,10 @@ export function Credentials() {
         <div className="w-full flex justify-end mt-4 sm:mt-5">
           <Link
             to="/certificates"
-            className="flex items-center text-fg-secondary hover:text-fg-primary transition-colors cursor-pointer cursor-target font-jetbrains-mono text-[10px] lg:text-[11px] font-semibold tracking-wider uppercase group px-2 py-1"
+            className="flex items-center text-fg-secondary hover:text-fg-primary transition-colors cursor-pointer cursor-target font-jetbrains-mono text-xs lg:text-xs font-semibold tracking-wider uppercase group px-2 py-1"
           >
             [ VIEW ALL CERTIFICATIONS{" "}
-            <span className="text-primary font-jetbrains-mono ml-1 mr-1">
+            <span className="text-accent-primary font-jetbrains-mono ml-1 mr-1">
               &gt;
             </span>{" "}
             ]

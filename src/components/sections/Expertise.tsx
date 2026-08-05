@@ -137,7 +137,7 @@ export function Expertise() {
     >
       {/* 1. SECTION HEADER */}
       <div className="flex flex-col gap-2 w-full mb-8 sm:mb-10">
-        <span className="font-jetbrains-mono text-xs sm:text-sm text-primary font-bold tracking-widest uppercase">
+        <span className="font-jetbrains-mono text-xs sm:text-sm text-accent-primary font-bold tracking-widest uppercase">
           02 // ACTIVE DOMAINS
         </span>
         <h2 className="font-sans text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-normal uppercase tracking-[-0.04em] ml-[-0.05em] text-fg-primary">
@@ -158,10 +158,10 @@ export function Expertise() {
               >
                 {/* Top Indicator Row with Topic-Specific Icon */}
                 <div className="flex items-center justify-between mb-6 sm:mb-8">
-                  <span className="font-jetbrains-mono text-xs font-bold text-fg-tertiary group-hover/card:text-primary transition-colors tracking-widest">
+                  <span className="font-jetbrains-mono text-xs font-bold text-fg-muted group-hover/card:text-accent-primary transition-colors tracking-widest">
                     [ {card.number} ]
                   </span>
-                  <CardIcon className="w-4 h-4 text-fg-tertiary group-hover/card:text-primary transition-colors shrink-0" />
+                  <CardIcon className="w-4 h-4 text-fg-muted group-hover/card:text-accent-primary transition-colors shrink-0" />
                 </div>
 
                 {/* Content: Title & Description */}
@@ -169,17 +169,17 @@ export function Expertise() {
                   <h3 className="font-jetbrains-mono text-base sm:text-lg font-bold uppercase tracking-wide text-fg-primary transition-colors">
                     {card.title}
                   </h3>
-                  <p className="font-jetbrains-mono text-[13px] text-fg-secondary/90 leading-relaxed">
+                  <p className="font-jetbrains-mono text-[13px] text-fg-muted leading-relaxed">
                     {card.description}
                   </p>
                 </div>
 
                 {/* Bottom Tags Row */}
-                <div className="flex flex-wrap gap-1.5 pt-5 border-t border-border-default/60 mt-auto">
+                <div className="flex flex-wrap gap-1.5 pt-5 border-t border-border-subtle mt-auto">
                   {card.tags.map((tag) => (
                     <span
                       key={tag}
-                      className="px-2 py-0.5 rounded-xs text-[10px] sm:text-[11px] font-jetbrains-mono bg-bg-default border border-border-default text-fg-secondary group-hover/card:border-fg-secondary/50 group-hover/card:text-fg-primary transition-colors shrink-0"
+                      className="px-2 py-0.5 rounded-xs text-xs sm:text-xs font-jetbrains-mono bg-bg-default border border-border-default text-fg-secondary group-hover/card:border-fg-secondary/50 group-hover/card:text-fg-primary transition-colors shrink-0"
                     >
                       {tag}
                     </span>
@@ -221,7 +221,7 @@ export function Expertise() {
                         className="w-8 h-8 sm:w-8 sm:h-8 object-contain opacity-60 group-hover/item:opacity-100 grayscale group-hover/item:grayscale-0 transition-all shrink-0"
                       />
                     ) : IconNode ? (
-                      <IconNode className="w-8 h-8 sm:w-8 sm:h-8 text-fg-tertiary group-hover/item:text-fg-primary transition-colors shrink-0" />
+                      <IconNode className="w-8 h-8 sm:w-8 sm:h-8 text-fg-muted group-hover/item:text-fg-primary transition-colors shrink-0" />
                     ) : null}
                     <span className="hidden sm:inline font-jetbrains-mono text-xs sm:text-sm text-fg-secondary group-hover/item:text-fg-primary uppercase tracking-wider font-semibold whitespace-nowrap">
                       {tech.name}

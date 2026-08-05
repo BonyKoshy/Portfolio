@@ -32,9 +32,17 @@ export function HomeHero() {
             <defs>
               <linearGradient id="textFade" x1="0" y1="0" x2="0" y2="1">
                 {/* Opaque from top (0%) down to 80% */}
-                <stop offset="50%" stopColor="#a1a1aa" stopOpacity="1" />
+                <stop
+                  offset="50%"
+                  stopColor="var(--color-fg-muted)"
+                  stopOpacity="1"
+                />
                 {/* Fades to transparent at the very bottom (100%) */}
-                <stop offset="100%" stopColor="#a1a1aa" stopOpacity="0" />
+                <stop
+                  offset="100%"
+                  stopColor="var(--color-fg-muted)"
+                  stopOpacity="0"
+                />
               </linearGradient>
             </defs>
             <text
@@ -53,8 +61,9 @@ export function HomeHero() {
 
           {/* Anchor Row */}
           <div className="w-full flex justify-end -mt-1 sm:-mt-3 md:-mt-5 lg:-mt-6 xl:-mt-5 pr-[4%] md:pr-[3.5%] relative z-10">
-            <p className="font-jetbrains-mono text-[10px] sm:text-xs md:text-sm text-fg-secondary tracking-[0.2em]">
-              BASED IN INDIA, <span className="text-primary">BENGALURU</span>
+            <p className="font-jetbrains-mono text-xs sm:text-xs md:text-sm text-fg-secondary tracking-[0.2em]">
+              BASED IN INDIA,{" "}
+              <span className="text-accent-primary">BENGALURU</span>
             </p>
           </div>
         </motion.div>
@@ -112,10 +121,10 @@ export function HomeHero() {
 
           {/* 5. Description (Col span 2 on row 4 in vertical layout, col span 2 across 2 rows on desktop) */}
           <div className="col-span-2 row-start-4 lg:col-start-4 lg:row-start-1 lg:col-span-2 lg:row-span-2 border border-border-default rounded-sm p-4 sm:p-5 bg-bg-default flex flex-col justify-center cursor-default">
-            <p className="font-jetbrains-mono text-[11px] sm:text-xs text-fg-secondary leading-relaxed tracking-wider uppercase">
+            <p className="font-jetbrains-mono text-xs sm:text-xs text-fg-secondary leading-relaxed tracking-wider uppercase">
               SYSTEMS INFRASTRUCTURE &amp; STORAGE ADMINISTRATION. ARCHITECTING
               HIGH-AVAILABILITY DATA BACKUP AND DISASTER RECOVERY SOLUTIONS FOR{" "}
-              <span className="text-primary font-semibold whitespace-nowrap">
+              <span className="text-accent-primary font-semibold whitespace-nowrap">
                 ᐳ ACCENTURE
               </span>
               .
@@ -135,7 +144,9 @@ export function HomeHero() {
                 RESUME
               </span>
             </div>
-            <span className="text-primary font-jetbrains-mono">&gt;</span>
+            <span className="text-accent-primary font-jetbrains-mono">
+              &gt;
+            </span>
           </a>
 
           {/* 7. Contact (Interactive; smooth scroll to #contact) */}
@@ -164,7 +175,9 @@ export function HomeHero() {
                 CONTACT
               </span>
             </div>
-            <span className="text-primary font-jetbrains-mono">&gt;</span>
+            <span className="text-accent-primary font-jetbrains-mono">
+              &gt;
+            </span>
           </a>
         </div>
       </section>
@@ -180,14 +193,14 @@ export function HomeHero() {
               exit={{ opacity: 0 }}
               transition={{ duration: 0.3 }}
               onClick={() => setIsImageOpen(false)}
-              className="absolute inset-0 bg-bg-default/90 cursor-zoom-out"
+              className="absolute inset-0 bg-bg-overlay cursor-zoom-out"
             />
 
             {/* Modal Wrapper for Button Positioning */}
             <div className="relative z-10 w-[90vw] max-w-2xl flex flex-col items-end gap-2">
               <button
                 onClick={() => setIsImageOpen(false)}
-                className="text-fg-tertiary hover:text-fg-primary transition-colors cursor-target focus:outline-none text-xs tracking-widest uppercase font-jetbrains-mono"
+                className="text-fg-muted hover:text-fg-primary transition-colors cursor-target focus:outline-none text-xs tracking-widest uppercase font-jetbrains-mono"
               >
                 [ EXIT ]
               </button>

@@ -4,7 +4,7 @@ import { cva, type VariantProps } from "class-variance-authority";
 import { Slot, Slottable } from "@radix-ui/react-slot";
 
 const primaryButtonVariants = cva(
-  "group inline-flex items-center justify-center font-medium transition-all active:scale-95 focus-visible:ring-2 focus-visible:ring-offset-2 outline-none disabled:opacity-50 gap-2 whitespace-nowrap bg-primary text-primary-fg rounded-full hover:bg-primary-hover",
+  "group inline-flex items-center justify-center font-medium transition-all active:scale-95 focus-visible:ring-2 focus-visible:ring-offset-2 outline-none disabled:opacity-50 gap-2 whitespace-nowrap bg-accent-primary text-accent-fg rounded-full hover:bg-accent-hover",
   {
     variants: {
       size: {

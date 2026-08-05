@@ -14,7 +14,7 @@ const PrivacyPolicy: React.FC = () => {
           <h1 className="text-4xl md:text-5xl font-normal mb-2 text-fg-primary tracking-tight font-sans uppercase">
             Privacy Policy
           </h1>
-          <p className="text-fg-tertiary mb-10 text-xs sm:text-sm uppercase tracking-widest font-medium border-b border-border-default pb-6 inline-block w-full">
+          <p className="text-fg-muted mb-10 text-xs sm:text-sm uppercase tracking-widest font-medium border-b border-border-default pb-6 inline-block w-full">
             Effective Date: August 2026
           </p>
 
@@ -34,7 +34,7 @@ const PrivacyPolicy: React.FC = () => {
               When you submit a message through the contact form, the following
               information may be collected:
             </p>
-            <ul className="list-disc pl-5 mb-8 space-y-2 marker:text-primary text-fg-secondary">
+            <ul className="list-disc pl-5 mb-8 space-y-2 marker:text-accent-primary text-fg-secondary">
               <li>Your name</li>
               <li>Your email address</li>
               <li>Your message content</li>
@@ -77,7 +77,7 @@ const PrivacyPolicy: React.FC = () => {
               respond to your inquiry. You have the right to request deletion of
               your data at any time by contacting:
             </p>
-            <p className="font-medium text-primary mb-8 hover:underline">
+            <p className="font-medium text-accent-primary mb-8 hover:underline">
               <a href="mailto:bonykoshy@gmail.com">bonykoshy@gmail.com</a>
             </p>
 
@@ -97,7 +97,7 @@ const PrivacyPolicy: React.FC = () => {
               If you have any questions or concerns about this Privacy Policy,
               please contact:
             </p>
-            <p className="font-medium text-primary hover:underline">
+            <p className="font-medium text-accent-primary hover:underline">
               <a href="mailto:bonykoshy@gmail.com">bonykoshy@gmail.com</a>
             </p>
           </div>

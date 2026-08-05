@@ -64,7 +64,7 @@ export function Experience() {
     >
       {/* 1. SECTION HEADER */}
       <div className="flex flex-col gap-2 w-full mb-12 sm:mb-16">
-        <span className="font-jetbrains-mono text-xs sm:text-sm text-primary font-bold tracking-widest uppercase">
+        <span className="font-jetbrains-mono text-xs sm:text-sm text-accent-primary font-bold tracking-widest uppercase">
           04 // PROFESSIONAL JOURNEY
         </span>
         <h2 className="font-sans text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-normal uppercase tracking-[-0.04em] ml-[-0.05em] text-fg-primary">
@@ -91,15 +91,15 @@ export function Experience() {
               >
                 <div
                   className={`group relative border border-border-default bg-bg-default rounded-sm p-6 sm:p-8 flex flex-col h-70 xl:h-75 transition-all duration-300 group-hover/grid:opacity-40 hover:opacity-100! hover:border-fg-primary overflow-hidden ${
-                    isActive ? "md:hover:border-primary" : ""
+                    isActive ? "md:hover:border-accent-primary" : ""
                   }`}
                 >
                   {/* Header */}
                   <div className="flex justify-between items-center w-full relative z-10">
-                    <span className="font-jetbrains-mono text-[10px] sm:text-xs text-fg-secondary tracking-widest uppercase transition-colors duration-300 group-hover:text-primary">
+                    <span className="font-jetbrains-mono text-xs sm:text-xs text-fg-secondary tracking-widest uppercase transition-colors duration-300 group-hover:text-accent-primary">
                       {module.category}
                     </span>
-                    <Icon className="w-4 h-4 transition-colors duration-300 text-primary max-md:text-primary md:text-fg-secondary md:group-hover:text-primary" />
+                    <Icon className="w-4 h-4 transition-colors duration-300 text-accent-primary max-md:text-accent-primary md:text-fg-secondary md:group-hover:text-accent-primary" />
                   </div>
 
                   {/* Main Content (Default View) */}
@@ -107,10 +107,10 @@ export function Experience() {
                     <h3 className="font-sans text-xl sm:text-2xl font-normal uppercase text-fg-primary tracking-wide leading-tight">
                       {module.role}
                     </h3>
-                    <span className="font-jetbrains-mono text-[11px] sm:text-xs text-fg-secondary uppercase tracking-widest mt-1">
+                    <span className="font-jetbrains-mono text-xs sm:text-xs text-fg-secondary uppercase tracking-widest mt-1">
                       {module.org}
                     </span>
-                    <span className="font-jetbrains-mono text-[9px] sm:text-[10px] text-fg-tertiary uppercase tracking-widest mt-3">
+                    <span className="font-jetbrains-mono text-xs sm:text-xs text-fg-muted uppercase tracking-widest mt-3">
                       {module.date}
                     </span>
                   </div>
@@ -120,8 +120,8 @@ export function Experience() {
                     <div className="flex flex-col gap-2.5">
                       {module.skills.map((skill) => (
                         <div key={skill} className="flex items-center gap-3">
-                          <div className="w-1 h-1 bg-primary rounded-full shrink-0" />
-                          <span className="font-jetbrains-mono text-[10px] sm:text-xs text-fg-primary uppercase tracking-widest">
+                          <div className="w-1 h-1 bg-accent-primary rounded-full shrink-0" />
+                          <span className="font-jetbrains-mono text-xs sm:text-xs text-fg-primary uppercase tracking-widest">
                             {skill}
                           </span>
                         </div>
@@ -130,20 +130,20 @@ export function Experience() {
                   </div>
 
                   {/* Footer Status */}
-                  <div className="flex items-center justify-between border-t border-border-default/60 pt-4 w-full mt-auto">
-                    <span className="font-jetbrains-mono text-[9px] sm:text-[10px] text-fg-secondary uppercase tracking-widest relative z-10">
+                  <div className="flex items-center justify-between border-t border-border-subtle pt-4 w-full mt-auto">
+                    <span className="font-jetbrains-mono text-xs sm:text-xs text-fg-secondary uppercase tracking-widest relative z-10">
                       Status
                     </span>
                     <div className="flex items-center gap-2 relative z-10">
-                      <span className="font-jetbrains-mono text-[9px] sm:text-[10px] text-fg-primary uppercase tracking-widest">
+                      <span className="font-jetbrains-mono text-xs sm:text-xs text-fg-primary uppercase tracking-widest">
                         {module.status}
                       </span>
                       {isActive ? (
                         <span className="relative flex h-2 w-2 ml-1">
-                          <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-primary opacity-75 z-20"></span>
-                          <span className="relative inline-flex rounded-full h-2 w-2 bg-primary z-20"></span>
+                          <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-accent-primary opacity-75 z-20"></span>
+                          <span className="relative inline-flex rounded-full h-2 w-2 bg-accent-primary z-20"></span>
                           {/* Expanding circular background fill originating exactly from this dot */}
-                          <span className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 w-0.5 h-0.5 bg-primary/20 rounded-full scale-0 md:group-hover:scale-[600] transition-transform duration-700 ease-out z-[-1] hidden md:block pointer-events-none" />
+                          <span className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 w-0.5 h-0.5 bg-accent-primary/20 rounded-full scale-0 md:group-hover:scale-[600] transition-transform duration-700 ease-out z-[-1] hidden md:block pointer-events-none" />
                         </span>
                       ) : (
                         <Check className="w-3.5 h-3.5 text-fg-secondary stroke-[2.5]" />

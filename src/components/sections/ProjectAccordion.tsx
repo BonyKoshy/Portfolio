@@ -141,23 +141,23 @@ export const ProjectAccordion = ({
           className="w-full flex items-center justify-between py-5 sm:py-6 text-left group"
         >
           <div className="flex items-center gap-4 sm:gap-6 w-full">
-            <span className="font-sans text-2xl sm:text-3xl lg:text-4xl font-normal text-fg-tertiary transition-colors leading-none group-hover:text-primary">
+            <span className="font-sans text-2xl sm:text-3xl lg:text-4xl font-normal text-fg-muted transition-colors leading-none group-hover:text-accent-primary">
               {(index + 1).toString().padStart(2, "0")}
             </span>
             <div className="flex flex-col items-start gap-1">
               <h3 className="font-sans text-lg sm:text-xl lg:text-2xl font-normal uppercase tracking-wide text-fg-primary group-hover:text-fg-secondary transition-colors duration-200">
                 {project.title}
               </h3>
-              <span className="font-jetbrains-mono text-[9px] sm:text-[10px] text-fg-tertiary uppercase tracking-widest">
+              <span className="font-jetbrains-mono text-xs sm:text-xs text-fg-muted uppercase tracking-widest">
                 [ {project.status} ]
               </span>
             </div>
           </div>
           <ChevronDown
             className={cn(
-              "w-5 h-5 text-fg-tertiary transition-transform duration-300 shrink-0",
+              "w-5 h-5 text-fg-muted transition-transform duration-300 shrink-0",
               isOpen
-                ? "rotate-180 text-primary"
+                ? "rotate-180 text-accent-primary"
                 : "group-hover:text-fg-secondary"
             )}
           />
@@ -176,7 +176,7 @@ export const ProjectAccordion = ({
               <div className="pt-2 pb-8 flex flex-col gap-6 sm:gap-8 w-full">
                 {/* Hero Image */}
                 <div
-                  className="w-full aspect-video sm:aspect-video relative overflow-hidden bg-bg-surface border border-border-default/60 rounded-sm cursor-target group/img"
+                  className="w-full aspect-video sm:aspect-video relative overflow-hidden bg-bg-surface border border-border-subtle rounded-sm cursor-target group/img"
                   onClick={() =>
                     openZoom(project.heroImage, `hero-${project.id}`)
                   }
@@ -189,18 +189,18 @@ export const ProjectAccordion = ({
                 </div>
 
                 {/* Meta & Tech Stack Row */}
-                <div className="flex flex-col sm:flex-row justify-between items-start gap-4 sm:gap-6 pt-4 border-t border-border-default/40">
+                <div className="flex flex-col sm:flex-row justify-between items-start gap-4 sm:gap-6 pt-4 border-t border-border-subtle">
                   <div className="flex flex-col gap-1 shrink-0">
-                    <span className="font-jetbrains-mono text-[9px] text-fg-tertiary uppercase tracking-[0.2em] font-bold">
+                    <span className="font-jetbrains-mono text-xs text-fg-muted uppercase tracking-[0.2em] font-bold">
                       Project Reference
                     </span>
-                    <span className="font-jetbrains-mono text-[11px] text-fg-secondary">
+                    <span className="font-jetbrains-mono text-xs text-fg-secondary">
                       PRJ-{project.id.toUpperCase().substring(0, 6)}
                     </span>
                   </div>
 
                   <div className="flex flex-col gap-1.5 sm:items-end">
-                    <span className="font-jetbrains-mono text-[9px] text-fg-tertiary uppercase tracking-[0.2em] font-bold">
+                    <span className="font-jetbrains-mono text-xs text-fg-muted uppercase tracking-[0.2em] font-bold">
                       Technical Stack
                     </span>
                     <div className="flex flex-wrap items-center gap-x-3 gap-y-1.5 sm:justify-end">
@@ -212,15 +212,13 @@ export const ProjectAccordion = ({
                             className="inline-flex items-center gap-1.5"
                           >
                             {TechIcon && (
-                              <TechIcon className="w-3 h-3 text-fg-tertiary shrink-0" />
+                              <TechIcon className="w-3 h-3 text-fg-muted shrink-0" />
                             )}
-                            <span className="font-jetbrains-mono text-[10px] sm:text-[11px] text-fg-secondary uppercase tracking-wider">
+                            <span className="font-jetbrains-mono text-xs sm:text-xs text-fg-secondary uppercase tracking-wider">
                               {tech}
                             </span>
                             {i < project.techStack.length - 1 && (
-                              <span className="text-fg-tertiary/40 ml-1.5">
-                                ·
-                              </span>
+                              <span className="text-fg-muted/40 ml-1.5">·</span>
                             )}
                           </span>
                         );
@@ -234,7 +232,7 @@ export const ProjectAccordion = ({
                   <h4 className="font-jetbrains-mono text-xs sm:text-sm font-normal text-fg-primary uppercase tracking-wider">
                     Executive Summary
                   </h4>
-                  <p className="font-jetbrains-mono text-xs sm:text-sm text-fg-secondary/90 leading-relaxed font-light">
+                  <p className="font-jetbrains-mono text-xs sm:text-sm text-fg-muted leading-relaxed font-light">
                     {project.overview}
                   </p>
                 </div>
@@ -250,7 +248,7 @@ export const ProjectAccordion = ({
                         key={idx}
                         className="flex items-start gap-3 font-jetbrains-mono text-fg-secondary text-xs sm:text-sm font-light leading-relaxed"
                       >
-                        <span className="text-primary mt-1.5 text-[7px] shrink-0">
+                        <span className="text-accent-primary mt-1.5 text-xs shrink-0">
                           ●
                         </span>
                         <span>{highlight}</span>
@@ -261,7 +259,7 @@ export const ProjectAccordion = ({
 
                 {/* Project Links */}
                 {(repoLink || liveLink || downloadLink) && (
-                  <div className="flex flex-col gap-3 pt-5 border-t border-border-default/40">
+                  <div className="flex flex-col gap-3 pt-5 border-t border-border-subtle">
                     <h4 className="font-jetbrains-mono text-xs sm:text-sm font-normal text-fg-primary uppercase tracking-wider">
                       Resources & Links
                     </h4>
@@ -274,10 +272,10 @@ export const ProjectAccordion = ({
                           className="flex items-center gap-2.5 group/link cursor-target text-fg-secondary hover:text-fg-primary transition-colors"
                         >
                           <FiGithub className="w-3.5 h-3.5" />
-                          <span className="font-jetbrains-mono text-[10px] sm:text-[11px] uppercase tracking-widest">
+                          <span className="font-jetbrains-mono text-xs sm:text-xs uppercase tracking-widest">
                             {repoLink.label}
                           </span>
-                          <ArrowRight className="w-3 h-3 text-fg-tertiary group-hover/link:text-primary group-hover/link:translate-x-1 transition-all" />
+                          <ArrowRight className="w-3 h-3 text-fg-muted group-hover/link:text-accent-primary group-hover/link:translate-x-1 transition-all" />
                         </a>
                       )}
 
@@ -289,10 +287,10 @@ export const ProjectAccordion = ({
                           className="flex items-center gap-2.5 group/link cursor-target text-fg-secondary hover:text-fg-primary transition-colors"
                         >
                           <ExternalLink className="w-3.5 h-3.5" />
-                          <span className="font-jetbrains-mono text-[10px] sm:text-[11px] uppercase tracking-widest">
+                          <span className="font-jetbrains-mono text-xs sm:text-xs uppercase tracking-widest">
                             {liveLink.label}
                           </span>
-                          <ArrowRight className="w-3 h-3 text-fg-tertiary group-hover/link:text-primary group-hover/link:translate-x-1 transition-all" />
+                          <ArrowRight className="w-3 h-3 text-fg-muted group-hover/link:text-accent-primary group-hover/link:translate-x-1 transition-all" />
                         </a>
                       )}
 
@@ -304,10 +302,10 @@ export const ProjectAccordion = ({
                           className="flex items-center gap-2.5 group/link cursor-target text-fg-secondary hover:text-fg-primary transition-colors"
                         >
                           <Download className="w-3.5 h-3.5" />
-                          <span className="font-jetbrains-mono text-[10px] sm:text-[11px] uppercase tracking-widest">
+                          <span className="font-jetbrains-mono text-xs sm:text-xs uppercase tracking-widest">
                             {downloadLink.label}
                           </span>
-                          <ArrowRight className="w-3 h-3 text-fg-tertiary group-hover/link:text-primary group-hover/link:translate-x-1 transition-all" />
+                          <ArrowRight className="w-3 h-3 text-fg-muted group-hover/link:text-accent-primary group-hover/link:translate-x-1 transition-all" />
                         </a>
                       )}
                     </div>
@@ -330,14 +328,14 @@ export const ProjectAccordion = ({
               exit={{ opacity: 0 }}
               transition={{ duration: 0.3 }}
               onClick={closeZoom}
-              className="absolute inset-0 bg-bg-default/95 backdrop-blur-md cursor-zoom-out"
+              className="absolute inset-0 bg-bg-overlay backdrop-blur-md cursor-zoom-out"
             />
 
             {/* Modal Content */}
             <div className="relative z-10 w-[90vw] max-w-6xl flex flex-col items-end gap-3">
               <button
                 onClick={closeZoom}
-                className="text-fg-tertiary hover:text-fg-primary transition-colors cursor-target focus:outline-none text-xs tracking-widest uppercase font-mono"
+                className="text-fg-muted hover:text-fg-primary transition-colors cursor-target focus:outline-none text-xs tracking-widest uppercase font-mono"
               >
                 [ EXIT ]
               </button>

@@ -15,6 +15,7 @@ interface CardNavProps {
   isOpen: boolean;
   items: CardNavItem[];
   onClose: () => void;
+  onLinkClick?: (href: string, e: React.MouseEvent) => void;
 }
 
 const containerVariants: Variants = {
@@ -53,7 +54,12 @@ const cardVariants: Variants = {
   },
 };
 
-const CardNav: React.FC<CardNavProps> = ({ isOpen, items, onClose }) => {
+const CardNav: React.FC<CardNavProps> = ({
+  isOpen,
+  items,
+  onClose,
+  onLinkClick,
+}) => {
   return (
     <AnimatePresence>
       {isOpen && (
@@ -79,18 +85,51 @@ const CardNav: React.FC<CardNavProps> = ({ isOpen, items, onClose }) => {
                   {item.label}
                 </div>
                 <div className="nav-card-links">
-                  {item.links.map((lnk) => (
-                    <Link
-                      key={lnk.label}
-                      to={lnk.href}
-                      className="nav-card-link"
-                      onClick={onClose}
-                      style={{ fontFamily: '"JetBrains Mono", monospace' }}
-                    >
-                      <ArrowUpRight className="nav-card-link-icon" size={16} />
-                      {lnk.label}
-                    </Link>
-                  ))}
+                  {item.links.map((lnk) =>
+                    lnk.href.startsWith("http") ||
+                    lnk.href.endsWith(".pdf") ||
+                    lnk.href.startsWith("/#") ? (
+                      <a
+                        key={lnk.label}
+                        href={lnk.href}
+                        target={lnk.href.startsWith("/#") ? "_self" : "_blank"}
+                        rel={
+                          lnk.href.startsWith("/#")
+                            ? undefined
+                            : "noopener noreferrer"
+                        }
+                        className="nav-card-link"
+                        onClick={(e) => {
+                          if (onLinkClick) onLinkClick(lnk.href, e);
+                          onClose();
+                        }}
+                        style={{ fontFamily: '"JetBrains Mono", monospace' }}
+                      >
+                        <ArrowUpRight
+                          className="nav-card-link-icon"
+                          size={16}
+                        />
+                        {lnk.label}
+                      </a>
+                    ) : (
+                      <Link
+                        key={lnk.label}
+                        to={lnk.href}
+                        className="nav-card-link"
+                        onClick={(e) => {
+                          if (onLinkClick) onLinkClick(lnk.href, e);
+                          onClose();
+                        }}
+                        style={{ fontFamily: '"JetBrains Mono", monospace' }}
+                      >
+                        <ArrowUpRight
+                          className="nav-card-link-icon"
+                          size={16}
+                        />
+                        {lnk.label}
+                      </Link>
+                    )
+                  )}
                 </div>
               </motion.div>
             ))}

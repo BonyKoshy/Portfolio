@@ -51,7 +51,7 @@ export function PageLoader({ onComplete }: { onComplete?: () => void }) {
             <div className="w-full h-0.5 md:h-0.75 bg-border-default relative overflow-hidden">
               {/* Progress Bar Fill (Accent color used minimally) */}
               <motion.div
-                className="absolute top-0 left-0 h-full bg-primary"
+                className="absolute top-0 left-0 h-full bg-accent-primary"
                 initial={{ width: "0%" }}
                 animate={{ width: "100%" }}
                 transition={{
