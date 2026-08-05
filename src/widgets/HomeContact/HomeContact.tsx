@@ -4,7 +4,7 @@ import { ArrowUpRight, Send, CheckCircle2, Quote } from "lucide-react";
 import GlobeWireframe from "@/components/ui/globe-wireframe";
 import { SlideText } from "@/shared/ui/SlideText";
 
-export function HomeContactV2() {
+export function HomeContact() {
   const containerRef = useRef<HTMLDivElement>(null);
   const isInView = useInView(containerRef, {
     once: true,

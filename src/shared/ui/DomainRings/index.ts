@@ -1,1 +1,0 @@
-export { DomainRings } from "./DomainRings";

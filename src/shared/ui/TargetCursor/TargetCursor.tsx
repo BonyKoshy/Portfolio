@@ -2,10 +2,10 @@ import { useEffect, useRef, useCallback, useMemo, useState } from "react";
 import {
   motion,
   useMotionValue,
-  useSpring,
   animate,
   useAnimation,
   useAnimationFrame,
+  type MotionValue,
 } from "framer-motion";
 import "./TargetCursor.css";
 
@@ -89,20 +89,16 @@ const TargetCursor = ({
   const containingBlockRef = useRef<HTMLElement | null>(null);
 
   // Core motion values
-  const mouseX = useMotionValue(
+  const cursorX = useMotionValue(
     typeof window !== "undefined" ? window.innerWidth / 2 : 0
   );
-  const mouseY = useMotionValue(
+  const cursorY = useMotionValue(
     typeof window !== "undefined" ? window.innerHeight / 2 : 0
   );
 
-  // Springs for cursor following
-  const cursorX = useSpring(mouseX, { stiffness: 450, damping: 28, mass: 0.5 });
-  const cursorY = useSpring(mouseY, { stiffness: 450, damping: 28, mass: 0.5 });
-
   // Scaling
-  const dotScale = useSpring(1, { stiffness: 500, damping: 30 });
-  const cursorScale = useSpring(1, { stiffness: 500, damping: 30 });
+  const dotScale = useMotionValue(1);
+  const cursorScale = useMotionValue(1);
 
   // Colors
   const activeColor = useMotionValue(cursorColor);
@@ -111,18 +107,31 @@ const TargetCursor = ({
   const controls = useAnimation();
 
   // 4 Corners Motion Values (x, y)
-  const cornersX = [
-    useMotionValue(0),
-    useMotionValue(0),
-    useMotionValue(0),
-    useMotionValue(0),
-  ] as const;
-  const cornersY = [
-    useMotionValue(0),
-    useMotionValue(0),
-    useMotionValue(0),
-    useMotionValue(0),
-  ] as const;
+  const cx0 = useMotionValue(0);
+  const cx1 = useMotionValue(0);
+  const cx2 = useMotionValue(0);
+  const cx3 = useMotionValue(0);
+  const cornersX = useMemo<
+    [
+      MotionValue<number>,
+      MotionValue<number>,
+      MotionValue<number>,
+      MotionValue<number>,
+    ]
+  >(() => [cx0, cx1, cx2, cx3], [cx0, cx1, cx2, cx3]);
+
+  const cy0 = useMotionValue(0);
+  const cy1 = useMotionValue(0);
+  const cy2 = useMotionValue(0);
+  const cy3 = useMotionValue(0);
+  const cornersY = useMemo<
+    [
+      MotionValue<number>,
+      MotionValue<number>,
+      MotionValue<number>,
+      MotionValue<number>,
+    ]
+  >(() => [cy0, cy1, cy2, cy3], [cy0, cy1, cy2, cy3]);
 
   // State refs for frame loop
   const isHoveringRef = useRef(false);
@@ -137,10 +146,10 @@ const TargetCursor = ({
       const { x: offsetX, y: offsetY } = getContainingBlockOffset(
         containingBlockRef.current
       );
-      mouseX.set(x - offsetX);
-      mouseY.set(y - offsetY);
+      animate(cursorX, x - offsetX, { duration: 0.1, ease: "easeOut" });
+      animate(cursorY, y - offsetY, { duration: 0.1, ease: "easeOut" });
     },
-    [mouseX, mouseY]
+    [cursorX, cursorY]
   );
 
   // Initializing idle corners
@@ -225,8 +234,16 @@ const TargetCursor = ({
     const moveHandler = (e: MouseEvent) => moveCursor(e.clientX, e.clientY);
     window.addEventListener("mousemove", moveHandler);
 
-    const scrollHandler = () => {
-      if (!activeTargetRef.current) return;
+    const checkStillOverTarget = () => {
+      if (!activeTargetRef.current || !currentLeaveHandler) return;
+
+      // If it was completely removed from DOM
+      if (!document.contains(activeTargetRef.current)) {
+        currentLeaveHandler();
+        return;
+      }
+
+      // Check if something else (like a modal or overlay) is now on top
       const { x: offsetX, y: offsetY } = getContainingBlockOffset(
         containingBlockRef.current
       );
@@ -241,29 +258,24 @@ const TargetCursor = ({
         (elementUnderMouse === activeTargetRef.current ||
           elementUnderMouse.closest(targetSelector) ===
             activeTargetRef.current);
-      if (!isStillOverTarget && currentLeaveHandler) {
+
+      if (!isStillOverTarget) {
         currentLeaveHandler();
       }
     };
+
+    const scrollHandler = () => checkStillOverTarget();
     window.addEventListener("scroll", scrollHandler, { passive: true });
 
     const mouseDownHandler = () => {
-      dotScale.set(0.7);
-      cursorScale.set(0.9);
+      animate(dotScale, 0.7, { duration: 0.3, ease: "easeOut" });
+      animate(cursorScale, 0.9, { duration: 0.2, ease: "easeOut" });
     };
 
     const mouseUpHandler = () => {
-      dotScale.set(1);
-      cursorScale.set(1);
-      setTimeout(() => {
-        if (
-          activeTargetRef.current &&
-          !document.contains(activeTargetRef.current) &&
-          currentLeaveHandler
-        ) {
-          currentLeaveHandler();
-        }
-      }, 50);
+      animate(dotScale, 1, { duration: 0.3, ease: "easeOut" });
+      animate(cursorScale, 1, { duration: 0.2, ease: "easeOut" });
+      setTimeout(checkStillOverTarget, 50);
     };
 
     window.addEventListener("mousedown", mouseDownHandler);
@@ -327,15 +339,7 @@ const TargetCursor = ({
         },
       ];
 
-      unmountCheckInterval = setInterval(() => {
-        if (
-          activeTargetRef.current &&
-          !document.contains(activeTargetRef.current) &&
-          currentLeaveHandler
-        ) {
-          currentLeaveHandler();
-        }
-      }, 100);
+      unmountCheckInterval = setInterval(checkStillOverTarget, 100);
 
       animate(0, 1, {
         duration: hoverDuration,

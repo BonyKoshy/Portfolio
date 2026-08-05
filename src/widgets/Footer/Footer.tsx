@@ -10,6 +10,11 @@ import { ChevronDown } from "lucide-react";
 import { useThemeTransition } from "@/shared/hooks/useThemeTransition";
 
 import { SlideText } from "@/shared/ui/SlideText";
+import {
+  Tooltip,
+  TooltipTrigger,
+  TooltipContent,
+} from "@/components/ui/tooltip";
 
 const Footer = () => {
   const [isExpanded, setIsExpanded] = useState(false);
@@ -136,28 +141,46 @@ const Footer = () => {
             [ PRIVACY.TXT ]
           </Link>
 
-          <button
-            ref={buttonRef}
-            onClick={handleThemeToggle}
-            className="group relative flex items-center text-xs text-fg-tertiary hover:text-fg-secondary cursor-target transition-colors focus:outline-none"
-          >
-            <span>[ THEME:&nbsp;</span>
-            <div className="w-9.5 flex justify-start">
-              <SlideText
-                text={theme.toUpperCase()}
-                staggerDelay={0.03}
-                staggerDuration={0.4}
-              />
-            </div>
-            <span>]</span>
-
-            {/* Tooltip */}
-            {theme === "dark" && (
-              <div className="absolute bottom-full right-0 mb-2 bg-bg-surface text-fg-primary text-[10px] px-2 py-1 rounded-sm opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none border border-border-default whitespace-nowrap shadow-xl">
+          {theme === "dark" ? (
+            <Tooltip>
+              <TooltipTrigger asChild>
+                <button
+                  ref={buttonRef}
+                  onClick={handleThemeToggle}
+                  className="group relative flex items-center text-xs text-fg-tertiary hover:text-fg-secondary cursor-target transition-colors focus:outline-none"
+                >
+                  <span>[ THEME:&nbsp;</span>
+                  <div className="w-9.5 flex justify-start">
+                    <SlideText
+                      text={theme.toUpperCase()}
+                      staggerDelay={0.03}
+                      staggerDuration={0.4}
+                    />
+                  </div>
+                  <span>]</span>
+                </button>
+              </TooltipTrigger>
+              <TooltipContent side="top" align="end" sideOffset={8}>
                 WARNING: Flashbang imminent.
+              </TooltipContent>
+            </Tooltip>
+          ) : (
+            <button
+              ref={buttonRef}
+              onClick={handleThemeToggle}
+              className="group relative flex items-center text-xs text-fg-tertiary hover:text-fg-secondary cursor-target transition-colors focus:outline-none"
+            >
+              <span>[ THEME:&nbsp;</span>
+              <div className="w-9.5 flex justify-start">
+                <SlideText
+                  text={theme.toUpperCase()}
+                  staggerDelay={0.03}
+                  staggerDuration={0.4}
+                />
               </div>
-            )}
-          </button>
+              <span>]</span>
+            </button>
+          )}
         </div>
       </div>
     </footer>

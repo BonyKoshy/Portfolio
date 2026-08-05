@@ -49,7 +49,7 @@ const FEATURED_PROJECTS = [
   },
 ];
 
-export function HomeProjectsV2() {
+export function HomeProjects() {
   return (
     <section
       id="projects"

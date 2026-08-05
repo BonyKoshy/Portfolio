@@ -4,7 +4,12 @@ import { Menu, X, Terminal, ArrowLeft } from "lucide-react";
 import { AnimatePresence, motion } from "framer-motion";
 import CardNav from "@/shared/ui/CardNav/CardNav";
 import TerminalUI from "./TerminalUI";
-import { Tooltip } from "@/shared/ui/Tooltip";
+import {
+  Tooltip,
+  TooltipTrigger,
+  TooltipContent,
+} from "@/components/ui/tooltip";
+import { Kbd, KbdGroup } from "@/components/ui/kbd";
 
 import { cn } from "@/shared/lib/utils";
 
@@ -201,26 +206,26 @@ const Navbar = () => {
 
                 {/* Right Column: Terminal Button (Always visible) */}
                 <div className="flex items-center gap-2 z-10">
-                  <Tooltip
-                    unstyled
-                    content={
-                      <div className="px-2 py-1 text-[10px] sm:text-xs font-mono text-fg-secondary bg-bg-default border border-border-default rounded shadow-md whitespace-nowrap flex items-center justify-center">
-                        Ctrl + `
-                      </div>
-                    }
-                  >
-                    <button
-                      onClick={toggleTerminal}
-                      className={`flex items-center gap-2 cursor-target px-3 py-1.5 rounded-full transition-colors ${isTerminalOpen ? "bg-bg-surface text-primary" : "hover:bg-bg-surface"}`}
-                    >
-                      <Terminal size={18} className="text-primary" />
-                      <span
-                        className="hidden sm:inline-block text-fg-primary text-[10px] sm:text-xs uppercase tracking-widest"
-                        style={{ fontFamily: '"JetBrains Mono", monospace' }}
+                  <Tooltip>
+                    <TooltipTrigger asChild>
+                      <button
+                        onClick={toggleTerminal}
+                        className={`flex items-center gap-2 cursor-target px-3 py-1.5 rounded-full transition-colors ${isTerminalOpen ? "bg-bg-surface text-primary" : "hover:bg-bg-surface"}`}
                       >
-                        Terminal
-                      </span>
-                    </button>
+                        <Terminal size={18} className="text-primary" />
+                        <span
+                          className="hidden sm:inline-block text-fg-primary text-[10px] sm:text-xs uppercase tracking-widest"
+                          style={{ fontFamily: '"JetBrains Mono", monospace' }}
+                        >
+                          Terminal
+                        </span>
+                      </button>
+                    </TooltipTrigger>
+                    <TooltipContent sideOffset={5}>
+                      <KbdGroup>
+                        <Kbd>Ctrl</Kbd> + <Kbd>`</Kbd>
+                      </KbdGroup>
+                    </TooltipContent>
                   </Tooltip>
                 </div>
               </div>

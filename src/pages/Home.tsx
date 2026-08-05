@@ -1,9 +1,9 @@
-import { HomeHeroV2 } from "@/widgets/HomeHeroV2";
+import { HomeHero } from "@/widgets/HomeHero";
 import { Expertise } from "@/widgets/Expertise";
 import { Credentials } from "@/widgets/Credentials";
 import { Experience } from "@/widgets/Experience";
-import { HomeProjectsV2 } from "@/widgets/HomeProjectsV2";
-import { HomeContactV2 } from "@/widgets/HomeContactV2";
+import { HomeProjects } from "@/widgets/HomeProjects";
+import { HomeContact } from "@/widgets/HomeContact";
 import { TableOfContents, TOCItem } from "@/shared/ui/TableOfContents";
 
 const HOME_TOC_ITEMS: TOCItem[] = [
@@ -25,7 +25,7 @@ export default function Home() {
         className="fixed left-3 top-1/2 -translate-y-1/2 z-40 hidden lg:flex"
       />
 
-      <HomeHeroV2 />
+      <HomeHero />
 
       {/* 0. SUBTLE SECTION SEPARATOR WITH TINY [ SECTION 02 ] BADGE */}
       <div className="relative w-[94%] max-w-6xl mx-auto flex items-center justify-center py-12 md:py-16">
@@ -72,7 +72,7 @@ export default function Home() {
       </div>
 
       <div className="w-[94%] max-w-6xl mx-auto flex flex-col">
-        <HomeProjectsV2 />
+        <HomeProjects />
       </div>
 
       {/* 0. SUBTLE SECTION SEPARATOR WITH TINY [ SECTION 06 ] BADGE */}
@@ -84,7 +84,7 @@ export default function Home() {
       </div>
 
       <div className="w-[94%] max-w-6xl mx-auto flex flex-col pt-8">
-        <HomeContactV2 />
+        <HomeContact />
       </div>
     </div>
   );

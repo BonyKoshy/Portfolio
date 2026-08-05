@@ -8,7 +8,7 @@ import {
   ThemeContextValues,
 } from "@/app/providers/ThemeProvider";
 
-export function HomeHeroV2() {
+export function HomeHero() {
   const [isImageOpen, setIsImageOpen] = useState(false);
   const themeContext = useContext(ThemeContext) as ThemeContextValues | null;
   const currentTheme = themeContext?.theme || "dark";
