@@ -3,32 +3,24 @@ import { Link } from "react-router-dom";
 import { CheckCircle2, ArrowUpRight } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
 import { certificates } from "@/lib/certificateData";
-import { Certificate } from "@/types/certificate";
+import { UmbrellaCert } from "@/types/certificate";
 import { useOutsideClick } from "@/hooks/use-outside-click";
 
-const CREDENTIAL_IDS = [
-  "ibm-java-professional",
-  "google-it-support-specialization",
-  "aws-cloud-technical-essentials",
-];
-
 export function Credentials() {
-  const [active, setActive] = useState<Certificate | boolean | null>(null);
+  const [active, setActive] = useState<UmbrellaCert | null>(null);
   const id = useId();
   const ref = useRef<HTMLDivElement>(null);
 
-  const credentials = CREDENTIAL_IDS.map((certId) =>
-    certificates.find((c) => c.id === certId)!
-  ).filter(Boolean);
+  const credentials = certificates.slice(0, 3);
 
   useEffect(() => {
     function onKeyDown(event: KeyboardEvent) {
       if (event.key === "Escape") {
-        setActive(false);
+        setActive(null);
       }
     }
 
-    if (active && typeof active === "object") {
+    if (active) {
       document.body.style.overflow = "hidden";
     } else {
       document.body.style.overflow = "auto";
@@ -40,10 +32,9 @@ export function Credentials() {
 
   useOutsideClick(ref, () => setActive(null));
 
-  const activeIndex =
-    active && typeof active === "object"
-      ? credentials.findIndex((c) => c.id === active.id)
-      : -1;
+  const activeIndex = active
+    ? credentials.findIndex((c) => c.id === active.id)
+    : -1;
 
   const justifyClass =
     activeIndex === 0
@@ -55,7 +46,7 @@ export function Credentials() {
   return (
     <>
       <AnimatePresence>
-        {active && typeof active === "object" && (
+        {active && (
           <div className="fixed inset-0 z-50 flex items-center justify-center p-4 md:p-0 pointer-events-none">
             {/* Backdrop */}
             <motion.div
@@ -103,7 +94,9 @@ export function Credentials() {
                       <div className="flex items-center gap-1.5 text-status-success">
                         <CheckCircle2 className="w-3.5 h-3.5" />
                         <span className="font-jetbrains-mono text-xs tracking-widest uppercase font-semibold">
-                          VERIFIED
+                          {active.status
+                            ? active.status.toUpperCase()
+                            : "VERIFIED"}
                         </span>
                       </div>
                     </div>
@@ -128,20 +121,26 @@ export function Credentials() {
                       <span className="font-jetbrains-mono text-xs text-fg-muted uppercase tracking-widest">
                         {active.date === "Ongoing" ? "ACTIVE" : active.date}
                       </span>
-                      <motion.a
-                        layout
-                        initial={{ opacity: 0 }}
-                        animate={{ opacity: 1 }}
-                        exit={{ opacity: 0 }}
-                        href={active.credentialUrl}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="flex items-center text-fg-secondary hover:text-fg-primary transition-colors font-jetbrains-mono text-xs sm:text-xs uppercase tracking-widest font-semibold group cursor-target"
-                      >
-                        [ VIEW CREDENTIAL{" "}
-                        <ArrowUpRight className="w-3.5 h-3.5 text-accent-primary ml-1 mr-1" />{" "}
-                        ]
-                      </motion.a>
+                      {active.credentialUrl ? (
+                        <motion.a
+                          layout
+                          initial={{ opacity: 0 }}
+                          animate={{ opacity: 1 }}
+                          exit={{ opacity: 0 }}
+                          href={active.credentialUrl}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="flex items-center text-fg-secondary hover:text-fg-primary transition-colors font-jetbrains-mono text-xs sm:text-xs uppercase tracking-widest font-semibold group cursor-target"
+                        >
+                          [ VIEW CREDENTIAL{" "}
+                          <ArrowUpRight className="w-3.5 h-3.5 text-accent-primary ml-1 mr-1" />{" "}
+                          ]
+                        </motion.a>
+                      ) : (
+                        <span className="font-jetbrains-mono text-xs text-fg-muted uppercase tracking-widest">
+                          [ VERIFIED TRACK ]
+                        </span>
+                      )}
                     </div>
                   </div>
                 </motion.div>
@@ -204,7 +203,7 @@ export function Credentials() {
                 <div className="flex items-center gap-1.5 text-status-success group-hover/card:text-status-success transition-colors">
                   <CheckCircle2 className="w-3.5 h-3.5" />
                   <span className="font-jetbrains-mono text-xs tracking-widest uppercase font-semibold">
-                    VERIFIED
+                    {cert.status ? cert.status.toUpperCase() : "VERIFIED"}
                   </span>
                 </div>
               </div>

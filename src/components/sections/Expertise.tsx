@@ -66,7 +66,7 @@ const DOMAIN_CARDS: DomainCard[] = [
     number: "03",
     title: "Data Protection",
     description: "Deploying backup, recovery and data security.",
-    tags: ["NetBackup", "Rubrik", "Disaster Recovery", "Automation"],
+    tags: ["NetBackup", "Rubrik", "DR", "Automation"],
     icon: Shield,
   },
   {

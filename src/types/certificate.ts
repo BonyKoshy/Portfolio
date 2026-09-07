@@ -1,20 +1,23 @@
-export type CertificateCategory = "software" | "cloud" | "ai" | "security";
-
-export interface SubCertificate {
-  title: string;
-  certId: string;
-}
-
-export interface Certificate {
+export interface SubModule {
   id: string;
-  thumbnail: string;
-  isSpecialization: boolean;
-  issuer: string;
   title: string;
   date: string;
-  description: string;
-  skills: string[];
+  credentialId?: string | null;
   credentialUrl: string;
-  category: CertificateCategory;
-  subCertificates?: SubCertificate[];
+}
+
+export interface UmbrellaCert {
+  id: string;
+  title: string;
+  issuer: string;
+  category: "Infrastructure" | "Development" | "Cloud" | "Productivity";
+  date: string;
+  thumbnail: string;
+  description: string;
+  skills: string[]; // <-- Crisp, high-leverage skill chips
+  credentialId?: string | null;
+  credentialUrl?: string | null;
+  isSpecialization: boolean;
+  status?: "Completed" | "Core Curriculum Completed";
+  modules?: SubModule[];
 }
